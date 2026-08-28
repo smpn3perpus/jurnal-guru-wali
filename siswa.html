@@ -21,7 +21,7 @@ body{
 
 .header{
   background:#16a34a;
-  color:white;
+  color:#fff;
   padding:18px 20px;
   display:flex;
   justify-content:space-between;
@@ -43,7 +43,7 @@ body{
 .logout{
   border:0;
   background:#dc2626;
-  color:white;
+  color:#fff;
   padding:10px 16px;
   border-radius:8px;
   font-weight:bold;
@@ -57,20 +57,22 @@ body{
   padding:20px 15px 35px;
 }
 
-/* IDENTITAS */
+.identitas,
+.panel,
+.nomor{
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
 
 .identitas{
-  background:white;
-  border-radius:14px;
   padding:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
   margin-bottom:18px;
 }
 
 .identitas h2{
   margin:0 0 14px;
   color:#15803d;
-  font-size:22px;
 }
 
 .identitas-grid{
@@ -79,18 +81,18 @@ body{
   gap:10px;
 }
 
-.identitas-item{
+.info-item{
   background:#f8fafc;
   padding:12px;
   border-radius:9px;
 }
 
-.identitas-label{
+.label{
   color:#64748b;
   font-size:12px;
 }
 
-.identitas-value{
+.value{
   margin-top:4px;
   font-weight:bold;
 }
@@ -99,9 +101,9 @@ body{
   margin-top:15px;
   padding:12px;
   border-radius:9px;
-  line-height:1.5;
   background:#eff6ff;
   color:#075985;
+  line-height:1.5;
 }
 
 .status.success{
@@ -119,13 +121,8 @@ body{
   color:#991b1b;
 }
 
-/* PANEL */
-
 .panel{
-  background:white;
-  border-radius:14px;
   padding:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
   margin-bottom:18px;
 }
 
@@ -135,25 +132,24 @@ body{
 }
 
 .nomor{
-  background:white;
-  border:1px solid #dbe3ea;
-  border-radius:12px;
   padding:18px;
   margin-bottom:15px;
+  border:1px solid #dbe3ea;
+  box-shadow:none;
 }
 
 .nomor-title{
   font-size:17px;
   font-weight:bold;
   color:#15803d;
-  margin-bottom:8px;
+  margin-bottom:9px;
 }
 
 .petunjuk{
   color:#64748b;
   font-size:12px;
-  line-height:1.5;
   margin-bottom:10px;
+  line-height:1.5;
 }
 
 label{
@@ -187,23 +183,19 @@ textarea{
 }
 
 .hidden{
-  display:none !important;
+  display:none!important;
 }
 
 .save{
   width:100%;
   border:0;
   background:#16a34a;
-  color:white;
+  color:#fff;
   padding:14px;
   border-radius:10px;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
-}
-
-.save:hover{
-  background:#15803d;
 }
 
 .save:disabled{
@@ -215,7 +207,7 @@ textarea{
   width:100%;
   margin-top:10px;
   border:1px solid #cbd5e1;
-  background:white;
+  background:#fff;
   color:#334155;
   padding:12px;
   border-radius:10px;
@@ -225,8 +217,8 @@ textarea{
 
 .footer{
   text-align:center;
-  color:#64748b;
   padding:20px;
+  color:#64748b;
   font-size:12px;
 }
 
@@ -269,7 +261,7 @@ textarea{
 
 <main class="container">
 
-  <!-- IDENTITAS SISWA -->
+  <!-- IDENTITAS -->
 
   <section class="identitas">
 
@@ -279,52 +271,34 @@ textarea{
 
     <div class="identitas-grid">
 
-      <div class="identitas-item">
-
-        <div class="identitas-label">
-          NISN
-        </div>
-
+      <div class="info-item">
+        <div class="label">NISN</div>
         <div
-          class="identitas-value"
+          class="value"
           id="nisnSiswa">
           -
         </div>
-
       </div>
 
-
-      <div class="identitas-item">
-
-        <div class="identitas-label">
-          Kelas
-        </div>
-
+      <div class="info-item">
+        <div class="label">Kelas</div>
         <div
-          class="identitas-value"
+          class="value"
           id="kelasSiswa">
           -
         </div>
-
       </div>
 
-
-      <div class="identitas-item">
-
-        <div class="identitas-label">
-          Guru Wali
-        </div>
-
+      <div class="info-item">
+        <div class="label">Guru Wali</div>
         <div
-          class="identitas-value"
+          class="value"
           id="guruSiswa">
           -
         </div>
-
       </div>
 
     </div>
-
 
     <div
       id="statusJurnal"
@@ -341,9 +315,7 @@ textarea{
 
     <section class="panel">
 
-      <h2>
-        📅 Tanggal Jurnal
-      </h2>
+      <h2>📅 Tanggal Jurnal</h2>
 
       <label for="tanggal">
         Tanggal
@@ -358,7 +330,7 @@ textarea{
     </section>
 
 
-    <!-- 1. BANGUN PAGI -->
+    <!-- 1 -->
 
     <section class="nomor">
 
@@ -367,7 +339,7 @@ textarea{
       </div>
 
       <div class="petunjuk">
-        Jam berapa siswa bangun?
+        Jam berapa kamu bangun?
       </div>
 
       <label for="jam_bangun">
@@ -383,7 +355,7 @@ textarea{
     </section>
 
 
-    <!-- 2. MAKAN SEHAT -->
+    <!-- 2 -->
 
     <section class="nomor">
 
@@ -392,7 +364,7 @@ textarea{
       </div>
 
       <div class="petunjuk">
-        Pilih puasa atau tidak puasa.
+        Pilih apakah kamu berpuasa atau tidak.
       </div>
 
       <label for="puasa">
@@ -418,7 +390,6 @@ textarea{
 
       </select>
 
-
       <div
         id="bagianPuasa"
         class="hidden">
@@ -432,7 +403,6 @@ textarea{
           placeholder="Tuliskan menu sahur..."
         ></textarea>
 
-
         <label for="menu_berbuka">
           Menu Berbuka
         </label>
@@ -443,7 +413,6 @@ textarea{
         ></textarea>
 
       </div>
-
 
       <div
         id="bagianTidakPuasa"
@@ -458,7 +427,6 @@ textarea{
           placeholder="Tuliskan menu sarapan..."
         ></textarea>
 
-
         <label for="menu_siang">
           Menu Makan Siang
         </label>
@@ -467,7 +435,6 @@ textarea{
           id="menu_siang"
           placeholder="Tuliskan menu makan siang..."
         ></textarea>
-
 
         <label for="menu_malam">
           Menu Makan Malam
@@ -483,7 +450,7 @@ textarea{
     </section>
 
 
-    <!-- 3. BELAJAR -->
+    <!-- 3 -->
 
     <section class="nomor">
 
@@ -514,7 +481,6 @@ textarea{
 
       </select>
 
-
       <div
         id="bagianBelajarYa"
         class="hidden">
@@ -525,9 +491,8 @@ textarea{
 
         <textarea
           id="materi_belajar"
-          placeholder="Apa materi yang dipelajari?"
+          placeholder="Apa yang kamu pelajari?"
         ></textarea>
-
 
         <label for="durasi_belajar">
           Durasi Belajar (menit)
@@ -541,7 +506,6 @@ textarea{
         >
 
       </div>
-
 
       <div
         id="bagianBelajarTidak"
@@ -561,7 +525,7 @@ textarea{
     </section>
 
 
-    <!-- 4. OLAHRAGA -->
+    <!-- 4 -->
 
     <section class="nomor">
 
@@ -592,7 +556,6 @@ textarea{
 
       </select>
 
-
       <div
         id="bagianOlahragaYa"
         class="hidden">
@@ -604,9 +567,8 @@ textarea{
         <input
           type="text"
           id="jenis_olahraga"
-          placeholder="Contoh: Sepak bola"
+          placeholder="Contoh: Jalan kaki"
         >
-
 
         <label for="durasi_olahraga">
           Durasi Olahraga (menit)
@@ -620,7 +582,6 @@ textarea{
         >
 
       </div>
-
 
       <div
         id="bagianOlahragaTidak"
@@ -640,7 +601,7 @@ textarea{
     </section>
 
 
-    <!-- 5. BERMASYARAKAT -->
+    <!-- 5 -->
 
     <section class="nomor">
 
@@ -671,7 +632,6 @@ textarea{
 
       </select>
 
-
       <div
         id="bagianMasyarakatYa"
         class="hidden">
@@ -686,7 +646,6 @@ textarea{
         ></textarea>
 
       </div>
-
 
       <div
         id="bagianMasyarakatTidak"
@@ -706,7 +665,7 @@ textarea{
     </section>
 
 
-    <!-- 6. IBADAH -->
+    <!-- 6 -->
 
     <section class="nomor">
 
@@ -737,7 +696,6 @@ textarea{
 
       </select>
 
-
       <div
         id="bagianIbadahYa"
         class="hidden">
@@ -752,7 +710,6 @@ textarea{
         ></textarea>
 
       </div>
-
 
       <div
         id="bagianIbadahTidak"
@@ -772,7 +729,7 @@ textarea{
     </section>
 
 
-    <!-- 7. TIDUR CEPAT -->
+    <!-- 7 -->
 
     <section class="nomor">
 
@@ -781,7 +738,7 @@ textarea{
       </div>
 
       <div class="petunjuk">
-        Jam berapa siswa tidur?
+        Jam berapa kamu tidur?
       </div>
 
       <label for="jam_tidur">
@@ -843,8 +800,8 @@ const SUPABASE_KEY =
 function headers(){
 
   return {
-    "apikey":
-      SUPABASE_KEY,
+
+    "apikey":SUPABASE_KEY,
 
     "Authorization":
       "Bearer " + SUPABASE_KEY,
@@ -854,13 +811,14 @@ function headers(){
 
     "Accept":
       "application/json"
+
   };
 
 }
 
 
 /* =====================================================
-   SESSION
+   SESSION SISWA
 ===================================================== */
 
 const session =
@@ -902,50 +860,37 @@ try{
 }
 
 
+if(
+  !akun ||
+  akun.role !== "siswa" ||
+  !akun.referensi_id
+){
+
+  sessionStorage.removeItem(
+    "akun_siswa"
+  );
+
+  window.location.replace(
+    "login-siswa.html"
+  );
+
+}
+
+
 /* =====================================================
    AMAN HTML
 ===================================================== */
 
 function aman(value){
 
-  return String(value ?? "-")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* =====================================================
-   NAMA KELAS
-===================================================== */
-
-function dapatNamaKelas(){
-
-  if(!kelas)
-    return "-";
-
-
-  /* Kolom database kita adalah kelas.nama */
-
-  return kelas.nama || "-";
-
-}
-
-
-/* =====================================================
-   NAMA GURU
-===================================================== */
-
-function dapatNamaGuru(){
-
-  if(!guruWali)
-    return "-";
-
-
-  return guruWali.nama || "-";
+  return String(
+    value ?? "-"
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
@@ -964,14 +909,17 @@ async function ambilSiswa(){
 
   const response =
     await fetch(
+
       SUPABASE_URL +
       "/rest/v1/siswa" +
       "?id=eq." +
       encodeURIComponent(id) +
-      "&select=*",
+      "&select=id,nama,nisn,kelas_id,guru_wali_id",
+
       {
         headers:headers()
       }
+
     );
 
 
@@ -992,7 +940,7 @@ async function ambilSiswa(){
   }catch(error){
 
     throw new Error(
-      "Respons siswa tidak valid."
+      "Data siswa tidak valid."
     );
 
   }
@@ -1028,33 +976,38 @@ async function ambilSiswa(){
 
 async function ambilKelas(){
 
-  if(
-    siswa.kelas_id === null ||
-    siswa.kelas_id === undefined
-  ){
-
-    return null;
-
-  }
+  const kelasId =
+    siswa.kelas_id;
 
 
   const response =
     await fetch(
+
       SUPABASE_URL +
       "/rest/v1/kelas" +
       "?id=eq." +
-      encodeURIComponent(
-        siswa.kelas_id
-      ) +
+      encodeURIComponent(kelasId) +
       "&select=id,nama",
+
       {
         headers:headers()
       }
+
     );
 
 
   const text =
     await response.text();
+
+
+  if(!response.ok){
+
+    throw new Error(
+      "Gagal membaca kelas: " +
+      text
+    );
+
+  }
 
 
   let data=[];
@@ -1069,18 +1022,25 @@ async function ambilKelas(){
 
   }catch(error){
 
-    return null;
+    throw new Error(
+      "Data kelas tidak valid."
+    );
 
   }
 
 
-  if(!response.ok)
-    return null;
+  if(!data.length){
+
+    throw new Error(
+      "Kelas dengan ID " +
+      kelasId +
+      " tidak ditemukan."
+    );
+
+  }
 
 
-  return data.length
-    ? data[0]
-    : null;
+  return data[0];
 
 }
 
@@ -1091,33 +1051,38 @@ async function ambilKelas(){
 
 async function ambilGuruWali(){
 
-  if(
-    siswa.guru_wali_id === null ||
-    siswa.guru_wali_id === undefined
-  ){
-
-    return null;
-
-  }
+  const guruId =
+    siswa.guru_wali_id;
 
 
   const response =
     await fetch(
+
       SUPABASE_URL +
       "/rest/v1/guru_wali" +
       "?id=eq." +
-      encodeURIComponent(
-        siswa.guru_wali_id
-      ) +
+      encodeURIComponent(guruId) +
       "&select=id,nama",
+
       {
         headers:headers()
       }
+
     );
 
 
   const text =
     await response.text();
+
+
+  if(!response.ok){
+
+    throw new Error(
+      "Gagal membaca guru wali: " +
+      text
+    );
+
+  }
 
 
   let data=[];
@@ -1132,24 +1097,31 @@ async function ambilGuruWali(){
 
   }catch(error){
 
-    return null;
+    throw new Error(
+      "Data guru wali tidak valid."
+    );
 
   }
 
 
-  if(!response.ok)
-    return null;
+  if(!data.length){
+
+    throw new Error(
+      "Guru wali dengan ID " +
+      guruId +
+      " tidak ditemukan."
+    );
+
+  }
 
 
-  return data.length
-    ? data[0]
-    : null;
+  return data[0];
 
 }
 
 
 /* =====================================================
-   TANGGAL HARI INI
+   TANGGAL
 ===================================================== */
 
 function tanggalHariIni(){
@@ -1172,10 +1144,6 @@ function tanggalHariIni(){
 
 }
 
-
-/* =====================================================
-   FORMAT TANGGAL
-===================================================== */
 
 function formatTanggal(value){
 
@@ -1203,94 +1171,7 @@ function formatTanggal(value){
 
 
 /* =====================================================
-   MULAI
-===================================================== */
-
-async function mulai(){
-
-  try{
-
-    siswa =
-      await ambilSiswa();
-
-
-    kelas =
-      await ambilKelas();
-
-
-    guruWali =
-      await ambilGuruWali();
-
-
-    document.getElementById(
-      "namaSiswa"
-    ).textContent =
-      siswa.nama;
-
-
-    document.getElementById(
-      "nisnSiswa"
-    ).textContent =
-      siswa.nisn || "-";
-
-
-    document.getElementById(
-      "kelasSiswa"
-    ).textContent =
-      dapatNamaKelas();
-
-
-    document.getElementById(
-      "guruSiswa"
-    ).textContent =
-      dapatNamaGuru();
-
-
-    document.getElementById(
-      "tanggal"
-    ).value =
-      tanggalHariIni();
-
-
-    ubahMakan();
-    ubahBelajar();
-    ubahOlahraga();
-    ubahBermasyarakat();
-    ubahIbadah();
-
-
-    await cekJurnal();
-
-
-  }catch(error){
-
-    console.error(error);
-
-
-    document.getElementById(
-      "namaSiswa"
-    ).textContent =
-      "Siswa";
-
-
-    document.getElementById(
-      "statusJurnal"
-    ).className =
-      "status error";
-
-
-    document.getElementById(
-      "statusJurnal"
-    ).textContent =
-      error.message;
-
-  }
-
-}
-
-
-/* =====================================================
-   CEK JURNAL TANGGAL
+   CEK JURNAL
 ===================================================== */
 
 async function cekJurnal(){
@@ -1309,101 +1190,110 @@ async function cekJurnal(){
     return;
 
 
-  const response =
-    await fetch(
-
-      SUPABASE_URL +
-      "/rest/v1/jurnal_7_kaih" +
-      "?siswa_id=eq." +
-      encodeURIComponent(
-        siswa.id
-      ) +
-      "&tanggal=eq." +
-      encodeURIComponent(
-        tanggal
-      ) +
-      "&select=id",
-
-      {
-        headers:headers()
-      }
-
-    );
-
-
-  const text =
-    await response.text();
-
-
-  if(!response.ok){
-
-    return;
-
-  }
-
-
-  let data=[];
-
-
   try{
 
-    data =
-      text
-      ? JSON.parse(text)
-      : [];
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/jurnal_7_kaih" +
+        "?siswa_id=eq." +
+        encodeURIComponent(
+          siswa.id
+        ) +
+        "&tanggal=eq." +
+        encodeURIComponent(
+          tanggal
+        ) +
+        "&select=id",
+
+        {
+          headers:headers()
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    if(!response.ok)
+      return;
+
+
+    let data=[];
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : [];
+
+    }catch(error){
+
+      return;
+
+    }
+
+
+    const tombol =
+      document.getElementById(
+        "btnSimpan"
+      );
+
+
+    const status =
+      document.getElementById(
+        "statusJurnal"
+      );
+
+
+    if(data.length){
+
+      tombol.disabled=true;
+
+      tombol.textContent=
+        "✅ Jurnal Sudah Diisi";
+
+
+      status.className =
+        "status warning";
+
+
+      status.textContent =
+        "Jurnal tanggal " +
+        formatTanggal(tanggal) +
+        " sudah pernah diisi.";
+
+    }else{
+
+      tombol.disabled=false;
+
+      tombol.textContent=
+        "💾 Simpan Jurnal";
+
+
+      status.className =
+        "status";
+
+
+      status.textContent =
+        "Silakan isi jurnal tanggal " +
+        formatTanggal(tanggal) +
+        ".";
+
+    }
+
 
   }catch(error){
 
-    return;
-
-  }
-
-
-  const tombol =
-    document.getElementById(
-      "btnSimpan"
+    console.error(
+      "CEK JURNAL:",
+      error
     );
-
-
-  const status =
-    document.getElementById(
-      "statusJurnal"
-    );
-
-
-  if(data.length){
-
-    tombol.disabled=true;
-
-    tombol.textContent=
-      "✅ Jurnal Sudah Diisi";
-
-
-    status.className =
-      "status warning";
-
-
-    status.textContent =
-      "Jurnal tanggal " +
-      formatTanggal(tanggal) +
-      " sudah pernah diisi.";
-
-  }else{
-
-    tombol.disabled=false;
-
-    tombol.textContent=
-      "💾 Simpan Jurnal";
-
-
-    status.className =
-      "status";
-
-
-    status.textContent =
-      "Silakan isi jurnal tanggal " +
-      formatTanggal(tanggal) +
-      ".";
 
   }
 
@@ -1411,7 +1301,7 @@ async function cekJurnal(){
 
 
 /* =====================================================
-   MAKAN
+   TAMPILKAN OPSI MAKAN
 ===================================================== */
 
 function ubahMakan(){
@@ -1469,7 +1359,7 @@ function ubahMakan(){
 
 
 /* =====================================================
-   BELAJAR
+   TAMPILKAN BELAJAR
 ===================================================== */
 
 function ubahBelajar(){
@@ -1527,7 +1417,7 @@ function ubahBelajar(){
 
 
 /* =====================================================
-   OLAHRAGA
+   TAMPILKAN OLAHRAGA
 ===================================================== */
 
 function ubahOlahraga(){
@@ -1585,7 +1475,7 @@ function ubahOlahraga(){
 
 
 /* =====================================================
-   BERMASYARAKAT
+   TAMPILKAN BERMASYARAKAT
 ===================================================== */
 
 function ubahBermasyarakat(){
@@ -1643,7 +1533,7 @@ function ubahBermasyarakat(){
 
 
 /* =====================================================
-   IBADAH
+   TAMPILKAN IBADAH
 ===================================================== */
 
 function ubahIbadah(){
@@ -1701,7 +1591,7 @@ function ubahIbadah(){
 
 
 /* =====================================================
-   RESET FORM
+   RESET
 ===================================================== */
 
 function resetForm(){
@@ -1746,7 +1636,7 @@ function resetForm(){
 
 
 /* =====================================================
-   VALIDASI FORM
+   VALIDASI
 ===================================================== */
 
 function validasi(){
@@ -1781,28 +1671,33 @@ function validasi(){
     ).value;
 
 
+  if(!document.getElementById(
+      "jam_bangun"
+    ).value){
+
+    return "Jam bangun wajib diisi.";
+
+  }
+
+
   if(!puasa)
     return "Pilih Puasa atau Tidak.";
 
 
   if(puasa==="Ya"){
 
-    if(
-      !document.getElementById(
-        "menu_sahur"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "menu_sahur"
+    ).value.trim()){
 
       return "Menu sahur wajib diisi.";
 
     }
 
 
-    if(
-      !document.getElementById(
-        "menu_berbuka"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "menu_berbuka"
+    ).value.trim()){
 
       return "Menu berbuka wajib diisi.";
 
@@ -1813,33 +1708,27 @@ function validasi(){
 
   if(puasa==="Tidak"){
 
-    if(
-      !document.getElementById(
-        "menu_sarapan"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "menu_sarapan"
+    ).value.trim()){
 
       return "Menu sarapan wajib diisi.";
 
     }
 
 
-    if(
-      !document.getElementById(
-        "menu_siang"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "menu_siang"
+    ).value.trim()){
 
       return "Menu makan siang wajib diisi.";
 
     }
 
 
-    if(
-      !document.getElementById(
-        "menu_malam"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "menu_malam"
+    ).value.trim()){
 
       return "Menu makan malam wajib diisi.";
 
@@ -1854,22 +1743,18 @@ function validasi(){
 
   if(belajar==="Ya"){
 
-    if(
-      !document.getElementById(
-        "materi_belajar"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "materi_belajar"
+    ).value.trim()){
 
       return "Materi belajar wajib diisi.";
 
     }
 
 
-    if(
-      !document.getElementById(
-        "durasi_belajar"
-      ).value
-    ){
+    if(!document.getElementById(
+      "durasi_belajar"
+    ).value){
 
       return "Durasi belajar wajib diisi.";
 
@@ -1880,11 +1765,9 @@ function validasi(){
 
   if(belajar==="Tidak"){
 
-    if(
-      !document.getElementById(
-        "alasan_belajar"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "alasan_belajar"
+    ).value.trim()){
 
       return "Alasan tidak belajar wajib diisi.";
 
@@ -1899,22 +1782,18 @@ function validasi(){
 
   if(olahraga==="Ya"){
 
-    if(
-      !document.getElementById(
-        "jenis_olahraga"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "jenis_olahraga"
+    ).value.trim()){
 
       return "Jenis olahraga wajib diisi.";
 
     }
 
 
-    if(
-      !document.getElementById(
-        "durasi_olahraga"
-      ).value
-    ){
+    if(!document.getElementById(
+      "durasi_olahraga"
+    ).value){
 
       return "Durasi olahraga wajib diisi.";
 
@@ -1925,11 +1804,9 @@ function validasi(){
 
   if(olahraga==="Tidak"){
 
-    if(
-      !document.getElementById(
-        "alasan_olahraga"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "alasan_olahraga"
+    ).value.trim()){
 
       return "Alasan tidak olahraga wajib diisi.";
 
@@ -1944,11 +1821,9 @@ function validasi(){
 
   if(bermasyarakat==="Ya"){
 
-    if(
-      !document.getElementById(
-        "jenis_bermasyarakat"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "jenis_bermasyarakat"
+    ).value.trim()){
 
       return "Jenis kegiatan bermasyarakat wajib diisi.";
 
@@ -1959,11 +1834,9 @@ function validasi(){
 
   if(bermasyarakat==="Tidak"){
 
-    if(
-      !document.getElementById(
-        "alasan_bermasyarakat"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "alasan_bermasyarakat"
+    ).value.trim()){
 
       return "Alasan tidak bermasyarakat wajib diisi.";
 
@@ -1978,11 +1851,9 @@ function validasi(){
 
   if(ibadah==="Ya"){
 
-    if(
-      !document.getElementById(
-        "jenis_ibadah"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "jenis_ibadah"
+    ).value.trim()){
 
       return "Jenis ibadah wajib diisi.";
 
@@ -1993,15 +1864,22 @@ function validasi(){
 
   if(ibadah==="Tidak"){
 
-    if(
-      !document.getElementById(
-        "alasan_ibadah"
-      ).value.trim()
-    ){
+    if(!document.getElementById(
+      "alasan_ibadah"
+    ).value.trim()){
 
       return "Alasan tidak beribadah wajib diisi.";
 
     }
+
+  }
+
+
+  if(!document.getElementById(
+    "jam_tidur"
+  ).value){
+
+    return "Jam tidur wajib diisi.";
 
   }
 
@@ -2012,7 +1890,7 @@ function validasi(){
 
 
 /* =====================================================
-   SIMPAN JURNAL
+   SIMPAN MELALUI RPC
 ===================================================== */
 
 document
@@ -2064,300 +1942,283 @@ document
         );
 
 
-      /*
-        Cek apakah sudah ada.
-      */
-
-      const cekResponse =
-        await fetch(
-
-          SUPABASE_URL +
-          "/rest/v1/jurnal_7_kaih" +
-          "?siswa_id=eq." +
-          encodeURIComponent(
-            siswa.id
-          ) +
-          "&tanggal=eq." +
-          encodeURIComponent(
-            tanggal
-          ) +
-          "&select=id",
-
-          {
-            headers:headers()
-          }
-
-        );
-
-
-      const cekText =
-        await cekResponse.text();
-
-
-      if(!cekResponse.ok){
-
-        alert(
-          "Gagal memeriksa jurnal:\n\n" +
-          cekText
-        );
-
-        return;
-
-      }
-
-
-      let cekData=[];
-
-
-      try{
-
-        cekData =
-          cekText
-          ? JSON.parse(cekText)
-          : [];
-
-      }catch(error){
-
-        alert(
-          "Respons server tidak valid."
-        );
-
-        return;
-
-      }
-
-
-      if(cekData.length){
-
-        alert(
-          "Jurnal tanggal " +
-          formatTanggal(tanggal) +
-          " sudah pernah diisi."
-        );
-
-        return;
-
-      }
-
-
-      /* =========================
-         DATA YANG DIKIRIM
-      ========================= */
-
-      const dataJurnal = {
-
-        siswa_id:
-          Number(siswa.id),
-
-        tanggal:
-          tanggal,
-
-        jam_bangun:
-          document.getElementById(
-            "jam_bangun"
-          ).value,
-
-        puasa:
-          document.getElementById(
-            "puasa"
-          ).value,
-
-        menu_sahur:
-          document.getElementById(
-            "puasa"
-          ).value==="Ya"
-          ? document.getElementById(
-              "menu_sahur"
-            ).value.trim()
-          : null,
-
-        menu_berbuka:
-          document.getElementById(
-            "puasa"
-          ).value==="Ya"
-          ? document.getElementById(
-              "menu_berbuka"
-            ).value.trim()
-          : null,
-
-        menu_sarapan:
-          document.getElementById(
-            "puasa"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "menu_sarapan"
-            ).value.trim()
-          : null,
-
-        menu_siang:
-          document.getElementById(
-            "puasa"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "menu_siang"
-            ).value.trim()
-          : null,
-
-        menu_malam:
-          document.getElementById(
-            "puasa"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "menu_malam"
-            ).value.trim()
-          : null,
-
-        belajar_malam:
-          document.getElementById(
-            "belajar_malam"
-          ).value,
-
-        materi_belajar:
-          document.getElementById(
-            "belajar_malam"
-          ).value==="Ya"
-          ? document.getElementById(
-              "materi_belajar"
-            ).value.trim()
-          : null,
-
-        durasi_belajar:
-          document.getElementById(
-            "belajar_malam"
-          ).value==="Ya"
-          ? Number(
-              document.getElementById(
-                "durasi_belajar"
-              ).value
-            )
-          : null,
-
-        alasan_belajar:
-          document.getElementById(
-            "belajar_malam"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "alasan_belajar"
-            ).value.trim()
-          : null,
-
-        olahraga:
-          document.getElementById(
-            "olahraga"
-          ).value,
-
-        jenis_olahraga:
-          document.getElementById(
-            "olahraga"
-          ).value==="Ya"
-          ? document.getElementById(
-              "jenis_olahraga"
-            ).value.trim()
-          : null,
-
-        durasi_olahraga:
-          document.getElementById(
-            "olahraga"
-          ).value==="Ya"
-          ? Number(
-              document.getElementById(
-                "durasi_olahraga"
-              ).value
-            )
-          : null,
-
-        alasan_olahraga:
-          document.getElementById(
-            "olahraga"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "alasan_olahraga"
-            ).value.trim()
-          : null,
-
-        bermasyarakat:
-          document.getElementById(
-            "bermasyarakat"
-          ).value,
-
-        jenis_bermasyarakat:
-          document.getElementById(
-            "bermasyarakat"
-          ).value==="Ya"
-          ? document.getElementById(
-              "jenis_bermasyarakat"
-            ).value.trim()
-          : null,
-
-        alasan_bermasyarakat:
-          document.getElementById(
-            "bermasyarakat"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "alasan_bermasyarakat"
-            ).value.trim()
-          : null,
-
-        ibadah:
-          document.getElementById(
-            "ibadah"
-          ).value,
-
-        jenis_ibadah:
-          document.getElementById(
-            "ibadah"
-          ).value==="Ya"
-          ? document.getElementById(
-              "jenis_ibadah"
-            ).value.trim()
-          : null,
-
-        alasan_ibadah:
-          document.getElementById(
-            "ibadah"
-          ).value==="Tidak"
-          ? document.getElementById(
-              "alasan_ibadah"
-            ).value.trim()
-          : null,
-
-        jam_tidur:
-          document.getElementById(
-            "jam_tidur"
-          ).value
-
-      };
-
-
       tombol.disabled=true;
 
-      tombol.textContent=
+      tombol.textContent =
         "⏳ Menyimpan...";
 
 
       try{
 
+        /*
+          Cek jurnal terlebih dahulu.
+        */
+
+        const cekResponse =
+          await fetch(
+
+            SUPABASE_URL +
+            "/rest/v1/jurnal_7_kaih" +
+            "?siswa_id=eq." +
+            encodeURIComponent(
+              siswa.id
+            ) +
+            "&tanggal=eq." +
+            encodeURIComponent(
+              tanggal
+            ) +
+            "&select=id",
+
+            {
+              headers:
+                headers()
+            }
+
+          );
+
+
+        const cekText =
+          await cekResponse.text();
+
+
+        if(!cekResponse.ok){
+
+          throw new Error(
+            "Gagal memeriksa jurnal: " +
+            cekText
+          );
+
+        }
+
+
+        let cekData=[];
+
+
+        try{
+
+          cekData =
+            cekText
+            ? JSON.parse(cekText)
+            : [];
+
+        }catch(error){
+
+          cekData=[];
+
+        }
+
+
+        if(cekData.length){
+
+          throw new Error(
+            "Jurnal tanggal " +
+            formatTanggal(tanggal) +
+            " sudah pernah diisi."
+          );
+
+        }
+
+
+        /*
+          Panggil RPC simpan_jurnal.
+        */
+
         const response =
           await fetch(
 
             SUPABASE_URL +
-            "/rest/v1/jurnal_7_kaih",
+            "/rest/v1/rpc/simpan_jurnal",
 
             {
 
               method:"POST",
 
-              headers:{
-                ...headers(),
-
-                "Prefer":
-                  "return=representation"
-              },
+              headers:headers(),
 
               body:
-                JSON.stringify(
-                  dataJurnal
-                )
+                JSON.stringify({
+
+                  p_siswa_id:
+                    Number(siswa.id),
+
+                  p_tanggal:
+                    tanggal,
+
+                  p_jam_bangun:
+                    document.getElementById(
+                      "jam_bangun"
+                    ).value,
+
+                  p_puasa:
+                    document.getElementById(
+                      "puasa"
+                    ).value,
+
+                  p_menu_sahur:
+                    document.getElementById(
+                      "puasa"
+                    ).value === "Ya"
+                    ? document.getElementById(
+                        "menu_sahur"
+                      ).value.trim()
+                    : null,
+
+                  p_menu_berbuka:
+                    document.getElementById(
+                      "puasa"
+                    ).value === "Ya"
+                    ? document.getElementById(
+                        "menu_berbuka"
+                      ).value.trim()
+                    : null,
+
+                  p_menu_sarapan:
+                    document.getElementById(
+                      "puasa"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "menu_sarapan"
+                      ).value.trim()
+                    : null,
+
+                  p_menu_siang:
+                    document.getElementById(
+                      "puasa"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "menu_siang"
+                      ).value.trim()
+                    : null,
+
+                  p_menu_malam:
+                    document.getElementById(
+                      "puasa"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "menu_malam"
+                      ).value.trim()
+                    : null,
+
+                  p_belajar_malam:
+                    document.getElementById(
+                      "belajar_malam"
+                    ).value,
+
+                  p_materi_belajar:
+                    document.getElementById(
+                      "belajar_malam"
+                    ).value === "Ya"
+                    ? document.getElementById(
+                        "materi_belajar"
+                      ).value.trim()
+                    : null,
+
+                  p_durasi_belajar:
+                    document.getElementById(
+                      "belajar_malam"
+                    ).value === "Ya"
+                    ? Number(
+                        document.getElementById(
+                          "durasi_belajar"
+                        ).value
+                      )
+                    : null,
+
+                  p_alasan_belajar:
+                    document.getElementById(
+                      "belajar_malam"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "alasan_belajar"
+                      ).value.trim()
+                    : null,
+
+                  p_olahraga:
+                    document.getElementById(
+                      "olahraga"
+                    ).value,
+
+                  p_jenis_olahraga:
+                    document.getElementById(
+                      "olahraga"
+                    ).value === "Ya"
+                    ? document.getElementById(
+                        "jenis_olahraga"
+                      ).value.trim()
+                    : null,
+
+                  p_durasi_olahraga:
+                    document.getElementById(
+                      "olahraga"
+                    ).value === "Ya"
+                    ? Number(
+                        document.getElementById(
+                          "durasi_olahraga"
+                        ).value
+                      )
+                    : null,
+
+                  p_alasan_olahraga:
+                    document.getElementById(
+                      "olahraga"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "alasan_olahraga"
+                      ).value.trim()
+                    : null,
+
+                  p_bermasyarakat:
+                    document.getElementById(
+                      "bermasyarakat"
+                    ).value,
+
+                  p_jenis_bermasyarakat:
+                    document.getElementById(
+                      "bermasyarakat"
+                    ).value === "Ya"
+                    ? document.getElementById(
+                        "jenis_bermasyarakat"
+                      ).value.trim()
+                    : null,
+
+                  p_alasan_bermasyarakat:
+                    document.getElementById(
+                      "bermasyarakat"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "alasan_bermasyarakat"
+                      ).value.trim()
+                    : null,
+
+                  p_ibadah:
+                    document.getElementById(
+                      "ibadah"
+                    ).value,
+
+                  p_jenis_ibadah:
+                    document.getElementById(
+                      "ibadah"
+                    ).value === "Ya"
+                    ? document.getElementById(
+                        "jenis_ibadah"
+                      ).value.trim()
+                    : null,
+
+                  p_alasan_ibadah:
+                    document.getElementById(
+                      "ibadah"
+                    ).value === "Tidak"
+                    ? document.getElementById(
+                        "alasan_ibadah"
+                      ).value.trim()
+                    : null,
+
+                  p_jam_tidur:
+                    document.getElementById(
+                      "jam_tidur"
+                    ).value
+
+                })
 
             }
 
@@ -2368,36 +2229,42 @@ document
           await response.text();
 
 
+        let hasil={};
+
+
+        try{
+
+          hasil =
+            text
+            ? JSON.parse(text)
+            : {};
+
+        }catch(error){
+
+          hasil={};
+
+        }
+
+
         if(!response.ok){
 
-          let detail =
-            text;
-
-
-          try{
-
-            const errorData =
-              JSON.parse(
-                text
-              );
-
-
-            detail =
-              errorData.message ||
-              errorData.details ||
-              errorData.hint ||
-              errorData.code ||
-              text;
-
-          }catch(e){}
-
-
           throw new Error(
-            detail
+
+            hasil.message ||
+            hasil.details ||
+            hasil.hint ||
+            hasil.code ||
+            text ||
+            "Gagal menyimpan jurnal."
+
           );
 
         }
 
+
+        /*
+          BERHASIL
+        */
 
         const status =
           document.getElementById(
@@ -2417,7 +2284,7 @@ document
 
         tombol.disabled=true;
 
-        tombol.textContent=
+        tombol.textContent =
           "✅ Jurnal Sudah Disimpan";
 
 
@@ -2429,20 +2296,22 @@ document
       }catch(error){
 
         console.error(
-          "SIMPAN JURNAL ERROR:",
+          "SIMPAN RPC ERROR:",
           error
         );
 
 
-        document.getElementById(
-          "statusJurnal"
-        ).className =
+        const status =
+          document.getElementById(
+            "statusJurnal"
+          );
+
+
+        status.className =
           "status error";
 
 
-        document.getElementById(
-          "statusJurnal"
-        ).textContent =
+        status.textContent =
           "Gagal menyimpan jurnal: " +
           error.message;
 
@@ -2455,7 +2324,7 @@ document
 
         tombol.disabled=false;
 
-        tombol.textContent=
+        tombol.textContent =
           "💾 Simpan Jurnal";
 
       }
@@ -2465,7 +2334,7 @@ document
 
 
 /* =====================================================
-   GANTI TANGGAL
+   PERUBAHAN TANGGAL
 ===================================================== */
 
 document
@@ -2494,6 +2363,10 @@ function keluar(){
     "akun_siswa"
   );
 
+  sessionStorage.removeItem(
+    "akun_login"
+  );
+
   window.location.replace(
     "index.html"
   );
@@ -2504,6 +2377,93 @@ function keluar(){
 /* =====================================================
    MULAI
 ===================================================== */
+
+async function mulai(){
+
+  try{
+
+    akun =
+      JSON.parse(
+        session
+      );
+
+
+    siswa =
+      await ambilSiswa();
+
+
+    kelas =
+      await ambilKelas();
+
+
+    guruWali =
+      await ambilGuruWali();
+
+
+    document.getElementById(
+      "namaSiswa"
+    ).textContent =
+      siswa.nama;
+
+
+    document.getElementById(
+      "nisnSiswa"
+    ).textContent =
+      siswa.nisn || "-";
+
+
+    document.getElementById(
+      "kelasSiswa"
+    ).textContent =
+      kelas.nama;
+
+
+    document.getElementById(
+      "guruSiswa"
+    ).textContent =
+      guruWali.nama;
+
+
+    document.getElementById(
+      "tanggal"
+    ).value =
+      tanggalHariIni();
+
+
+    ubahMakan();
+    ubahBelajar();
+    ubahOlahraga();
+    ubahBermasyarakat();
+    ubahIbadah();
+
+
+    await cekJurnal();
+
+
+  }catch(error){
+
+    console.error(
+      "MULAI SISWA ERROR:",
+      error
+    );
+
+
+    document.getElementById(
+      "statusJurnal"
+    ).className =
+      "status error";
+
+
+    document.getElementById(
+      "statusJurnal"
+    ).textContent =
+      "Gagal memuat data: " +
+      error.message;
+
+  }
+
+}
+
 
 mulai();
 
