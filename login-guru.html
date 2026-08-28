@@ -1,0 +1,513 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Guru - Jurnal 7 KAIH</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#e0f2fe,#f8fafc);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+.logo{
+  width:80px;
+  height:80px;
+  margin:auto;
+  border-radius:20px;
+  background:#0284c7;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+h1{
+  text-align:center;
+  font-size:22px;
+  color:#0369a1;
+  margin:18px 0 5px;
+}
+
+.school{
+  text-align:center;
+  color:#64748b;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:25px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:15px 0 7px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  font-size:16px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#0284c7;
+  box-shadow:0 0 0 3px rgba(2,132,199,.10);
+}
+
+button{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#0284c7;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#0369a1;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+#pesan{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:9px;
+  text-align:center;
+  line-height:1.5;
+}
+
+.error{
+  display:block!important;
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.sukses{
+  display:block!important;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.info{
+  margin-top:18px;
+  padding:12px;
+  border-radius:9px;
+  background:#eff6ff;
+  color:#075985;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.kembali{
+  display:block;
+  text-align:center;
+  margin-top:18px;
+  color:#0284c7;
+  text-decoration:none;
+  font-size:14px;
+}
+
+footer{
+  text-align:center;
+  margin-top:25px;
+  color:#777;
+  font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+
+  <div class="logo">
+    👨‍🏫
+  </div>
+
+  <h1>
+    LOGIN GURU WALI
+  </h1>
+
+  <div class="school">
+    APLIKASI JURNAL 7 KEBIASAAN ANAK INDONESIA HEBAT
+    <br>
+    SMP NEGERI 3 SIBOLGA
+  </div>
+
+  <label for="username">
+    Username / NIP
+  </label>
+
+  <input
+    type="text"
+    id="username"
+    placeholder="Masukkan username / NIP"
+    autocomplete="username"
+  >
+
+  <label for="password">
+    Password
+  </label>
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Masukkan password"
+    autocomplete="current-password"
+  >
+
+  <button
+    id="btnLogin"
+    onclick="loginGuru()">
+    LOGIN
+  </button>
+
+  <div id="pesan"></div>
+
+  <div class="info">
+    Gunakan username dan password Guru
+    yang terdaftar pada sistem.
+  </div>
+
+  <a href="index.html" class="kembali">
+    ← Kembali ke halaman utama
+  </a>
+
+  <footer>
+    Created by Mr. Rahmat Batubara, S.T.P
+  </footer>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+async function loginGuru(){
+
+  const username =
+    document.getElementById("username").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const tombol =
+    document.getElementById("btnLogin");
+
+  const pesan =
+    document.getElementById("pesan");
+
+
+  pesan.className = "";
+  pesan.textContent = "";
+
+
+  if(!username){
+
+    pesan.className = "error";
+    pesan.textContent = "Username / NIP wajib diisi.";
+    return;
+
+  }
+
+
+  if(!password){
+
+    pesan.className = "error";
+    pesan.textContent = "Password wajib diisi.";
+    return;
+
+  }
+
+
+  tombol.disabled = true;
+  tombol.textContent = "MEMERIKSA...";
+
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/rpc/cek_login",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json",
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY
+          },
+
+          body:JSON.stringify({
+            p_username:username,
+            p_password:password
+          })
+        }
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data = [];
+
+    try{
+
+      data =
+        text ? JSON.parse(text) : [];
+
+    }catch(error){
+
+      throw new Error(
+        "Respons server tidak valid."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.hint ||
+        data.details ||
+        "Login gagal."
+      );
+
+    }
+
+
+    if(
+      !Array.isArray(data) ||
+      data.length === 0
+    ){
+
+      throw new Error(
+        "Username atau password salah."
+      );
+
+    }
+
+
+    const akun =
+      data[0];
+
+
+    const role =
+      String(
+        akun.role || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(role !== "guru"){
+
+      throw new Error(
+        "Akun ini bukan akun guru."
+      );
+
+    }
+
+
+    if(
+      !akun.id ||
+      !akun.referensi_id
+    ){
+
+      throw new Error(
+        "ID Guru tidak ditemukan."
+      );
+
+    }
+
+
+    const sessionGuru = {
+
+      id:
+        Number(akun.id),
+
+      username:
+        akun.username,
+
+      role:
+        "guru",
+
+      tipe:
+        "guru",
+
+      referensi_id:
+        Number(akun.referensi_id),
+
+      nama:
+        akun.nama || "Guru Wali"
+
+    };
+
+
+    sessionStorage.setItem(
+      "akun_guru",
+      JSON.stringify(sessionGuru)
+    );
+
+
+    sessionStorage.removeItem(
+      "akun_login"
+    );
+
+
+    /*
+      Catat login guru.
+    */
+
+    try{
+
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/log_login",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json",
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Prefer":"return=minimal"
+          },
+
+          body:JSON.stringify({
+
+            username:
+              akun.username,
+
+            role:
+              "guru",
+
+            referensi_id:
+              Number(akun.referensi_id)
+
+          })
+        }
+      );
+
+    }catch(error){
+
+      console.error(
+        "Gagal mencatat login guru:",
+        error
+      );
+
+    }
+
+
+    pesan.className =
+      "sukses";
+
+    pesan.textContent =
+      "Login berhasil. Membuka dashboard guru...";
+
+
+    setTimeout(function(){
+
+      window.location.replace(
+        "guru.html"
+      );
+
+    },500);
+
+
+  }catch(error){
+
+    console.error(
+      "LOGIN GURU ERROR:",
+      error
+    );
+
+
+    pesan.className =
+      "error";
+
+    pesan.textContent =
+      error.message ||
+      "Terjadi kesalahan saat login.";
+
+
+    tombol.disabled =
+      false;
+
+    tombol.textContent =
+      "LOGIN";
+
+  }
+
+}
+
+
+/*
+  Tekan Enter untuk login.
+*/
+
+document
+  .getElementById("password")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(event.key === "Enter"){
+
+        loginGuru();
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
+```
