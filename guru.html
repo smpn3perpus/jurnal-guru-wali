@@ -21,7 +21,7 @@ body{
 
 .header{
   background:#0284c7;
-  color:#fff;
+  color:white;
   padding:18px 20px;
   display:flex;
   justify-content:space-between;
@@ -81,13 +81,13 @@ body{
 }
 
 .error-box{
+  display:none;
   margin-top:12px;
   padding:12px;
+  border-radius:8px;
   background:#fee2e2;
   color:#991b1b;
-  border-radius:8px;
   line-height:1.5;
-  display:none;
 }
 
 .tanggal-box{
@@ -120,7 +120,7 @@ textarea{
 .primary{
   border:0;
   background:#0284c7;
-  color:#fff;
+  color:white;
   padding:11px 16px;
   border-radius:8px;
   font-weight:bold;
@@ -180,15 +180,14 @@ textarea{
   border-radius:8px;
   background:#f8fafc;
   margin-bottom:15px;
-  line-height:1.5;
 }
 
-.ok{
+.status.ok{
   background:#dcfce7;
   color:#166534;
 }
 
-.error{
+.status.error{
   background:#fee2e2;
   color:#991b1b;
 }
@@ -196,9 +195,8 @@ textarea{
 /* SISWA */
 
 .siswa-box{
-  padding:0;
-  margin-bottom:10px;
   border:1px solid #dbe3ea;
+  margin-bottom:10px;
   overflow:hidden;
 }
 
@@ -212,7 +210,6 @@ textarea{
 
 .siswa-click{
   cursor:pointer;
-  transition:.15s;
 }
 
 .siswa-click:hover{
@@ -220,16 +217,16 @@ textarea{
 }
 
 .siswa-nama{
-  font-weight:bold;
   color:#0369a1;
   font-size:16px;
+  font-weight:bold;
 }
 
 .siswa-detail{
+  margin-top:5px;
   color:#64748b;
   font-size:13px;
-  line-height:1.5;
-  margin-top:4px;
+  line-height:1.6;
 }
 
 .badge{
@@ -238,8 +235,8 @@ textarea{
   border-radius:20px;
   font-size:12px;
   font-weight:bold;
-  white-space:nowrap;
   text-align:center;
+  white-space:nowrap;
 }
 
 .badge-sudah{
@@ -252,7 +249,7 @@ textarea{
   color:#475569;
 }
 
-/* DETAIL JURNAL */
+/* JURNAL */
 
 .jurnal-detail{
   display:none;
@@ -265,44 +262,44 @@ textarea{
 }
 
 .jurnal-info{
-  background:#f8fafc;
-  padding:14px;
-  border-radius:9px;
-  line-height:1.7;
   margin-top:15px;
+  padding:13px;
+  border-radius:9px;
+  background:#f8fafc;
+  line-height:1.7;
 }
 
 .nomor{
+  margin-top:13px;
+  padding:15px;
   border:1px solid #cbd5e1;
   border-radius:11px;
-  padding:15px;
-  margin-top:14px;
 }
 
 .nomor-title{
-  font-size:16px;
-  font-weight:bold;
   color:#0369a1;
+  font-weight:bold;
+  font-size:16px;
   margin-bottom:8px;
 }
 
 .data-siswa{
-  background:#f8fafc;
   padding:11px;
   border-radius:8px;
+  background:#f8fafc;
   line-height:1.7;
 }
 
 .feedback{
   margin-top:12px;
-  background:#f1f5f9;
   padding:12px;
   border-radius:9px;
+  background:#f1f5f9;
 }
 
 .feedback-title{
-  color:#64748b;
   font-size:12px;
+  color:#64748b;
   font-weight:bold;
   margin-bottom:8px;
 }
@@ -311,13 +308,13 @@ textarea{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-  margin-bottom:8px;
+  margin-bottom:9px;
 }
 
 .respons button{
   border:1px solid #cbd5e1;
   background:white;
-  padding:8px 11px;
+  padding:8px 12px;
   border-radius:20px;
   cursor:pointer;
   font-weight:bold;
@@ -325,15 +322,20 @@ textarea{
 
 .respons button.active{
   background:#0284c7;
-  color:white;
+  color:#fff;
   border-color:#0284c7;
+}
+
+.komentar{
+  min-height:75px;
+  resize:vertical;
 }
 
 .save-feedback{
   margin-top:9px;
   border:0;
   background:#16a34a;
-  color:white;
+  color:#fff;
   padding:9px 13px;
   border-radius:8px;
   font-weight:bold;
@@ -352,6 +354,12 @@ textarea{
   font-weight:bold;
 }
 
+.loading{
+  text-align:center;
+  padding:25px;
+  color:#64748b;
+}
+
 /* DOWNLOAD */
 
 .download-box{
@@ -363,8 +371,8 @@ textarea{
 }
 
 .small{
-  font-size:12px;
   color:#64748b;
+  font-size:12px;
 }
 
 .footer{
@@ -412,10 +420,16 @@ textarea{
 <header class="header">
 
   <div>
-    <h1>👨‍🏫 Dashboard Guru Wali</h1>
+
+    <h1>
+      👨‍🏫 Dashboard Guru Wali
+    </h1>
+
     <p>
-      SMP Negeri 3 Sibolga • Jurnal 7 Kebiasaan Anak Indonesia Hebat
+      SMP Negeri 3 Sibolga •
+      Jurnal 7 Kebiasaan Anak Indonesia Hebat
     </p>
+
   </div>
 
   <button
@@ -497,7 +511,7 @@ textarea{
     <div class="card">
 
       <div class="card-title">
-        📝 Jurnal Belum Feedback Hari Ini
+        📝 Jurnal Belum Feedback
       </div>
 
       <div
@@ -512,7 +526,7 @@ textarea{
     <div class="card">
 
       <div class="card-title">
-        ✅ Jurnal Sudah Feedback Hari Ini
+        ✅ Jurnal Sudah Feedback
       </div>
 
       <div
@@ -603,6 +617,7 @@ const SUPABASE_KEY =
 function headers(){
 
   return {
+
     "apikey":
       SUPABASE_KEY,
 
@@ -614,6 +629,7 @@ function headers(){
 
     "Accept":
       "application/json"
+
   };
 
 }
@@ -638,27 +654,9 @@ if(!session){
 }
 
 
-let akun = null;
-let guru = null;
-let daftarSiswa = [];
-
-
-try{
-
-  akun =
-    JSON.parse(session);
-
-}catch(error){
-
-  sessionStorage.removeItem(
-    "akun_guru"
-  );
-
-  window.location.replace(
-    "login-guru.html"
-  );
-
-}
+let akun=null;
+let guru=null;
+let daftarSiswa=[];
 
 
 /* =====================================================
@@ -679,12 +677,13 @@ async function ambilGuru(){
       SUPABASE_URL +
       "/rest/v1/guru_wali" +
       "?id=eq." +
-      encodeURIComponent(guruId) +
+      encodeURIComponent(
+        guruId
+      ) +
       "&select=id,nama",
 
       {
-        headers:
-          headers()
+        headers:headers()
       }
 
     );
@@ -699,8 +698,10 @@ async function ambilGuru(){
 
   try{
 
-    data =
-      text ? JSON.parse(text) : [];
+    data=
+      text
+      ? JSON.parse(text)
+      : [];
 
   }catch(error){
 
@@ -736,7 +737,7 @@ async function ambilGuru(){
 
 
 /* =====================================================
-   AMBIL SISWA GURU
+   AMBIL SISWA
 ===================================================== */
 
 async function ambilSiswa(){
@@ -754,8 +755,7 @@ async function ambilSiswa(){
       "&order=id.asc",
 
       {
-        headers:
-          headers()
+        headers:headers()
       }
 
     );
@@ -770,8 +770,10 @@ async function ambilSiswa(){
 
   try{
 
-    data =
-      text ? JSON.parse(text) : [];
+    data=
+      text
+      ? JSON.parse(text)
+      : [];
 
   }catch(error){
 
@@ -800,20 +802,12 @@ async function ambilSiswa(){
 
 
 /* =====================================================
-   AMBIL NAMA KELAS
+   KELAS
 ===================================================== */
 
-async function ambilNamaKelas(kelasId){
-
-  if(
-    kelasId === null ||
-    kelasId === undefined
-  ){
-
-    return "-";
-
-  }
-
+async function namaKelas(
+  kelasId
+){
 
   try{
 
@@ -823,34 +817,33 @@ async function ambilNamaKelas(kelasId){
         SUPABASE_URL +
         "/rest/v1/kelas" +
         "?id=eq." +
-        encodeURIComponent(kelasId) +
+        encodeURIComponent(
+          kelasId
+        ) +
         "&select=nama",
 
         {
-          headers:
-            headers()
+          headers:headers()
         }
 
       );
 
 
     if(!response.ok)
-      return String(kelasId);
+      return "-";
 
 
     const data =
       await response.json();
 
 
-    if(!data.length)
-      return String(kelasId);
-
-
-    return data[0].nama || String(kelasId);
+    return data.length
+      ? data[0].nama
+      : "-";
 
   }catch(error){
 
-    return String(kelasId);
+    return "-";
 
   }
 
@@ -865,6 +858,7 @@ function tanggalHariIni(){
 
   const d =
     new Date();
+
 
   return (
     d.getFullYear() +
@@ -881,16 +875,21 @@ function tanggalHariIni(){
 }
 
 
-function formatTanggal(tanggal){
+function formatTanggal(
+  value
+){
 
-  if(!tanggal)
+  if(!value)
     return "-";
 
+
   const p =
-    String(tanggal).split("-");
+    String(value).split("-");
+
 
   if(p.length!==3)
-    return tanggal;
+    return value;
+
 
   return (
     p[2] +
@@ -904,18 +903,12 @@ function formatTanggal(tanggal){
 
 
 /* =====================================================
-   AMBIL JURNAL MELALUI RPC
+   AMBIL JURNAL VIA RPC
 ===================================================== */
 
 async function ambilJurnalGuru(
   tanggal
 ){
-
-  const guruId =
-    Number(
-      guru.id
-    );
-
 
   const response =
     await fetch(
@@ -924,16 +917,18 @@ async function ambilJurnalGuru(
       "/rest/v1/rpc/ambil_jurnal_guru",
 
       {
+
         method:"POST",
 
-        headers:
-          headers(),
+        headers:headers(),
 
         body:
           JSON.stringify({
 
             p_guru_id:
-              guruId,
+              Number(
+                guru.id
+              ),
 
             p_tanggal:
               tanggal
@@ -955,12 +950,14 @@ async function ambilJurnalGuru(
   try{
 
     data =
-      text ? JSON.parse(text) : [];
+      text
+      ? JSON.parse(text)
+      : [];
 
   }catch(error){
 
     throw new Error(
-      "Respons jurnal tidak valid: " +
+      "Data jurnal tidak valid: " +
       text
     );
 
@@ -974,7 +971,7 @@ async function ambilJurnalGuru(
       data.details ||
       data.hint ||
       text ||
-      "Gagal mengambil jurnal guru."
+      "Gagal mengambil jurnal."
     );
 
   }
@@ -988,7 +985,7 @@ async function ambilJurnalGuru(
 
 
 /* =====================================================
-   FEEDBACK
+   AMBIL FEEDBACK VIA RPC
 ===================================================== */
 
 async function ambilFeedback(
@@ -999,69 +996,69 @@ async function ambilFeedback(
     await fetch(
 
       SUPABASE_URL +
-      "/rest/v1/feedback_jurnal" +
-      "?jurnal_id=eq." +
-      encodeURIComponent(
-        jurnalId
-      ) +
-      "&select=*",
+      "/rest/v1/rpc/ambil_feedback_guru",
 
       {
-        headers:
-          headers()
+
+        method:"POST",
+
+        headers:headers(),
+
+        body:
+          JSON.stringify({
+
+            p_jurnal_id:
+              Number(jurnalId),
+
+            p_guru_id:
+              Number(guru.id)
+
+          })
+
       }
 
     );
 
 
-  if(!response.ok)
-    return [];
+  const text =
+    await response.text();
 
 
-  const data =
-    await response.json();
+  let data=[];
+
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data feedback tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.details ||
+      data.hint ||
+      text ||
+      "Gagal mengambil feedback."
+    );
+
+  }
 
 
   return Array.isArray(data)
     ? data
     : [];
-
-}
-
-
-/* =====================================================
-   CEK 7 FEEDBACK
-===================================================== */
-
-function feedbackLengkap(
-  data
-){
-
-  const set =
-    new Set(
-      data
-        .map(
-          f => f.bagian
-        )
-        .filter(Boolean)
-    );
-
-
-  const wajib=[
-    "bangun_pagi",
-    "makan_sehat",
-    "belajar_malam",
-    "olahraga",
-    "bermasyarakat",
-    "ibadah",
-    "tidur_cepat"
-  ];
-
-
-  return wajib.every(
-    item =>
-      set.has(item)
-  );
 
 }
 
@@ -1102,7 +1099,7 @@ async function tampilkanDaftar(){
       "status error";
 
     status.textContent=
-      "Pilih tanggal jurnal terlebih dahulu.";
+      "Pilih tanggal terlebih dahulu.";
 
     return;
 
@@ -1116,7 +1113,7 @@ async function tampilkanDaftar(){
 
 
   daftar.innerHTML=
-    '<div class="loading">Memuat data siswa...</div>';
+    '<div class="loading">Memuat jurnal siswa...</div>';
 
 
   try{
@@ -1127,15 +1124,15 @@ async function tampilkanDaftar(){
       );
 
 
-    const mapJurnal={};
+    const map={};
 
 
     jurnal.forEach(
-      function(item){
+      function(j){
 
-        mapJurnal[
-          String(item.siswa_id)
-        ] = item;
+        map[
+          String(j.siswa_id)
+        ] = j;
 
       }
     );
@@ -1143,8 +1140,7 @@ async function tampilkanDaftar(){
 
     let sudahFeedback=0;
 
-
-    const feedbackMap={};
+    const detailFeedback={};
 
 
     for(
@@ -1157,7 +1153,7 @@ async function tampilkanDaftar(){
         );
 
 
-      feedbackMap[
+      detailFeedback[
         String(j.id)
       ] = f;
 
@@ -1180,25 +1176,24 @@ async function tampilkanDaftar(){
       const siswa of daftarSiswa
     ){
 
-      const j =
-        mapJurnal[
+      const jurnalSiswa =
+        map[
           String(siswa.id)
         ];
 
 
       const kelasNama =
-        await ambilNamaKelas(
+        await namaKelas(
           siswa.kelas_id
         );
 
 
-      if(!j){
+      /* ====================================
+         BELUM MENGISI
+         TIDAK ADA onclick
+      ==================================== */
 
-        /*
-          BELUM MENGISI:
-          HANYA KETERANGAN,
-          TIDAK BISA DIKLIK.
-        */
+      if(!jurnalSiswa){
 
         html += `
 
@@ -1213,15 +1208,24 @@ async function tampilkanDaftar(){
                 </div>
 
                 <div class="siswa-detail">
-                  NISN: ${aman(siswa.nisn || "-")}
+
+                  NISN:
+                  ${aman(siswa.nisn || "-")}
+
                   <br>
-                  Kelas: ${aman(kelasNama)}
+
+                  Kelas:
+                  ${aman(kelasNama)}
+
                 </div>
 
               </div>
 
+
               <span class="badge badge-belum">
+
                 ⭕ BELUM MENGISI JURNAL
+
               </span>
 
             </div>
@@ -1230,15 +1234,14 @@ async function tampilkanDaftar(){
 
         `;
 
-
         continue;
 
       }
 
 
       const f =
-        feedbackMap[
-          String(j.id)
+        detailFeedback[
+          String(jurnalSiswa.id)
         ] || [];
 
 
@@ -1248,12 +1251,11 @@ async function tampilkanDaftar(){
 
       html += `
 
-        <div
-          class="siswa-box">
+        <div class="siswa-box">
 
           <div
             class="siswa-head siswa-click"
-            onclick="bukaJurnal(${j.id})">
+            onclick="bukaJurnal(${jurnalSiswa.id})">
 
             <div>
 
@@ -1262,14 +1264,24 @@ async function tampilkanDaftar(){
               </div>
 
               <div class="siswa-detail">
-                NISN: ${aman(siswa.nisn || "-")}
+
+                NISN:
+                ${aman(siswa.nisn || "-")}
+
                 <br>
-                Kelas: ${aman(kelasNama)}
+
+                Kelas:
+                ${aman(kelasNama)}
+
                 <br>
-                Tanggal: ${aman(formatTanggal(j.tanggal))}
+
+                Tanggal:
+                ${aman(formatTanggal(jurnalSiswa.tanggal))}
+
               </div>
 
             </div>
+
 
             <span class="badge badge-sudah">
 
@@ -1287,11 +1299,11 @@ async function tampilkanDaftar(){
 
 
           <div
-            id="detail_${j.id}"
+            id="detail_${jurnalSiswa.id}"
             class="jurnal-detail">
 
             ${buatJurnal(
-              j,
+              jurnalSiswa,
               f
             )}
 
@@ -1308,7 +1320,7 @@ async function tampilkanDaftar(){
 
       html=
         '<div class="status">' +
-        'Belum ada siswa yang terdaftar sebagai wali.' +
+        'Belum ada siswa wali.' +
         '</div>';
 
     }
@@ -1318,14 +1330,6 @@ async function tampilkanDaftar(){
       html;
 
 
-    const belum =
-      Math.max(
-        0,
-        jurnal.length -
-        sudahFeedback
-      );
-
-
     document.getElementById(
       "jumlahSiswa"
     ).textContent =
@@ -1333,15 +1337,19 @@ async function tampilkanDaftar(){
 
 
     document.getElementById(
-      "belumFeedback"
-    ).textContent =
-      belum;
-
-
-    document.getElementById(
       "sudahFeedback"
     ).textContent =
       sudahFeedback;
+
+
+    document.getElementById(
+      "belumFeedback"
+    ).textContent =
+      Math.max(
+        0,
+        jurnal.length -
+        sudahFeedback
+      );
 
 
     status.className=
@@ -1384,6 +1392,43 @@ async function tampilkanDaftar(){
 
 
 /* =====================================================
+   FEEDBACK LENGKAP
+===================================================== */
+
+function feedbackLengkap(
+  feedback
+){
+
+  const set =
+    new Set(
+      feedback
+        .map(
+          f => f.bagian
+        )
+        .filter(Boolean)
+    );
+
+
+  const wajib=[
+    "bangun_pagi",
+    "makan_sehat",
+    "belajar_malam",
+    "olahraga",
+    "bermasyarakat",
+    "ibadah",
+    "tidur_cepat"
+  ];
+
+
+  return wajib.every(
+    bagian =>
+      set.has(bagian)
+  );
+
+}
+
+
+/* =====================================================
    BUAT JURNAL
 ===================================================== */
 
@@ -1414,17 +1459,20 @@ function buatJurnal(
     </div>
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "1",
       "🌅 Bangun Pagi",
-      `<b>Jam bangun:</b> ${aman(j.jam_bangun)}`,
+      `
+        <b>Jam bangun:</b>
+        ${aman(j.jam_bangun)}
+      `,
       "bangun_pagi"
     )}
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "2",
@@ -1434,7 +1482,7 @@ function buatJurnal(
     )}
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "3",
@@ -1444,7 +1492,7 @@ function buatJurnal(
     )}
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "4",
@@ -1454,7 +1502,7 @@ function buatJurnal(
     )}
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "5",
@@ -1464,7 +1512,7 @@ function buatJurnal(
     )}
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "6",
@@ -1474,12 +1522,15 @@ function buatJurnal(
     )}
 
 
-    ${nomor(
+    ${buatNomor(
       j,
       map,
       "7",
       "🌙 Tidur Cepat",
-      `<b>Jam tidur:</b> ${aman(j.jam_tidur)}`,
+      `
+        <b>Jam tidur:</b>
+        ${aman(j.jam_tidur)}
+      `,
       "tidur_cepat"
     )}
 
@@ -1489,7 +1540,7 @@ function buatJurnal(
 
 
 /* =====================================================
-   MAKAN
+   ISI MAKAN
 ===================================================== */
 
 function buatMakan(j){
@@ -1500,19 +1551,34 @@ function buatMakan(j){
   ){
 
     return `
+
       <b>Puasa:</b> Ya<br>
-      <b>Menu Sahur:</b> ${aman(j.menu_sahur)}<br>
-      <b>Menu Berbuka:</b> ${aman(j.menu_berbuka)}
+
+      <b>Menu Sahur:</b>
+      ${aman(j.menu_sahur)}<br>
+
+      <b>Menu Berbuka:</b>
+      ${aman(j.menu_berbuka)}
+
     `;
 
   }
 
 
   return `
-    <b>Puasa:</b> ${aman(j.puasa)}<br>
-    <b>Menu Sarapan:</b> ${aman(j.menu_sarapan)}<br>
-    <b>Menu Makan Siang:</b> ${aman(j.menu_siang)}<br>
-    <b>Menu Makan Malam:</b> ${aman(j.menu_malam)}
+
+    <b>Puasa:</b>
+    ${aman(j.puasa)}<br>
+
+    <b>Menu Sarapan:</b>
+    ${aman(j.menu_sarapan)}<br>
+
+    <b>Menu Makan Siang:</b>
+    ${aman(j.menu_siang)}<br>
+
+    <b>Menu Makan Malam:</b>
+    ${aman(j.menu_malam)}
+
   `;
 
 }
@@ -1530,17 +1596,28 @@ function buatBelajar(j){
   ){
 
     return `
+
       <b>Belajar malam:</b> Ya<br>
-      <b>Materi:</b> ${aman(j.materi_belajar)}<br>
-      <b>Durasi:</b> ${aman(j.durasi_belajar)} menit
+
+      <b>Materi:</b>
+      ${aman(j.materi_belajar)}<br>
+
+      <b>Durasi:</b>
+      ${aman(j.durasi_belajar)} menit
+
     `;
 
   }
 
 
   return `
-    <b>Belajar malam:</b> ${aman(j.belajar_malam)}<br>
-    <b>Alasan:</b> ${aman(j.alasan_belajar)}
+
+    <b>Belajar malam:</b>
+    ${aman(j.belajar_malam)}<br>
+
+    <b>Alasan:</b>
+    ${aman(j.alasan_belajar)}
+
   `;
 
 }
@@ -1558,17 +1635,28 @@ function buatOlahraga(j){
   ){
 
     return `
+
       <b>Olahraga:</b> Ya<br>
-      <b>Jenis:</b> ${aman(j.jenis_olahraga)}<br>
-      <b>Durasi:</b> ${aman(j.durasi_olahraga)} menit
+
+      <b>Jenis:</b>
+      ${aman(j.jenis_olahraga)}<br>
+
+      <b>Durasi:</b>
+      ${aman(j.durasi_olahraga)} menit
+
     `;
 
   }
 
 
   return `
-    <b>Olahraga:</b> ${aman(j.olahraga)}<br>
-    <b>Alasan:</b> ${aman(j.alasan_olahraga)}
+
+    <b>Olahraga:</b>
+    ${aman(j.olahraga)}<br>
+
+    <b>Alasan:</b>
+    ${aman(j.alasan_olahraga)}
+
   `;
 
 }
@@ -1586,16 +1674,25 @@ function buatMasyarakat(j){
   ){
 
     return `
+
       <b>Bermasyarakat:</b> Ya<br>
-      <b>Jenis kegiatan:</b> ${aman(j.jenis_bermasyarakat)}
+
+      <b>Jenis kegiatan:</b>
+      ${aman(j.jenis_bermasyarakat)}
+
     `;
 
   }
 
 
   return `
-    <b>Bermasyarakat:</b> ${aman(j.bermasyarakat)}<br>
-    <b>Alasan:</b> ${aman(j.alasan_bermasyarakat)}
+
+    <b>Bermasyarakat:</b>
+    ${aman(j.bermasyarakat)}<br>
+
+    <b>Alasan:</b>
+    ${aman(j.alasan_bermasyarakat)}
+
   `;
 
 }
@@ -1613,16 +1710,25 @@ function buatIbadah(j){
   ){
 
     return `
+
       <b>Beribadah:</b> Ya<br>
-      <b>Jenis ibadah:</b> ${aman(j.jenis_ibadah)}
+
+      <b>Jenis ibadah:</b>
+      ${aman(j.jenis_ibadah)}
+
     `;
 
   }
 
 
   return `
-    <b>Beribadah:</b> ${aman(j.ibadah)}<br>
-    <b>Alasan:</b> ${aman(j.alasan_ibadah)}
+
+    <b>Beribadah:</b>
+    ${aman(j.ibadah)}<br>
+
+    <b>Alasan:</b>
+    ${aman(j.alasan_ibadah)}
+
   `;
 
 }
@@ -1632,7 +1738,7 @@ function buatIbadah(j){
    NOMOR + FEEDBACK
 ===================================================== */
 
-function nomor(
+function buatNomor(
   j,
   map,
   no,
@@ -1661,6 +1767,7 @@ function nomor(
         ${no}. ${judul}
       </div>
 
+
       <div class="data-siswa">
         ${isi}
       </div>
@@ -1673,14 +1780,15 @@ function nomor(
         </div>
 
 
-        <div
-          class="respons"
-          data-jurnal="${j.id}"
-          data-bagian="${bagian}">
+        <div class="respons">
 
           <button
             type="button"
-            class="${respons==="Suka" ? "active" : ""}"
+            class="${
+              respons==="Suka"
+              ? "active"
+              : ""
+            }"
             data-respons="Suka"
             onclick="pilihRespons(this)">
             ❤️ Suka
@@ -1689,7 +1797,11 @@ function nomor(
 
           <button
             type="button"
-            class="${respons==="Biasa" ? "active" : ""}"
+            class="${
+              respons==="Biasa"
+              ? "active"
+              : ""
+            }"
             data-respons="Biasa"
             onclick="pilihRespons(this)">
             🙂 Biasa
@@ -1698,7 +1810,11 @@ function nomor(
 
           <button
             type="button"
-            class="${respons==="Kecewa" ? "active" : ""}"
+            class="${
+              respons==="Kecewa"
+              ? "active"
+              : ""
+            }"
             data-respons="Kecewa"
             onclick="pilihRespons(this)">
             😔 Kecewa
@@ -1744,7 +1860,7 @@ function nomor(
 
 
 /* =====================================================
-   PILIH RESPONS
+   PILIH FEEDBACK
 ===================================================== */
 
 function pilihRespons(button){
@@ -1756,9 +1872,9 @@ function pilihRespons(button){
   parent
     .querySelectorAll("button")
     .forEach(
-      function(b){
+      function(btn){
 
-        b.classList.remove(
+        btn.classList.remove(
           "active"
         );
 
@@ -1774,10 +1890,12 @@ function pilihRespons(button){
 
 
 /* =====================================================
-   SIMPAN FEEDBACK
+   SIMPAN FEEDBACK VIA RPC
 ===================================================== */
 
-async function simpanFeedback(button){
+async function simpanFeedback(
+  button
+){
 
   const jurnalId =
     Number(
@@ -1830,169 +1948,72 @@ async function simpanFeedback(button){
 
   try{
 
-    const siswaId =
-      await ambilSiswaIdJurnal(
-        jurnalId
-      );
-
-
-    const guruId =
-      Number(
-        guru.id
-      );
-
-
-    const cekResponse =
+    const response =
       await fetch(
 
         SUPABASE_URL +
-        "/rest/v1/feedback_jurnal" +
-        "?jurnal_id=eq." +
-        encodeURIComponent(jurnalId) +
-        "&bagian=eq." +
-        encodeURIComponent(bagian) +
-        "&select=id",
+        "/rest/v1/rpc/simpan_feedback",
 
         {
-          headers:
-            headers()
+
+          method:"POST",
+
+          headers:headers(),
+
+          body:
+            JSON.stringify({
+
+              p_jurnal_id:
+                jurnalId,
+
+              p_guru_id:
+                Number(
+                  guru.id
+                ),
+
+              p_respons:
+                respons,
+
+              p_komentar:
+                komentar,
+
+              p_bagian:
+                bagian
+
+            })
+
         }
 
       );
-
-
-    const cekText =
-      await cekResponse.text();
-
-
-    let cekData=[];
-
-
-    try{
-
-      cekData =
-        cekText
-        ? JSON.parse(cekText)
-        : [];
-
-    }catch(e){
-
-      cekData=[];
-
-    }
-
-
-    if(!cekResponse.ok){
-
-      throw new Error(
-        "Gagal memeriksa feedback: " +
-        cekText
-      );
-
-    }
-
-
-    let response;
-
-
-    if(cekData.length){
-
-      response =
-        await fetch(
-
-          SUPABASE_URL +
-          "/rest/v1/feedback_jurnal?id=eq." +
-          encodeURIComponent(
-            cekData[0].id
-          ),
-
-          {
-            method:"PATCH",
-
-            headers:{
-              ...headers(),
-              "Prefer":
-                "return=minimal"
-            },
-
-            body:
-              JSON.stringify({
-
-                siswa_id:
-                  siswaId,
-
-                guru_id:
-                  guruId,
-
-                respons:
-                  respons,
-
-                komentar:
-                  komentar,
-
-                bagian:
-                  bagian
-
-              })
-
-          }
-
-        );
-
-    }else{
-
-      response =
-        await fetch(
-
-          SUPABASE_URL +
-          "/rest/v1/feedback_jurnal",
-
-          {
-            method:"POST",
-
-            headers:{
-              ...headers(),
-              "Prefer":
-                "return=minimal"
-            },
-
-            body:
-              JSON.stringify({
-
-                jurnal_id:
-                  jurnalId,
-
-                siswa_id:
-                  siswaId,
-
-                guru_id:
-                  guruId,
-
-                respons:
-                  respons,
-
-                komentar:
-                  komentar,
-
-                bagian:
-                  bagian
-
-              })
-
-          }
-
-        );
-
-    }
 
 
     const text =
       await response.text();
 
 
+    let data={};
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : {};
+
+    }catch(error){
+
+      data={};
+
+    }
+
+
     if(!response.ok){
 
       throw new Error(
+        data.message ||
+        data.details ||
+        data.hint ||
         text ||
         "Gagal menyimpan feedback."
       );
@@ -2013,10 +2034,13 @@ async function simpanFeedback(button){
     status.textContent=
       "✓ Feedback sudah tersimpan";
 
-
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "FEEDBACK:",
+      error
+    );
+
 
     alert(
       "Gagal menyimpan feedback:\n\n" +
@@ -2043,68 +2067,33 @@ async function simpanFeedback(button){
 
 
 /* =====================================================
-   AMBIL SISWA ID JURNAL
+   BUKA JURNAL
 ===================================================== */
 
-async function ambilSiswaIdJurnal(
+function bukaJurnal(
   jurnalId
 ){
 
-  const response =
-    await fetch(
-
-      SUPABASE_URL +
-      "/rest/v1/jurnal_7_kaih" +
-      "?id=eq." +
-      encodeURIComponent(jurnalId) +
-      "&select=siswa_id",
-
-      {
-        headers:
-          headers()
-      }
-
+  const detail =
+    document.getElementById(
+      "detail_" +
+      jurnalId
     );
 
 
-  const text =
-    await response.text();
+  if(!detail)
+    return;
 
 
-  if(!response.ok){
-
-    throw new Error(
-      "Gagal membaca siswa jurnal: " +
-      text
-    );
-
-  }
-
-
-  const data =
-    text
-    ? JSON.parse(text)
-    : [];
-
-
-  if(!data.length){
-
-    throw new Error(
-      "Siswa untuk jurnal tidak ditemukan."
-    );
-
-  }
-
-
-  return Number(
-    data[0].siswa_id
+  detail.classList.toggle(
+    "open"
   );
 
 }
 
 
 /* =====================================================
-   DOWNLOAD REKAP
+   DOWNLOAD
 ===================================================== */
 
 async function downloadRekap(){
@@ -2142,7 +2131,7 @@ async function downloadRekap(){
 
         siswaMap[
           String(s.id)
-        ] = s;
+        ]=s;
 
       }
     );
@@ -2270,16 +2259,6 @@ async function downloadRekap(){
     );
 
 
-    if(!data.length){
-
-      rows.push([
-        "",
-        "Tidak ada jurnal pada tanggal tersebut."
-      ]);
-
-    }
-
-
     const csv =
       rows
         .map(
@@ -2370,7 +2349,9 @@ async function downloadRekap(){
    ERROR
 ===================================================== */
 
-function tampilkanError(error){
+function tampilkanError(
+  error
+){
 
   const box =
     document.getElementById(
@@ -2432,14 +2413,19 @@ async function mulai(){
 
   try{
 
+    akun =
+      JSON.parse(
+        session
+      );
+
+
     if(
-      !akun ||
       akun.role !== "guru" ||
       !akun.referensi_id
     ){
 
       throw new Error(
-        "Session guru tidak valid. Silakan login ulang."
+        "Session Guru tidak valid. Silakan login ulang."
       );
 
     }
@@ -2478,7 +2464,7 @@ async function mulai(){
   }catch(error){
 
     console.error(
-      "MULAI GURU ERROR:",
+      "MULAI:",
       error
     );
 
@@ -2496,7 +2482,6 @@ async function mulai(){
   }
 
 }
-
 
 mulai();
 
