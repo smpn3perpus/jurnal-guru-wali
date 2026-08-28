@@ -1,11 +1,11 @@
-```html
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard Admin - Jurnal 7 KAIH</title>
+<title>Login Admin - Jurnal 7 KAIH</title>
 
 <style>
 *{
@@ -14,437 +14,220 @@
 
 body{
   margin:0;
+  min-height:100vh;
   font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#1e293b;
+  background:linear-gradient(135deg,#581c87,#7c3aed,#a855f7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
-/* HEADER */
+.login-card{
+  width:100%;
+  max-width:420px;
+  background:white;
+  padding:32px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
 
-.header{
+.logo{
+  width:80px;
+  height:80px;
+  margin:auto;
+  border-radius:20px;
   background:#7c3aed;
   color:white;
-  padding:18px 25px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  box-shadow:0 3px 10px rgba(0,0,0,.15);
+  justify-content:center;
+  font-size:40px;
 }
 
-.header h1{
-  margin:0;
-  font-size:22px;
+h1{
+  text-align:center;
+  color:#6d28d9;
+  font-size:23px;
+  margin:18px 0 5px;
 }
 
-.header p{
-  margin:5px 0 0;
-  font-size:13px;
-  opacity:.9;
-}
-
-.logout{
-  border:0;
-  background:white;
-  color:#7c3aed;
-  padding:10px 16px;
-  border-radius:9px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.logout:hover{
-  background:#f3e8ff;
-}
-
-/* CONTAINER */
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:25px;
-}
-
-/* WELCOME */
-
-.welcome{
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-  margin-bottom:20px;
-}
-
-.welcome h2{
-  margin:0 0 7px;
-  color:#7c3aed;
-}
-
-.welcome p{
-  margin:0;
+.school{
+  text-align:center;
   color:#64748b;
-}
-
-/* STATISTIK */
-
-.statistik{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+  font-size:14px;
+  line-height:1.5;
   margin-bottom:25px;
 }
 
-.stat{
-  background:white;
-  border-radius:15px;
-  padding:20px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
-}
-
-.stat .angka{
-  font-size:30px;
+label{
+  display:block;
   font-weight:bold;
-  color:#7c3aed;
+  margin:15px 0 7px;
+  color:#334155;
 }
 
-.stat .label{
-  margin-top:5px;
-  color:#64748b;
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  font-size:16px;
+  outline:none;
 }
 
-/* MENU */
-
-.menu{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
+input:focus{
+  border-color:#7c3aed;
+  box-shadow:0 0 0 3px rgba(124,58,237,.12);
 }
 
-.menu-card{
-  background:white;
-  border-radius:15px;
-  padding:25px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+button{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#7c3aed;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
   cursor:pointer;
-  transition:.2s;
 }
 
-.menu-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 7px 18px rgba(0,0,0,.12);
+button:hover{
+  background:#6d28d9;
 }
 
-.menu-icon{
-  font-size:38px;
-  margin-bottom:10px;
+button:disabled{
+  opacity:.6;
+  cursor:wait;
 }
 
-.menu-card h3{
-  margin:0 0 7px;
-  color:#7c3aed;
-}
-
-.menu-card p{
-  margin:0;
-  color:#64748b;
+#pesan{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:9px;
+  text-align:center;
   line-height:1.5;
 }
 
-/* PANEL */
-
-.panel{
-  display:none;
-  background:white;
-  margin-top:20px;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+.error{
+  display:block!important;
+  background:#fee2e2;
+  color:#991b1b;
 }
 
-.panel.active{
-  display:block;
+.sukses{
+  display:block!important;
+  background:#dcfce7;
+  color:#166534;
 }
 
-.panel h2{
-  margin-top:0;
-  color:#7c3aed;
-}
-
-.tabel-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
-}
-
-th,td{
-  padding:11px;
-  border-bottom:1px solid #e2e8f0;
-  text-align:left;
-}
-
-th{
+.info{
+  margin-top:18px;
+  padding:12px;
+  border-radius:9px;
   background:#f5f3ff;
   color:#6d28d9;
+  font-size:13px;
+  line-height:1.6;
 }
 
-/* LOADING */
-
-.loading{
+.back{
+  display:block;
   text-align:center;
-  padding:20px;
-  color:#64748b;
+  margin-top:18px;
+  color:#7c3aed;
+  text-decoration:none;
+  font-size:14px;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:800px){
-
-  .statistik{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .menu{
-    grid-template-columns:1fr;
-  }
-
-}
-
-@media(max-width:500px){
-
-  .header{
-    padding:15px;
-  }
-
-  .header h1{
-    font-size:18px;
-  }
-
-  .container{
-    padding:15px;
-  }
-
-  .statistik{
-    grid-template-columns:1fr;
-  }
-
+footer{
+  text-align:center;
+  margin-top:22px;
+  color:#777;
+  font-size:12px;
 }
 </style>
+
 </head>
 
 <body>
 
-<header class="header">
+<div class="login-card">
 
-  <div>
-    <h1>📊 Dashboard Admin</h1>
-    <p>Jurnal 7 Kebiasaan Anak Indonesia Hebat</p>
+  <div class="logo">
+    👨‍💼
   </div>
 
-  <button class="logout" onclick="logout()">
-    Keluar
+  <h1>
+    LOGIN ADMIN
+  </h1>
+
+  <div class="school">
+    JURNAL 7 KEBIASAAN ANAK INDONESIA HEBAT
+    <br>
+    SMP NEGERI 3 SIBOLGA
+  </div>
+
+  <label for="username">
+    Username
+  </label>
+
+<input
+type="text"
+id="username"
+placeholder="Masukkan username"
+autocomplete="username"
+
+>
+
+  <label for="password">
+    Password
+  </label>
+
+<input
+type="password"
+id="password"
+placeholder="Masukkan password"
+autocomplete="current-password"
+
+>
+
+<button
+id="btnLogin"
+onclick="loginAdmin()"
+
+>
+
+```
+LOGIN
+```
+
   </button>
 
-</header>
-
-
-<main class="container">
-
-  <section class="welcome">
-
-    <h2 id="namaAdmin">
-      Admin / Kepala Sekolah
-    </h2>
-
-    <p>
-      Selamat datang di sistem monitoring
-      Jurnal 7 Kebiasaan Anak Indonesia Hebat
-      SMP Negeri 3 Sibolga.
-    </p>
-
-  </section>
-
-
-  <!-- STATISTIK -->
-
-  <section class="statistik">
-
-    <div class="stat">
-
-      <div
-        class="angka"
-        id="jumlahGuru">
-        -
-      </div>
-
-      <div class="label">
-        Jumlah Guru
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div
-        class="angka"
-        id="jumlahSiswa">
-        -
-      </div>
-
-      <div class="label">
-        Jumlah Siswa
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div
-        class="angka"
-        id="jumlahJurnal">
-        -
-      </div>
-
-      <div class="label">
-        Jurnal Masuk
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div
-        class="angka"
-        id="jumlahKelas">
-        -
-      </div>
-
-      <div class="label">
-        Jumlah Kelas
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- MENU -->
-
-  <section class="menu">
-
-    <div
-      class="menu-card"
-      onclick="tampilGuru()">
-
-      <div class="menu-icon">
-        👨‍🏫
-      </div>
-
-      <h3>
-        Data Guru
-      </h3>
-
-      <p>
-        Melihat daftar guru wali
-        yang terdaftar dalam sistem.
-      </p>
-
-    </div>
-
-
-    <div
-      class="menu-card"
-      onclick="tampilSiswa()">
-
-      <div class="menu-icon">
-        👨‍🎓
-      </div>
-
-      <h3>
-        Data Siswa
-      </h3>
-
-      <p>
-        Melihat data siswa dan
-        guru wali masing-masing.
-      </p>
-
-    </div>
-
-
-    <div
-      class="menu-card"
-      onclick="tampilJurnal()">
-
-      <div class="menu-icon">
-        📖
-      </div>
-
-      <h3>
-        Monitoring Jurnal
-      </h3>
-
-      <p>
-        Melihat jurnal 7 KAIH
-        yang telah diisi siswa.
-      </p>
-
-    </div>
-
-
-    <div
-      class="menu-card"
-      onclick="tampilKelas()">
-
-      <div class="menu-icon">
-        🏫
-      </div>
-
-      <h3>
-        Data Kelas
-      </h3>
-
-      <p>
-        Melihat daftar kelas
-        yang tersedia.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- PANEL DATA -->
-
-  <section
-    id="panel"
-    class="panel">
-
-    <h2 id="judulPanel">
-      Data
-    </h2>
-
-    <div
-      id="isiPanel"
-      class="loading">
-      Silakan pilih menu.
-    </div>
-
-  </section>
-
-</main>
-
+  <div id="pesan"></div>
+
+  <div class="info">
+    <b>Login Admin</b>
+    <br>
+    Gunakan username dan password
+    yang terdaftar pada tabel
+    <b>akun_login</b>.
+  </div>
+
+  <a href="index.html" class="back">
+    ← Kembali ke halaman utama
+  </a>
+
+  <footer>
+    Created by Mr. Rahmat Batubara, S.T.P
+  </footer>
+
+</div>
 
 <script>
-
-/* =====================================================
-   SUPABASE
-===================================================== */
 
 const SUPABASE_URL =
 "https://nnnvgbajiqlqrsaygxme.supabase.co";
@@ -453,512 +236,207 @@ const SUPABASE_KEY =
 "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
-/* =====================================================
-   SESSION ADMIN
-===================================================== */
+async function loginAdmin(){
 
-const session =
-sessionStorage.getItem("akun_admin");
+  const username =
+    document.getElementById("username").value.trim();
 
-if(!session){
+  const password =
+    document.getElementById("password").value;
 
-  window.location.replace(
-    "login-admin.html"
-  );
+  const tombol =
+    document.getElementById("btnLogin");
 
-}
+  const pesan =
+    document.getElementById("pesan");
 
+  pesan.className="";
+  pesan.textContent="";
 
-let akunAdmin = null;
+  if(!username){
 
-try{
-
-  akunAdmin =
-    JSON.parse(session);
-
-  if(
-    akunAdmin &&
-    akunAdmin.nama
-  ){
-
-    document.getElementById(
-      "namaAdmin"
-    ).textContent =
-      "Selamat datang, " +
-      akunAdmin.nama;
+    pesan.className="error";
+    pesan.textContent="Username wajib diisi.";
+    return;
 
   }
 
-}catch(error){
+  if(!password){
 
-  sessionStorage.removeItem(
-    "akun_admin"
-  );
-
-  window.location.replace(
-    "login-admin.html"
-  );
-
-}
-
-
-/* =====================================================
-   FUNGSI SUPABASE
-===================================================== */
-
-async function ambilData(tabel){
-
-  const response =
-    await fetch(
-
-      SUPABASE_URL +
-      "/rest/v1/" +
-      tabel +
-      "?select=*",
-
-      {
-
-        headers:{
-
-          "apikey":
-            SUPABASE_KEY,
-
-          "Authorization":
-            "Bearer " +
-            SUPABASE_KEY
-
-        }
-
-      }
-
-    );
-
-
-  if(!response.ok){
-
-    throw new Error(
-      "Gagal mengambil data " +
-      tabel
-    );
+    pesan.className="error";
+    pesan.textContent="Password wajib diisi.";
+    return;
 
   }
 
-
-  return await response.json();
-
-}
-
-
-/* =====================================================
-   STATISTIK
-===================================================== */
-
-async function loadStatistik(){
+  tombol.disabled=true;
+  tombol.textContent="MEMERIKSA...";
 
   try{
 
-    const guru =
-      await ambilData("guru_wali");
+    /*
+      Login menggunakan RPC cek_login.
+      Fungsi ini membaca tabel akun_login.
+    */
 
-    document.getElementById(
-      "jumlahGuru"
-    ).textContent =
-      guru.length;
+    const response = await fetch(
+      SUPABASE_URL + "/rest/v1/rpc/cek_login",
+      {
+        method:"POST",
 
+        headers:{
+          "Content-Type":"application/json",
+          "apikey":SUPABASE_KEY,
+          "Authorization":"Bearer " + SUPABASE_KEY
+        },
 
-    const siswa =
-      await ambilData("siswa");
+        body:JSON.stringify({
+          p_username:username,
+          p_password:password
+        })
+      }
+    );
 
-    document.getElementById(
-      "jumlahSiswa"
-    ).textContent =
-      siswa.length;
+    const text =
+      await response.text();
 
+    let data=[];
 
-    const jurnal =
-      await ambilData("jurnal_7_kaih");
+    try{
 
-    document.getElementById(
-      "jumlahJurnal"
-    ).textContent =
-      jurnal.length;
+      data =
+        text ? JSON.parse(text) : [];
 
+    }catch(e){
 
-    const kelas =
-      await ambilData("kelas");
+      throw new Error(
+        "Respons server tidak valid."
+      );
 
-    document.getElementById(
-      "jumlahKelas"
-    ).textContent =
-      kelas.length;
+    }
+
+    console.log("HASIL LOGIN ADMIN:",data);
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.hint ||
+        data.details ||
+        "Login gagal."
+      );
+
+    }
+
+    if(
+      !Array.isArray(data) ||
+      data.length===0
+    ){
+
+      throw new Error(
+        "Username atau password salah."
+      );
+
+    }
+
+    const akun=data[0];
+
+    const role =
+      String(akun.role || "")
+      .trim()
+      .toLowerCase();
+
+    if(role!=="admin"){
+
+      throw new Error(
+        "Akun ini bukan akun admin."
+      );
+
+    }
+
+    if(!akun.id){
+
+      throw new Error(
+        "ID akun tidak ditemukan."
+      );
+
+    }
+
+    const sessionAdmin={
+
+      id:Number(akun.id),
+
+      username:akun.username,
+
+      role:"admin",
+
+      tipe:"admin",
+
+      referensi_id:
+        akun.referensi_id
+        ? Number(akun.referensi_id)
+        : null,
+
+      nama:
+        akun.nama || "Admin / Kepala Sekolah"
+
+    };
+
+    sessionStorage.setItem(
+      "akun_admin",
+      JSON.stringify(sessionAdmin)
+    );
+
+    sessionStorage.removeItem("akun_login");
+
+    pesan.className="sukses";
+
+    pesan.textContent =
+      "Login berhasil. Membuka dashboard admin...";
+
+    setTimeout(function(){
+
+      window.location.replace("admin.html");
+
+    },500);
 
   }catch(error){
 
     console.error(
-      "Statistik:",
+      "LOGIN ADMIN ERROR:",
       error
     );
 
+    pesan.className="error";
+
+    pesan.textContent =
+      error.message ||
+      "Terjadi kesalahan saat login.";
+
+    tombol.disabled=false;
+    tombol.textContent="LOGIN";
+
   }
 
 }
 
 
-/* =====================================================
-   PANEL
-===================================================== */
+document
+.getElementById("password")
+.addEventListener(
+  "keydown",
+  function(event){
 
-function bukaPanel(judul){
+    if(event.key==="Enter"){
 
-  document.getElementById(
-    "panel"
-  ).classList.add("active");
-
-  document.getElementById(
-    "judulPanel"
-  ).textContent =
-    judul;
-
-  document.getElementById(
-    "isiPanel"
-  ).innerHTML =
-    '<div class="loading">Memuat data...</div>';
-
-}
-
-
-/* =====================================================
-   DATA GURU
-===================================================== */
-
-async function tampilGuru(){
-
-  bukaPanel("Data Guru");
-
-  try{
-
-    const data =
-      await ambilData("guru_wali");
-
-    if(data.length === 0){
-
-      document.getElementById(
-        "isiPanel"
-      ).innerHTML =
-        "Belum ada data guru.";
-
-      return;
+      loginAdmin();
 
     }
 
-
-    let html =
-      '<div class="tabel-wrap">' +
-      '<table>' +
-      '<tr>' +
-      '<th>ID</th>' +
-      '<th>Nama Guru</th>' +
-      '</tr>';
-
-
-    data.forEach(function(guru){
-
-      html +=
-        "<tr>" +
-        "<td>" +
-        (guru.id ?? "") +
-        "</td>" +
-        "<td>" +
-        (guru.nama ?? "") +
-        "</td>" +
-        "</tr>";
-
-    });
-
-
-    html +=
-      "</table>" +
-      "</div>";
-
-
-    document.getElementById(
-      "isiPanel"
-    ).innerHTML =
-      html;
-
-  }catch(error){
-
-    document.getElementById(
-      "isiPanel"
-    ).textContent =
-      error.message;
-
   }
-
-}
-
-
-/* =====================================================
-   DATA SISWA
-===================================================== */
-
-async function tampilSiswa(){
-
-  bukaPanel("Data Siswa");
-
-  try{
-
-    const data =
-      await ambilData(
-        "siswa"
-      );
-
-
-    if(data.length === 0){
-
-      document.getElementById(
-        "isiPanel"
-      ).innerHTML =
-        "Belum ada data siswa.";
-
-      return;
-
-    }
-
-
-    let html =
-      '<div class="tabel-wrap">' +
-      '<table>' +
-      '<tr>' +
-      '<th>ID</th>' +
-      '<th>Nama</th>' +
-      '<th>Guru Wali</th>' +
-      '</tr>';
-
-
-    data.forEach(function(siswa){
-
-      html +=
-        "<tr>" +
-        "<td>" +
-        (siswa.id ?? "") +
-        "</td>" +
-        "<td>" +
-        (siswa.nama ?? "") +
-        "</td>" +
-        "<td>" +
-        (siswa.guru_wali_id ?? "") +
-        "</td>" +
-        "</tr>";
-
-    });
-
-
-    html +=
-      "</table>" +
-      "</div>";
-
-
-    document.getElementById(
-      "isiPanel"
-    ).innerHTML =
-      html;
-
-  }catch(error){
-
-    document.getElementById(
-      "isiPanel"
-    ).textContent =
-      error.message;
-
-  }
-
-}
-
-
-/* =====================================================
-   DATA JURNAL
-===================================================== */
-
-async function tampilJurnal(){
-
-  bukaPanel(
-    "Monitoring Jurnal 7 KAIH"
-  );
-
-  try{
-
-    const data =
-      await ambilData(
-        "jurnal_7_kaih"
-      );
-
-
-    if(data.length === 0){
-
-      document.getElementById(
-        "isiPanel"
-      ).innerHTML =
-        "Belum ada jurnal.";
-
-      return;
-
-    }
-
-
-    let html =
-      '<div class="tabel-wrap">' +
-      '<table>' +
-      '<tr>' +
-      '<th>ID</th>' +
-      '<th>Siswa ID</th>' +
-      '<th>Guru ID</th>' +
-      '<th>Tanggal</th>' +
-      '</tr>';
-
-
-    data.forEach(function(jurnal){
-
-      html +=
-        "<tr>" +
-        "<td>" +
-        (jurnal.id ?? "") +
-        "</td>" +
-        "<td>" +
-        (jurnal.siswa_id ?? "") +
-        "</td>" +
-        "<td>" +
-        (jurnal.guru_id ?? "") +
-        "</td>" +
-        "<td>" +
-        (jurnal.tanggal ?? "") +
-        "</td>" +
-        "</tr>";
-
-    });
-
-
-    html +=
-      "</table>" +
-      "</div>";
-
-
-    document.getElementById(
-      "isiPanel"
-    ).innerHTML =
-      html;
-
-  }catch(error){
-
-    document.getElementById(
-      "isiPanel"
-    ).textContent =
-      error.message;
-
-  }
-
-}
-
-
-/* =====================================================
-   DATA KELAS
-===================================================== */
-
-async function tampilKelas(){
-
-  bukaPanel("Data Kelas");
-
-  try{
-
-    const data =
-      await ambilData(
-        "kelas"
-      );
-
-
-    if(data.length === 0){
-
-      document.getElementById(
-        "isiPanel"
-      ).innerHTML =
-        "Belum ada data kelas.";
-
-      return;
-
-    }
-
-
-    let html =
-      '<div class="tabel-wrap">' +
-      '<table>' +
-      '<tr>' +
-      '<th>ID</th>' +
-      '<th>Nama Kelas</th>' +
-      '</tr>';
-
-
-    data.forEach(function(kelas){
-
-      html +=
-        "<tr>" +
-        "<td>" +
-        (kelas.id ?? "") +
-        "</td>" +
-        "<td>" +
-        (kelas.nama ?? "") +
-        "</td>" +
-        "</tr>";
-
-    });
-
-
-    html +=
-      "</table>" +
-      "</div>";
-
-
-    document.getElementById(
-      "isiPanel"
-    ).innerHTML =
-      html;
-
-  }catch(error){
-
-    document.getElementById(
-      "isiPanel"
-    ).textContent =
-      error.message;
-
-  }
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-function logout(){
-
-  sessionStorage.removeItem(
-    "akun_admin"
-  );
-
-  window.location.replace(
-    "index.html"
-  );
-
-}
-
-
-/* =====================================================
-   MULAI
-===================================================== */
-
-loadStatistik();
+);
 
 </script>
 
 </body>
 </html>
-```
