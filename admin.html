@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Admin - Jurnal 7 KAIH</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+header {
+  background: #075985;
+  color: white;
+  padding: 20px;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+header p {
+  margin: 5px 0 0;
+  opacity: .9;
+}
+
+.logout {
+  background: #dc2626;
+  color: white;
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.welcome {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.welcome h2 {
+  margin-top: 0;
+  color: #075985;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.card-title {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.card-number {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #075985;
+}
+
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+
+.panel h2 {
+  margin-top: 0;
+  color: #075985;
+}
+
+.status {
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+th {
+  background: #f8fafc;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #64748b;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+@media (max-width: 800px) {
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div>
+      <h1>Dashboard Admin</h1>
+      <p>SMP Negeri 3 Sibolga</p>
+    </div>
+
+    <button class="logout" onclick="logout()">
+      Keluar
+    </button>
+
+  </div>
+</header>
+
+
+<div class="container">
+
+  <div class="welcome">
+    <h2 id="namaAdmin">Selamat Datang, Admin</h2>
+    <div>
+      Sistem Monitoring Jurnal 7 Kebiasaan Anak Indonesia Hebat
+    </div>
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-title">
+        Guru Wali
+      </div>
+
+      <div class="card-number" id="jumlahGuru">
+        -
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-title">
+        Guru Sudah Feedback
+      </div>
+
+      <div class="card-number" id="sudahFeedback">
+        -
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-title">
+        Guru Belum Feedback
+      </div>
+
+      <div class="card-number" id="belumFeedback">
+        -
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-title">
+        Persentase Feedback
+      </div>
+
+      <div class="card-number" id="persentase">
+        -
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="panel">
+
+    <h2>Monitoring Feedback</h2>
+
+    <div id="status" class="status">
+      Memuat data...
+    </div>
+
+    <div id="hasil">
+      <div class="loading">
+        Mengambil data dari Supabase...
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+/* =========================
+   CEK SESSION
+========================= */
+
+const akunText =
+  sessionStorage.getItem("akun_login");
+
+
+if (!akunText) {
+
+  window.location.href = "index.html";
+
+}
+
+
+let akun;
+
+try {
+
+  akun = JSON.parse(akunText);
+
+} catch (e) {
+
+  sessionStorage.removeItem("akun_login");
+
+  window.location.href = "index.html";
+
+}
+
+
+/* =========================
+   CEK ROLE
+========================= */
+
+if (
+  !akun ||
+  String(akun.role).toLowerCase() !== "admin"
+) {
+
+  alert("Halaman ini khusus Admin.");
+
+  window.location.href = "index.html";
+
+}
+
+
+/* =========================
+   NAMA ADMIN
+========================= */
+
+document.getElementById("namaAdmin").textContent =
+  "Selamat Datang, " +
+  (akun.nama || "Admin");
+
+
+/* =========================
+   MONITORING FEEDBACK
+========================= */
+
+async function loadMonitoring() {
+
+  const status =
+    document.getElementById("status");
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/rpc/monitoring_feedback_bulan_ini",
+      {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_KEY,
+          "Authorization":
+            "Bearer " + SUPABASE_KEY
+        },
+
+        body: "{}"
+
+      }
+    );
+
+
+    const data = await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.message ||
+        "Gagal mengambil monitoring."
+      );
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+      status.textContent =
+        "Belum ada data monitoring.";
+
+      return;
+
+    }
+
+
+    const hasil = data[0];
+
+
+    document.getElementById("jumlahGuru").textContent =
+      hasil.jumlah_guru ?? 0;
+
+    document.getElementById("sudahFeedback").textContent =
+      hasil.guru_sudah_feedback ?? 0;
+
+    document.getElementById("belumFeedback").textContent =
+      hasil.guru_belum_feedback ?? 0;
+
+    document.getElementById("persentase").textContent =
+      (hasil.persentase ?? "0") + "%";
+
+
+    status.textContent =
+      "Data monitoring berhasil dimuat.";
+
+
+    document.getElementById("hasil").innerHTML = `
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Keterangan</th>
+            <th>Jumlah</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Total Guru Wali</td>
+            <td>${hasil.jumlah_guru ?? 0}</td>
+          </tr>
+
+          <tr>
+            <td>Sudah Feedback</td>
+            <td>${hasil.guru_sudah_feedback ?? 0}</td>
+          </tr>
+
+          <tr>
+            <td>Belum Feedback</td>
+            <td>${hasil.guru_belum_feedback ?? 0}</td>
+          </tr>
+
+          <tr>
+            <td>Persentase</td>
+            <td>${hasil.persentase ?? 0}%</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    `;
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.className = "error";
+
+    status.textContent =
+      "Gagal mengambil data: " +
+      error.message;
+
+  }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+  sessionStorage.removeItem("akun_login");
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* =========================
+   JALANKAN
+========================= */
+
+loadMonitoring();
+
+</script>
+
+</body>
+</html>
