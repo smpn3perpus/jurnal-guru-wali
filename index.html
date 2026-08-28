@@ -2,191 +2,189 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Aplikasi Jurnal Guru Wali</title>
+<title>Aplikasi Jurnal Guru Wali</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{
+  box-sizing:border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e8f1ff, #f8fbff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#e8f1ff,#f8fbff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .login-card {
-      width: 95%;
-      max-width: 420px;
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 12px 35px rgba(0,0,0,.12);
-    }
+.login-card{
+  width:95%;
+  max-width:420px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
 
-    .logo {
-      width: 75px;
-      height: 75px;
-      margin: auto;
-      border-radius: 18px;
-      background: #075985;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      font-weight: bold;
-    }
+.logo{
+  width:75px;
+  height:75px;
+  margin:auto;
+  border-radius:18px;
+  background:#075985;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:bold;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 21px;
-      margin: 18px 0 5px;
-      color: #075985;
-    }
+h1{
+  text-align:center;
+  font-size:21px;
+  margin:18px 0 5px;
+  color:#075985;
+}
 
-    .school {
-      text-align: center;
-      color: #555;
-      margin-bottom: 25px;
-    }
+.school{
+  text-align:center;
+  color:#555;
+  margin-bottom:25px;
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin: 15px 0 7px;
-    }
+label{
+  display:block;
+  font-weight:bold;
+  margin:15px 0 7px;
+}
 
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ccd5df;
-      border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-    }
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #ccd5df;
+  border-radius:10px;
+  font-size:16px;
+  outline:none;
+}
 
-    input:focus {
-      border-color: #075985;
-    }
+input:focus{
+  border-color:#075985;
+}
 
-    button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 13px;
-      border: none;
-      border-radius: 10px;
-      background: #075985;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+button{
+  width:100%;
+  margin-top:20px;
+  padding:13px;
+  border:none;
+  border-radius:10px;
+  background:#075985;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    button:hover {
-      background: #064e75;
-    }
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
 
-    button:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
+#pesan{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:9px;
+  text-align:center;
+}
 
-    #pesan {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 9px;
-      text-align: center;
-    }
+.error{
+  display:block!important;
+  background:#fee2e2;
+  color:#991b1b;
+}
 
-    .error {
-      display: block !important;
-      background: #fee2e2;
-      color: #991b1b;
-    }
+.sukses{
+  display:block!important;
+  background:#dcfce7;
+  color:#166534;
+}
 
-    .sukses {
-      display: block !important;
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #777;
-      font-size: 12px;
-    }
-  </style>
+footer{
+  text-align:center;
+  margin-top:25px;
+  color:#777;
+  font-size:12px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="login-card">
+<div class="login-card">
 
-    <div class="logo">JW</div>
+  <div class="logo">JW</div>
 
-    <h1>APLIKASI JURNAL GURU WALI</h1>
+  <h1>APLIKASI JURNAL GURU WALI</h1>
 
-    <div class="school">
-      SMP NEGERI 3 SIBOLGA
-    </div>
-
-    <label for="username">Username</label>
-
-    <input
-      type="text"
-      id="username"
-      placeholder="Masukkan username"
-      autocomplete="username"
-    >
-
-    <label for="password">Password</label>
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Masukkan password"
-      autocomplete="current-password"
-    >
-
-    <button id="btnLogin" onclick="login()">
-      LOGIN
-    </button>
-
-    <div id="pesan"></div>
-
-    <footer>
-      Created by Mr. Rahmat Batubara, S.T.P
-    </footer>
-
+  <div class="school">
+    SMP NEGERI 3 SIBOLGA
   </div>
+
+  <label for="username">Username</label>
+
+  <input
+    type="text"
+    id="username"
+    placeholder="Masukkan username"
+    autocomplete="username"
+  >
+
+  <label for="password">Password</label>
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Masukkan password"
+    autocomplete="current-password"
+  >
+
+  <button id="btnLogin" onclick="login()">
+    LOGIN
+  </button>
+
+  <div id="pesan"></div>
+
+  <footer>
+    Created by Mr. Rahmat Batubara, S.T.P
+  </footer>
+
+</div>
 
 
 <script>
 
 const SUPABASE_URL =
-  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+"https://nnnvgbajiqlqrsaygxme.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+"sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
-async function login() {
+async function login(){
 
   const username =
-    document.getElementById("username").value.trim();
+    document.getElementById("username")
+    .value.trim();
 
   const password =
-    document.getElementById("password").value;
+    document.getElementById("password")
+    .value;
 
   const tombol =
     document.getElementById("btnLogin");
@@ -195,48 +193,61 @@ async function login() {
     document.getElementById("pesan");
 
 
-  if (!username || !password) {
+  if(!username || !password){
 
-    pesan.className = "error";
+    pesan.className="error";
 
-    pesan.textContent =
+    pesan.textContent=
       "Username dan password wajib diisi.";
 
     return;
+
   }
 
 
-  tombol.disabled = true;
-  tombol.textContent = "MEMERIKSA...";
+  tombol.disabled=true;
+
+  tombol.textContent="MEMERIKSA...";
 
 
-  try {
+  try{
 
-    const response = await fetch(
-      SUPABASE_URL +
+    const response=await fetch(
+
+      SUPABASE_URL+
       "/rest/v1/rpc/cek_login",
-      {
-        method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_KEY,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          "apikey":
+            SUPABASE_KEY,
+
           "Authorization":
-            "Bearer " + SUPABASE_KEY
+            "Bearer "+SUPABASE_KEY
         },
 
-        body: JSON.stringify({
-          p_username: username,
-          p_password: password
+        body:JSON.stringify({
+
+          p_username:username,
+
+          p_password:password
+
         })
       }
+
     );
 
 
-    const data = await response.json();
+    const data=
+      await response.json();
 
 
-    if (!response.ok) {
+    if(!response.ok){
 
       throw new Error(
         data.message ||
@@ -246,7 +257,7 @@ async function login() {
     }
 
 
-    if (!data || data.length === 0) {
+    if(!data || data.length===0){
 
       throw new Error(
         "Username atau password salah."
@@ -255,11 +266,11 @@ async function login() {
     }
 
 
-    const akun = data[0];
+    const akun=data[0];
 
 
     /*
-      SIMPAN DATA AKUN LOGIN
+      SIMPAN AKUN LOGIN
     */
 
     sessionStorage.setItem(
@@ -268,55 +279,68 @@ async function login() {
     );
 
 
-    pesan.className = "sukses";
+    pesan.className="sukses";
 
-    pesan.textContent =
+    pesan.textContent=
       "Login berhasil. Membuka dashboard...";
 
 
-    setTimeout(function() {
+    /*
+      PENGALIHAN DASHBOARD
+    */
+
+    setTimeout(function(){
 
       bukaDashboard(akun);
 
-    }, 500);
+    },500);
 
 
-  } catch (error) {
+  }catch(error){
 
     console.error(error);
 
-    pesan.className = "error";
+    pesan.className="error";
 
-    pesan.textContent =
+    pesan.textContent=
       error.message ||
       "Terjadi kesalahan saat login.";
 
-    tombol.disabled = false;
-    tombol.textContent = "LOGIN";
+    tombol.disabled=false;
+
+    tombol.textContent="LOGIN";
 
   }
 
 }
 
 
-function bukaDashboard(akun) {
+/*
+=================================
+  PENGATURAN DASHBOARD
+=================================
+*/
 
-  const role =
+function bukaDashboard(akun){
+
+  const role=
     String(akun.role || "")
-      .trim()
-      .toLowerCase();
+    .trim()
+    .toLowerCase();
 
 
   /*
     ADMIN
   */
 
-  if (role === "admin") {
+  if(role==="admin"){
 
-    window.location.href =
-      "admin.html";
+    window.location.replace(
+      "admin.html"
+    );
 
     return;
+
   }
 
 
@@ -324,24 +348,26 @@ function bukaDashboard(akun) {
     GURU WALI
   */
 
-  if (
-    role === "guru" ||
-    role === "guru_wali"
-  ) {
+  if(
+    role==="guru" ||
+    role==="guru_wali"
+  ){
 
-    window.location.href =
-      "guru_wali.html";
+    window.location.replace(
+      "guru_wali.html"
+    );
 
     return;
+
   }
 
 
   /*
-    ROLE LAIN
+    ROLE TIDAK DIKENAL
   */
 
   alert(
-    "Role akun belum dikenali: " +
+    "Role akun belum dikenali: "+
     akun.role
   );
 
