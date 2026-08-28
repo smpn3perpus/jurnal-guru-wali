@@ -1,10 +1,11 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Guru Wali - SMP Negeri 3 Sibolga</title>
+<title>Dashboard Guru Wali</title>
 
 <style>
 *{
@@ -21,46 +22,52 @@ body{
 .header{
   background:#075985;
   color:white;
-  padding:20px;
+  padding:18px 20px;
 }
 
 .header-content{
-  max-width:1100px;
+  max-width:1150px;
   margin:auto;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:20px;
 }
 
 .header h1{
   margin:0;
-  font-size:22px;
+  font-size:23px;
 }
 
 .header p{
   margin:6px 0 0;
+  opacity:.9;
 }
 
 .logout{
   background:#dc2626;
-  border:0;
   color:white;
-  padding:10px 16px;
-  border-radius:8px;
+  border:0;
+  padding:11px 18px;
+  border-radius:9px;
   font-weight:bold;
   cursor:pointer;
 }
 
+.logout:hover{
+  background:#b91c1c;
+}
+
 .container{
-  max-width:1100px;
+  max-width:1150px;
   margin:25px auto;
   padding:0 15px;
 }
 
 .welcome{
   background:white;
-  padding:20px;
-  border-radius:14px;
+  padding:22px;
+  border-radius:15px;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
   margin-bottom:20px;
 }
@@ -70,17 +77,21 @@ body{
   color:#075985;
 }
 
+.info{
+  color:#64748b;
+}
+
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:15px;
+  gap:16px;
   margin-bottom:20px;
 }
 
 .card{
   background:white;
-  padding:20px;
-  border-radius:14px;
+  padding:22px;
+  border-radius:15px;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
@@ -90,36 +101,39 @@ body{
 }
 
 .card-number{
-  font-size:30px;
+  margin-top:8px;
+  font-size:32px;
   font-weight:bold;
   color:#075985;
-  margin-top:8px;
 }
 
 .panel{
   background:white;
-  padding:20px;
-  border-radius:14px;
+  padding:22px;
+  border-radius:15px;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
 .panel h2{
-  color:#075985;
   margin-top:0;
+  color:#075985;
 }
 
 .status{
-  padding:12px;
+  padding:13px;
   background:#f8fafc;
-  border-radius:8px;
+  border-radius:9px;
   margin-bottom:15px;
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534;
 }
 
 .error{
   background:#fee2e2;
   color:#991b1b;
-  padding:12px;
-  border-radius:8px;
 }
 
 .table-wrap{
@@ -131,13 +145,19 @@ table{
   border-collapse:collapse;
 }
 
-th,td{
+th,
+td{
   padding:12px;
   border-bottom:1px solid #e2e8f0;
   text-align:left;
 }
 
 th{
+  background:#f8fafc;
+  color:#334155;
+}
+
+tr:hover{
   background:#f8fafc;
 }
 
@@ -147,6 +167,13 @@ th{
   border-radius:20px;
   background:#e0f2fe;
   color:#075985;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  padding:30px;
+  color:#64748b;
 }
 
 @media(max-width:700px){
@@ -158,16 +185,19 @@ th{
   .header-content{
     flex-direction:column;
     align-items:flex-start;
-    gap:15px;
   }
 
+  .logout{
+    width:100%;
+  }
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="header">
+<header class="header">
 
   <div class="header-content">
 
@@ -182,25 +212,25 @@ th{
 
   </div>
 
-</div>
+</header>
 
 
-<div class="container">
+<main class="container">
 
-  <div class="welcome">
+  <section class="welcome">
 
     <h2 id="namaGuru">
       Guru Wali
     </h2>
 
-    <div>
+    <div class="info">
       Selamat datang di Aplikasi Jurnal 7 Kebiasaan Anak Indonesia Hebat.
     </div>
 
-  </div>
+  </section>
 
 
-  <div class="cards">
+  <section class="cards">
 
     <div class="card">
 
@@ -208,7 +238,9 @@ th{
         Jumlah Siswa
       </div>
 
-      <div class="card-number" id="jumlahSiswa">
+      <div
+        class="card-number"
+        id="jumlahSiswa">
         0
       </div>
 
@@ -221,7 +253,9 @@ th{
         Jumlah Kelas
       </div>
 
-      <div class="card-number" id="jumlahKelas">
+      <div
+        class="card-number"
+        id="jumlahKelas">
         0
       </div>
 
@@ -234,31 +268,39 @@ th{
         Guru Wali ID
       </div>
 
-      <div class="card-number" id="guruId">
+      <div
+        class="card-number"
+        id="guruId">
         -
       </div>
 
     </div>
 
-  </div>
+  </section>
 
 
-  <div class="panel">
+  <section class="panel">
 
     <h2>Daftar Siswa Wali</h2>
 
-    <div id="status" class="status">
+    <div
+      id="status"
+      class="status">
       Memuat data siswa...
     </div>
 
     <div id="daftar"></div>
 
-  </div>
+  </section>
 
-</div>
+</main>
 
 
 <script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://nnnvgbajiqlqrsaygxme.supabase.co";
@@ -267,9 +309,9 @@ const SUPABASE_KEY =
 "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
-/* ==============================
-   CEK LOGIN
-============================== */
+/* =====================================================
+   CEK SESSION LOGIN
+===================================================== */
 
 const session =
 sessionStorage.getItem("akun_login");
@@ -277,13 +319,16 @@ sessionStorage.getItem("akun_login");
 
 if(!session){
 
-  window.location.href="index.html";
+  window.location.replace("index.html");
 
 }
 
 
-let akun = null;
+/* =====================================================
+   BACA AKUN
+===================================================== */
 
+let akun = null;
 
 try{
 
@@ -293,17 +338,19 @@ try{
 
   sessionStorage.removeItem("akun_login");
 
-  window.location.href="index.html";
+  window.location.replace("index.html");
 
 }
 
 
-/* ==============================
+/* =====================================================
    CEK ROLE
-============================== */
+===================================================== */
 
 const role =
-String(akun.role || "").toLowerCase();
+String(akun.role || "")
+.trim()
+.toLowerCase();
 
 
 if(
@@ -311,16 +358,20 @@ if(
   role !== "guru_wali"
 ){
 
-  alert("Akun ini bukan akun Guru Wali.");
+  alert(
+    "Akun ini bukan akun Guru Wali."
+  );
 
-  window.location.href="index.html";
+  sessionStorage.removeItem("akun_login");
+
+  window.location.replace("index.html");
 
 }
 
 
-/* ==============================
-   IDENTITAS GURU
-============================== */
+/* =====================================================
+   AMBIL IDENTITAS GURU
+===================================================== */
 
 const guruId =
 Number(akun.referensi_id);
@@ -337,9 +388,9 @@ akun.nama ||
 "Guru Wali";
 
 
-/* ==============================
-   AMBIL SISWA
-============================== */
+/* =====================================================
+   FUNGSI AMBIL SISWA
+===================================================== */
 
 async function ambilSiswa(){
 
@@ -352,157 +403,271 @@ async function ambilSiswa(){
 
   if(!guruId){
 
-    status.className="error";
+    status.className = "status error";
 
     status.textContent =
-    "referensi_id guru tidak ditemukan pada akun.";
+    "ID Guru Wali tidak ditemukan.";
 
     return;
 
   }
 
 
+  status.className = "status";
+
+  status.textContent =
+  "Mengambil data siswa...";
+
+
   try{
 
-    const url =
-    SUPABASE_URL +
-    "/rest/v1/siswa" +
-    "?guru_wali_id=eq." +
-    guruId +
-    "&select=id,nama,nisn,kelas_id";
+    /*
+      PENTING:
+
+      Kita menggunakan RPC yang sudah dibuat
+      di Supabase:
+
+      ambil_siswa_guru_wali(bigint)
+    */
 
 
     const response =
-    await fetch(url,{
+    await fetch(
 
-      method:"GET",
+      SUPABASE_URL +
+      "/rest/v1/rpc/ambil_siswa_guru_wali",
 
-      headers:{
-        "apikey":SUPABASE_KEY,
-        "Authorization":
-        "Bearer "+SUPABASE_KEY
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "Content-Type":
+          "application/json",
+
+          "apikey":
+          SUPABASE_KEY,
+
+          "Authorization":
+          "Bearer " + SUPABASE_KEY
+
+        },
+
+        body:JSON.stringify({
+
+          p_guru_wali_id:
+          guruId
+
+        })
+
       }
 
-    });
+    );
 
 
     const data =
     await response.json();
 
 
+    console.log(
+      "Data siswa:",
+      data
+    );
+
+
     if(!response.ok){
 
       throw new Error(
+
         data.message ||
+        data.error_description ||
         "Gagal mengambil data siswa."
+
       );
 
     }
 
 
-    document.getElementById("jumlahSiswa")
-    .textContent=data.length;
+    /* ===============================================
+       JUMLAH SISWA
+    =============================================== */
+
+    document.getElementById(
+      "jumlahSiswa"
+    ).textContent =
+    Array.isArray(data)
+      ? data.length
+      : 0;
 
 
-    const kelas =
+    /* ===============================================
+       JUMLAH KELAS
+    =============================================== */
+
+    const daftarKelas =
     new Set(
+
       data
-      .map(x=>x.kelas_id)
-      .filter(x=>x!==null)
+      .map(function(siswa){
+
+        return siswa.kelas_id;
+
+      })
+      .filter(function(kelas){
+
+        return kelas !== null &&
+               kelas !== undefined;
+
+      })
+
     );
 
 
-    document.getElementById("jumlahKelas")
-    .textContent=kelas.size;
+    document.getElementById(
+      "jumlahKelas"
+    ).textContent =
+    daftarKelas.size;
 
 
-    if(data.length===0){
+    /* ===============================================
+       JIKA TIDAK ADA SISWA
+    =============================================== */
+
+    if(
+      !Array.isArray(data) ||
+      data.length === 0
+    ){
+
+      status.className =
+      "status";
 
       status.textContent =
-      "Belum ada siswa yang terhubung dengan guru wali ini.";
+      "Belum ada siswa yang terhubung dengan Guru Wali ID " +
+      guruId + ".";
 
-      daftar.innerHTML="";
+      daftar.innerHTML = `
+        <div class="empty">
+          Tidak ada data siswa.
+        </div>
+      `;
 
       return;
 
     }
 
 
+    /* ===============================================
+       STATUS BERHASIL
+    =============================================== */
+
+    status.className =
+    "status success";
+
     status.textContent =
-    "Data siswa berhasil dimuat.";
+    "Data siswa berhasil dimuat. Jumlah: " +
+    data.length +
+    " siswa.";
 
 
-    let html=`
+    /* ===============================================
+       TABEL
+    =============================================== */
+
+    let html = `
 
       <div class="table-wrap">
 
-      <table>
+        <table>
 
-      <thead>
+          <thead>
 
-      <tr>
-        <th>No</th>
-        <th>Nama Siswa</th>
-        <th>NISN</th>
-        <th>Kelas ID</th>
-      </tr>
+            <tr>
 
-      </thead>
+              <th>No</th>
 
-      <tbody>
+              <th>Nama Siswa</th>
+
+              <th>NISN</th>
+
+              <th>Kelas ID</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
     `;
 
 
-    data.forEach((siswa,index)=>{
+    data.forEach(
+      function(siswa,index){
 
-      html+=`
+        html += `
 
-        <tr>
+          <tr>
 
-          <td>${index+1}</td>
+            <td>
+              ${index + 1}
+            </td>
 
-          <td>
-            ${aman(siswa.nama)}
-          </td>
+            <td>
+              ${aman(siswa.nama)}
+            </td>
 
-          <td>
-            ${aman(siswa.nisn)}
-          </td>
+            <td>
+              ${aman(siswa.nisn)}
+            </td>
 
-          <td>
-            <span class="badge">
-              ${siswa.kelas_id ?? "-"}
-            </span>
-          </td>
+            <td>
 
-        </tr>
+              <span class="badge">
 
-      `;
+                ${aman(
+                  siswa.kelas_id
+                )}
 
-    });
+              </span>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    );
 
 
-    html+=`
+    html += `
 
-      </tbody>
+          </tbody>
 
-      </table>
+        </table>
 
       </div>
+
     `;
 
 
-    daftar.innerHTML=html;
+    daftar.innerHTML =
+    html;
 
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "ERROR:",
+      error
+    );
 
-    status.className="error";
+
+    status.className =
+    "status error";
 
     status.textContent =
-    "Gagal mengambil data siswa: "+
+    "Gagal mengambil data siswa: " +
     error.message;
 
   }
@@ -510,38 +675,64 @@ async function ambilSiswa(){
 }
 
 
-/* ==============================
+/* =====================================================
    AMANKAN TEKS
-============================== */
+===================================================== */
 
 function aman(value){
 
-  return String(value ?? "-")
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
+  return String(
+    value ?? "-"
+  )
+
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
 
 }
 
 
-/* ==============================
+/* =====================================================
    LOGOUT
-============================== */
+===================================================== */
 
 function keluar(){
 
-  sessionStorage.removeItem("akun_login");
+  sessionStorage.removeItem(
+    "akun_login"
+  );
 
-  window.location.href="index.html";
+  window.location.replace(
+    "index.html"
+  );
 
 }
 
 
-/* ==============================
-   MULAI
-============================== */
+/* =====================================================
+   JALANKAN
+===================================================== */
 
 ambilSiswa();
 
@@ -549,3 +740,4 @@ ambilSiswa();
 
 </body>
 </html>
+```
