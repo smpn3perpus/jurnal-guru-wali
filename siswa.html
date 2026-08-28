@@ -1,0 +1,2533 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jurnal Siswa - 7 KAIH</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#1e293b;
+}
+
+.header{
+  background:#16a34a;
+  color:white;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin:5px 0 0;
+  font-size:13px;
+}
+
+.logout{
+  border:0;
+  background:#dc2626;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px 15px 35px;
+}
+
+.identitas{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  margin-bottom:18px;
+  line-height:1.8;
+}
+
+.identitas h2{
+  margin:0 0 8px;
+  color:#15803d;
+}
+
+.identitas-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.info-item{
+  background:#f8fafc;
+  padding:10px;
+  border-radius:8px;
+}
+
+.label{
+  color:#64748b;
+  font-size:12px;
+}
+
+.value{
+  font-weight:bold;
+  margin-top:3px;
+}
+
+.status{
+  margin-top:15px;
+  padding:12px;
+  border-radius:9px;
+  background:#f8fafc;
+}
+
+.ok{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.warning{
+  background:#fef3c7;
+  color:#92400e;
+}
+
+.info{
+  background:#eff6ff;
+  color:#075985;
+}
+
+.panel{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  margin-bottom:18px;
+}
+
+.panel h2{
+  margin:0 0 15px;
+  color:#15803d;
+}
+
+.nomor{
+  border:1px solid #dbe3ea;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:15px;
+  background:#fff;
+}
+
+.nomor-title{
+  font-size:17px;
+  font-weight:bold;
+  color:#15803d;
+  margin-bottom:12px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:10px 0 7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  font-size:14px;
+  font-family:inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  outline:none;
+  border-color:#16a34a;
+  box-shadow:0 0 0 3px rgba(22,163,74,.08);
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.save{
+  width:100%;
+  border:0;
+  background:#16a34a;
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.save:hover{
+  background:#15803d;
+}
+
+.save:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+.reset{
+  width:100%;
+  margin-top:10px;
+  border:1px solid #cbd5e1;
+  background:white;
+  color:#334155;
+  padding:12px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.judul-kebiasaan{
+  color:#0f172a;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.petunjuk{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:10px;
+  line-height:1.5;
+}
+
+.footer{
+  text-align:center;
+  color:#64748b;
+  font-size:12px;
+  padding:20px;
+}
+
+@media(max-width:700px){
+
+  .identitas-grid{
+    grid-template-columns:1fr;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div>
+    <h1>👨‍🎓 Jurnal 7 Kebiasaan Anak Indonesia Hebat</h1>
+    <p>SMP Negeri 3 Sibolga</p>
+  </div>
+
+  <button
+    class="logout"
+    onclick="keluar()">
+    Keluar
+  </button>
+
+</header>
+
+
+<main class="container">
+
+  <!-- IDENTITAS -->
+
+  <section class="identitas">
+
+    <h2 id="namaSiswa">
+      Memuat nama siswa...
+    </h2>
+
+    <div class="identitas-grid">
+
+      <div class="info-item">
+        <div class="label">NISN</div>
+        <div
+          class="value"
+          id="nisnSiswa">
+          -
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">Kelas</div>
+        <div
+          class="value"
+          id="kelasSiswa">
+          -
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">Guru Wali</div>
+        <div
+          class="value"
+          id="guruSiswa">
+          -
+        </div>
+      </div>
+
+    </div>
+
+
+    <div
+      id="statusJurnal"
+      class="status">
+      Memuat data...
+    </div>
+
+  </section>
+
+
+  <!-- FORM -->
+
+  <form id="formJurnal">
+
+
+    <!-- TANGGAL -->
+
+    <section class="panel">
+
+      <h2>
+        📅 Tanggal Jurnal
+      </h2>
+
+      <label for="tanggal">
+        Tanggal
+      </label>
+
+      <input
+        type="date"
+        id="tanggal"
+        required
+      >
+
+    </section>
+
+
+    <!-- 1 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        1. 🌅 Bangun Pagi
+      </div>
+
+      <div class="petunjuk">
+        Isi jam berapa kamu bangun pagi.
+      </div>
+
+      <label for="jam_bangun">
+        Jam Bangun
+      </label>
+
+      <input
+        type="time"
+        id="jam_bangun"
+        required
+      >
+
+    </section>
+
+
+    <!-- 2 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        2. 🍎 Makan Sehat dan Bergizi
+      </div>
+
+      <div class="petunjuk">
+        Pilih apakah kamu berpuasa atau tidak.
+      </div>
+
+      <label for="puasa">
+        Puasa
+      </label>
+
+      <select
+        id="puasa"
+        required
+        onchange="ubahMakan()">
+
+        <option value="">
+          Pilih
+        </option>
+
+        <option value="Ya">
+          Ya
+        </option>
+
+        <option value="Tidak">
+          Tidak
+        </option>
+
+      </select>
+
+
+      <!-- PUASA -->
+
+      <div
+        id="bagianPuasa"
+        class="hidden">
+
+        <label for="menu_sahur">
+          Menu Sahur
+        </label>
+
+        <textarea
+          id="menu_sahur"
+          placeholder="Tuliskan menu sahur..."
+        ></textarea>
+
+
+        <label for="menu_berbuka">
+          Menu Berbuka
+        </label>
+
+        <textarea
+          id="menu_berbuka"
+          placeholder="Tuliskan menu berbuka..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- TIDAK PUASA -->
+
+      <div
+        id="bagianTidakPuasa"
+        class="hidden">
+
+        <label for="menu_sarapan">
+          Menu Sarapan
+        </label>
+
+        <textarea
+          id="menu_sarapan"
+          placeholder="Tuliskan menu sarapan..."
+        ></textarea>
+
+
+        <label for="menu_siang">
+          Menu Makan Siang
+        </label>
+
+        <textarea
+          id="menu_siang"
+          placeholder="Tuliskan menu makan siang..."
+        ></textarea>
+
+
+        <label for="menu_malam">
+          Menu Makan Malam
+        </label>
+
+        <textarea
+          id="menu_malam"
+          placeholder="Tuliskan menu makan malam..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- 3 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        3. 📚 Gemar Belajar
+      </div>
+
+      <label for="belajar_malam">
+        Belajar Malam
+      </label>
+
+      <select
+        id="belajar_malam"
+        required
+        onchange="ubahBelajar()">
+
+        <option value="">
+          Pilih
+        </option>
+
+        <option value="Ya">
+          Ya
+        </option>
+
+        <option value="Tidak">
+          Tidak
+        </option>
+
+      </select>
+
+
+      <div
+        id="bagianBelajarYa"
+        class="hidden">
+
+        <label for="materi_belajar">
+          Materi Belajar
+        </label>
+
+        <textarea
+          id="materi_belajar"
+          placeholder="Materi yang dipelajari..."
+        ></textarea>
+
+
+        <label for="durasi_belajar">
+          Durasi Belajar (menit)
+        </label>
+
+        <input
+          type="number"
+          id="durasi_belajar"
+          min="1"
+          placeholder="Contoh: 60"
+        >
+
+      </div>
+
+
+      <div
+        id="bagianBelajarTidak"
+        class="hidden">
+
+        <label for="alasan_belajar">
+          Alasan Tidak Belajar
+        </label>
+
+        <textarea
+          id="alasan_belajar"
+          placeholder="Tuliskan alasan..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- 4 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        4. 🏃 Berolahraga
+      </div>
+
+      <label for="olahraga">
+        Berolahraga
+      </label>
+
+      <select
+        id="olahraga"
+        required
+        onchange="ubahOlahraga()">
+
+        <option value="">
+          Pilih
+        </option>
+
+        <option value="Ya">
+          Ya
+        </option>
+
+        <option value="Tidak">
+          Tidak
+        </option>
+
+      </select>
+
+
+      <div
+        id="bagianOlahragaYa"
+        class="hidden">
+
+        <label for="jenis_olahraga">
+          Jenis Olahraga
+        </label>
+
+        <input
+          type="text"
+          id="jenis_olahraga"
+          placeholder="Contoh: Sepak bola"
+        >
+
+
+        <label for="durasi_olahraga">
+          Durasi Olahraga (menit)
+        </label>
+
+        <input
+          type="number"
+          id="durasi_olahraga"
+          min="1"
+          placeholder="Contoh: 30"
+        >
+
+      </div>
+
+
+      <div
+        id="bagianOlahragaTidak"
+        class="hidden">
+
+        <label for="alasan_olahraga">
+          Alasan Tidak Berolahraga
+        </label>
+
+        <textarea
+          id="alasan_olahraga"
+          placeholder="Tuliskan alasan..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- 5 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        5. 🤝 Bermasyarakat
+      </div>
+
+      <label for="bermasyarakat">
+        Bermasyarakat
+      </label>
+
+      <select
+        id="bermasyarakat"
+        required
+        onchange="ubahBermasyarakat()">
+
+        <option value="">
+          Pilih
+        </option>
+
+        <option value="Ya">
+          Ya
+        </option>
+
+        <option value="Tidak">
+          Tidak
+        </option>
+
+      </select>
+
+
+      <div
+        id="bagianMasyarakatYa"
+        class="hidden">
+
+        <label for="jenis_bermasyarakat">
+          Jenis Kegiatan
+        </label>
+
+        <textarea
+          id="jenis_bermasyarakat"
+          placeholder="Contoh: Membantu membersihkan lingkungan..."
+        ></textarea>
+
+      </div>
+
+
+      <div
+        id="bagianMasyarakatTidak"
+        class="hidden">
+
+        <label for="alasan_bermasyarakat">
+          Alasan Tidak Bermasyarakat
+        </label>
+
+        <textarea
+          id="alasan_bermasyarakat"
+          placeholder="Tuliskan alasan..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- 6 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        6. 🙏 Beribadah
+      </div>
+
+      <label for="ibadah">
+        Beribadah
+      </label>
+
+      <select
+        id="ibadah"
+        required
+        onchange="ubahIbadah()">
+
+        <option value="">
+          Pilih
+        </option>
+
+        <option value="Ya">
+          Ya
+        </option>
+
+        <option value="Tidak">
+          Tidak
+        </option>
+
+      </select>
+
+
+      <div
+        id="bagianIbadahYa"
+        class="hidden">
+
+        <label for="jenis_ibadah">
+          Jenis Ibadah
+        </label>
+
+        <textarea
+          id="jenis_ibadah"
+          placeholder="Contoh: Shalat, membaca Al-Qur'an..."
+        ></textarea>
+
+      </div>
+
+
+      <div
+        id="bagianIbadahTidak"
+        class="hidden">
+
+        <label for="alasan_ibadah">
+          Alasan Tidak Beribadah
+        </label>
+
+        <textarea
+          id="alasan_ibadah"
+          placeholder="Tuliskan alasan..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- 7 -->
+
+    <section class="nomor">
+
+      <div class="nomor-title">
+        7. 🌙 Tidur Cepat
+      </div>
+
+      <div class="petunjuk">
+        Isi jam berapa kamu tidur malam.
+      </div>
+
+      <label for="jam_tidur">
+        Jam Tidur
+      </label>
+
+      <input
+        type="time"
+        id="jam_tidur"
+        required
+      >
+
+    </section>
+
+
+    <!-- SIMPAN -->
+
+    <section class="panel">
+
+      <button
+        type="submit"
+        class="save"
+        id="btnSimpan">
+        💾 Simpan Jurnal
+      </button>
+
+      <button
+        type="button"
+        class="reset"
+        onclick="resetForm()">
+        🔄 Kosongkan Form
+      </button>
+
+    </section>
+
+
+  </form>
+
+
+  <div class="footer">
+    Created by Mr. Rahmat Batubara, S.T.P
+  </div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+function headersSupabase(){
+
+  return {
+    "apikey":SUPABASE_KEY,
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+    "Content-Type":
+      "application/json",
+    "Accept":
+      "application/json"
+  };
+
+}
+
+
+/* =====================================================
+   SESSION SISWA
+===================================================== */
+
+const session =
+  sessionStorage.getItem(
+    "akun_siswa"
+  );
+
+
+if(!session){
+
+  window.location.replace(
+    "login-siswa.html"
+  );
+
+}
+
+
+let akun = null;
+let siswa = null;
+let kelas = null;
+let guruWali = null;
+
+
+/* =====================================================
+   BACA SESSION
+===================================================== */
+
+try{
+
+  akun =
+    JSON.parse(session);
+
+}catch(error){
+
+  sessionStorage.removeItem(
+    "akun_siswa"
+  );
+
+  window.location.replace(
+    "login-siswa.html"
+  );
+
+}
+
+
+if(
+  !akun ||
+  akun.role !== "siswa" ||
+  !akun.referensi_id
+){
+
+  sessionStorage.removeItem(
+    "akun_siswa"
+  );
+
+  window.location.replace(
+    "login-siswa.html"
+  );
+
+}
+
+
+/* =====================================================
+   AMAN HTML
+===================================================== */
+
+function aman(value){
+
+  return String(value ?? "-")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   AMBIL SISWA
+===================================================== */
+
+async function ambilSiswa(){
+
+  const id =
+    Number(akun.referensi_id);
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/siswa" +
+      "?id=eq." +
+      encodeURIComponent(id) +
+      "&select=*",
+
+      {
+        headers:
+          headersSupabase()
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data=[];
+
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data siswa tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.hint ||
+      "Gagal membaca data siswa."
+    );
+
+  }
+
+
+  if(!data.length){
+
+    throw new Error(
+      "Data siswa tidak ditemukan."
+    );
+
+  }
+
+
+  return data[0];
+
+}
+
+
+/* =====================================================
+   AMBIL KELAS
+===================================================== */
+
+async function ambilKelas(id){
+
+  if(
+    id === null ||
+    id === undefined ||
+    id === ""
+  ){
+
+    return null;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/kelas" +
+        "?id=eq." +
+        encodeURIComponent(id) +
+        "&select=*",
+
+        {
+          headers:
+            headersSupabase()
+        }
+
+      );
+
+
+    if(!response.ok)
+      return null;
+
+
+    const data =
+      await response.json();
+
+
+    return data.length
+      ? data[0]
+      : null;
+
+  }catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+/* =====================================================
+   AMBIL GURU WALI
+===================================================== */
+
+async function ambilGuru(id){
+
+  if(
+    id === null ||
+    id === undefined ||
+    id === ""
+  ){
+
+    return null;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/guru_wali" +
+        "?id=eq." +
+        encodeURIComponent(id) +
+        "&select=*",
+
+        {
+          headers:
+            headersSupabase()
+        }
+
+      );
+
+
+    if(!response.ok)
+      return null;
+
+
+    const data =
+      await response.json();
+
+
+    return data.length
+      ? data[0]
+      : null;
+
+  }catch(error){
+
+    return null;
+
+  }
+
+}
+
+
+/* =====================================================
+   NAMA KELAS
+===================================================== */
+
+function namaKelas(){
+
+  if(!kelas){
+
+    return siswa?.kelas_id || "-";
+
+  }
+
+
+  return (
+    kelas.nama_kelas ||
+    kelas.nama ||
+    kelas.kelas ||
+    kelas.kode_kelas ||
+    siswa?.kelas_id ||
+    "-"
+  );
+
+}
+
+
+/* =====================================================
+   NAMA GURU
+===================================================== */
+
+function namaGuru(){
+
+  if(!guruWali){
+
+    return siswa?.guru_wali_id || "-";
+
+  }
+
+
+  return (
+    guruWali.nama ||
+    guruWali.nama_guru ||
+    guruWali.guru_nama ||
+    "-"
+  );
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+async function mulai(){
+
+  try{
+
+    siswa =
+      await ambilSiswa();
+
+
+    kelas =
+      await ambilKelas(
+        siswa.kelas_id
+      );
+
+
+    guruWali =
+      await ambilGuru(
+        siswa.guru_wali_id
+      );
+
+
+    document.getElementById(
+      "namaSiswa"
+    ).textContent =
+      siswa.nama ||
+      "Siswa";
+
+
+    document.getElementById(
+      "nisnSiswa"
+    ).textContent =
+      siswa.nisn ||
+      "-";
+
+
+    document.getElementById(
+      "kelasSiswa"
+    ).textContent =
+      namaKelas();
+
+
+    document.getElementById(
+      "guruSiswa"
+    ).textContent =
+      namaGuru();
+
+
+    document.getElementById(
+      "tanggal"
+    ).value =
+      tanggalHariIni();
+
+
+    ubahMakan();
+
+    ubahBelajar();
+
+    ubahOlahraga();
+
+    ubahBermasyarakat();
+
+    ubahIbadah();
+
+
+    await cekJurnalTanggal();
+
+
+  }catch(error){
+
+    document.getElementById(
+      "statusJurnal"
+    ).className =
+      "status error";
+
+    document.getElementById(
+      "statusJurnal"
+    ).textContent =
+      "Gagal memuat data: " +
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   TANGGAL HARI INI
+===================================================== */
+
+function tanggalHariIni(){
+
+  const d =
+    new Date();
+
+  return (
+    d.getFullYear() +
+    "-" +
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+/* =====================================================
+   CEK JURNAL TANGGAL TERPILIH
+===================================================== */
+
+async function cekJurnalTanggal(){
+
+  if(!siswa)
+    return;
+
+
+  const tanggal =
+    document.getElementById(
+      "tanggal"
+    ).value;
+
+
+  if(!tanggal)
+    return;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/jurnal_7_kaih" +
+        "?siswa_id=eq." +
+        encodeURIComponent(siswa.id) +
+        "&tanggal=eq." +
+        encodeURIComponent(tanggal) +
+        "&select=id",
+
+        {
+          headers:
+            headersSupabase()
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data=[];
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : [];
+
+    }catch(error){
+
+      data=[];
+
+    }
+
+
+    if(!response.ok)
+      return;
+
+
+    const tombol =
+      document.getElementById(
+        "btnSimpan"
+      );
+
+
+    const status =
+      document.getElementById(
+        "statusJurnal"
+      );
+
+
+    if(data.length){
+
+      status.className =
+        "status warning";
+
+      status.textContent =
+        "Jurnal tanggal " +
+        formatTanggal(tanggal) +
+        " sudah pernah diisi.";
+
+
+      tombol.disabled=true;
+
+      tombol.textContent=
+        "✅ Jurnal Sudah Diisi";
+
+    }else{
+
+      status.className =
+        "status info";
+
+      status.textContent =
+        "Silakan isi jurnal untuk tanggal " +
+        formatTanggal(tanggal) +
+        ".";
+
+
+      tombol.disabled=false;
+
+      tombol.textContent=
+        "💾 Simpan Jurnal";
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* =====================================================
+   FORMAT TANGGAL
+===================================================== */
+
+function formatTanggal(value){
+
+  if(!value)
+    return "-";
+
+
+  const p =
+    String(value).split("-");
+
+
+  if(p.length!==3)
+    return value;
+
+
+  return (
+    p[2] +
+    "/" +
+    p[1] +
+    "/" +
+    p[0]
+  );
+
+}
+
+
+/* =====================================================
+   TAMPILKAN MAKAN
+===================================================== */
+
+function ubahMakan(){
+
+  const value =
+    document.getElementById(
+      "puasa"
+    ).value;
+
+
+  document
+    .getElementById(
+      "bagianPuasa"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "bagianTidakPuasa"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  if(value==="Ya"){
+
+    document
+      .getElementById(
+        "bagianPuasa"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+
+  if(value==="Tidak"){
+
+    document
+      .getElementById(
+        "bagianTidakPuasa"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   TAMPILKAN BELAJAR
+===================================================== */
+
+function ubahBelajar(){
+
+  const value =
+    document.getElementById(
+      "belajar_malam"
+    ).value;
+
+
+  document
+    .getElementById(
+      "bagianBelajarYa"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "bagianBelajarTidak"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  if(value==="Ya"){
+
+    document
+      .getElementById(
+        "bagianBelajarYa"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+
+  if(value==="Tidak"){
+
+    document
+      .getElementById(
+        "bagianBelajarTidak"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   TAMPILKAN OLAHRAGA
+===================================================== */
+
+function ubahOlahraga(){
+
+  const value =
+    document.getElementById(
+      "olahraga"
+    ).value;
+
+
+  document
+    .getElementById(
+      "bagianOlahragaYa"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "bagianOlahragaTidak"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  if(value==="Ya"){
+
+    document
+      .getElementById(
+        "bagianOlahragaYa"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+
+  if(value==="Tidak"){
+
+    document
+      .getElementById(
+        "bagianOlahragaTidak"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   TAMPILKAN BERMASYARAKAT
+===================================================== */
+
+function ubahBermasyarakat(){
+
+  const value =
+    document.getElementById(
+      "bermasyarakat"
+    ).value;
+
+
+  document
+    .getElementById(
+      "bagianMasyarakatYa"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "bagianMasyarakatTidak"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  if(value==="Ya"){
+
+    document
+      .getElementById(
+        "bagianMasyarakatYa"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+
+  if(value==="Tidak"){
+
+    document
+      .getElementById(
+        "bagianMasyarakatTidak"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   TAMPILKAN IBADAH
+===================================================== */
+
+function ubahIbadah(){
+
+  const value =
+    document.getElementById(
+      "ibadah"
+    ).value;
+
+
+  document
+    .getElementById(
+      "bagianIbadahYa"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById(
+      "bagianIbadahTidak"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  if(value==="Ya"){
+
+    document
+      .getElementById(
+        "bagianIbadahYa"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+
+  if(value==="Tidak"){
+
+    document
+      .getElementById(
+        "bagianIbadahTidak"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   RESET FORM
+===================================================== */
+
+function resetForm(){
+
+  const tanggal =
+    document.getElementById(
+      "tanggal"
+    ).value;
+
+
+  document
+    .getElementById(
+      "formJurnal"
+    )
+    .reset();
+
+
+  document.getElementById(
+    "tanggal"
+  ).value =
+    tanggal;
+
+
+  ubahMakan();
+  ubahBelajar();
+  ubahOlahraga();
+  ubahBermasyarakat();
+  ubahIbadah();
+
+}
+
+
+/* =====================================================
+   SIMPAN JURNAL
+===================================================== */
+
+document
+  .getElementById(
+    "formJurnal"
+  )
+  .addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+
+      if(!siswa){
+
+        alert(
+          "Data siswa belum siap."
+        );
+
+        return;
+
+      }
+
+
+      const tanggal =
+        document.getElementById(
+          "tanggal"
+        ).value;
+
+
+      const jamBangun =
+        document.getElementById(
+          "jam_bangun"
+        ).value;
+
+
+      const puasa =
+        document.getElementById(
+          "puasa"
+        ).value;
+
+
+      const belajar =
+        document.getElementById(
+          "belajar_malam"
+        ).value;
+
+
+      const olahraga =
+        document.getElementById(
+          "olahraga"
+        ).value;
+
+
+      const bermasyarakat =
+        document.getElementById(
+          "bermasyarakat"
+        ).value;
+
+
+      const ibadah =
+        document.getElementById(
+          "ibadah"
+        ).value;
+
+
+      const jamTidur =
+        document.getElementById(
+          "jam_tidur"
+        ).value;
+
+
+      if(!tanggal){
+
+        alert(
+          "Tanggal wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!jamBangun){
+
+        alert(
+          "Jam bangun wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!puasa){
+
+        alert(
+          "Pilih Puasa atau Tidak."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        puasa==="Ya" &&
+        (
+          !document.getElementById(
+            "menu_sahur"
+          ).value.trim() ||
+          !document.getElementById(
+            "menu_berbuka"
+          ).value.trim()
+        )
+      ){
+
+        alert(
+          "Menu sahur dan menu berbuka wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        puasa==="Tidak" &&
+        (
+          !document.getElementById(
+            "menu_sarapan"
+          ).value.trim() ||
+          !document.getElementById(
+            "menu_siang"
+          ).value.trim() ||
+          !document.getElementById(
+            "menu_malam"
+          ).value.trim()
+        )
+      ){
+
+        alert(
+          "Menu sarapan, makan siang, dan makan malam wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!belajar){
+
+        alert(
+          "Pilih Gemar Belajar Ya atau Tidak."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        belajar==="Ya" &&
+        (
+          !document.getElementById(
+            "materi_belajar"
+          ).value.trim() ||
+          !document.getElementById(
+            "durasi_belajar"
+          ).value
+        )
+      ){
+
+        alert(
+          "Materi dan durasi belajar wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        belajar==="Tidak" &&
+        !document.getElementById(
+          "alasan_belajar"
+        ).value.trim()
+      ){
+
+        alert(
+          "Alasan tidak belajar wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!olahraga){
+
+        alert(
+          "Pilih Berolahraga Ya atau Tidak."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        olahraga==="Ya" &&
+        (
+          !document.getElementById(
+            "jenis_olahraga"
+          ).value.trim() ||
+          !document.getElementById(
+            "durasi_olahraga"
+          ).value
+        )
+      ){
+
+        alert(
+          "Jenis dan durasi olahraga wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        olahraga==="Tidak" &&
+        !document.getElementById(
+          "alasan_olahraga"
+        ).value.trim()
+      ){
+
+        alert(
+          "Alasan tidak olahraga wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!bermasyarakat){
+
+        alert(
+          "Pilih Bermasyarakat Ya atau Tidak."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        bermasyarakat==="Ya" &&
+        !document.getElementById(
+          "jenis_bermasyarakat"
+        ).value.trim()
+      ){
+
+        alert(
+          "Jenis kegiatan bermasyarakat wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        bermasyarakat==="Tidak" &&
+        !document.getElementById(
+          "alasan_bermasyarakat"
+        ).value.trim()
+      ){
+
+        alert(
+          "Alasan tidak bermasyarakat wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!ibadah){
+
+        alert(
+          "Pilih Beribadah Ya atau Tidak."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        ibadah==="Ya" &&
+        !document.getElementById(
+          "jenis_ibadah"
+        ).value.trim()
+      ){
+
+        alert(
+          "Jenis ibadah wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        ibadah==="Tidak" &&
+        !document.getElementById(
+          "alasan_ibadah"
+        ).value.trim()
+      ){
+
+        alert(
+          "Alasan tidak beribadah wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!jamTidur){
+
+        alert(
+          "Jam tidur wajib diisi."
+        );
+
+        return;
+
+      }
+
+
+      /*
+        CEK DUPLIKAT SEKALI LAGI
+      */
+
+      const cekResponse =
+        await fetch(
+
+          SUPABASE_URL +
+          "/rest/v1/jurnal_7_kaih" +
+          "?siswa_id=eq." +
+          encodeURIComponent(siswa.id) +
+          "&tanggal=eq." +
+          encodeURIComponent(tanggal) +
+          "&select=id",
+
+          {
+            headers:
+              headersSupabase()
+          }
+
+        );
+
+
+      const cekText =
+        await cekResponse.text();
+
+
+      let cekData=[];
+
+
+      try{
+
+        cekData =
+          cekText
+          ? JSON.parse(cekText)
+          : [];
+
+      }catch(error){
+
+        cekData=[];
+
+      }
+
+
+      if(!cekResponse.ok){
+
+        alert(
+          "Gagal memeriksa jurnal. " +
+          cekText
+        );
+
+        return;
+
+      }
+
+
+      if(cekData.length){
+
+        alert(
+          "Jurnal untuk tanggal tersebut sudah pernah diisi."
+        );
+
+        await cekJurnalTanggal();
+
+        return;
+
+      }
+
+
+      const tombol =
+        document.getElementById(
+          "btnSimpan"
+        );
+
+
+      tombol.disabled=true;
+
+      tombol.textContent=
+        "⏳ Menyimpan...";
+
+
+      /*
+        Data jurnal.
+        guru_id sengaja tidak dikirim karena
+        trigger isi_guru_wali_jurnal()
+        akan mengisinya berdasarkan siswa.
+      */
+
+      const dataJurnal={
+
+        siswa_id:
+          Number(siswa.id),
+
+        tanggal:
+          tanggal,
+
+        jam_bangun:
+          jamBangun,
+
+        puasa:
+          puasa,
+
+        menu_sahur:
+          puasa==="Ya"
+          ? document.getElementById(
+              "menu_sahur"
+            ).value.trim()
+          : null,
+
+        menu_berbuka:
+          puasa==="Ya"
+          ? document.getElementById(
+              "menu_berbuka"
+            ).value.trim()
+          : null,
+
+        menu_sarapan:
+          puasa==="Tidak"
+          ? document.getElementById(
+              "menu_sarapan"
+            ).value.trim()
+          : null,
+
+        menu_siang:
+          puasa==="Tidak"
+          ? document.getElementById(
+              "menu_siang"
+            ).value.trim()
+          : null,
+
+        menu_malam:
+          puasa==="Tidak"
+          ? document.getElementById(
+              "menu_malam"
+            ).value.trim()
+          : null,
+
+        belajar_malam:
+          belajar,
+
+        materi_belajar:
+          belajar==="Ya"
+          ? document.getElementById(
+              "materi_belajar"
+            ).value.trim()
+          : null,
+
+        durasi_belajar:
+          belajar==="Ya"
+          ? Number(
+              document.getElementById(
+                "durasi_belajar"
+              ).value
+            )
+          : null,
+
+        alasan_belajar:
+          belajar==="Tidak"
+          ? document.getElementById(
+              "alasan_belajar"
+            ).value.trim()
+          : null,
+
+        olahraga:
+          olahraga,
+
+        jenis_olahraga:
+          olahraga==="Ya"
+          ? document.getElementById(
+              "jenis_olahraga"
+            ).value.trim()
+          : null,
+
+        durasi_olahraga:
+          olahraga==="Ya"
+          ? Number(
+              document.getElementById(
+                "durasi_olahraga"
+              ).value
+            )
+          : null,
+
+        alasan_olahraga:
+          olahraga==="Tidak"
+          ? document.getElementById(
+              "alasan_olahraga"
+            ).value.trim()
+          : null,
+
+        bermasyarakat:
+          bermasyarakat,
+
+        jenis_bermasyarakat:
+          bermasyarakat==="Ya"
+          ? document.getElementById(
+              "jenis_bermasyarakat"
+            ).value.trim()
+          : null,
+
+        alasan_bermasyarakat:
+          bermasyarakat==="Tidak"
+          ? document.getElementById(
+              "alasan_bermasyarakat"
+            ).value.trim()
+          : null,
+
+        ibadah:
+          ibadah,
+
+        jenis_ibadah:
+          ibadah==="Ya"
+          ? document.getElementById(
+              "jenis_ibadah"
+            ).value.trim()
+          : null,
+
+        alasan_ibadah:
+          ibadah==="Tidak"
+          ? document.getElementById(
+              "alasan_ibadah"
+            ).value.trim()
+          : null,
+
+        jam_tidur:
+          jamTidur
+
+      };
+
+
+      try{
+
+        const response =
+          await fetch(
+
+            SUPABASE_URL +
+            "/rest/v1/jurnal_7_kaih",
+
+            {
+
+              method:"POST",
+
+              headers:{
+                ...headersSupabase(),
+
+                "Prefer":
+                  "return=representation"
+              },
+
+              body:
+                JSON.stringify(
+                  dataJurnal
+                )
+
+            }
+
+          );
+
+
+        const text =
+          await response.text();
+
+
+        let result=[];
+
+
+        try{
+
+          result =
+            text
+            ? JSON.parse(text)
+            : [];
+
+        }catch(error){
+
+          result=[];
+
+        }
+
+
+        if(!response.ok){
+
+          throw new Error(
+
+            result.message ||
+            result.hint ||
+            result.details ||
+            text ||
+            "Gagal menyimpan jurnal."
+
+          );
+
+        }
+
+
+        document.getElementById(
+          "statusJurnal"
+        ).className =
+          "status ok";
+
+
+        document.getElementById(
+          "statusJurnal"
+        ).textContent =
+          "✅ Jurnal tanggal " +
+          formatTanggal(tanggal) +
+          " berhasil disimpan.";
+
+
+        tombol.textContent=
+          "✅ Jurnal Tersimpan";
+
+
+        tombol.disabled=true;
+
+
+        alert(
+          "Jurnal berhasil disimpan. Terima kasih sudah mengisi jurnal! 🎉"
+        );
+
+
+      }catch(error){
+
+        console.error(
+          "SIMPAN JURNAL ERROR:",
+          error
+        );
+
+
+        alert(
+          "Gagal menyimpan jurnal:\n" +
+          error.message
+        );
+
+
+        tombol.disabled=false;
+
+        tombol.textContent=
+          "💾 Simpan Jurnal";
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   GANTI TANGGAL
+===================================================== */
+
+document
+  .getElementById(
+    "tanggal"
+  )
+  .addEventListener(
+    "change",
+    function(){
+
+      resetFormIsi();
+
+      cekJurnalTanggal();
+
+    }
+  );
+
+
+function resetFormIsi(){
+
+  const tanggal =
+    document.getElementById(
+      "tanggal"
+    ).value;
+
+
+  document
+    .getElementById(
+      "formJurnal"
+    )
+    .reset();
+
+
+  document.getElementById(
+    "tanggal"
+  ).value =
+    tanggal;
+
+
+  ubahMakan();
+  ubahBelajar();
+  ubahOlahraga();
+  ubahBermasyarakat();
+  ubahIbadah();
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function keluar(){
+
+  sessionStorage.removeItem(
+    "akun_siswa"
+  );
+
+  sessionStorage.removeItem(
+    "akun_login"
+  );
+
+  window.location.replace(
+    "index.html"
+  );
+
+}
+
+
+/* =====================================================
+   MULAI
+===================================================== */
+
+mulai();
+
+</script>
+
+</body>
+</html>
+```
