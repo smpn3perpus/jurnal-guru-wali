@@ -1,0 +1,1311 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin - Jurnal 7 KAIH</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#1e293b;
+}
+
+.header{
+  background:#7c3aed;
+  color:white;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin:5px 0 0;
+  font-size:13px;
+  opacity:.95;
+}
+
+.logout{
+  border:0;
+  background:white;
+  color:#7c3aed;
+  padding:10px 15px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px 15px 35px;
+}
+
+.panel{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.panel h2{
+  margin:0 0 15px;
+  color:#6d28d9;
+}
+
+.welcome p{
+  margin:0;
+  color:#64748b;
+}
+
+.tanggal-box{
+  display:flex;
+  gap:10px;
+  align-items:end;
+  margin-top:18px;
+}
+
+.tanggal-wrap{
+  flex:1;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:9px;
+  font-size:14px;
+}
+
+.button{
+  border:0;
+  padding:12px 16px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary{
+  background:#7c3aed;
+  color:white;
+}
+
+.primary:hover{
+  background:#6d28d9;
+}
+
+.logout:hover{
+  background:#f5f3ff;
+}
+
+.button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+/* STATISTIK */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.card-title{
+  color:#64748b;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.card-number{
+  color:#7c3aed;
+  font-size:32px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.week{
+  padding:12px;
+  background:#f5f3ff;
+  border-radius:9px;
+  color:#5b21b6;
+}
+
+/* TABEL */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:11px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:#f5f3ff;
+  color:#6d28d9;
+}
+
+.empty{
+  padding:14px;
+  border-radius:9px;
+  background:#f8fafc;
+  color:#64748b;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.green{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  display:none;
+  padding:12px;
+  margin-top:12px;
+  border-radius:9px;
+  background:#fee2e2;
+  color:#991b1b;
+  line-height:1.5;
+}
+
+.loading{
+  padding:20px;
+  text-align:center;
+  color:#64748b;
+}
+
+.footer{
+  text-align:center;
+  padding:25px;
+  color:#64748b;
+  font-size:12px;
+}
+
+@media(max-width:900px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:600px){
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .tanggal-box{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .button{
+    width:100%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div>
+    <h1>📊 Dashboard Admin / Kepala Sekolah</h1>
+
+    <p>
+      Monitoring Jurnal 7 Kebiasaan Anak Indonesia Hebat
+      • SMP Negeri 3 Sibolga
+    </p>
+  </div>
+
+  <button
+    class="button logout"
+    onclick="logout()">
+    Keluar
+  </button>
+
+</header>
+
+
+<main class="container">
+
+  <!-- SELAMAT DATANG -->
+
+  <section class="panel welcome">
+
+    <h2 id="namaAdmin">
+      Memuat nama admin...
+    </h2>
+
+    <p>
+      Rekap login Guru, login Siswa, dan feedback Guru.
+    </p>
+
+    <div class="tanggal-box">
+
+      <div class="tanggal-wrap">
+
+        <label for="tanggal">
+          📅 Pilih Tanggal
+        </label>
+
+        <input
+          type="date"
+          id="tanggal"
+        >
+
+      </div>
+
+      <button
+        class="button primary"
+        id="btnTampilkan"
+        onclick="loadDashboard()">
+        🔎 Tampilkan
+      </button>
+
+    </div>
+
+    <div
+      id="pesanError"
+      class="error">
+    </div>
+
+  </section>
+
+
+  <!-- STATISTIK -->
+
+  <section class="cards">
+
+    <div class="card">
+
+      <div class="card-title">
+        👨‍🏫 Guru Login
+      </div>
+
+      <div
+        class="card-number"
+        id="guruLoginCount">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-title">
+        👨‍🎓 Siswa Login
+      </div>
+
+      <div
+        class="card-number"
+        id="siswaLoginCount">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-title">
+        📝 Guru Feedback Minggu Ini
+      </div>
+
+      <div
+        class="card-number"
+        id="guruFeedbackCount">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-title">
+        ✅ Total Feedback Minggu Ini
+      </div>
+
+      <div
+        class="card-number"
+        id="totalFeedback">
+        0
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PERIODE -->
+
+  <section class="panel">
+
+    <h2>
+      📅 Periode Feedback Minggu Ini
+    </h2>
+
+    <div
+      id="periodeMinggu"
+      class="week">
+      -
+    </div>
+
+  </section>
+
+
+  <!-- GURU LOGIN -->
+
+  <section class="panel">
+
+    <h2>
+      👨‍🏫 Rekap Guru Login
+    </h2>
+
+    <div
+      id="tabelGuruLogin"
+      class="loading">
+      Memuat...
+    </div>
+
+  </section>
+
+
+  <!-- SISWA LOGIN -->
+
+  <section class="panel">
+
+    <h2>
+      👨‍🎓 Rekap Siswa Login
+    </h2>
+
+    <div
+      id="tabelSiswaLogin"
+      class="loading">
+      Memuat...
+    </div>
+
+  </section>
+
+
+  <!-- FEEDBACK -->
+
+  <section class="panel">
+
+    <h2>
+      📝 Rekap Guru yang Memberikan Feedback
+    </h2>
+
+    <div
+      id="tabelGuruFeedback"
+      class="loading">
+      Memuat...
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    Created by Mr. Rahmat Batubara, S.T.P
+  </div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+function headers(){
+
+  return {
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Accept":
+      "application/json"
+  };
+
+}
+
+
+/* =====================================================
+   SESSION ADMIN
+===================================================== */
+
+const session =
+  sessionStorage.getItem(
+    "akun_admin"
+  );
+
+
+if(!session){
+
+  window.location.replace(
+    "login-admin.html"
+  );
+
+}
+
+
+let akunAdmin=null;
+
+
+try{
+
+  akunAdmin =
+    JSON.parse(
+      session
+    );
+
+}catch(error){
+
+  sessionStorage.removeItem(
+    "akun_admin"
+  );
+
+  window.location.replace(
+    "login-admin.html"
+  );
+
+}
+
+
+/* =====================================================
+   TANGGAL
+===================================================== */
+
+function tanggalHariIni(){
+
+  const d =
+    new Date();
+
+  return (
+    d.getFullYear() +
+    "-" +
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+function formatTanggal(value){
+
+  if(!value)
+    return "-";
+
+  const p =
+    String(value).split("-");
+
+  if(p.length!==3)
+    return value;
+
+  return (
+    p[2] +
+    "/" +
+    p[1] +
+    "/" +
+    p[0]
+  );
+
+}
+
+
+function formatTanggalWaktu(value){
+
+  if(!value)
+    return "-";
+
+  try{
+
+    return new Date(value)
+      .toLocaleString(
+        "id-ID",
+        {
+          dateStyle:"short",
+          timeStyle:"short"
+        }
+      );
+
+  }catch(error){
+
+    return value;
+
+  }
+
+}
+
+
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
+
+async function loadDashboard(){
+
+  const tanggal =
+    document.getElementById(
+      "tanggal"
+    ).value;
+
+
+  const tombol =
+    document.getElementById(
+      "btnTampilkan"
+    );
+
+
+  if(!tanggal){
+
+    tampilError(
+      "Pilih tanggal terlebih dahulu."
+    );
+
+    return;
+
+  }
+
+
+  tombol.disabled=true;
+
+  tombol.textContent=
+    "⏳ Memuat...";
+
+
+  sembunyikanError();
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/ambil_dashboard_admin",
+
+        {
+          method:"POST",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              p_admin_id:
+                Number(
+                  akunAdmin.referensi_id
+                ),
+
+              p_tanggal:
+                tanggal
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data={};
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : {};
+
+    }catch(error){
+
+      throw new Error(
+        "Respons server tidak valid."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.details ||
+        data.hint ||
+        text ||
+        "Gagal mengambil data Admin."
+      );
+
+    }
+
+
+    /*
+      RPC mengembalikan satu objek JSONB.
+    */
+
+    let dashboard =
+      data;
+
+
+    /*
+      Jika response berbentuk:
+      [
+        {
+          "ambil_dashboard_admin": {...}
+        }
+      ]
+    */
+
+    if(
+      Array.isArray(data)
+    ){
+
+      dashboard =
+        data[0]?.ambil_dashboard_admin ||
+        {};
+
+    }
+
+
+    /*
+      Jika response langsung:
+      {
+        "ambil_dashboard_admin": {...}
+      }
+    */
+
+    if(
+      dashboard.ambil_dashboard_admin
+    ){
+
+      dashboard =
+        dashboard.ambil_dashboard_admin;
+
+    }
+
+
+    if(!dashboard.admin_nama){
+
+      dashboard.admin_nama =
+        "Admin / Kepala Sekolah";
+
+    }
+
+
+    tampilDashboard(
+      dashboard
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "ADMIN ERROR:",
+      error
+    );
+
+    tampilError(
+      error.message
+    );
+
+  }finally{
+
+    tombol.disabled=false;
+
+    tombol.textContent=
+      "🔎 Tampilkan";
+
+  }
+
+}
+
+
+/* =====================================================
+   TAMPIL DASHBOARD
+===================================================== */
+
+function tampilDashboard(
+  d
+){
+
+  document.getElementById(
+    "namaAdmin"
+  ).textContent =
+    "Selamat datang, " +
+    (
+      d.admin_nama ||
+      "Admin / Kepala Sekolah"
+    );
+
+
+  document.getElementById(
+    "guruLoginCount"
+  ).textContent =
+    Number(
+      d.guru_login_count || 0
+    );
+
+
+  document.getElementById(
+    "siswaLoginCount"
+  ).textContent =
+    Number(
+      d.siswa_login_count || 0
+    );
+
+
+  document.getElementById(
+    "guruFeedbackCount"
+  ).textContent =
+    Number(
+      d.guru_feedback_count || 0
+    );
+
+
+  document.getElementById(
+    "totalFeedback"
+  ).textContent =
+    Number(
+      d.total_feedback || 0
+    );
+
+
+  document.getElementById(
+    "periodeMinggu"
+  ).textContent =
+    formatTanggal(
+      d.awal_minggu
+    ) +
+    " s.d. " +
+    formatTanggal(
+      d.akhir_minggu
+    );
+
+
+  tampilGuruLogin(
+    d.guru_login || []
+  );
+
+
+  tampilSiswaLogin(
+    d.siswa_login || []
+  );
+
+
+  tampilGuruFeedback(
+    d.guru_feedback || []
+  );
+
+}
+
+
+/* =====================================================
+   GURU LOGIN
+===================================================== */
+
+function tampilGuruLogin(
+  data
+){
+
+  const tempat =
+    document.getElementById(
+      "tabelGuruLogin"
+    );
+
+
+  if(!data.length){
+
+    tempat.innerHTML =
+      `
+        <div class="empty">
+          Belum ada guru yang login pada
+          tanggal ${aman(
+            formatTanggal(
+              document.getElementById(
+                "tanggal"
+              ).value
+            )
+          )}.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  let html=`
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No</th>
+            <th>Nama Guru</th>
+            <th>NIP / Username</th>
+            <th>Waktu Login</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+  `;
+
+
+  data.forEach(
+    function(item,index){
+
+      html+=`
+
+        <tr>
+
+          <td>
+            ${index+1}
+          </td>
+
+          <td>
+            <b>
+              ${aman(item.nama)}
+            </b>
+          </td>
+
+          <td>
+            ${aman(item.username)}
+          </td>
+
+          <td>
+            ${aman(
+              formatTanggalWaktu(
+                item.waktu_login
+              )
+            )}
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html+=`
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+
+
+  tempat.innerHTML=
+    html;
+
+}
+
+
+/* =====================================================
+   SISWA LOGIN
+===================================================== */
+
+function tampilSiswaLogin(
+  data
+){
+
+  const tempat =
+    document.getElementById(
+      "tabelSiswaLogin"
+    );
+
+
+  if(!data.length){
+
+    tempat.innerHTML =
+      `
+        <div class="empty">
+          Belum ada siswa yang login pada
+          tanggal ${aman(
+            formatTanggal(
+              document.getElementById(
+                "tanggal"
+              ).value
+            )
+          )}.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  let html=`
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No</th>
+            <th>Nama Siswa</th>
+            <th>NISN</th>
+            <th>Waktu Login</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+  `;
+
+
+  data.forEach(
+    function(item,index){
+
+      html+=`
+
+        <tr>
+
+          <td>
+            ${index+1}
+          </td>
+
+          <td>
+            <b>
+              ${aman(item.nama)}
+            </b>
+          </td>
+
+          <td>
+            ${aman(item.username)}
+          </td>
+
+          <td>
+            ${aman(
+              formatTanggalWaktu(
+                item.waktu_login
+              )
+            )}
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html+=`
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+
+
+  tempat.innerHTML=
+    html;
+
+}
+
+
+/* =====================================================
+   GURU FEEDBACK
+===================================================== */
+
+function tampilGuruFeedback(
+  data
+){
+
+  const tempat =
+    document.getElementById(
+      "tabelGuruFeedback"
+    );
+
+
+  if(!data.length){
+
+    tempat.innerHTML =
+      `
+        <div class="empty">
+          Belum ada guru yang memberikan
+          feedback pada minggu ini.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  let html=`
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No</th>
+            <th>Nama Guru</th>
+            <th>Jumlah Feedback</th>
+            <th>Feedback Terakhir</th>
+            <th>Status</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+  `;
+
+
+  data.forEach(
+    function(item,index){
+
+      html+=`
+
+        <tr>
+
+          <td>
+            ${index+1}
+          </td>
+
+          <td>
+            <b>
+              ${aman(item.nama)}
+            </b>
+          </td>
+
+          <td>
+            ${Number(
+              item.jumlah_feedback || 0
+            )}
+          </td>
+
+          <td>
+            ${aman(
+              formatTanggalWaktu(
+                item.feedback_terakhir
+              )
+            )}
+          </td>
+
+          <td>
+
+            <span class="badge green">
+              ✅ SUDAH FEEDBACK
+            </span>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html+=`
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+
+
+  tempat.innerHTML=
+    html;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function tampilError(
+  pesan
+){
+
+  const box =
+    document.getElementById(
+      "pesanError"
+    );
+
+
+  box.style.display=
+    "block";
+
+
+  box.textContent=
+    pesan ||
+    "Terjadi kesalahan.";
+
+}
+
+
+function sembunyikanError(){
+
+  const box =
+    document.getElementById(
+      "pesanError"
+    );
+
+
+  box.style.display=
+    "none";
+
+
+  box.textContent=
+    "";
+
+}
+
+
+/* =====================================================
+   AMAN
+===================================================== */
+
+function aman(value){
+
+  return String(
+    value ?? "-"
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+  sessionStorage.removeItem(
+    "akun_admin"
+  );
+
+  window.location.replace(
+    "login-admin.html"
+  );
+
+}
+
+
+/* =====================================================
+   MULAI
+===================================================== */
+
+document.getElementById(
+  "tanggal"
+).value =
+  tanggalHariIni();
+
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>
+```
