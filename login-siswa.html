@@ -1,230 +1,351 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>Login Siswa - Jurnal 7 KAIH</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
 
 body{
+
   margin:0;
+
   min-height:100vh;
+
   font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#075985,#0ea5e9);
+
+  background:
+    linear-gradient(
+      135deg,
+      #e0f2fe,
+      #f8fafc
+    );
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   padding:20px;
+
 }
 
-.login-box{
+.login-card{
+
   width:100%;
+
   max-width:420px;
+
   background:white;
-  border-radius:20px;
+
   padding:30px;
-  box-shadow:0 10px 35px rgba(0,0,0,.2);
+
+  border-radius:20px;
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.12);
+
 }
 
 .logo{
+
   width:80px;
+
   height:80px;
-  margin:0 auto 15px;
-  border-radius:50%;
-  background:#e0f2fe;
+
+  margin:auto;
+
+  border-radius:20px;
+
+  background:#075985;
+
+  color:white;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  font-size:40px;
+
+  font-size:27px;
+
+  font-weight:bold;
+
 }
 
 h1{
+
   text-align:center;
+
+  font-size:22px;
+
   color:#075985;
-  margin:0;
-  font-size:24px;
+
+  margin:
+    18px 0 5px;
+
 }
 
-.subtitle{
+.school{
+
   text-align:center;
+
   color:#64748b;
-  margin:8px 0 25px;
-  line-height:1.5;
+
+  margin-bottom:25px;
+
+  font-size:14px;
+
 }
 
 label{
+
   display:block;
+
   font-weight:bold;
-  margin-bottom:7px;
-  color:#334155;
+
+  margin:
+    15px 0 7px;
+
 }
 
 input{
+
   width:100%;
+
   padding:13px;
-  border:1px solid #cbd5e1;
+
+  border:
+    1px solid #cbd5e1;
+
   border-radius:10px;
+
   font-size:16px;
-  margin-bottom:16px;
+
   outline:none;
+
 }
 
 input:focus{
+
   border-color:#075985;
-  box-shadow:0 0 0 3px rgba(14,165,233,.15);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(7,89,133,.1);
+
 }
 
-.btn-login{
+button{
+
   width:100%;
-  border:0;
+
+  margin-top:20px;
+
   padding:14px;
+
+  border:0;
+
   border-radius:10px;
+
   background:#075985;
+
   color:white;
+
   font-size:16px;
+
   font-weight:bold;
+
   cursor:pointer;
+
 }
 
-.btn-login:hover{
+button:hover{
+
   background:#0369a1;
+
 }
 
-.btn-login:disabled{
+button:disabled{
+
   opacity:.6;
-  cursor:not-allowed;
+
+  cursor:wait;
+
+}
+
+#pesan{
+
+  display:none;
+
+  margin-top:15px;
+
+  padding:12px;
+
+  border-radius:9px;
+
+  text-align:center;
+
+  line-height:1.5;
+
 }
 
 .error{
+
+  display:block!important;
+
   background:#fee2e2;
+
   color:#991b1b;
-  padding:12px;
-  border-radius:9px;
-  margin-bottom:15px;
-  display:none;
-  line-height:1.5;
+
+}
+
+.sukses{
+
+  display:block!important;
+
+  background:#dcfce7;
+
+  color:#166534;
+
 }
 
 .info{
-  background:#eff6ff;
-  color:#075985;
-  padding:12px;
-  border-radius:9px;
+
   margin-top:18px;
+
+  padding:12px;
+
+  border-radius:9px;
+
+  background:#eff6ff;
+
+  color:#075985;
+
   font-size:13px;
-  text-align:center;
-  line-height:1.5;
+
+  line-height:1.6;
+
 }
 
-.footer{
+footer{
+
   text-align:center;
-  margin-top:20px;
-  color:#64748b;
+
+  margin-top:25px;
+
+  color:#777;
+
   font-size:12px;
-}
-
-.show-password{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-top:-8px;
-  margin-bottom:18px;
-  font-size:13px;
-  color:#64748b;
-}
-
-.show-password input{
-  width:auto;
-  margin:0;
-}
-
-@media(max-width:500px){
-
-  .login-box{
-    padding:23px;
-  }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="login-card">
 
   <div class="logo">
-    🎓
+    JW
   </div>
 
-  <h1>Login Siswa</h1>
+  <h1>
+    LOGIN SISWA
+  </h1>
 
-  <div class="subtitle">
-    Jurnal 7 Kebiasaan Anak Indonesia Hebat<br>
-    <b>SMP Negeri 3 Sibolga</b>
+  <div class="school">
+    APLIKASI JURNAL 7 KEBIASAAN ANAK INDONESIA HEBAT
+    <br>
+    SMP NEGERI 3 SIBOLGA
   </div>
 
-  <div id="pesanError" class="error"></div>
 
-  <form id="formLogin">
+  <label for="username">
+    NISN
+  </label>
 
-    <label for="nisn">
-      Username / NISN
-    </label>
+  <input
+    type="text"
+    id="username"
+    placeholder="Masukkan NISN"
+    autocomplete="username"
+    inputmode="numeric"
+  >
 
-    <input
-      type="text"
-      id="nisn"
-      placeholder="Masukkan NISN"
-      autocomplete="username"
-      inputmode="numeric"
-      required
-    >
 
-    <label for="password">
-      Password
-    </label>
+  <label for="password">
+    Password
+  </label>
 
-    <input
-      type="password"
-      id="password"
-      placeholder="Masukkan password"
-      autocomplete="current-password"
-      required
-    >
+  <input
+    type="password"
+    id="password"
+    placeholder="Masukkan password"
+    autocomplete="current-password"
+  >
 
-    <label class="show-password">
-      <input
-        type="checkbox"
-        id="lihatPassword"
-      >
-      Tampilkan password
-    </label>
 
-    <button
-      type="submit"
-      class="btn-login"
-      id="btnLogin">
+  <button
+    id="btnLogin"
+    onclick="loginSiswa()"
+  >
+    LOGIN
+  </button>
 
-      🔐 Masuk sebagai Siswa
 
-    </button>
+  <div
+    id="pesan">
+  </div>
 
-  </form>
 
   <div class="info">
-    <b>Informasi Login</b><br>
-    Username dan password menggunakan NISN siswa.
+
+    <b>Informasi Login</b>
+    <br><br>
+
+    Username:
+    <b>NISN</b>
+
+    <br>
+
+    Password awal:
+    <b>NISN</b>
+
+    <br><br>
+
+    Contoh:
+    <br>
+
+    NISN:
+    <b>0142655861</b>
+
+    <br>
+
+    Password:
+    <b>0142655861</b>
+
   </div>
 
-  <div class="footer">
-    © SMP Negeri 3 Sibolga
-  </div>
+
+  <footer>
+    Created by Mr. Rahmat Batubara, S.T.P
+  </footer>
 
 </div>
 
@@ -242,399 +363,338 @@ const SUPABASE_KEY =
 "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
-function headersSupabase(){
-
-  return {
-
-    "apikey": SUPABASE_KEY,
-
-    "Authorization":
-      "Bearer " + SUPABASE_KEY,
-
-    "Content-Type":
-      "application/json",
-
-    "Accept":
-      "application/json"
-
-  };
-
-}
-
-
 /* =====================================================
-   ELEMEN
+   LOGIN SISWA
 ===================================================== */
 
-const form =
-document.getElementById("formLogin");
+async function loginSiswa(){
 
-const nisnInput =
-document.getElementById("nisn");
+  const username =
+    document
+      .getElementById("username")
+      .value
+      .trim();
 
-const passwordInput =
-document.getElementById("password");
+  const password =
+    document
+      .getElementById("password")
+      .value;
 
-const btnLogin =
-document.getElementById("btnLogin");
+  const tombol =
+    document
+      .getElementById("btnLogin");
 
-const pesanError =
-document.getElementById("pesanError");
-
-const lihatPassword =
-document.getElementById("lihatPassword");
+  const pesan =
+    document
+      .getElementById("pesan");
 
 
-/* =====================================================
-   TAMPILKAN PASSWORD
-===================================================== */
+  pesan.className = "";
+  pesan.textContent = "";
 
-lihatPassword.addEventListener(
-  "change",
-  function(){
 
-    passwordInput.type =
-      this.checked
-      ? "text"
-      : "password";
+  if(!username){
+
+    pesan.className = "error";
+
+    pesan.textContent =
+      "NISN wajib diisi.";
+
+    return;
 
   }
-);
 
 
-/* =====================================================
-   PESAN ERROR
-===================================================== */
+  if(!password){
 
-function tampilError(pesan){
+    pesan.className = "error";
 
-  pesanError.style.display =
-    "block";
+    pesan.textContent =
+      "Password wajib diisi.";
 
-  pesanError.textContent =
-    pesan;
+    return;
 
-}
+  }
 
 
-function hilangkanError(){
+  tombol.disabled = true;
 
-  pesanError.style.display =
-    "none";
-
-  pesanError.textContent =
-    "";
-
-}
+  tombol.textContent =
+    "MEMERIKSA...";
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+  try{
 
-form.addEventListener(
-  "submit",
-  async function(e){
+    const response =
+      await fetch(
 
-    e.preventDefault();
+        SUPABASE_URL +
+        "/rest/v1/rpc/cek_login",
 
-    hilangkanError();
+        {
 
-    const nisn =
-      nisnInput.value.trim();
+          method:"POST",
 
-    const password =
-      passwordInput.value.trim();
+          headers:{
 
+            "Content-Type":
+              "application/json",
 
-    if(!nisn){
+            "apikey":
+              SUPABASE_KEY,
 
-      tampilError(
-        "Silakan masukkan NISN."
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          },
+
+          body:
+            JSON.stringify({
+
+              p_username:
+                username,
+
+              p_password:
+                password
+
+            })
+
+        }
+
       );
 
-      nisnInput.focus();
 
-      return;
-
-    }
+    const text =
+      await response.text();
 
 
-    if(!password){
-
-      tampilError(
-        "Silakan masukkan password."
-      );
-
-      passwordInput.focus();
-
-      return;
-
-    }
-
-
-    /*
-      Password siswa = NISN
-    */
-
-    if(password !== nisn){
-
-      tampilError(
-        "Password salah. Password siswa adalah NISN."
-      );
-
-      passwordInput.focus();
-
-      return;
-
-    }
-
-
-    btnLogin.disabled =
-      true;
-
-    btnLogin.textContent =
-      "⏳ Memeriksa login...";
-
+    let data = [];
 
     try{
 
-      /*
-        Cari siswa berdasarkan NISN.
-      */
+      data =
+        text
+        ? JSON.parse(text)
+        : [];
 
-      const url =
-        SUPABASE_URL +
-        "/rest/v1/siswa" +
-        "?nisn=eq." +
-        encodeURIComponent(nisn) +
-        "&select=*";
+    }catch(e){
 
-
-      console.log(
-        "Mencari siswa:",
-        nisn
+      throw new Error(
+        "Respons server tidak valid."
       );
 
-
-      const response =
-        await fetch(
-          url,
-          {
-            method:"GET",
-            headers:
-              headersSupabase()
-          }
-        );
+    }
 
 
-      const text =
-        await response.text();
+    console.log(
+      "HASIL LOGIN:",
+      data
+    );
 
 
-      let data = [];
+    if(!response.ok){
 
-      try{
+      throw new Error(
 
-        data =
-          text
-          ? JSON.parse(text)
-          : [];
+        data.message ||
+        data.hint ||
+        data.details ||
+        "Login gagal."
 
-      }catch(error){
-
-        throw new Error(
-          "Data dari server tidak dapat dibaca."
-        );
-
-      }
-
-
-      if(!response.ok){
-
-        console.error(
-          "Supabase error:",
-          data
-        );
-
-        throw new Error(
-          data.message ||
-          data.hint ||
-          data.details ||
-          "Gagal menghubungi database."
-        );
-
-      }
-
-
-      if(!Array.isArray(data)){
-
-        throw new Error(
-          "Format data siswa tidak valid."
-        );
-
-      }
-
-
-      /*
-        NISN tidak ditemukan.
-      */
-
-      if(data.length === 0){
-
-        tampilError(
-          "NISN tidak ditemukan. Periksa kembali NISN Anda."
-        );
-
-        return;
-
-      }
-
-
-      /*
-        Kalau ada lebih dari satu siswa
-        dengan NISN yang sama,
-        login dihentikan.
-      */
-
-      if(data.length > 1){
-
-        tampilError(
-          "NISN terdaftar lebih dari satu kali. Silakan hubungi Admin."
-        );
-
-        console.error(
-          "NISN DUPLIKAT:",
-          data
-        );
-
-        return;
-
-      }
-
-
-      const siswa =
-        data[0];
-
-
-      console.log(
-        "SISWA LOGIN:",
-        siswa
       );
 
-
-      /*
-        Simpan akun siswa.
-      */
-
-      const akunSiswa = {
-
-        tipe:
-          "siswa",
-
-        id:
-          siswa.id,
-
-        nama:
-          siswa.nama,
-
-        nisn:
-          siswa.nisn,
-
-        kelas_id:
-          siswa.kelas_id,
-
-        guru_wali_id:
-          siswa.guru_wali_id
-
-      };
+    }
 
 
-      sessionStorage.setItem(
-        "akun_login",
-        JSON.stringify(
-          akunSiswa
-        )
+    if(
+      !Array.isArray(data) ||
+      data.length === 0
+    ){
+
+      throw new Error(
+        "NISN atau password salah."
       );
 
+    }
 
-      /*
-        Simpan khusus siswa juga.
-      */
 
-      sessionStorage.setItem(
-        "akun_siswa",
-        JSON.stringify(
-          akunSiswa
-        )
+    const akun =
+      data[0];
+
+
+    /* =================================================
+       PASTIKAN AKUN SISWA
+    ================================================= */
+
+    const role =
+      String(
+        akun.role || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(role !== "siswa"){
+
+      throw new Error(
+        "Akun ini bukan akun siswa."
       );
 
-
-      /*
-        Berhasil.
-      */
-
-      btnLogin.textContent =
-        "✓ Login berhasil...";
+    }
 
 
-      window.location.href =
-        "dashboard-siswa.html";
+    /* =================================================
+       PASTIKAN ID SISWA ADA
+    ================================================= */
 
+    if(
+      !akun.id ||
+      !akun.referensi_id
+    ){
 
-    }catch(error){
-
-      console.error(
-        "LOGIN SISWA ERROR:",
-        error
+      throw new Error(
+        "ID siswa tidak ditemukan."
       );
 
-
-      tampilError(
-        "Login gagal: " +
-        error.message
-      );
+    }
 
 
-    }finally{
+    /* =================================================
+       SIMPAN SESSION SISWA
+    ================================================= */
 
-      btnLogin.disabled =
-        false;
+    const sessionSiswa = {
 
+      id:
+        Number(akun.id),
+
+      username:
+        akun.username,
+
+      role:
+        "siswa",
+
+      tipe:
+        "siswa",
+
+      referensi_id:
+        Number(akun.referensi_id),
+
+      nama:
+        akun.nama || "Siswa"
+
+    };
+
+
+    sessionStorage.setItem(
+      "akun_siswa",
+      JSON.stringify(
+        sessionSiswa
+      )
+    );
+
+
+    /* =================================================
+       HAPUS SESSION LOGIN LAMA
+    ================================================= */
+
+    sessionStorage.removeItem(
+      "akun_login"
+    );
+
+
+    pesan.className =
+      "sukses";
+
+    pesan.textContent =
+      "Login berhasil. Membuka dashboard siswa...";
+
+
+    setTimeout(
+
+      function(){
+
+        window.location.replace(
+          "siswa.html"
+        );
+
+      },
+
+      500
+
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+
+    pesan.className =
+      "error";
+
+    pesan.textContent =
+      error.message ||
+      "Terjadi kesalahan saat login.";
+
+
+    tombol.disabled =
+      false;
+
+    tombol.textContent =
+      "LOGIN";
+
+  }
+
+}
+
+
+/* =====================================================
+   ENTER UNTUK LOGIN
+===================================================== */
+
+document
+  .getElementById("password")
+  .addEventListener(
+    "keydown",
+    function(event){
 
       if(
-        btnLogin.textContent
-        ===
-        "⏳ Memeriksa login..."
+        event.key === "Enter"
       ){
 
-        btnLogin.textContent =
-          "🔐 Masuk sebagai Siswa";
+        loginSiswa();
 
       }
 
     }
-
-  }
-);
+  );
 
 
 /* =====================================================
-   JIKA SUDAH LOGIN
+   CEK SESSION LAMA
 ===================================================== */
 
-const akunLama =
-sessionStorage.getItem(
-  "akun_siswa"
-);
+(function(){
+
+  const session =
+    sessionStorage.getItem(
+      "akun_siswa"
+    );
 
 
-if(akunLama){
+  if(!session)
+    return;
+
 
   try{
 
     const akun =
-      JSON.parse(akunLama);
+      JSON.parse(session);
 
 
     if(
@@ -644,15 +704,11 @@ if(akunLama){
     ){
 
       /*
-        Bisa langsung masuk dashboard.
-        Jika tidak ingin fitur ini,
-        bagian ini dapat dihapus.
+        Session masih ada.
+        Jangan langsung memaksa masuk.
+        Pengguna tetap berada di halaman
+        login agar dapat login ulang.
       */
-
-      console.log(
-        "Siswa sudah login:",
-        akun
-      );
 
     }
 
@@ -664,10 +720,9 @@ if(akunLama){
 
   }
 
-}
+})();
 
 </script>
 
 </body>
 </html>
-```
