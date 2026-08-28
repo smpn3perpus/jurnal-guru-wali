@@ -93,8 +93,8 @@ body{
   cursor:pointer;
 }
 
-.menu button:hover,
-.menu button.active{
+.menu button.active,
+.menu button:hover{
   background:#075985;
   color:white;
 }
@@ -285,12 +285,19 @@ th{
   <div class="header-content">
 
     <div>
+
       <h1>Dashboard Guru Wali</h1>
+
       <p>SMP Negeri 3 Sibolga</p>
+
     </div>
 
-    <button class="logout" onclick="keluar()">
+    <button
+      class="logout"
+      onclick="keluar()">
+
       Keluar
+
     </button>
 
   </div>
@@ -299,9 +306,6 @@ th{
 
 
 <div class="container">
-
-
-<!-- WELCOME -->
 
 <div class="welcome">
 
@@ -314,47 +318,55 @@ th{
     7 Kebiasaan Anak Indonesia Hebat.
   </div>
 
-  <div class="small" id="infoGuru">
-    Mengambil data guru...
+  <div
+    class="small"
+    id="infoGuru">
+    Sedang membaca data guru...
   </div>
 
 </div>
 
-
-<!-- MENU -->
 
 <div class="menu">
 
   <button
     class="active"
     onclick="bukaMenu('siswa',this)">
+
     👥 Daftar Siswa
+
   </button>
 
   <button
     onclick="bukaMenu('jurnal',this)">
+
     📝 Verifikasi Jurnal KAIH
+
   </button>
 
   <button
     onclick="bukaMenu('hadir',this)">
+
     📋 Verifikasi Kehadiran
+
   </button>
 
   <button
     onclick="bukaMenu('rekap',this)">
+
     📊 Rekap
+
   </button>
 
   <button
     onclick="bukaMenu('download',this)">
+
     📥 Download
+
   </button>
 
 </div>
 
-
-<!-- CARDS -->
 
 <div class="cards">
 
@@ -367,7 +379,9 @@ th{
     <div
       class="card-number"
       id="jumlahSiswa">
+
       0
+
     </div>
 
   </div>
@@ -382,7 +396,9 @@ th{
     <div
       class="card-number"
       id="jumlahKelas">
+
       0
+
     </div>
 
   </div>
@@ -396,8 +412,11 @@ th{
 
     <div
       class="card-number"
-      id="guruId">
+      id="guruId"
+      style="font-size:20px">
+
       -
+
     </div>
 
   </div>
@@ -407,20 +426,28 @@ th{
 
 <!-- SISWA -->
 
-<div id="menuSiswa" class="panel">
+<div
+  id="menuSiswa"
+  class="panel">
 
-  <h2>👥 Daftar Siswa Wali</h2>
+  <h2>
+    👥 Daftar Siswa Wali
+  </h2>
 
   <div
     id="statusSiswa"
     class="status">
+
     Memuat data siswa...
+
   </div>
 
   <div id="daftarSiswa">
+
     <div class="loading">
       Memuat daftar siswa...
     </div>
+
   </div>
 
 </div>
@@ -428,9 +455,13 @@ th{
 
 <!-- JURNAL -->
 
-<div id="menuJurnal" class="panel hidden">
+<div
+  id="menuJurnal"
+  class="panel hidden">
 
-  <h2>📝 Verifikasi Jurnal KAIH</h2>
+  <h2>
+    📝 Verifikasi Jurnal KAIH
+  </h2>
 
   <div class="toolbar">
 
@@ -441,13 +472,19 @@ th{
     <button
       class="primary"
       onclick="ambilJurnal()">
+
       Tampilkan
+
     </button>
 
   </div>
 
-  <div id="statusJurnal" class="status">
-    Pilih tanggal lalu klik Tampilkan.
+  <div
+    id="statusJurnal"
+    class="status">
+
+    Pilih tanggal.
+
   </div>
 
   <div id="daftarJurnal"></div>
@@ -457,9 +494,13 @@ th{
 
 <!-- KEHADIRAN -->
 
-<div id="menuHadir" class="panel hidden">
+<div
+  id="menuHadir"
+  class="panel hidden">
 
-  <h2>📋 Verifikasi Daftar Hadir</h2>
+  <h2>
+    📋 Verifikasi Kehadiran
+  </h2>
 
   <div class="toolbar">
 
@@ -470,13 +511,19 @@ th{
     <button
       class="primary"
       onclick="ambilKehadiran()">
+
       Tampilkan
+
     </button>
 
   </div>
 
-  <div id="statusHadir" class="status">
-    Pilih tanggal lalu klik Tampilkan.
+  <div
+    id="statusHadir"
+    class="status">
+
+    Pilih tanggal.
+
   </div>
 
   <div id="daftarHadir"></div>
@@ -486,9 +533,13 @@ th{
 
 <!-- REKAP -->
 
-<div id="menuRekap" class="panel hidden">
+<div
+  id="menuRekap"
+  class="panel hidden">
 
-  <h2>📊 Rekap Guru Wali</h2>
+  <h2>
+    📊 Rekap Guru Wali
+  </h2>
 
   <div class="toolbar">
 
@@ -503,13 +554,19 @@ th{
     <button
       class="primary"
       onclick="buatRekap()">
+
       Buat Rekap
+
     </button>
 
   </div>
 
-  <div id="statusRekap" class="status">
-    Pilih periode rekap.
+  <div
+    id="statusRekap"
+    class="status">
+
+    Pilih periode.
+
   </div>
 
   <div id="hasilRekap"></div>
@@ -519,9 +576,13 @@ th{
 
 <!-- DOWNLOAD -->
 
-<div id="menuDownload" class="panel hidden">
+<div
+  id="menuDownload"
+  class="panel hidden">
 
-  <h2>📥 Download Rekap</h2>
+  <h2>
+    📥 Download Rekap
+  </h2>
 
   <div class="toolbar">
 
@@ -548,7 +609,9 @@ th{
     <button
       class="primary"
       onclick="downloadRekap()">
+
       Download CSV
+
     </button>
 
   </div>
@@ -575,8 +638,7 @@ function headersSupabase(){
 
   return {
 
-    "apikey":
-      SUPABASE_KEY,
+    "apikey":SUPABASE_KEY,
 
     "Authorization":
       "Bearer " + SUPABASE_KEY,
@@ -599,7 +661,6 @@ function headersSupabase(){
 const session =
 sessionStorage.getItem("akun_login");
 
-
 if(!session){
 
   window.location.replace("index.html");
@@ -607,14 +668,13 @@ if(!session){
 }
 
 
-let akun = null;
-
+let akun;
 
 try{
 
   akun = JSON.parse(session);
 
-}catch(error){
+}catch(e){
 
   sessionStorage.removeItem("akun_login");
 
@@ -631,14 +691,10 @@ if(!akun){
 
 
 /* =====================================================
-   GURU
+   DATA GURU
 ===================================================== */
 
-let guruId = null;
-
-let namaGuru = "Guru Wali";
-
-let dataGuru = null;
+let guru = null;
 
 let daftarSiswaGlobal = [];
 
@@ -662,39 +718,29 @@ function aman(value){
 
 
 /* =====================================================
-   TANGGAL
+   CARI GURU OTOMATIS
 ===================================================== */
 
-function tanggalHariIni(){
+async function cariGuru(){
 
-  const d = new Date();
+  /*
+    TIDAK ADA ID 36
+    TIDAK ADA ID GURU YANG DIKETIK MANUAL
+  */
 
-  const y = d.getFullYear();
+  const namaLogin =
+    String(
+      akun.nama ||
+      akun.nama_guru ||
+      ""
+    ).trim()
+    .toLowerCase();
 
-  const m = String(
-    d.getMonth()+1
-  ).padStart(2,"0");
-
-  const day = String(
-    d.getDate()
-  ).padStart(2,"0");
-
-  return y + "-" + m + "-" + day;
-
-}
-
-
-/* =====================================================
-   AMBIL GURU YANG LOGIN
-===================================================== */
-
-async function ambilGuruLogin(){
-
-  const authUserId =
-    akun.auth_user_id ||
-    akun.user_id ||
-    akun.authUserId ||
-    null;
+  const referensiLogin =
+    String(
+      akun.referensi_id ||
+      ""
+    ).trim();
 
 
   console.log(
@@ -704,245 +750,314 @@ async function ambilGuruLogin(){
 
 
   /*
-    CARA 1
-    Cari berdasarkan auth_user_id.
-    Tidak ada ID guru yang ditulis manual.
+    Ambil semua guru_wali.
+    Kita tidak mengunci ke ID tertentu.
   */
 
-  if(authUserId){
-
-    try{
-
-      const url =
-        SUPABASE_URL +
-        "/rest/v1/guru_wali" +
-        "?auth_user_id=eq." +
-        encodeURIComponent(authUserId) +
-        "&select=*" +
-        "&limit=1";
+  const url =
+    SUPABASE_URL +
+    "/rest/v1/guru_wali" +
+    "?select=*";
 
 
-      console.log(
-        "MENCARI GURU:",
-        url
-      );
-
-
-      const response =
-        await fetch(
-          url,
-          {
-            headers:
-              headersSupabase()
-          }
-        );
-
-
-      const text =
-        await response.text();
-
-
-      let data = [];
-
-
-      try{
-
-        data =
-          text
-          ? JSON.parse(text)
-          : [];
-
-      }catch(e){
-
-        data = [];
-
+  const response =
+    await fetch(
+      url,
+      {
+        headers:headersSupabase()
       }
+    );
 
 
-      console.log(
-        "DATA GURU:",
-        data
-      );
+  const text =
+    await response.text();
 
 
-      if(
-        response.ok &&
-        Array.isArray(data) &&
-        data.length > 0
-      ){
+  let data = [];
 
-        dataGuru =
-          data[0];
+  try{
 
-        return true;
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
 
-      }
-
-    }catch(error){
-
-      console.error(
-        "Pencarian auth_user_id gagal:",
-        error
-      );
-
-    }
-
-  }
-
-
-  /*
-    CARA 2
-    Jika akun_login memang menyimpan referensi_id,
-    gunakan referensi_id secara DINAMIS.
-
-    Tidak ada angka 36.
-  */
-
-  const referensiId =
-    akun.referensi_id;
-
-
-  if(
-    referensiId !== null &&
-    referensiId !== undefined &&
-    String(referensiId).trim() !== ""
-  ){
-
-    try{
-
-      const url =
-        SUPABASE_URL +
-        "/rest/v1/guru_wali" +
-        "?id=eq." +
-        encodeURIComponent(
-          String(referensiId).trim()
-        ) +
-        "&select=*" +
-        "&limit=1";
-
-
-      console.log(
-        "MENCARI GURU DENGAN REFERENSI:",
-        url
-      );
-
-
-      const response =
-        await fetch(
-          url,
-          {
-            headers:
-              headersSupabase()
-          }
-        );
-
-
-      const text =
-        await response.text();
-
-
-      const data =
-        text
-        ? JSON.parse(text)
-        : [];
-
-
-      if(
-        response.ok &&
-        Array.isArray(data) &&
-        data.length > 0
-      ){
-
-        dataGuru =
-          data[0];
-
-        return true;
-
-      }
-
-    }catch(error){
-
-      console.error(
-        "Pencarian referensi guru gagal:",
-        error
-      );
-
-    }
-
-  }
-
-
-  return false;
-
-}
-
-
-/* =====================================================
-   IDENTITAS GURU
-===================================================== */
-
-async function siapkanGuru(){
-
-  const berhasil =
-    await ambilGuruLogin();
-
-
-  if(!berhasil){
+  }catch(e){
 
     throw new Error(
-      "Guru yang sedang login tidak ditemukan pada tabel guru_wali."
+      "Data guru_wali tidak dapat dibaca."
     );
 
   }
 
 
-  /*
-    ID guru diambil dari database.
-    BUKAN ditulis manual.
-  */
+  if(!response.ok){
 
-  guruId =
-    dataGuru.id;
+    throw new Error(
+      data.message ||
+      data.hint ||
+      "Gagal membaca tabel guru_wali."
+    );
 
-
-  namaGuru =
-    dataGuru.nama ||
-    dataGuru.nama_guru ||
-    dataGuru.nama_lengkap ||
-    akun.nama ||
-    "Guru Wali";
+  }
 
 
-  document.getElementById(
-    "guruId"
-  ).textContent =
-    namaGuru;
+  if(!Array.isArray(data)){
 
+    throw new Error(
+      "Data guru_wali tidak berbentuk daftar."
+    );
 
-  document.getElementById(
-    "namaGuru"
-  ).textContent =
-    namaGuru;
-
-
-  document.getElementById(
-    "infoGuru"
-  ).textContent =
-    "Guru Wali: " +
-    namaGuru +
-    " | Data siswa diambil otomatis dari guru yang login.";
+  }
 
 
   console.log(
-    "GURU AKTIF:",
-    dataGuru
+    "SEMUA GURU WALI:",
+    data
+  );
+
+
+  /*
+    PRIORITAS 1
+    Cocokkan referensi_id login dengan
+    beberapa kemungkinan kolom ID.
+  */
+
+  guru =
+    data.find(function(g){
+
+      return (
+
+        String(g.id ?? "").trim()
+        ===
+        referensiLogin
+
+      );
+
+    });
+
+
+  /*
+    PRIORITAS 2
+    Jika belum ketemu, cocokkan nama guru.
+  */
+
+  if(!guru && namaLogin){
+
+    guru =
+      data.find(function(g){
+
+        const namaDatabase =
+          String(
+            g.nama ||
+            g.nama_guru ||
+            g.guru_nama ||
+            ""
+          )
+          .trim()
+          .toLowerCase();
+
+        return (
+          namaDatabase === namaLogin
+        );
+
+      });
+
+  }
+
+
+  /*
+    PRIORITAS 3
+    Cocokkan username/email bila ada.
+  */
+
+  if(!guru){
+
+    const usernameLogin =
+      String(
+        akun.username ||
+        akun.email ||
+        ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if(usernameLogin){
+
+      guru =
+        data.find(function(g){
+
+          const usernameDatabase =
+            String(
+              g.username ||
+              g.email ||
+              ""
+            )
+            .trim()
+            .toLowerCase();
+
+          return (
+            usernameDatabase &&
+            usernameDatabase === usernameLogin
+          );
+
+        });
+
+    }
+
+  }
+
+
+  if(!guru){
+
+    console.error(
+      "GURU TIDAK DITEMUKAN",
+      {
+        akun:akun,
+        referensiLogin:referensiLogin,
+        namaLogin:namaLogin,
+        dataGuru:data
+      }
+    );
+
+    throw new Error(
+      "Guru yang sedang login tidak cocok dengan data pada tabel guru_wali."
+    );
+
+  }
+
+
+  console.log(
+    "GURU DITEMUKAN:",
+    guru
+  );
+
+
+  return guru;
+
+}
+
+
+/* =====================================================
+   AMBIL KELAS
+===================================================== */
+
+async function ambilSemuaKelas(){
+
+  const url =
+    SUPABASE_URL +
+    "/rest/v1/kelas" +
+    "?select=*";
+
+  const response =
+    await fetch(
+      url,
+      {
+        headers:headersSupabase()
+      }
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data = [];
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(e){
+
+    data = [];
+
+  }
+
+
+  if(!response.ok){
+
+    console.warn(
+      "Tabel kelas tidak dapat dibaca:",
+      data
+    );
+
+    return [];
+
+  }
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
+
+}
+
+
+/* =====================================================
+   NAMA KELAS
+===================================================== */
+
+function namaKelas(kelasId){
+
+  if(
+    kelasId === null ||
+    kelasId === undefined ||
+    kelasId === ""
+  ){
+
+    return "-";
+
+  }
+
+
+  const id =
+    String(kelasId).trim();
+
+
+  const k =
+    daftarKelasGlobal.find(
+      function(x){
+
+        return (
+          String(x.id ?? "").trim()
+          ===
+          id
+        );
+
+      }
+    );
+
+
+  if(!k){
+
+    /*
+      Kalau tidak ditemukan di tabel kelas,
+      tetap tampilkan kelas_id.
+    */
+
+    return id;
+
+  }
+
+
+  return (
+    k.nama_kelas ||
+    k.kelas ||
+    k.nama ||
+    k.kode_kelas ||
+    id
   );
 
 }
 
 
 /* =====================================================
-   AMBIL SISWA GURU
+   AMBIL SISWA
 ===================================================== */
 
 async function ambilSiswa(){
@@ -958,46 +1073,93 @@ async function ambilSiswa(){
     );
 
 
-  status.className =
-    "status";
+  status.className = "status";
 
   status.textContent =
-    "Memuat siswa...";
+    "Membaca data guru dan siswa...";
 
 
   daftar.innerHTML =
-    '<div class="loading">Memuat daftar siswa...</div>';
+    '<div class="loading">Memuat...</div>';
 
 
   try{
 
-    if(!guruId){
+    /*
+      Cari guru otomatis.
+    */
 
-      throw new Error(
-        "ID guru tidak ditemukan."
-      );
-
-    }
+    guru =
+      await cariGuru();
 
 
     /*
-      PENTING:
+      Ambil kelas.
+    */
 
-      Sekarang menggunakan tabel siswa
-      berdasarkan guru_wali_id.
+    daftarKelasGlobal =
+      await ambilSemuaKelas();
 
-      Tidak ada ID 36.
+
+    /*
+      ID guru yang ditemukan dari database.
+      BUKAN ID 36.
+    */
+
+    const idGuru =
+      guru.id;
+
+
+    /*
+      Tampilkan identitas.
+    */
+
+    const nama =
+      guru.nama ||
+      guru.nama_guru ||
+      guru.guru_nama ||
+      akun.nama ||
+      "Guru Wali";
+
+
+    document.getElementById(
+      "namaGuru"
+    ).textContent =
+      nama;
+
+
+    document.getElementById(
+      "guruId"
+    ).textContent =
+      nama;
+
+
+    document.getElementById(
+      "infoGuru"
+    ).innerHTML =
+      "Guru Wali: <b>" +
+      aman(nama) +
+      "</b>";
+
+
+    /*
+      Ambil siswa berdasarkan guru_wali_id
+      milik guru yang ditemukan.
     */
 
     const url =
       SUPABASE_URL +
       "/rest/v1/siswa" +
       "?guru_wali_id=eq." +
-      encodeURIComponent(
-        String(guruId)
-      ) +
+      encodeURIComponent(idGuru) +
       "&select=*" +
       "&order=id.asc";
+
+
+    console.log(
+      "ID GURU DATABASE:",
+      idGuru
+    );
 
 
     console.log(
@@ -1010,8 +1172,7 @@ async function ambilSiswa(){
       await fetch(
         url,
         {
-          headers:
-            headersSupabase()
+          headers:headersSupabase()
         }
       );
 
@@ -1022,7 +1183,6 @@ async function ambilSiswa(){
 
     let data = [];
 
-
     try{
 
       data =
@@ -1030,10 +1190,10 @@ async function ambilSiswa(){
         ? JSON.parse(text)
         : [];
 
-    }catch(error){
+    }catch(e){
 
       throw new Error(
-        "Data siswa dari Supabase tidak valid."
+        "Data siswa tidak valid."
       );
 
     }
@@ -1045,7 +1205,7 @@ async function ambilSiswa(){
         data.message ||
         data.hint ||
         data.details ||
-        "Gagal mengambil siswa."
+        "Gagal mengambil data siswa."
       );
 
     }
@@ -1054,7 +1214,7 @@ async function ambilSiswa(){
     if(!Array.isArray(data)){
 
       throw new Error(
-        "Format data siswa tidak valid."
+        "Data siswa bukan daftar."
       );
 
     }
@@ -1065,115 +1225,7 @@ async function ambilSiswa(){
 
 
     /*
-      AMBIL DATA KELAS
-    */
-
-    const kelasIds =
-      [
-        ...new Set(
-          data
-            .map(
-              s => s.kelas_id
-            )
-            .filter(
-              x =>
-                x !== null &&
-                x !== undefined &&
-                String(x).trim() !== ""
-            )
-        )
-      ];
-
-
-    let kelasMap = {};
-
-
-    if(kelasIds.length > 0){
-
-      const daftarId =
-        kelasIds
-          .map(
-            x =>
-              encodeURIComponent(
-                String(x)
-              )
-          )
-          .join(",");
-
-
-      try{
-
-        const urlKelas =
-          SUPABASE_URL +
-          "/rest/v1/kelas" +
-          "?id=in.(" +
-          daftarId +
-          ")" +
-          "&select=*";
-
-
-        console.log(
-          "URL KELAS:",
-          urlKelas
-        );
-
-
-        const responseKelas =
-          await fetch(
-            urlKelas,
-            {
-              headers:
-                headersSupabase()
-            }
-          );
-
-
-        const textKelas =
-          await responseKelas.text();
-
-
-        const dataKelas =
-          textKelas
-          ? JSON.parse(textKelas)
-          : [];
-
-
-        if(
-          responseKelas.ok &&
-          Array.isArray(dataKelas)
-        ){
-
-          daftarKelasGlobal =
-            dataKelas;
-
-
-          dataKelas.forEach(
-            function(kelas){
-
-              kelasMap[
-                String(kelas.id)
-              ] =
-                kelas;
-
-            }
-          );
-
-        }
-
-      }catch(error){
-
-        console.error(
-          "Gagal mengambil nama kelas:",
-          error
-        );
-
-      }
-
-    }
-
-
-    /*
-      JUMLAH
+      Jumlah siswa.
     */
 
     document.getElementById(
@@ -1182,50 +1234,81 @@ async function ambilSiswa(){
       data.length;
 
 
+    /*
+      Jumlah kelas unik.
+    */
+
+    const kelasUnik =
+      new Set(
+        data
+          .map(
+            function(s){
+
+              return String(
+                s.kelas_id ?? ""
+              ).trim();
+
+            }
+          )
+          .filter(Boolean)
+      );
+
+
     document.getElementById(
       "jumlahKelas"
     ).textContent =
-      kelasIds.length;
+      kelasUnik.size;
 
+
+    /*
+      Tidak ada siswa.
+    */
 
     if(data.length === 0){
 
       status.className =
         "error";
 
-      status.textContent =
-        "Belum ditemukan siswa untuk guru " +
-        namaGuru +
-        ".";
+      status.innerHTML =
+        "Guru <b>" +
+        aman(nama) +
+        "</b> berhasil ditemukan, " +
+        "tetapi belum ada siswa yang terhubung " +
+        "dengan guru tersebut.";
 
-      daftar.innerHTML =
-        "";
+      daftar.innerHTML = "";
 
       return;
 
     }
 
 
+    /*
+      BERHASIL
+    */
+
     status.className =
       "ok";
 
-    status.textContent =
-      "Berhasil memuat " +
+    status.innerHTML =
+      "Berhasil memuat <b>" +
       data.length +
-      " siswa.";
+      "</b> siswa untuk <b>" +
+      aman(nama) +
+      "</b>.";
 
 
     let html = `
 
       <div class="info-box">
 
-        <b>${aman(namaGuru)}</b><br>
+        <b>${aman(nama)}</b><br>
 
         Jumlah siswa:
         <b>${data.length}</b><br>
 
         Jumlah kelas:
-        <b>${kelasIds.length}</b>
+        <b>${kelasUnik.size}</b>
 
       </div>
 
@@ -1238,8 +1321,11 @@ async function ambilSiswa(){
             <tr>
 
               <th>No</th>
+
               <th>Nama Siswa</th>
+
               <th>NISN</th>
+
               <th>Kelas</th>
 
             </tr>
@@ -1253,31 +1339,6 @@ async function ambilSiswa(){
 
     data.forEach(
       function(siswa,index){
-
-        const kelas =
-          kelasMap[
-            String(
-              siswa.kelas_id
-            )
-          ];
-
-
-        /*
-          Mencoba beberapa kemungkinan
-          nama kolom tabel kelas.
-        */
-
-        const namaKelas =
-          kelas?.nama_kelas ||
-          kelas?.nama ||
-          kelas?.kelas ||
-          kelas?.nama_kelas_siswa ||
-          kelas?.kode_kelas ||
-          siswa.kelas ||
-          siswa.nama_kelas ||
-          siswa.kelas_id ||
-          "-";
-
 
         html += `
 
@@ -1300,7 +1361,13 @@ async function ambilSiswa(){
             <td>
 
               <span class="badge">
-                ${aman(namaKelas)}
+
+                ${aman(
+                  namaKelas(
+                    siswa.kelas_id
+                  )
+                )}
+
               </span>
 
             </td>
@@ -1331,7 +1398,7 @@ async function ambilSiswa(){
   }catch(error){
 
     console.error(
-      "ERROR SISWA:",
+      "ERROR DASHBOARD:",
       error
     );
 
@@ -1339,14 +1406,13 @@ async function ambilSiswa(){
     status.className =
       "error";
 
-    status.innerHTML =
-      "Gagal mengambil siswa:<br><br>" +
-      "<b>" +
-      aman(error.message) +
-      "</b>";
 
-    daftar.innerHTML =
-      "";
+    status.innerHTML =
+      "<b>Gagal memuat dashboard.</b><br><br>" +
+      aman(error.message);
+
+
+    daftar.innerHTML = "";
 
   }
 
@@ -1354,12 +1420,18 @@ async function ambilSiswa(){
 
 
 /* =====================================================
-   AMBIL SISWA UNTUK DATA LAIN
+   SISWA UNTUK DATA
 ===================================================== */
 
 async function ambilDaftarSiswaUntukData(){
 
+  /*
+    Kalau sudah ada data siswa,
+    gunakan data tersebut.
+  */
+
   if(
+    daftarSiswaGlobal &&
     daftarSiswaGlobal.length > 0
   ){
 
@@ -1368,59 +1440,7 @@ async function ambilDaftarSiswaUntukData(){
   }
 
 
-  if(!guruId){
-
-    await siapkanGuru();
-
-  }
-
-
-  const url =
-    SUPABASE_URL +
-    "/rest/v1/siswa" +
-    "?guru_wali_id=eq." +
-    encodeURIComponent(
-      String(guruId)
-    ) +
-    "&select=*" +
-    "&order=id.asc";
-
-
-  const response =
-    await fetch(
-      url,
-      {
-        headers:
-          headersSupabase()
-      }
-    );
-
-
-  const text =
-    await response.text();
-
-
-  const data =
-    text
-    ? JSON.parse(text)
-    : [];
-
-
-  if(!response.ok){
-
-    throw new Error(
-      data.message ||
-      data.hint ||
-      "Gagal mengambil siswa."
-    );
-
-  }
-
-
-  daftarSiswaGlobal =
-    Array.isArray(data)
-    ? data
-    : [];
+  await ambilSiswa();
 
 
   return daftarSiswaGlobal;
@@ -1432,17 +1452,16 @@ async function ambilDaftarSiswaUntukData(){
    MENU
 ===================================================== */
 
-function bukaMenu(
-  menu,
-  tombol
-){
+function bukaMenu(menu,tombol){
 
   const panels = [
+
     "menuSiswa",
     "menuJurnal",
     "menuHadir",
     "menuRekap",
     "menuDownload"
+
   ];
 
 
@@ -1451,8 +1470,7 @@ function bukaMenu(
 
       document
         .getElementById(id)
-        .classList
-        .add("hidden");
+        .classList.add("hidden");
 
     }
   );
@@ -1461,10 +1479,9 @@ function bukaMenu(
   document
     .querySelectorAll(".menu button")
     .forEach(
-      function(button){
+      function(btn){
 
-        button.classList
-          .remove("active");
+        btn.classList.remove("active");
 
       }
     );
@@ -1480,16 +1497,14 @@ function bukaMenu(
 
   if(panel){
 
-    panel.classList
-      .remove("hidden");
+    panel.classList.remove("hidden");
 
   }
 
 
   if(tombol){
 
-    tombol.classList
-      .add("active");
+    tombol.classList.add("active");
 
   }
 
@@ -1501,6 +1516,53 @@ function bukaMenu(
   }
 
 }
+
+
+/* =====================================================
+   TANGGAL
+===================================================== */
+
+function tanggalHariIni(){
+
+  const d = new Date();
+
+  return (
+    d.getFullYear() +
+    "-" +
+    String(d.getMonth()+1).padStart(2,"0") +
+    "-" +
+    String(d.getDate()).padStart(2,"0")
+  );
+
+}
+
+
+const hariIni =
+  tanggalHariIni();
+
+
+[
+  "tanggalJurnal",
+  "tanggalHadir",
+  "rekapMulai",
+  "rekapSelesai",
+  "downloadMulai",
+  "downloadSelesai"
+].forEach(
+  function(id){
+
+    const el =
+      document.getElementById(id);
+
+    if(el){
+
+      el.value =
+        hariIni;
+
+    }
+
+  }
+);
 
 
 /* =====================================================
@@ -1533,7 +1595,7 @@ async function ambilJurnal(){
       "error";
 
     status.textContent =
-      "Pilih tanggal terlebih dahulu.";
+      "Pilih tanggal.";
 
     return;
 
@@ -1557,10 +1619,10 @@ async function ambilJurnal(){
       await ambilDaftarSiswaUntukData();
 
 
-    if(!siswa.length){
+    if(siswa.length === 0){
 
       throw new Error(
-        "Tidak ada siswa untuk guru ini."
+        "Tidak ada siswa."
       );
 
     }
@@ -1568,29 +1630,33 @@ async function ambilJurnal(){
 
     const ids =
       siswa
-        .map(s => s.id)
+        .map(
+          function(s){
+
+            return s.id;
+
+          }
+        )
         .filter(Boolean)
         .join(",");
 
 
-    const url =
-      SUPABASE_URL +
-      "/rest/v1/jurnal_7_kaih" +
-      "?siswa_id=in.(" +
-      ids +
-      ")" +
-      "&tanggal=eq." +
-      encodeURIComponent(tanggal) +
-      "&select=*";
-
-
     const response =
       await fetch(
-        url,
+
+        SUPABASE_URL +
+        "/rest/v1/jurnal_7_kaih" +
+        "?siswa_id=in.(" +
+        ids +
+        ")" +
+        "&tanggal=eq." +
+        encodeURIComponent(tanggal) +
+        "&select=*",
+
         {
-          headers:
-            headersSupabase()
+          headers:headersSupabase()
         }
+
       );
 
 
@@ -1618,8 +1684,11 @@ async function ambilJurnal(){
 
 
     jurnal.forEach(
-      j => {
-        map[j.siswa_id] = j;
+      function(j){
+
+        map[j.siswa_id] =
+          j;
+
       }
     );
 
@@ -1637,66 +1706,56 @@ async function ambilJurnal(){
 
       <div class="table-wrap">
 
-        <table>
+      <table>
 
-          <thead>
+      <thead>
 
-            <tr>
+      <tr>
 
-              <th>No</th>
-              <th>Nama Siswa</th>
-              <th>Kelas</th>
-              <th>Status</th>
-              <th>Respons Guru</th>
-              <th>Aksi</th>
+      <th>No</th>
+      <th>Nama Siswa</th>
+      <th>Kelas</th>
+      <th>Status</th>
+      <th>Respons Guru</th>
+      <th>Aksi</th>
 
-            </tr>
+      </tr>
 
-          </thead>
+      </thead>
 
-          <tbody>
+      <tbody>
 
     `;
 
 
     siswa.forEach(
-      function(siswa,index){
+      function(s,i){
 
         const j =
-          map[siswa.id];
-
-
-        const kelas =
-          cariNamaKelas(
-            siswa.kelas_id
-          );
+          map[s.id];
 
 
         if(!j){
 
           html += `
 
-            <tr>
+          <tr>
 
-              <td>${index+1}</td>
+          <td>${i+1}</td>
 
-              <td>
-                ${aman(siswa.nama)}
-              </td>
+          <td>${aman(s.nama)}</td>
 
-              <td>
-                ${aman(kelas)}
-              </td>
+          <td>${aman(namaKelas(s.kelas_id))}</td>
 
-              <td class="notverified">
-                Belum mengisi
-              </td>
+          <td class="notverified">
+            Belum mengisi
+          </td>
 
-              <td>-</td>
+          <td>-</td>
 
-              <td>-</td>
+          <td>-</td>
 
-            </tr>
+          </tr>
 
           `;
 
@@ -1716,46 +1775,44 @@ async function ambilJurnal(){
 
         html += `
 
-          <tr>
+        <tr>
 
-            <td>${index+1}</td>
+        <td>${i+1}</td>
 
-            <td>
-              ${aman(siswa.nama)}
-            </td>
+        <td>${aman(s.nama)}</td>
 
-            <td>
-              ${aman(kelas)}
-            </td>
+        <td>${aman(namaKelas(s.kelas_id))}</td>
 
-            <td class="verified">
-              Sudah mengisi
-            </td>
+        <td class="verified">
+          Sudah mengisi
+        </td>
 
-            <td>
-              ${aman(
-                j.respons_guru ||
-                "Belum diverifikasi"
-              )}
-            </td>
+        <td>
+          ${aman(
+            j.respons_guru ||
+            "Belum diverifikasi"
+          )}
+        </td>
 
-            <td>
+        <td>
 
-              ${
-                sudah
-                ?
-                '<span class="verified">✓ Sudah</span>'
-                :
-                `<button
-                  class="success"
-                  onclick="verifikasiJurnal('${aman(j.id)}')">
-                  ✓ Verifikasi
-                </button>`
-              }
+        ${
+          sudah
+          ?
+          '<span class="verified">✓ Sudah</span>'
+          :
+          `<button
+             class="success"
+             onclick="verifikasiJurnal('${aman(j.id)}')">
 
-            </td>
+             ✓ Verifikasi
 
-          </tr>
+           </button>`
+        }
+
+        </td>
+
+        </tr>
 
         `;
 
@@ -1764,9 +1821,13 @@ async function ambilJurnal(){
 
 
     html += `
-          </tbody>
-        </table>
+
+      </tbody>
+
+      </table>
+
       </div>
+
     `;
 
 
@@ -1776,6 +1837,8 @@ async function ambilJurnal(){
 
   }catch(error){
 
+    console.error(error);
+
     status.className =
       "error";
 
@@ -1783,44 +1846,9 @@ async function ambilJurnal(){
       "Gagal mengambil jurnal: " +
       error.message;
 
-    daftar.innerHTML =
-      "";
+    daftar.innerHTML = "";
 
   }
-
-}
-
-
-/* =====================================================
-   NAMA KELAS
-===================================================== */
-
-function cariNamaKelas(id){
-
-  const kelas =
-    daftarKelasGlobal.find(
-      k =>
-        String(k.id) ===
-        String(id)
-    );
-
-
-  if(!kelas){
-
-    return id || "-";
-
-  }
-
-
-  return (
-    kelas.nama_kelas ||
-    kelas.nama ||
-    kelas.kelas ||
-    kelas.nama_kelas_siswa ||
-    kelas.kode_kelas ||
-    id ||
-    "-"
-  );
 
 }
 
@@ -1852,25 +1880,29 @@ async function verifikasiJurnal(id){
         encodeURIComponent(id),
 
         {
+
           method:"PATCH",
 
           headers:{
             ...headersSupabase(),
-            "Prefer":"return=minimal"
+
+            "Prefer":
+              "return=minimal"
           },
 
-          body:JSON.stringify({
+          body:
+            JSON.stringify({
 
-            respons_guru:
-              "Terverifikasi",
+              respons_guru:
+                "Terverifikasi",
 
-            komentar_guru:
-              komentar,
+              komentar_guru:
+                komentar,
 
-            feedback_at:
-              new Date().toISOString()
+              feedback_at:
+                new Date().toISOString()
 
-          })
+            })
 
         }
 
@@ -1882,17 +1914,7 @@ async function verifikasiJurnal(id){
       const text =
         await response.text();
 
-      let data = {};
-
-      try{
-        data = JSON.parse(text);
-      }catch(e){}
-
-      throw new Error(
-        data.message ||
-        data.hint ||
-        "Gagal verifikasi jurnal."
-      );
+      throw new Error(text);
 
     }
 
@@ -1947,7 +1969,7 @@ async function ambilKehadiran(){
       "error";
 
     status.textContent =
-      "Pilih tanggal terlebih dahulu.";
+      "Pilih tanggal.";
 
     return;
 
@@ -1962,7 +1984,7 @@ async function ambilKehadiran(){
 
 
   daftar.innerHTML =
-    '<div class="loading">Memuat kehadiran...</div>';
+    '<div class="loading">Memuat...</div>';
 
 
   try{
@@ -1971,9 +1993,24 @@ async function ambilKehadiran(){
       await ambilDaftarSiswaUntukData();
 
 
+    if(siswa.length === 0){
+
+      throw new Error(
+        "Tidak ada siswa."
+      );
+
+    }
+
+
     const ids =
       siswa
-        .map(s => s.id)
+        .map(
+          function(s){
+
+            return s.id;
+
+          }
+        )
         .filter(Boolean)
         .join(",");
 
@@ -1991,8 +2028,7 @@ async function ambilKehadiran(){
         "&select=*",
 
         {
-          headers:
-            headersSupabase()
+          headers:headersSupabase()
         }
 
       );
@@ -2022,76 +2058,76 @@ async function ambilKehadiran(){
 
 
     data.forEach(
-      k => {
-        map[k.siswa_id] = k;
+      function(k){
+
+        map[k.siswa_id] =
+          k;
+
       }
     );
 
 
+    status.className =
+      "ok";
+
+    status.textContent =
+      "Data kehadiran berhasil dimuat.";
+
+
     let html = `
 
-      <div class="table-wrap">
+    <div class="table-wrap">
 
-        <table>
+    <table>
 
-          <thead>
+    <thead>
 
-            <tr>
+    <tr>
 
-              <th>No</th>
-              <th>Nama</th>
-              <th>Kelas</th>
-              <th>Status</th>
-              <th>Keterangan</th>
-              <th>Verifikasi</th>
+    <th>No</th>
+    <th>Nama</th>
+    <th>Kelas</th>
+    <th>Status</th>
+    <th>Keterangan</th>
+    <th>Verifikasi</th>
 
-            </tr>
+    </tr>
 
-          </thead>
+    </thead>
 
-          <tbody>
+    <tbody>
 
     `;
 
 
     siswa.forEach(
-      function(siswa,index){
+      function(s,i){
 
         const k =
-          map[siswa.id];
-
-
-        const kelas =
-          cariNamaKelas(
-            siswa.kelas_id
-          );
+          map[s.id];
 
 
         if(!k){
 
           html += `
 
-            <tr>
+          <tr>
 
-              <td>${index+1}</td>
+          <td>${i+1}</td>
 
-              <td>
-                ${aman(siswa.nama)}
-              </td>
+          <td>${aman(s.nama)}</td>
 
-              <td>
-                ${aman(kelas)}
-              </td>
+          <td>${aman(namaKelas(s.kelas_id))}</td>
 
-              <td class="notverified">
-                Belum ada
-              </td>
+          <td class="notverified">
+            Belum ada
+          </td>
 
-              <td>-</td>
+          <td>-</td>
 
-              <td>-</td>
+          <td>-</td>
 
-            </tr>
+          </tr>
 
           `;
 
@@ -2102,43 +2138,37 @@ async function ambilKehadiran(){
 
         html += `
 
-          <tr>
+        <tr>
 
-            <td>${index+1}</td>
+        <td>${i+1}</td>
 
-            <td>
-              ${aman(siswa.nama)}
-            </td>
+        <td>${aman(s.nama)}</td>
 
-            <td>
-              ${aman(kelas)}
-            </td>
+        <td>${aman(namaKelas(s.kelas_id))}</td>
 
-            <td>
-              ${aman(k.status)}
-            </td>
+        <td>${aman(k.status)}</td>
 
-            <td>
-              ${aman(k.keterangan)}
-            </td>
+        <td>${aman(k.keterangan)}</td>
 
-            <td>
+        <td>
 
-              ${
-                k.diverifikasi
-                ?
-                '<span class="verified">✓ Sudah</span>'
-                :
-                `<button
-                  class="success"
-                  onclick="verifikasiHadir('${aman(k.id)}')">
-                  ✓ Verifikasi
-                </button>`
-              }
+        ${
+          k.diverifikasi
+          ?
+          '<span class="verified">✓ Sudah</span>'
+          :
+          `<button
+             class="success"
+             onclick="verifikasiHadir('${aman(k.id)}')">
 
-            </td>
+             ✓ Verifikasi
 
-          </tr>
+           </button>`
+        }
+
+        </td>
+
+        </tr>
 
         `;
 
@@ -2147,23 +2177,23 @@ async function ambilKehadiran(){
 
 
     html += `
-          </tbody>
-        </table>
-      </div>
+
+    </tbody>
+
+    </table>
+
+    </div>
+
     `;
 
-
-    status.className =
-      "ok";
-
-    status.textContent =
-      "Kehadiran berhasil dimuat.";
 
     daftar.innerHTML =
       html;
 
 
   }catch(error){
+
+    console.error(error);
 
     status.className =
       "error";
@@ -2172,8 +2202,7 @@ async function ambilKehadiran(){
       "Gagal mengambil kehadiran: " +
       error.message;
 
-    daftar.innerHTML =
-      "";
+    daftar.innerHTML = "";
 
   }
 
@@ -2207,16 +2236,22 @@ async function verifikasiHadir(id){
         encodeURIComponent(id),
 
         {
+
           method:"PATCH",
 
           headers:{
             ...headersSupabase(),
-            "Prefer":"return=minimal"
+
+            "Prefer":
+              "return=minimal"
           },
 
-          body:JSON.stringify({
-            diverifikasi:true
-          })
+          body:
+            JSON.stringify({
+
+              diverifikasi:true
+
+            })
 
         }
 
@@ -2226,7 +2261,7 @@ async function verifikasiHadir(id){
     if(!response.ok){
 
       throw new Error(
-        "Gagal verifikasi kehadiran."
+        await response.text()
       );
 
     }
@@ -2288,7 +2323,7 @@ async function buatRekap(){
       "error";
 
     status.textContent =
-      "Pilih tanggal mulai dan selesai.";
+      "Pilih tanggal.";
 
     return;
 
@@ -2301,14 +2336,25 @@ async function buatRekap(){
       await ambilDaftarSiswaUntukData();
 
 
+    if(!siswa.length){
+
+      throw new Error(
+        "Tidak ada siswa."
+      );
+
+    }
+
+
     const ids =
       siswa
-        .map(s => s.id)
+        .map(
+          s => s.id
+        )
         .filter(Boolean)
         .join(",");
 
 
-    const jurnalResponse =
+    const r1 =
       await fetch(
 
         SUPABASE_URL +
@@ -2323,24 +2369,17 @@ async function buatRekap(){
         "&select=id,siswa_id,tanggal,respons_guru",
 
         {
-          headers:
-            headersSupabase()
+          headers:headersSupabase()
         }
 
       );
 
 
-    const jurnalText =
-      await jurnalResponse.text();
-
-
     const jurnal =
-      jurnalText
-      ? JSON.parse(jurnalText)
-      : [];
+      await r1.json();
 
 
-    const hadirResponse =
+    const r2 =
       await fetch(
 
         SUPABASE_URL +
@@ -2355,21 +2394,14 @@ async function buatRekap(){
         "&select=id,siswa_id,tanggal,status,diverifikasi",
 
         {
-          headers:
-            headersSupabase()
+          headers:headersSupabase()
         }
 
       );
 
 
-    const hadirText =
-      await hadirResponse.text();
-
-
     const hadir =
-      hadirText
-      ? JSON.parse(hadirText)
-      : [];
+      await r2.json();
 
 
     const statistik = {};
@@ -2379,10 +2411,12 @@ async function buatRekap(){
       s => {
 
         statistik[s.id] = {
+
           jurnal:0,
           jurnalVerified:0,
           hadir:0,
           hadirVerified:0
+
         };
 
       }
@@ -2439,35 +2473,42 @@ async function buatRekap(){
     );
 
 
+    status.className =
+      "ok";
+
+    status.textContent =
+      "Rekap berhasil dibuat.";
+
+
     let html = `
 
-      <div class="table-wrap">
+    <div class="table-wrap">
 
-        <table>
+    <table>
 
-          <thead>
+    <thead>
 
-            <tr>
+    <tr>
 
-              <th>No</th>
-              <th>Nama Siswa</th>
-              <th>Kelas</th>
-              <th>Jurnal</th>
-              <th>Jurnal Terverifikasi</th>
-              <th>Kehadiran</th>
-              <th>Kehadiran Terverifikasi</th>
+    <th>No</th>
+    <th>Nama Siswa</th>
+    <th>Kelas</th>
+    <th>Jurnal</th>
+    <th>Jurnal Terverifikasi</th>
+    <th>Kehadiran</th>
+    <th>Kehadiran Terverifikasi</th>
 
-            </tr>
+    </tr>
 
-          </thead>
+    </thead>
 
-          <tbody>
+    <tbody>
 
     `;
 
 
     siswa.forEach(
-      function(s,index){
+      function(s,i){
 
         const x =
           statistik[s.id];
@@ -2475,39 +2516,23 @@ async function buatRekap(){
 
         html += `
 
-          <tr>
+        <tr>
 
-            <td>${index+1}</td>
+        <td>${i+1}</td>
 
-            <td>
-              ${aman(s.nama)}
-            </td>
+        <td>${aman(s.nama)}</td>
 
-            <td>
-              ${aman(
-                cariNamaKelas(
-                  s.kelas_id
-                )
-              )}
-            </td>
+        <td>${aman(namaKelas(s.kelas_id))}</td>
 
-            <td>
-              ${x.jurnal}
-            </td>
+        <td>${x.jurnal}</td>
 
-            <td>
-              ${x.jurnalVerified}
-            </td>
+        <td>${x.jurnalVerified}</td>
 
-            <td>
-              ${x.hadir}
-            </td>
+        <td>${x.hadir}</td>
 
-            <td>
-              ${x.hadirVerified}
-            </td>
+        <td>${x.hadirVerified}</td>
 
-          </tr>
+        </tr>
 
         `;
 
@@ -2516,23 +2541,23 @@ async function buatRekap(){
 
 
     html += `
-          </tbody>
-        </table>
-      </div>
+
+    </tbody>
+
+    </table>
+
+    </div>
+
     `;
 
-
-    status.className =
-      "ok";
-
-    status.textContent =
-      "Rekap berhasil dibuat.";
 
     hasil.innerHTML =
       html;
 
 
   }catch(error){
+
+    console.error(error);
 
     status.className =
       "error";
@@ -2541,8 +2566,7 @@ async function buatRekap(){
       "Gagal membuat rekap: " +
       error.message;
 
-    hasil.innerHTML =
-      "";
+    hasil.innerHTML = "";
 
   }
 
@@ -2550,7 +2574,7 @@ async function buatRekap(){
 
 
 /* =====================================================
-   DOWNLOAD
+   DOWNLOAD CSV
 ===================================================== */
 
 async function downloadRekap(){
@@ -2590,9 +2614,20 @@ async function downloadRekap(){
       await ambilDaftarSiswaUntukData();
 
 
+    if(!siswa.length){
+
+      throw new Error(
+        "Tidak ada siswa."
+      );
+
+    }
+
+
     const ids =
       siswa
-        .map(s => s.id)
+        .map(
+          s => s.id
+        )
         .filter(Boolean)
         .join(",");
 
@@ -2602,17 +2637,20 @@ async function downloadRekap(){
 
     siswa.forEach(
       s => {
-        siswaMap[s.id] = s;
+
+        siswaMap[s.id] =
+          s;
+
       }
     );
 
 
-    let url = "";
+    let endpoint;
 
 
     if(jenis === "jurnal"){
 
-      url =
+      endpoint =
         SUPABASE_URL +
         "/rest/v1/jurnal_7_kaih" +
         "?siswa_id=in.(" +
@@ -2626,7 +2664,7 @@ async function downloadRekap(){
 
     }else{
 
-      url =
+      endpoint =
         SUPABASE_URL +
         "/rest/v1/kehadiran" +
         "?siswa_id=in.(" +
@@ -2643,22 +2681,15 @@ async function downloadRekap(){
 
     const response =
       await fetch(
-        url,
+        endpoint,
         {
-          headers:
-            headersSupabase()
+          headers:headersSupabase()
         }
       );
 
 
-    const text =
-      await response.text();
-
-
     const rows =
-      text
-      ? JSON.parse(text)
-      : [];
+      await response.json();
 
 
     if(!response.ok){
@@ -2677,30 +2708,14 @@ async function downloadRekap(){
     if(jenis === "jurnal"){
 
       csv.push([
+
         "Nama Siswa",
         "NISN",
         "Kelas",
         "Tanggal",
-        "Jam Bangun",
-        "Puasa",
-        "Menu Sahur",
-        "Menu Berbuka",
-        "Menu Sarapan",
-        "Menu Siang",
-        "Menu Malam",
-        "Belajar Malam",
-        "Materi Belajar",
-        "Durasi Belajar",
-        "Olahraga",
-        "Jenis Olahraga",
-        "Durasi Olahraga",
-        "Bermasyarakat",
-        "Jenis Bermasyarakat",
-        "Ibadah",
-        "Jenis Ibadah",
-        "Jam Tidur",
         "Respons Guru",
         "Komentar Guru"
+
       ]);
 
 
@@ -2713,52 +2728,22 @@ async function downloadRekap(){
 
           csv.push([
 
-            s.nama,
-            s.nisn,
-            cariNamaKelas(
-              s.kelas_id
-            ),
-            r.tanggal,
-            r.jam_bangun,
-            r.puasa,
-            r.menu_sahur,
-            r.menu_berbuka,
-            r.menu_sarapan,
-            r.menu_siang,
-            r.menu_malam,
-            r.belajar_malam,
-            r.materi_belajar,
-            r.durasi_belajar,
-            r.olahraga,
-            r.jenis_olahraga,
-            r.durasi_olahraga,
-            r.bermasyarakat,
-            r.jenis_bermasyarakat,
-            r.ibadah,
-            r.jenis_ibadah,
-            r.jam_tidur,
-            r.respons_guru,
-            r.komentar_guru
+            s.nama || "",
+            s.nisn || "",
+            namaKelas(s.kelas_id),
+            r.tanggal || "",
+            r.respons_guru || "",
+            r.komentar_guru || ""
 
           ]);
 
         }
       );
 
-
-      buatCSV(
-        csv,
-        "rekap_jurnal_" +
-        mulai +
-        "_" +
-        selesai +
-        ".csv"
-      );
-
-
     }else{
 
       csv.push([
+
         "Nama Siswa",
         "NISN",
         "Kelas",
@@ -2766,6 +2751,7 @@ async function downloadRekap(){
         "Status",
         "Keterangan",
         "Diverifikasi"
+
       ]);
 
 
@@ -2778,34 +2764,34 @@ async function downloadRekap(){
 
           csv.push([
 
-            s.nama,
-            s.nisn,
-            cariNamaKelas(
-              s.kelas_id
-            ),
-            r.tanggal,
-            r.status,
-            r.keterangan,
+            s.nama || "",
+            s.nisn || "",
+            namaKelas(s.kelas_id),
+            r.tanggal || "",
+            r.status || "",
+            r.keterangan || "",
             r.diverifikasi
-            ? "Ya"
-            : "Belum"
+              ? "Ya"
+              : "Belum"
 
           ]);
 
         }
       );
 
-
-      buatCSV(
-        csv,
-        "rekap_kehadiran_" +
-        mulai +
-        "_" +
-        selesai +
-        ".csv"
-      );
-
     }
+
+
+    buatCSV(
+      csv,
+      "rekap_" +
+      jenis +
+      "_" +
+      mulai +
+      "_" +
+      selesai +
+      ".csv"
+    );
 
 
   }catch(error){
@@ -2824,10 +2810,7 @@ async function downloadRekap(){
    CSV
 ===================================================== */
 
-function buatCSV(
-  data,
-  namaFile
-){
+function buatCSV(data,namaFile){
 
   const csv =
     data
@@ -2909,101 +2892,10 @@ function keluar(){
 
 
 /* =====================================================
-   TANGGAL
-===================================================== */
-
-const hariIni =
-  tanggalHariIni();
-
-
-document.getElementById(
-  "tanggalJurnal"
-).value =
-  hariIni;
-
-
-document.getElementById(
-  "tanggalHadir"
-).value =
-  hariIni;
-
-
-document.getElementById(
-  "rekapMulai"
-).value =
-  hariIni;
-
-
-document.getElementById(
-  "rekapSelesai"
-).value =
-  hariIni;
-
-
-document.getElementById(
-  "downloadMulai"
-).value =
-  hariIni;
-
-
-document.getElementById(
-  "downloadSelesai"
-).value =
-  hariIni;
-
-
-/* =====================================================
    MULAI DASHBOARD
 ===================================================== */
 
-(async function(){
-
-  try{
-
-    await siapkanGuru();
-
-    await ambilSiswa();
-
-  }catch(error){
-
-    console.error(
-      "DASHBOARD ERROR:",
-      error
-    );
-
-
-    document.getElementById(
-      "namaGuru"
-    ).textContent =
-      "Guru tidak ditemukan";
-
-
-    document.getElementById(
-      "infoGuru"
-    ).textContent =
-      error.message;
-
-
-    document.getElementById(
-      "statusSiswa"
-    ).className =
-      "error";
-
-
-    document.getElementById(
-      "statusSiswa"
-    ).textContent =
-      error.message;
-
-
-    document.getElementById(
-      "daftarSiswa"
-    ).innerHTML =
-      "";
-
-  }
-
-})();
+ambilSiswa();
 
 </script>
 
