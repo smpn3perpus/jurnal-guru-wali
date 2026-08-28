@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Guru Wali - Jurnal 7 KAIH</title>
+<title>Dashboard Guru Wali - Jurnal 7 KAIH</title>
 
 <style>
 *{
@@ -21,12 +21,13 @@ body{
 
 .header{
   background:#0284c7;
-  color:white;
+  color:#fff;
   padding:18px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
 }
 
 .header h1{
@@ -52,14 +53,14 @@ body{
 .container{
   max-width:1200px;
   margin:auto;
-  padding:20px 15px 30px;
+  padding:20px 15px 35px;
 }
 
 .welcome,
 .card,
 .panel,
 .siswa-box{
-  background:white;
+  background:#fff;
   border-radius:14px;
   box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
@@ -85,8 +86,8 @@ body{
   background:#fee2e2;
   color:#991b1b;
   border-radius:8px;
-  display:none;
   line-height:1.5;
+  display:none;
 }
 
 .tanggal-box{
@@ -119,11 +120,15 @@ textarea{
 .primary{
   border:0;
   background:#0284c7;
-  color:white;
+  color:#fff;
   padding:11px 16px;
   border-radius:8px;
   font-weight:bold;
   cursor:pointer;
+}
+
+.primary:hover{
+  background:#0369a1;
 }
 
 .primary:disabled{
@@ -148,6 +153,7 @@ textarea{
 .card-title{
   color:#64748b;
   font-size:14px;
+  line-height:1.4;
 }
 
 .card-number{
@@ -171,9 +177,10 @@ textarea{
 
 .status{
   padding:12px;
-  background:#f8fafc;
   border-radius:8px;
+  background:#f8fafc;
   margin-bottom:15px;
+  line-height:1.5;
 }
 
 .ok{
@@ -186,43 +193,42 @@ textarea{
   color:#991b1b;
 }
 
-.info{
-  background:#eff6ff;
-  color:#075985;
-  padding:12px;
-  border-radius:8px;
-  margin-bottom:10px;
-}
-
-.loading{
-  text-align:center;
-  padding:25px;
-  color:#64748b;
-}
-
 /* SISWA */
 
 .siswa-box{
-  padding:15px;
+  padding:0;
   margin-bottom:10px;
   border:1px solid #dbe3ea;
+  overflow:hidden;
 }
 
 .siswa-head{
+  padding:15px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
+  gap:12px;
+}
+
+.siswa-click{
+  cursor:pointer;
+  transition:.15s;
+}
+
+.siswa-click:hover{
+  background:#f8fafc;
 }
 
 .siswa-nama{
   font-weight:bold;
   color:#0369a1;
+  font-size:16px;
 }
 
 .siswa-detail{
   color:#64748b;
   font-size:13px;
+  line-height:1.5;
   margin-top:4px;
 }
 
@@ -232,19 +238,25 @@ textarea{
   border-radius:20px;
   font-size:12px;
   font-weight:bold;
+  white-space:nowrap;
+  text-align:center;
+}
+
+.badge-sudah{
   background:#dcfce7;
   color:#166534;
 }
 
-.belum-badge{
+.badge-belum{
   background:#e2e8f0;
   color:#475569;
 }
 
+/* DETAIL JURNAL */
+
 .jurnal-detail{
   display:none;
-  margin-top:12px;
-  padding-top:12px;
+  padding:0 15px 18px;
   border-top:1px solid #e2e8f0;
 }
 
@@ -252,14 +264,23 @@ textarea{
   display:block;
 }
 
+.jurnal-info{
+  background:#f8fafc;
+  padding:14px;
+  border-radius:9px;
+  line-height:1.7;
+  margin-top:15px;
+}
+
 .nomor{
   border:1px solid #cbd5e1;
-  border-radius:10px;
-  padding:14px;
-  margin-top:12px;
+  border-radius:11px;
+  padding:15px;
+  margin-top:14px;
 }
 
 .nomor-title{
+  font-size:16px;
   font-weight:bold;
   color:#0369a1;
   margin-bottom:8px;
@@ -267,29 +288,36 @@ textarea{
 
 .data-siswa{
   background:#f8fafc;
-  padding:10px;
+  padding:11px;
   border-radius:8px;
   line-height:1.7;
 }
 
 .feedback{
-  margin-top:10px;
-  padding:10px;
-  border-radius:8px;
+  margin-top:12px;
   background:#f1f5f9;
+  padding:12px;
+  border-radius:9px;
+}
+
+.feedback-title{
+  color:#64748b;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:8px;
 }
 
 .respons{
   display:flex;
   flex-wrap:wrap;
-  gap:7px;
+  gap:8px;
   margin-bottom:8px;
 }
 
 .respons button{
   border:1px solid #cbd5e1;
   background:white;
-  padding:7px 10px;
+  padding:8px 11px;
   border-radius:20px;
   cursor:pointer;
   font-weight:bold;
@@ -301,43 +329,61 @@ textarea{
   border-color:#0284c7;
 }
 
-.save{
-  margin-top:8px;
+.save-feedback{
+  margin-top:9px;
   border:0;
   background:#16a34a;
   color:white;
-  padding:9px 12px;
+  padding:9px 13px;
   border-radius:8px;
   font-weight:bold;
   cursor:pointer;
 }
 
-.save:disabled{
+.save-feedback:disabled{
   opacity:.6;
+  cursor:wait;
 }
 
-.download{
+.feedback-status{
+  margin-top:7px;
+  color:#166534;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* DOWNLOAD */
+
+.download-box{
   display:flex;
   justify-content:space-between;
-  gap:15px;
   align-items:center;
+  gap:15px;
   flex-wrap:wrap;
+}
+
+.small{
+  font-size:12px;
+  color:#64748b;
 }
 
 .footer{
   text-align:center;
-  padding:20px;
+  padding:25px;
   color:#64748b;
   font-size:12px;
 }
 
 @media(max-width:800px){
+
   .cards{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
+
   .header{
     flex-direction:column;
     align-items:flex-start;
@@ -356,6 +402,7 @@ textarea{
     flex-direction:column;
     align-items:flex-start;
   }
+
 }
 </style>
 </head>
@@ -366,10 +413,14 @@ textarea{
 
   <div>
     <h1>👨‍🏫 Dashboard Guru Wali</h1>
-    <p>SMP Negeri 3 Sibolga</p>
+    <p>
+      SMP Negeri 3 Sibolga • Jurnal 7 Kebiasaan Anak Indonesia Hebat
+    </p>
   </div>
 
-  <button class="logout" onclick="keluar()">
+  <button
+    class="logout"
+    onclick="keluar()">
     Keluar
   </button>
 
@@ -377,6 +428,8 @@ textarea{
 
 
 <main class="container">
+
+  <!-- WELCOME -->
 
   <section class="welcome">
 
@@ -393,6 +446,7 @@ textarea{
       class="error-box">
     </div>
 
+
     <div class="tanggal-box">
 
       <div class="tanggal-wrap">
@@ -403,9 +457,11 @@ textarea{
 
         <input
           type="date"
-          id="tanggalJurnal">
+          id="tanggalJurnal"
+        >
 
       </div>
+
 
       <button
         class="primary"
@@ -419,6 +475,8 @@ textarea{
   </section>
 
 
+  <!-- RINGKASAN -->
+
   <section class="cards">
 
     <div class="card">
@@ -430,7 +488,7 @@ textarea{
       <div
         class="card-number"
         id="jumlahSiswa">
-        -
+        0
       </div>
 
     </div>
@@ -439,13 +497,13 @@ textarea{
     <div class="card">
 
       <div class="card-title">
-        📝 Jurnal Belum Feedback
+        📝 Jurnal Belum Feedback Hari Ini
       </div>
 
       <div
         class="card-number"
         id="belumFeedback">
-        -
+        0
       </div>
 
     </div>
@@ -454,19 +512,21 @@ textarea{
     <div class="card">
 
       <div class="card-title">
-        ✅ Jurnal Sudah Feedback
+        ✅ Jurnal Sudah Feedback Hari Ini
       </div>
 
       <div
         class="card-number"
         id="sudahFeedback">
-        -
+        0
       </div>
 
     </div>
 
   </section>
 
+
+  <!-- VERIFIKASI -->
 
   <section class="panel">
 
@@ -483,7 +543,7 @@ textarea{
     <div id="daftarSiswa">
 
       <div class="loading">
-        Memuat data siswa...
+        Memuat data...
       </div>
 
     </div>
@@ -491,18 +551,22 @@ textarea{
   </section>
 
 
+  <!-- DOWNLOAD -->
+
   <section class="panel">
 
-    <div class="download">
+    <div class="download-box">
 
       <div>
+
         <h2 style="margin-bottom:5px;">
           📥 Download Rekap Jurnal
         </h2>
 
-        <div style="color:#64748b;font-size:13px;">
-          Hanya jurnal siswa wali.
+        <div class="small">
+          Rekap hanya jurnal siswa wali Anda.
         </div>
+
       </div>
 
       <button
@@ -525,6 +589,10 @@ textarea{
 
 <script>
 
+/* =====================================================
+   SUPABASE
+===================================================== */
+
 const SUPABASE_URL =
   "https://nnnvgbajiqlqrsaygxme.supabase.co";
 
@@ -532,14 +600,40 @@ const SUPABASE_KEY =
   "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
-function headersSupabase(){
+function headers(){
 
   return {
-    "apikey":SUPABASE_KEY,
-    "Authorization":"Bearer " + SUPABASE_KEY,
-    "Content-Type":"application/json",
-    "Accept":"application/json"
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Accept":
+      "application/json"
   };
+
+}
+
+
+/* =====================================================
+   SESSION GURU
+===================================================== */
+
+const session =
+  sessionStorage.getItem(
+    "akun_guru"
+  );
+
+
+if(!session){
+
+  window.location.replace(
+    "login-guru.html"
+  );
 
 }
 
@@ -549,81 +643,59 @@ let guru = null;
 let daftarSiswa = [];
 
 
-/* =====================================================
-   SESSION GURU
-===================================================== */
+try{
 
-function bacaSession(){
+  akun =
+    JSON.parse(session);
 
-  const session =
-    sessionStorage.getItem("akun_guru");
+}catch(error){
 
-  if(!session){
+  sessionStorage.removeItem(
+    "akun_guru"
+  );
 
-    throw new Error(
-      "Session guru tidak ditemukan. Silakan login ulang."
-    );
-
-  }
-
-  try{
-
-    const data =
-      JSON.parse(session);
-
-    if(
-      !data ||
-      data.role !== "guru" ||
-      !data.referensi_id
-    ){
-
-      throw new Error(
-        "Session guru tidak valid."
-      );
-
-    }
-
-    return data;
-
-  }catch(error){
-
-    sessionStorage.removeItem("akun_guru");
-
-    throw error;
-
-  }
+  window.location.replace(
+    "login-guru.html"
+  );
 
 }
 
 
 /* =====================================================
-   AMBIL GURU DENGAN REFERENSI_ID
+   AMBIL GURU
 ===================================================== */
 
 async function ambilGuru(){
 
-  const idGuru =
-    Number(akun.referensi_id);
+  const guruId =
+    Number(
+      akun.referensi_id
+    );
 
-  const url =
-    SUPABASE_URL +
-    "/rest/v1/guru_wali" +
-    "?id=eq." +
-    encodeURIComponent(idGuru) +
-    "&select=*";
 
   const response =
     await fetch(
-      url,
+
+      SUPABASE_URL +
+      "/rest/v1/guru_wali" +
+      "?id=eq." +
+      encodeURIComponent(guruId) +
+      "&select=id,nama",
+
       {
-        headers:headersSupabase()
+        headers:
+          headers()
       }
+
     );
+
 
   const text =
     await response.text();
 
-  let data = [];
+
+  let data=[];
+
 
   try{
 
@@ -633,29 +705,30 @@ async function ambilGuru(){
   }catch(error){
 
     throw new Error(
-      "Respons data guru tidak valid."
+      "Data guru tidak valid."
     );
 
   }
+
 
   if(!response.ok){
 
     throw new Error(
       "Gagal membaca guru: " +
-      (data.message || text)
+      text
     );
 
   }
+
 
   if(!data.length){
 
     throw new Error(
-      "Guru dengan ID " +
-      idGuru +
-      " tidak ditemukan."
+      "Guru tidak ditemukan."
     );
 
   }
+
 
   return data[0];
 
@@ -668,29 +741,32 @@ async function ambilGuru(){
 
 async function ambilSiswa(){
 
-  const idGuru =
-    Number(guru.id);
-
-  const url =
-    SUPABASE_URL +
-    "/rest/v1/siswa" +
-    "?guru_wali_id=eq." +
-    encodeURIComponent(idGuru) +
-    "&select=id,nama,nisn,kelas_id" +
-    "&order=id.asc";
-
   const response =
     await fetch(
-      url,
+
+      SUPABASE_URL +
+      "/rest/v1/siswa" +
+      "?guru_wali_id=eq." +
+      encodeURIComponent(
+        guru.id
+      ) +
+      "&select=id,nama,nisn,kelas_id" +
+      "&order=id.asc",
+
       {
-        headers:headersSupabase()
+        headers:
+          headers()
       }
+
     );
+
 
   const text =
     await response.text();
 
-  let data = [];
+
+  let data=[];
+
 
   try{
 
@@ -700,23 +776,83 @@ async function ambilSiswa(){
   }catch(error){
 
     throw new Error(
-      "Respons data siswa tidak valid."
+      "Data siswa tidak valid."
     );
 
   }
+
 
   if(!response.ok){
 
     throw new Error(
       "Gagal membaca siswa: " +
-      (data.message || text)
+      text
     );
 
   }
 
+
   return Array.isArray(data)
     ? data
     : [];
+
+}
+
+
+/* =====================================================
+   AMBIL NAMA KELAS
+===================================================== */
+
+async function ambilNamaKelas(kelasId){
+
+  if(
+    kelasId === null ||
+    kelasId === undefined
+  ){
+
+    return "-";
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/kelas" +
+        "?id=eq." +
+        encodeURIComponent(kelasId) +
+        "&select=nama",
+
+        {
+          headers:
+            headers()
+        }
+
+      );
+
+
+    if(!response.ok)
+      return String(kelasId);
+
+
+    const data =
+      await response.json();
+
+
+    if(!data.length)
+      return String(kelasId);
+
+
+    return data[0].nama || String(kelasId);
+
+  }catch(error){
+
+    return String(kelasId);
+
+  }
 
 }
 
@@ -733,12 +869,17 @@ function tanggalHariIni(){
   return (
     d.getFullYear() +
     "-" +
-    String(d.getMonth()+1).padStart(2,"0") +
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0") +
     "-" +
-    String(d.getDate()).padStart(2,"0")
+    String(
+      d.getDate()
+    ).padStart(2,"0")
   );
 
 }
+
 
 function formatTanggal(tanggal){
 
@@ -748,146 +889,68 @@ function formatTanggal(tanggal){
   const p =
     String(tanggal).split("-");
 
-  if(p.length !== 3)
+  if(p.length!==3)
     return tanggal;
 
-  return p[2] + "/" + p[1] + "/" + p[0];
+  return (
+    p[2] +
+    "/" +
+    p[1] +
+    "/" +
+    p[0]
+  );
 
 }
 
 
 /* =====================================================
-   ERROR DI LAYAR
+   AMBIL JURNAL MELALUI RPC
 ===================================================== */
 
-function tampilError(error){
+async function ambilJurnalGuru(
+  tanggal
+){
 
-  console.error(error);
+  const guruId =
+    Number(
+      guru.id
+    );
 
-  const box =
-    document.getElementById("pesanError");
-
-  box.style.display = "block";
-
-  box.textContent =
-    error.message ||
-    "Terjadi kesalahan.";
-
-}
-
-
-/* =====================================================
-   MULAI
-===================================================== */
-
-async function mulai(){
-
-  try{
-
-    akun =
-      bacaSession();
-
-
-    guru =
-      await ambilGuru();
-
-
-    daftarSiswa =
-      await ambilSiswa();
-
-
-    const nama =
-      guru.nama ||
-      guru.nama_guru ||
-      guru.guru_nama ||
-      "Guru Wali";
-
-
-    document.getElementById(
-      "namaGuru"
-    ).textContent =
-      "Selamat datang, " +
-      nama;
-
-
-    document.getElementById(
-      "jumlahSiswa"
-    ).textContent =
-      daftarSiswa.length;
-
-
-    document.getElementById(
-      "tanggalJurnal"
-    ).value =
-      tanggalHariIni();
-
-
-    await tampilkanDaftar();
-
-
-  }catch(error){
-
-    tampilError(error);
-
-    document.getElementById(
-      "namaGuru"
-    ).textContent =
-      "Guru Wali";
-
-
-    document.getElementById(
-      "jumlahSiswa"
-    ).textContent =
-      "0";
-
-  }
-
-}
-
-
-/* =====================================================
-   AMBIL JURNAL
-===================================================== */
-
-async function ambilJurnal(tanggal){
-
-  if(!daftarSiswa.length)
-    return [];
-
-  const ids =
-    daftarSiswa
-      .map(s => s.id)
-      .filter(
-        id =>
-          id !== null &&
-          id !== undefined
-      );
-
-  if(!ids.length)
-    return [];
-
-  const url =
-    SUPABASE_URL +
-    "/rest/v1/jurnal_7_kaih" +
-    "?siswa_id=in.(" +
-    ids.join(",") +
-    ")" +
-    "&tanggal=eq." +
-    encodeURIComponent(tanggal) +
-    "&select=*";
 
   const response =
     await fetch(
-      url,
+
+      SUPABASE_URL +
+      "/rest/v1/rpc/ambil_jurnal_guru",
+
       {
-        headers:headersSupabase()
+        method:"POST",
+
+        headers:
+          headers(),
+
+        body:
+          JSON.stringify({
+
+            p_guru_id:
+              guruId,
+
+            p_tanggal:
+              tanggal
+
+          })
+
       }
+
     );
+
 
   const text =
     await response.text();
 
-  let data = [];
+
+  let data=[];
+
 
   try{
 
@@ -897,19 +960,25 @@ async function ambilJurnal(tanggal){
   }catch(error){
 
     throw new Error(
-      "Data jurnal tidak valid."
+      "Respons jurnal tidak valid: " +
+      text
     );
 
   }
+
 
   if(!response.ok){
 
     throw new Error(
-      "Gagal membaca jurnal: " +
-      (data.message || text)
+      data.message ||
+      data.details ||
+      data.hint ||
+      text ||
+      "Gagal mengambil jurnal guru."
     );
 
   }
+
 
   return Array.isArray(data)
     ? data
@@ -922,58 +991,63 @@ async function ambilJurnal(tanggal){
    FEEDBACK
 ===================================================== */
 
-async function ambilFeedback(jurnalId){
+async function ambilFeedback(
+  jurnalId
+){
 
-  const url =
-    SUPABASE_URL +
-    "/rest/v1/feedback_jurnal" +
-    "?jurnal_id=eq." +
-    encodeURIComponent(jurnalId) +
-    "&select=*";
+  const response =
+    await fetch(
 
-  try{
+      SUPABASE_URL +
+      "/rest/v1/feedback_jurnal" +
+      "?jurnal_id=eq." +
+      encodeURIComponent(
+        jurnalId
+      ) +
+      "&select=*",
 
-    const response =
-      await fetch(
-        url,
-        {
-          headers:headersSupabase()
-        }
-      );
+      {
+        headers:
+          headers()
+      }
 
-    if(!response.ok)
-      return [];
+    );
 
-    const data =
-      await response.json();
 
-    return Array.isArray(data)
-      ? data
-      : [];
-
-  }catch(error){
-
+  if(!response.ok)
     return [];
 
-  }
+
+  const data =
+    await response.json();
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
 
 }
 
 
 /* =====================================================
-   CEK LENGKAP 7 FEEDBACK
+   CEK 7 FEEDBACK
 ===================================================== */
 
-function lengkap(feedback){
+function feedbackLengkap(
+  data
+){
 
   const set =
     new Set(
-      feedback
-        .map(f => f.bagian)
+      data
+        .map(
+          f => f.bagian
+        )
         .filter(Boolean)
     );
 
-  const wajib = [
+
+  const wajib=[
     "bangun_pagi",
     "makan_sehat",
     "belajar_malam",
@@ -983,15 +1057,17 @@ function lengkap(feedback){
     "tidur_cepat"
   ];
 
+
   return wajib.every(
-    x => set.has(x)
+    item =>
+      set.has(item)
   );
 
 }
 
 
 /* =====================================================
-   TAMPIL DAFTAR SISWA
+   TAMPILKAN DAFTAR
 ===================================================== */
 
 async function tampilkanDaftar(){
@@ -1001,15 +1077,6 @@ async function tampilkanDaftar(){
       "tanggalJurnal"
     ).value;
 
-  const status =
-    document.getElementById(
-      "status"
-    );
-
-  const daftar =
-    document.getElementById(
-      "daftarSiswa"
-    );
 
   const tombol =
     document.getElementById(
@@ -1017,12 +1084,25 @@ async function tampilkanDaftar(){
     );
 
 
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  const daftar =
+    document.getElementById(
+      "daftarSiswa"
+    );
+
+
   if(!tanggal){
 
-    status.className="error";
+    status.className=
+      "status error";
 
     status.textContent=
-      "Pilih tanggal terlebih dahulu.";
+      "Pilih tanggal jurnal terlebih dahulu.";
 
     return;
 
@@ -1042,23 +1122,55 @@ async function tampilkanDaftar(){
   try{
 
     const jurnal =
-      await ambilJurnal(
+      await ambilJurnalGuru(
         tanggal
       );
 
 
-    const map={};
+    const mapJurnal={};
 
 
     jurnal.forEach(
-      j =>
-        map[
-          String(j.siswa_id)
-        ] = j
+      function(item){
+
+        mapJurnal[
+          String(item.siswa_id)
+        ] = item;
+
+      }
     );
 
 
-    let sudah=0;
+    let sudahFeedback=0;
+
+
+    const feedbackMap={};
+
+
+    for(
+      const j of jurnal
+    ){
+
+      const f =
+        await ambilFeedback(
+          j.id
+        );
+
+
+      feedbackMap[
+        String(j.id)
+      ] = f;
+
+
+      if(
+        feedbackLengkap(f)
+      ){
+
+        sudahFeedback++;
+
+      }
+
+    }
 
 
     let html="";
@@ -1069,12 +1181,24 @@ async function tampilkanDaftar(){
     ){
 
       const j =
-        map[
+        mapJurnal[
           String(siswa.id)
         ];
 
 
+      const kelasNama =
+        await ambilNamaKelas(
+          siswa.kelas_id
+        );
+
+
       if(!j){
+
+        /*
+          BELUM MENGISI:
+          HANYA KETERANGAN,
+          TIDAK BISA DIKLIK.
+        */
 
         html += `
 
@@ -1089,12 +1213,14 @@ async function tampilkanDaftar(){
                 </div>
 
                 <div class="siswa-detail">
-                  NISN: ${aman(siswa.nisn)}
+                  NISN: ${aman(siswa.nisn || "-")}
+                  <br>
+                  Kelas: ${aman(kelasNama)}
                 </div>
 
               </div>
 
-              <span class="badge belum-badge">
+              <span class="badge badge-belum">
                 ⭕ BELUM MENGISI JURNAL
               </span>
 
@@ -1104,35 +1230,30 @@ async function tampilkanDaftar(){
 
         `;
 
+
         continue;
 
       }
 
 
-      const feedback =
-        await ambilFeedback(
-          j.id
-        );
+      const f =
+        feedbackMap[
+          String(j.id)
+        ] || [];
 
 
-      const sudahFeedback =
-        lengkap(feedback);
-
-
-      if(sudahFeedback)
-        sudah++;
+      const lengkap =
+        feedbackLengkap(f);
 
 
       html += `
 
         <div
-          class="siswa-box"
-          id="box_${j.id}">
+          class="siswa-box">
 
           <div
-            class="siswa-head"
-            onclick="bukaJurnal(${j.id})"
-            style="cursor:pointer;">
+            class="siswa-head siswa-click"
+            onclick="bukaJurnal(${j.id})">
 
             <div>
 
@@ -1141,26 +1262,37 @@ async function tampilkanDaftar(){
               </div>
 
               <div class="siswa-detail">
-                NISN: ${aman(siswa.nisn)}
+                NISN: ${aman(siswa.nisn || "-")}
+                <br>
+                Kelas: ${aman(kelasNama)}
+                <br>
+                Tanggal: ${aman(formatTanggal(j.tanggal))}
               </div>
 
             </div>
 
-            <span class="badge">
+            <span class="badge badge-sudah">
+
               ✅ SUDAH MENGISI JURNAL
-              ${sudahFeedback ? "<br>✅ SUDAH FEEDBACK" : ""}
+
+              ${
+                lengkap
+                ? "<br>✅ SUDAH FEEDBACK"
+                : "<br>📝 BELUM FEEDBACK"
+              }
+
             </span>
 
           </div>
 
 
           <div
-            class="jurnal-detail"
-            id="detail_${j.id}">
+            id="detail_${j.id}"
+            class="jurnal-detail">
 
             ${buatJurnal(
               j,
-              feedback
+              f
             )}
 
           </div>
@@ -1175,44 +1307,64 @@ async function tampilkanDaftar(){
     if(!html){
 
       html=
-        '<div class="info">Belum ada siswa wali.</div>';
+        '<div class="status">' +
+        'Belum ada siswa yang terdaftar sebagai wali.' +
+        '</div>';
 
     }
 
 
-    daftar.innerHTML =
+    daftar.innerHTML=
       html;
 
 
+    const belum =
+      Math.max(
+        0,
+        jurnal.length -
+        sudahFeedback
+      );
+
+
     document.getElementById(
-      "sudahFeedback"
+      "jumlahSiswa"
     ).textContent =
-      sudah;
+      daftarSiswa.length;
 
 
     document.getElementById(
       "belumFeedback"
     ).textContent =
-      Math.max(
-        0,
-        jurnal.length - sudah
-      );
+      belum;
 
 
-    status.className="ok";
+    document.getElementById(
+      "sudahFeedback"
+    ).textContent =
+      sudahFeedback;
+
+
+    status.className=
+      "status ok";
+
 
     status.textContent=
       "Tanggal " +
       formatTanggal(tanggal) +
       ": " +
       jurnal.length +
-      " siswa sudah mengisi jurnal.";
+      " jurnal masuk dari " +
+      daftarSiswa.length +
+      " siswa.";
 
   }catch(error){
 
-    tampilError(error);
+    console.error(error);
 
-    status.className="error";
+    tampilkanError(error);
+
+    status.className=
+      "status error";
 
     status.textContent=
       error.message;
@@ -1232,7 +1384,7 @@ async function tampilkanDaftar(){
 
 
 /* =====================================================
-   JURNAL
+   BUAT JURNAL
 ===================================================== */
 
 function buatJurnal(
@@ -1242,86 +1394,108 @@ function buatJurnal(
 
   const map={};
 
+
   feedback.forEach(
-    f =>
-      map[f.bagian] = f
+    function(f){
+
+      map[f.bagian]=f;
+
+    }
   );
 
 
-  return (
+  return `
 
-    nomor(
+    <div class="jurnal-info">
+
+      <b>Tanggal:</b>
+      ${aman(formatTanggal(j.tanggal))}
+
+    </div>
+
+
+    ${nomor(
       j,
       map,
       "1",
       "🌅 Bangun Pagi",
       `<b>Jam bangun:</b> ${aman(j.jam_bangun)}`,
       "bangun_pagi"
-    ) +
+    )}
 
-    nomor(
+
+    ${nomor(
       j,
       map,
       "2",
       "🍎 Makan Sehat dan Bergizi",
       buatMakan(j),
       "makan_sehat"
-    ) +
+    )}
 
-    nomor(
+
+    ${nomor(
       j,
       map,
       "3",
       "📚 Gemar Belajar",
       buatBelajar(j),
       "belajar_malam"
-    ) +
+    )}
 
-    nomor(
+
+    ${nomor(
       j,
       map,
       "4",
       "🏃 Berolahraga",
       buatOlahraga(j),
       "olahraga"
-    ) +
+    )}
 
-    nomor(
+
+    ${nomor(
       j,
       map,
       "5",
       "🤝 Bermasyarakat",
-      buatBermasyarakat(j),
+      buatMasyarakat(j),
       "bermasyarakat"
-    ) +
+    )}
 
-    nomor(
+
+    ${nomor(
       j,
       map,
       "6",
       "🙏 Beribadah",
       buatIbadah(j),
       "ibadah"
-    ) +
+    )}
 
-    nomor(
+
+    ${nomor(
       j,
       map,
       "7",
       "🌙 Tidur Cepat",
       `<b>Jam tidur:</b> ${aman(j.jam_tidur)}`,
       "tidur_cepat"
-    )
+    )}
 
-  );
+  `;
 
 }
 
 
+/* =====================================================
+   MAKAN
+===================================================== */
+
 function buatMakan(j){
 
   if(
-    String(j.puasa)
+    String(j.puasa || "")
       .toLowerCase()==="ya"
   ){
 
@@ -1344,10 +1518,14 @@ function buatMakan(j){
 }
 
 
+/* =====================================================
+   BELAJAR
+===================================================== */
+
 function buatBelajar(j){
 
   if(
-    String(j.belajar_malam)
+    String(j.belajar_malam || "")
       .toLowerCase()==="ya"
   ){
 
@@ -1368,10 +1546,14 @@ function buatBelajar(j){
 }
 
 
+/* =====================================================
+   OLAHRAGA
+===================================================== */
+
 function buatOlahraga(j){
 
   if(
-    String(j.olahraga)
+    String(j.olahraga || "")
       .toLowerCase()==="ya"
   ){
 
@@ -1392,16 +1574,20 @@ function buatOlahraga(j){
 }
 
 
-function buatBermasyarakat(j){
+/* =====================================================
+   MASYARAKAT
+===================================================== */
+
+function buatMasyarakat(j){
 
   if(
-    String(j.bermasyarakat)
+    String(j.bermasyarakat || "")
       .toLowerCase()==="ya"
   ){
 
     return `
       <b>Bermasyarakat:</b> Ya<br>
-      <b>Jenis:</b> ${aman(j.jenis_bermasyarakat)}
+      <b>Jenis kegiatan:</b> ${aman(j.jenis_bermasyarakat)}
     `;
 
   }
@@ -1415,16 +1601,20 @@ function buatBermasyarakat(j){
 }
 
 
+/* =====================================================
+   IBADAH
+===================================================== */
+
 function buatIbadah(j){
 
   if(
-    String(j.ibadah)
+    String(j.ibadah || "")
       .toLowerCase()==="ya"
   ){
 
     return `
       <b>Beribadah:</b> Ya<br>
-      <b>Jenis:</b> ${aman(j.jenis_ibadah)}
+      <b>Jenis ibadah:</b> ${aman(j.jenis_ibadah)}
     `;
 
   }
@@ -1478,12 +1668,15 @@ function nomor(
 
       <div class="feedback">
 
-        <div style="font-size:12px;color:#64748b;margin-bottom:7px;">
+        <div class="feedback-title">
           Feedback Guru
         </div>
 
 
-        <div class="respons">
+        <div
+          class="respons"
+          data-jurnal="${j.id}"
+          data-bagian="${bagian}">
 
           <button
             type="button"
@@ -1493,6 +1686,7 @@ function nomor(
             ❤️ Suka
           </button>
 
+
           <button
             type="button"
             class="${respons==="Biasa" ? "active" : ""}"
@@ -1500,6 +1694,7 @@ function nomor(
             onclick="pilihRespons(this)">
             🙂 Biasa
           </button>
+
 
           <button
             type="button"
@@ -1513,19 +1708,31 @@ function nomor(
 
 
         <textarea
-          placeholder="Komentar guru..."
+          class="komentar"
           data-jurnal="${j.id}"
-          data-bagian="${bagian}">${aman(komentar)}</textarea>
+          data-bagian="${bagian}"
+          placeholder="Komentar guru...">${aman(komentar)}</textarea>
 
 
         <button
           type="button"
-          class="save"
+          class="save-feedback"
           data-jurnal="${j.id}"
           data-bagian="${bagian}"
           onclick="simpanFeedback(this)">
           ✅ Simpan Feedback
         </button>
+
+
+        <div class="feedback-status">
+
+          ${
+            f
+            ? "✓ Feedback sudah tersimpan"
+            : ""
+          }
+
+        </div>
 
       </div>
 
@@ -1549,11 +1756,19 @@ function pilihRespons(button){
   parent
     .querySelectorAll("button")
     .forEach(
-      b => b.classList.remove("active")
+      function(b){
+
+        b.classList.remove(
+          "active"
+        );
+
+      }
     );
 
 
-  button.classList.add("active");
+  button.classList.add(
+    "active"
+  );
 
 }
 
@@ -1565,26 +1780,31 @@ function pilihRespons(button){
 async function simpanFeedback(button){
 
   const jurnalId =
-    Number(button.dataset.jurnal);
+    Number(
+      button.dataset.jurnal
+    );
+
 
   const bagian =
     button.dataset.bagian;
 
 
   const box =
-    button.closest(".feedback");
+    button.closest(
+      ".feedback"
+    );
 
 
-  const aktif =
+  const active =
     box.querySelector(
       ".respons button.active"
     );
 
 
-  if(!aktif){
+  if(!active){
 
     alert(
-      "Pilih ❤️ Suka, 🙂 Biasa, atau 😔 Kecewa."
+      "Pilih ❤️ Suka, 🙂 Biasa, atau 😔 Kecewa terlebih dahulu."
     );
 
     return;
@@ -1593,13 +1813,13 @@ async function simpanFeedback(button){
 
 
   const respons =
-    aktif.dataset.respons;
+    active.dataset.respons;
 
 
   const komentar =
-    box.querySelector("textarea")
-      .value
-      .trim();
+    box.querySelector(
+      ".komentar"
+    ).value.trim();
 
 
   button.disabled=true;
@@ -1609,6 +1829,18 @@ async function simpanFeedback(button){
 
 
   try{
+
+    const siswaId =
+      await ambilSiswaIdJurnal(
+        jurnalId
+      );
+
+
+    const guruId =
+      Number(
+        guru.id
+      );
+
 
     const cekResponse =
       await fetch(
@@ -1622,7 +1854,8 @@ async function simpanFeedback(button){
         "&select=id",
 
         {
-          headers:headersSupabase()
+          headers:
+            headers()
         }
 
       );
@@ -1652,39 +1885,11 @@ async function simpanFeedback(button){
     if(!cekResponse.ok){
 
       throw new Error(
-        "Gagal memeriksa feedback."
+        "Gagal memeriksa feedback: " +
+        cekText
       );
 
     }
-
-
-    const siswaId =
-      await ambilSiswaId(
-        jurnalId
-      );
-
-
-    const payload={
-
-      jurnal_id:
-        jurnalId,
-
-      siswa_id:
-        siswaId,
-
-      guru_id:
-        Number(guru.id),
-
-      respons:
-        respons,
-
-      komentar:
-        komentar,
-
-      bagian:
-        bagian
-
-    };
 
 
     let response;
@@ -1705,23 +1910,31 @@ async function simpanFeedback(button){
             method:"PATCH",
 
             headers:{
-              ...headersSupabase(),
-              "Prefer":"return=minimal"
+              ...headers(),
+              "Prefer":
+                "return=minimal"
             },
 
             body:
               JSON.stringify({
+
                 siswa_id:
                   siswaId,
+
                 guru_id:
-                  Number(guru.id),
+                  guruId,
+
                 respons:
                   respons,
+
                 komentar:
                   komentar,
+
                 bagian:
                   bagian
+
               })
+
           }
 
         );
@@ -1738,14 +1951,34 @@ async function simpanFeedback(button){
             method:"POST",
 
             headers:{
-              ...headersSupabase(),
-              "Prefer":"return=minimal"
+              ...headers(),
+              "Prefer":
+                "return=minimal"
             },
 
             body:
-              JSON.stringify(
-                payload
-              )
+              JSON.stringify({
+
+                jurnal_id:
+                  jurnalId,
+
+                siswa_id:
+                  siswaId,
+
+                guru_id:
+                  guruId,
+
+                respons:
+                  respons,
+
+                komentar:
+                  komentar,
+
+                bagian:
+                  bagian
+
+              })
+
           }
 
         );
@@ -1753,10 +1986,11 @@ async function simpanFeedback(button){
     }
 
 
-    if(!response.ok){
+    const text =
+      await response.text();
 
-      const text =
-        await response.text();
+
+    if(!response.ok){
 
       throw new Error(
         text ||
@@ -1770,12 +2004,22 @@ async function simpanFeedback(button){
       "✅ Tersimpan";
 
 
+    const status =
+      box.querySelector(
+        ".feedback-status"
+      );
+
+
+    status.textContent=
+      "✓ Feedback sudah tersimpan";
+
+
   }catch(error){
 
     console.error(error);
 
     alert(
-      "Gagal menyimpan feedback: " +
+      "Gagal menyimpan feedback:\n\n" +
       error.message
     );
 
@@ -1783,16 +2027,26 @@ async function simpanFeedback(button){
 
     button.disabled=false;
 
+    if(
+      button.textContent ===
+      "⏳ Menyimpan..."
+    ){
+
+      button.textContent=
+        "✅ Simpan Feedback";
+
+    }
+
   }
 
 }
 
 
 /* =====================================================
-   AMBIL SISWA ID
+   AMBIL SISWA ID JURNAL
 ===================================================== */
 
-async function ambilSiswaId(
+async function ambilSiswaIdJurnal(
   jurnalId
 ){
 
@@ -1806,29 +2060,37 @@ async function ambilSiswaId(
       "&select=siswa_id",
 
       {
-        headers:headersSupabase()
+        headers:
+          headers()
       }
 
     );
 
 
+  const text =
+    await response.text();
+
+
   if(!response.ok){
 
     throw new Error(
-      "Gagal mengambil siswa jurnal."
+      "Gagal membaca siswa jurnal: " +
+      text
     );
 
   }
 
 
   const data =
-    await response.json();
+    text
+    ? JSON.parse(text)
+    : [];
 
 
   if(!data.length){
 
     throw new Error(
-      "Siswa jurnal tidak ditemukan."
+      "Siswa untuk jurnal tidak ditemukan."
     );
 
   }
@@ -1842,30 +2104,7 @@ async function ambilSiswaId(
 
 
 /* =====================================================
-   BUKA JURNAL
-===================================================== */
-
-function bukaJurnal(jurnalId){
-
-  const detail =
-    document.getElementById(
-      "detail_" + jurnalId
-    );
-
-
-  if(!detail)
-    return;
-
-
-  detail.classList.toggle(
-    "open"
-  );
-
-}
-
-
-/* =====================================================
-   DOWNLOAD
+   DOWNLOAD REKAP
 ===================================================== */
 
 async function downloadRekap(){
@@ -1890,19 +2129,22 @@ async function downloadRekap(){
   try{
 
     const data =
-      await ambilJurnal(
+      await ambilJurnalGuru(
         tanggal
       );
 
 
-    const map={};
+    const siswaMap={};
 
 
     daftarSiswa.forEach(
-      s =>
-        map[
+      function(s){
+
+        siswaMap[
           String(s.id)
-        ] = s
+        ] = s;
+
+      }
     );
 
 
@@ -1922,7 +2164,7 @@ async function downloadRekap(){
 
     rows.push([
       "Tanggal",
-      tanggal
+      formatTanggal(tanggal)
     ]);
 
 
@@ -1939,8 +2181,8 @@ async function downloadRekap(){
       "Menu Sahur",
       "Menu Berbuka",
       "Menu Sarapan",
-      "Menu Siang",
-      "Menu Malam",
+      "Menu Makan Siang",
+      "Menu Makan Malam",
       "Belajar Malam",
       "Materi Belajar",
       "Durasi Belajar",
@@ -1963,7 +2205,7 @@ async function downloadRekap(){
       function(j,index){
 
         const s =
-          map[
+          siswaMap[
             String(j.siswa_id)
           ] || {};
 
@@ -2028,22 +2270,40 @@ async function downloadRekap(){
     );
 
 
+    if(!data.length){
+
+      rows.push([
+        "",
+        "Tidak ada jurnal pada tanggal tersebut."
+      ]);
+
+    }
+
+
     const csv =
       rows
         .map(
-          row =>
-            row
+          function(row){
+
+            return row
               .map(
-                value =>
-                  '"' +
-                  String(value ?? "")
+                function(value){
+
+                  return '"' +
+                    String(
+                      value ?? ""
+                    )
                     .replace(
                       /"/g,
                       '""'
                     ) +
-                  '"'
+                    '"';
+
+                }
               )
-              .join(",")
+              .join(",");
+
+          }
         )
         .join("\r\n");
 
@@ -2055,7 +2315,8 @@ async function downloadRekap(){
           csv
         ],
         {
-          type:"text/csv;charset=utf-8;"
+          type:
+            "text/csv;charset=utf-8;"
         }
       );
 
@@ -2096,7 +2357,7 @@ async function downloadRekap(){
   }catch(error){
 
     alert(
-      "Gagal download rekap: " +
+      "Gagal download rekap:\n\n" +
       error.message
     );
 
@@ -2106,17 +2367,42 @@ async function downloadRekap(){
 
 
 /* =====================================================
-   AMAN
+   ERROR
+===================================================== */
+
+function tampilkanError(error){
+
+  const box =
+    document.getElementById(
+      "pesanError"
+    );
+
+
+  box.style.display=
+    "block";
+
+
+  box.textContent=
+    error.message ||
+    "Terjadi kesalahan.";
+
+}
+
+
+/* =====================================================
+   AMAN HTML
 ===================================================== */
 
 function aman(value){
 
-  return String(value ?? "-")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  return String(
+    value ?? "-"
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
@@ -2131,10 +2417,6 @@ function keluar(){
     "akun_guru"
   );
 
-  sessionStorage.removeItem(
-    "akun_login"
-  );
-
   window.location.replace(
     "index.html"
   );
@@ -2145,6 +2427,76 @@ function keluar(){
 /* =====================================================
    MULAI
 ===================================================== */
+
+async function mulai(){
+
+  try{
+
+    if(
+      !akun ||
+      akun.role !== "guru" ||
+      !akun.referensi_id
+    ){
+
+      throw new Error(
+        "Session guru tidak valid. Silakan login ulang."
+      );
+
+    }
+
+
+    guru =
+      await ambilGuru();
+
+
+    daftarSiswa =
+      await ambilSiswa();
+
+
+    document.getElementById(
+      "namaGuru"
+    ).textContent =
+      "Selamat datang, " +
+      guru.nama;
+
+
+    document.getElementById(
+      "jumlahSiswa"
+    ).textContent =
+      daftarSiswa.length;
+
+
+    document.getElementById(
+      "tanggalJurnal"
+    ).value =
+      tanggalHariIni();
+
+
+    await tampilkanDaftar();
+
+
+  }catch(error){
+
+    console.error(
+      "MULAI GURU ERROR:",
+      error
+    );
+
+
+    tampilkanError(
+      error
+    );
+
+
+    document.getElementById(
+      "namaGuru"
+    ).textContent =
+      "Guru Wali";
+
+  }
+
+}
+
 
 mulai();
 
