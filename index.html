@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -197,6 +198,7 @@ async function login() {
   if (!username || !password) {
 
     pesan.className = "error";
+
     pesan.textContent =
       "Username dan password wajib diisi.";
 
@@ -240,6 +242,7 @@ async function login() {
         data.message ||
         "Login gagal."
       );
+
     }
 
 
@@ -248,11 +251,16 @@ async function login() {
       throw new Error(
         "Username atau password salah."
       );
+
     }
 
 
     const akun = data[0];
 
+
+    /*
+      SIMPAN DATA AKUN LOGIN
+    */
 
     sessionStorage.setItem(
       "akun_login",
@@ -261,11 +269,12 @@ async function login() {
 
 
     pesan.className = "sukses";
+
     pesan.textContent =
       "Login berhasil. Membuka dashboard...";
 
 
-    setTimeout(() => {
+    setTimeout(function() {
 
       bukaDashboard(akun);
 
@@ -282,11 +291,10 @@ async function login() {
       error.message ||
       "Terjadi kesalahan saat login.";
 
+    tombol.disabled = false;
+    tombol.textContent = "LOGIN";
+
   }
-
-
-  tombol.disabled = false;
-  tombol.textContent = "LOGIN";
 
 }
 
@@ -294,41 +302,48 @@ async function login() {
 function bukaDashboard(akun) {
 
   const role =
-    String(akun.role || "").toLowerCase();
+    String(akun.role || "")
+      .trim()
+      .toLowerCase();
 
+
+  /*
+    ADMIN
+  */
 
   if (role === "admin") {
 
     window.location.href =
       "admin.html";
 
+    return;
   }
 
-  else if (
+
+  /*
+    GURU WALI
+  */
+
+  if (
     role === "guru" ||
     role === "guru_wali"
   ) {
 
     window.location.href =
-      "guru.html";
+      "guru_wali.html";
 
+    return;
   }
 
-  else if (role === "siswa") {
 
-    window.location.href =
-      "siswa.html";
+  /*
+    ROLE LAIN
+  */
 
-  }
-
-  else {
-
-    alert(
-      "Role akun belum dikenali: " +
-      akun.role
-    );
-
-  }
+  alert(
+    "Role akun belum dikenali: " +
+    akun.role
+  );
 
 }
 
@@ -336,3 +351,4 @@ function bukaDashboard(akun) {
 
 </body>
 </html>
+```
