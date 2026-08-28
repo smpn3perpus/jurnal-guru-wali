@@ -599,9 +599,7 @@ function headersSupabase(){
 ===================================================== */
 
 const session =
-  sessionStorage.getItem("akun_guru")
-  ||
-  sessionStorage.getItem("akun_login");
+  sessionStorage.getItem("akun_guru");
 
 
 if(!session){
@@ -611,24 +609,121 @@ if(!session){
 }
 
 
-let akun = null;
-let guru = null;
-let daftarSiswa = [];
-let jurnalTanggal = [];
+async function mulai(){
+
+  try{
+
+    /* =========================
+       PASTIKAN SESSION GURU
+    ========================= */
+
+    if(
+      !akun ||
+      akun.role !== "guru" ||
+      !akun.referensi_id
+    ){
+
+      throw new Error(
+        "Session guru tidak valid."
+      );
+
+    }
 
 
-try{
+    /* =========================
+       AMBIL GURU DARI ID REFERENSI
+    ========================= */
 
-  akun = JSON.parse(session);
+    guru =
+      await ambilGuru();
 
-}catch(error){
 
-  sessionStorage.removeItem("akun_guru");
-  sessionStorage.removeItem("akun_login");
-  window.location.replace("index.html");
+    /* =========================
+       AMBIL SISWA GURU
+    ========================= */
+
+    daftarSiswa =
+      await ambilSiswa();
+
+
+    /* =========================
+       NAMA GURU
+    ========================= */
+
+    const nama =
+      guru.nama ||
+      akun.nama ||
+      "Guru Wali";
+
+
+    document.getElementById(
+      "namaGuru"
+    ).textContent =
+      "Selamat datang, " +
+      nama;
+
+
+    /* =========================
+       JUMLAH SISWA
+    ========================= */
+
+    document.getElementById(
+      "jumlahSiswa"
+    ).textContent =
+      daftarSiswa.length;
+
+
+    /* =========================
+       TANGGAL
+    ========================= */
+
+    document.getElementById(
+      "tanggalJurnal"
+    ).value =
+      tanggalHariIni();
+
+
+    /* =========================
+       TAMPIL DAFTAR
+    ========================= */
+
+    await tampilkanDaftar();
+
+
+  }catch(error){
+
+    console.error(
+      "GURU ERROR:",
+      error
+    );
+
+
+    document.getElementById(
+      "namaGuru"
+    ).textContent =
+      "Guru Wali";
+
+
+    document.getElementById(
+      "jumlahSiswa"
+    ).textContent =
+      "0";
+
+
+    document.getElementById(
+      "status"
+    ).className =
+      "error";
+
+
+    document.getElementById(
+      "status"
+    ).textContent =
+      error.message;
+
+  }
 
 }
-
 
 /* =====================================================
    AMBIL GURU
