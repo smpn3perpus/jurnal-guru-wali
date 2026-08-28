@@ -128,44 +128,43 @@ footer{
 
 <div class="login-card">
 
-  <div class="logo">JW</div>
+<div class="logo">JW</div>
 
-  <h1>APLIKASI JURNAL GURU WALI</h1>
+<h1>APLIKASI JURNAL GURU WALI</h1>
 
-  <div class="school">
-    SMP NEGERI 3 SIBOLGA
-  </div>
-
-  <label for="username">Username</label>
-
-  <input
-    type="text"
-    id="username"
-    placeholder="Masukkan username"
-    autocomplete="username"
-  >
-
-  <label for="password">Password</label>
-
-  <input
-    type="password"
-    id="password"
-    placeholder="Masukkan password"
-    autocomplete="current-password"
-  >
-
-  <button id="btnLogin" onclick="login()">
-    LOGIN
-  </button>
-
-  <div id="pesan"></div>
-
-  <footer>
-    Created by Mr. Rahmat Batubara, S.T.P
-  </footer>
-
+<div class="school">
+SMP NEGERI 3 SIBOLGA
 </div>
 
+<label>Username</label>
+
+<input
+  type="text"
+  id="username"
+  placeholder="Masukkan username"
+  autocomplete="username"
+>
+
+<label>Password</label>
+
+<input
+  type="password"
+  id="password"
+  placeholder="Masukkan password"
+  autocomplete="current-password"
+>
+
+<button id="btnLogin" onclick="login()">
+LOGIN
+</button>
+
+<div id="pesan"></div>
+
+<footer>
+Created by Mr. Rahmat Batubara, S.T.P
+</footer>
+
+</div>
 
 <script>
 
@@ -178,198 +177,174 @@ const SUPABASE_KEY =
 
 async function login(){
 
-  const username =
-    document.getElementById("username")
-    .value.trim();
+const username =
+document.getElementById("username").value.trim();
 
-  const password =
-    document.getElementById("password")
-    .value;
+const password =
+document.getElementById("password").value;
 
-  const tombol =
-    document.getElementById("btnLogin");
+const tombol =
+document.getElementById("btnLogin");
 
-  const pesan =
-    document.getElementById("pesan");
+const pesan =
+document.getElementById("pesan");
 
 
-  if(!username || !password){
+if(!username || !password){
 
-    pesan.className="error";
+pesan.className="error";
 
-    pesan.textContent=
-      "Username dan password wajib diisi.";
+pesan.textContent=
+"Username dan password wajib diisi.";
 
-    return;
-
-  }
-
-
-  tombol.disabled=true;
-
-  tombol.textContent="MEMERIKSA...";
-
-
-  try{
-
-    const response=await fetch(
-
-      SUPABASE_URL+
-      "/rest/v1/rpc/cek_login",
-
-      {
-        method:"POST",
-
-        headers:{
-          "Content-Type":
-            "application/json",
-
-          "apikey":
-            SUPABASE_KEY,
-
-          "Authorization":
-            "Bearer "+SUPABASE_KEY
-        },
-
-        body:JSON.stringify({
-
-          p_username:username,
-
-          p_password:password
-
-        })
-      }
-
-    );
-
-
-    const data=
-      await response.json();
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.message ||
-        "Login gagal."
-      );
-
-    }
-
-
-    if(!data || data.length===0){
-
-      throw new Error(
-        "Username atau password salah."
-      );
-
-    }
-
-
-    const akun=data[0];
-
-
-    /*
-      SIMPAN AKUN LOGIN
-    */
-
-    sessionStorage.setItem(
-      "akun_login",
-      JSON.stringify(akun)
-    );
-
-
-    pesan.className="sukses";
-
-    pesan.textContent=
-      "Login berhasil. Membuka dashboard...";
-
-
-    /*
-      PENGALIHAN DASHBOARD
-    */
-
-    setTimeout(function(){
-
-      bukaDashboard(akun);
-
-    },500);
-
-
-  }catch(error){
-
-    console.error(error);
-
-    pesan.className="error";
-
-    pesan.textContent=
-      error.message ||
-      "Terjadi kesalahan saat login.";
-
-    tombol.disabled=false;
-
-    tombol.textContent="LOGIN";
-
-  }
+return;
 
 }
 
 
-/*
-=================================
-  PENGATURAN DASHBOARD
-=================================
-*/
+tombol.disabled=true;
+
+tombol.textContent="MEMERIKSA...";
+
+
+try{
+
+const response=await fetch(
+
+SUPABASE_URL+
+"/rest/v1/rpc/cek_login",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json",
+
+"apikey":
+SUPABASE_KEY,
+
+"Authorization":
+"Bearer "+SUPABASE_KEY
+
+},
+
+body:JSON.stringify({
+
+p_username:username,
+
+p_password:password
+
+})
+
+}
+
+);
+
+
+const data=
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message ||
+"Login gagal."
+);
+
+}
+
+
+if(!data || data.length===0){
+
+throw new Error(
+"Username atau password salah."
+);
+
+}
+
+
+const akun=data[0];
+
+
+sessionStorage.setItem(
+"akun_login",
+JSON.stringify(akun)
+);
+
+
+pesan.className="sukses";
+
+pesan.textContent=
+"Login berhasil. Membuka dashboard...";
+
+
+setTimeout(function(){
+
+bukaDashboard(akun);
+
+},500);
+
+
+}catch(error){
+
+console.error(error);
+
+pesan.className="error";
+
+pesan.textContent=
+error.message ||
+"Terjadi kesalahan saat login.";
+
+tombol.disabled=false;
+
+tombol.textContent="LOGIN";
+
+}
+
+}
+
 
 function bukaDashboard(akun){
 
-  const role=
-    String(akun.role || "")
-    .trim()
-    .toLowerCase();
+const role=
+String(akun.role || "")
+.trim()
+.toLowerCase();
 
 
-  /*
-    ADMIN
-  */
+if(role==="admin"){
 
-  if(role==="admin"){
+window.location.replace(
+"admin.html"
+);
 
-    window.location.replace(
-      "admin.html"
-    );
+return;
 
-    return;
-
-  }
+}
 
 
-  /*
-    GURU WALI
-  */
+if(
+role==="guru" ||
+role==="guru_wali"
+){
 
-  if(
-    role==="guru" ||
-    role==="guru_wali"
-  ){
+window.location.replace(
+"guru.html"
+);
 
-    window.location.replace(
-      "guru_wali.html"
-    );
+return;
 
-    return;
-
-  }
+}
 
 
-  /*
-    ROLE TIDAK DIKENAL
-  */
-
-  alert(
-    "Role akun belum dikenali: "+
-    akun.role
-  );
+alert(
+"Role akun belum dikenali: "+
+akun.role
+);
 
 }
 
