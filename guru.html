@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Guru Wali - Jurnal 7 KAIH</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#1e293b;
+}
+
+.header{
+  background:#0284c7;
+  color:white;
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin:5px 0 0;
+  font-size:13px;
+  opacity:.9;
+}
+
+.logout{
+  border:0;
+  background:#dc2626;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:20px 15px 30px;
+}
+
+.welcome,
+.card,
+.panel,
+.jurnal-card{
+  background:white;
+  border-radius:14px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.welcome{
+  padding:20px;
+  margin-bottom:18px;
+}
+
+.welcome h2{
+  margin:0 0 7px;
+  color:#0369a1;
+}
+
+.welcome p{
+  margin:0;
+  color:#64748b;
+}
+
+.tanggal-box{
+  margin-top:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:end;
+}
+
+.tanggal-box > div{
+  flex:1;
+  min-width:200px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:0 0 7px;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  font-size:14px;
+  font-family:inherit;
+}
+
+textarea{
+  min-height:70px;
+  resize:vertical;
+}
+
+.primary{
+  border:0;
+  border-radius:8px;
+  padding:11px 16px;
+  background:#0284c7;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.primary:hover{
+  background:#0369a1;
+}
+
+.primary:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.card{
+  padding:18px;
+}
+
+.card-title{
+  color:#64748b;
+  font-size:14px;
+}
+
+.card-number{
+  margin-top:7px;
+  font-size:30px;
+  font-weight:bold;
+  color:#0284c7;
+}
+
+.panel{
+  padding:20px;
+  margin-bottom:18px;
+}
+
+.panel h2{
+  margin:0 0 15px;
+  color:#0369a1;
+}
+
+.status{
+  padding:11px;
+  border-radius:8px;
+  background:#f8fafc;
+  margin-bottom:15px;
+}
+
+.ok{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.info{
+  background:#eff6ff;
+  color:#075985;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+
+.loading{
+  text-align:center;
+  padding:25px;
+  color:#64748b;
+}
+
+.jurnal-card{
+  padding:20px;
+  margin-bottom:20px;
+  border-left:5px solid #0284c7;
+}
+
+.identitas{
+  padding:13px;
+  border-radius:9px;
+  background:#f8fafc;
+  margin-bottom:15px;
+  line-height:1.7;
+}
+
+.nomor{
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  padding:15px;
+  margin-top:13px;
+  background:#fff;
+}
+
+.nomor-header{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.nomor-isi{
+  flex:1;
+}
+
+.nomor-judul{
+  font-size:16px;
+  font-weight:bold;
+  color:#0369a1;
+  margin-bottom:7px;
+}
+
+.data-siswa{
+  background:#f8fafc;
+  padding:12px;
+  border-radius:8px;
+  line-height:1.7;
+}
+
+.feedback-box{
+  margin-top:12px;
+  padding:12px;
+  background:#f8fafc;
+  border-radius:9px;
+}
+
+.respons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.respons button{
+  border:1px solid #cbd5e1;
+  background:white;
+  padding:9px 12px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.respons button.active{
+  background:#0284c7;
+  color:white;
+  border-color:#0284c7;
+}
+
+.simpan-feedback{
+  margin-top:10px;
+  border:0;
+  border-radius:8px;
+  padding:9px 13px;
+  background:#16a34a;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.simpan-feedback:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+.feedback-sudah{
+  margin-top:8px;
+  font-size:12px;
+  color:#166534;
+  font-weight:bold;
+}
+
+.download-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.small{
+  font-size:12px;
+  color:#64748b;
+}
+
+.footer{
+  text-align:center;
+  padding:25px;
+  color:#64748b;
+  font-size:12px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+@media(max-width:800px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .tanggal-box{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .tanggal-box > div{
+    min-width:100%;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+  <div>
+    <h1>👨‍🏫 Dashboard Guru Wali</h1>
+    <p>SMP Negeri 3 Sibolga • Jurnal 7 Kebiasaan Anak Indonesia Hebat</p>
+  </div>
+
+  <button class="logout" onclick="keluar()">
+    Keluar
+  </button>
+
+</header>
+
+<main class="container">
+
+  <!-- WELCOME -->
+
+  <section class="welcome">
+
+```
+<h2 id="namaGuru">
+  Memuat guru...
+</h2>
+
+<p>
+  Verifikasi jurnal siswa yang menjadi tanggung jawab Anda.
+</p>
+
+<div class="tanggal-box">
+
+  <div>
+    <label for="tanggalRekap">
+      📅 Pilih Tanggal Jurnal
+    </label>
+
+    <input
+      type="date"
+      id="tanggalRekap"
+    >
+  </div>
+
+  <button
+    class="primary"
+    id="btnTampilkan"
+    onclick="tampilkanJurnal()">
+    🔎 Tampilkan Jurnal
+  </button>
+
+</div>
+```
+
+  </section>
+
+  <!-- RINGKASAN -->
+
+  <section class="cards">
+
+```
+<div class="card">
+
+  <div class="card-title">
+    👨‍🎓 Jumlah Siswa Wali
+  </div>
+
+  <div
+    class="card-number"
+    id="jumlahSiswa">
+    0
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="card-title">
+    📝 Jurnal Belum Feedback Hari Ini
+  </div>
+
+  <div
+    class="card-number"
+    id="belumFeedback">
+    0
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="card-title">
+    ✅ Jurnal Sudah Feedback Hari Ini
+  </div>
+
+  <div
+    class="card-number"
+    id="sudahFeedback">
+    0
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- VERIFIKASI -->
+
+  <section class="panel">
+
+```
+<h2>
+  📝 Verifikasi Jurnal Siswa
+</h2>
+
+<div
+  id="statusJurnal"
+  class="status">
+  Pilih tanggal lalu klik Tampilkan Jurnal.
+</div>
+
+<div id="daftarJurnal">
+
+  <div class="loading">
+    Belum ada data jurnal yang ditampilkan.
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- DOWNLOAD -->
+
+  <section class="panel">
+
+```
+<div class="download-box">
+
+  <div>
+
+    <h2 style="margin-bottom:5px;">
+      📥 Download Rekap Jurnal
+    </h2>
+
+    <div class="small">
+      Download hanya jurnal siswa wali Anda.
+    </div>
+
+  </div>
+
+  <button
+    class="primary"
+    onclick="downloadRekap()">
+    📥 Download CSV
+  </button>
+
+</div>
+```
+
+  </section>
+
+  <div class="footer">
+    Created by Mr. Rahmat Batubara, S.T.P
+  </div>
+
+</main>
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+function headersSupabase(){
+
+  return {
+    "apikey":SUPABASE_KEY,
+    "Authorization":"Bearer " + SUPABASE_KEY,
+    "Content-Type":"application/json",
+    "Accept":"application/json"
+  };
+
+}
+
+
+/* =====================================================
+   SESSION GURU
+===================================================== */
+
+const session =
+  sessionStorage.getItem("akun_guru")
+  ||
+  sessionStorage.getItem("akun_login");
+
+
+if(!session){
+
+  window.location.replace("index.html");
+
+}
+
+
+let akun = null;
+let guru = null;
+let daftarSiswa = [];
+let jurnalHariIni = [];
+
+
+try{
+
+  akun = JSON.parse(session);
+
+}catch(error){
+
+  sessionStorage.removeItem("akun_guru");
+  sessionStorage.removeItem("akun_login");
+  window.location.replace("index.html");
+
+}
+
+
+if(!akun){
+
+  window.location.replace("index.html");
+
+}
+
+
+/* =====================================================
+   AMAN HTML
+===================================================== */
+
+function aman(value){
+
+  return String(value ?? "-")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   ID GURU DARI SESSION
+===================================================== */
+
+function ambilReferensiGuru(){
+
+  if(akun.referensi_id !== undefined &&
+     akun.referensi_id !== null &&
+     akun.referensi_id !== ""){
+
+    return akun.referensi_id;
+
+  }
+
+  if(akun.guru_id !== undefined &&
+     akun.guru_id !== null &&
+     akun.guru_id !== ""){
+
+    return akun.guru_id;
+
+  }
+
+  return null;
+
+}
+
+
+/* =====================================================
+   AMBIL GURU
+===================================================== */
+
+async function ambilDataGuru(){
+
+  const idGuru =
+    ambilReferensiGuru();
+
+
+  if(
+    idGuru === null ||
+    idGuru === undefined
+  ){
+
+    throw new Error(
+      "ID guru tidak ditemukan pada session login."
+    );
+
+  }
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/guru_wali" +
+      "?id=eq." +
+      encodeURIComponent(idGuru) +
+      "&select=*",
+
+      {
+        headers:headersSupabase()
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data = [];
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data guru tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.hint ||
+      "Gagal membaca data guru."
+    );
+
+  }
+
+
+  if(!data.length){
+
+    throw new Error(
+      "Data guru wali tidak ditemukan."
+    );
+
+  }
+
+
+  return data[0];
+
+}
+
+
+/* =====================================================
+   AMBIL SISWA WALI
+===================================================== */
+
+async function ambilSiswaWali(){
+
+  const idGuru =
+    guru.id;
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/siswa" +
+      "?guru_wali_id=eq." +
+      encodeURIComponent(idGuru) +
+      "&select=*" +
+      "&order=id.asc",
+
+      {
+        headers:headersSupabase()
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data = [];
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data siswa tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.hint ||
+      "Gagal membaca siswa."
+    );
+
+  }
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
+
+}
+
+
+/* =====================================================
+   TANGGAL HARI INI
+===================================================== */
+
+function tanggalHariIni(){
+
+  const sekarang =
+    new Date();
+
+  return (
+    sekarang.getFullYear() +
+    "-" +
+    String(
+      sekarang.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      sekarang.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+/* =====================================================
+   FORMAT TANGGAL
+===================================================== */
+
+function formatTanggal(tanggal){
+
+  if(!tanggal)
+    return "-";
+
+  const bagian =
+    String(tanggal).split("-");
+
+  if(bagian.length !== 3)
+    return tanggal;
+
+  return (
+    bagian[2] +
+    "/" +
+    bagian[1] +
+    "/" +
+    bagian[0]
+  );
+
+}
+
+
+/* =====================================================
+   FORMAT JAM
+===================================================== */
+
+function formatJam(value){
+
+  if(!value)
+    return "-";
+
+  return String(value).substring(0,5);
+
+}
+
+
+/* =====================================================
+   JAM / DATA TAMPIL
+===================================================== */
+
+function nilai(value){
+
+  if(
+    value === null ||
+    value === undefined ||
+    value === ""
+  ){
+
+    return "Tidak diisi";
+
+  }
+
+  return String(value);
+
+}
+
+
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
+
+async function mulai(){
+
+  try{
+
+    guru =
+      await ambilDataGuru();
+
+
+    daftarSiswa =
+      await ambilSiswaWali();
+
+
+    const namaGuru =
+      guru.nama ||
+      guru.nama_guru ||
+      guru.guru_nama ||
+      akun.nama ||
+      "Guru Wali";
+
+
+    document.getElementById(
+      "namaGuru"
+    ).textContent =
+      "Selamat datang, " +
+      namaGuru;
+
+
+    document.getElementById(
+      "jumlahSiswa"
+    ).textContent =
+      daftarSiswa.length;
+
+
+    document.getElementById(
+      "tanggalRekap"
+    ).value =
+      tanggalHariIni();
+
+
+    await hitungRingkasan(
+      tanggalHariIni()
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    document.getElementById(
+      "statusJurnal"
+    ).className =
+      "error";
+
+    document.getElementById(
+      "statusJurnal"
+    ).textContent =
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   AMBIL JURNAL TANGGAL
+===================================================== */
+
+async function ambilJurnalTanggal(tanggal){
+
+  if(!daftarSiswa.length)
+    return [];
+
+
+  const ids =
+    daftarSiswa
+      .map(
+        function(s){
+          return s.id;
+        }
+      )
+      .filter(
+        function(id){
+          return id !== null &&
+                 id !== undefined &&
+                 id !== "";
+        }
+      );
+
+
+  if(!ids.length)
+    return [];
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/jurnal_7_kaih" +
+      "?siswa_id=in.(" +
+      ids.join(",") +
+      ")" +
+      "&tanggal=eq." +
+      encodeURIComponent(tanggal) +
+      "&select=*" +
+      "&order=siswa_id.asc",
+
+      {
+        headers:headersSupabase()
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data = [];
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data jurnal tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.hint ||
+      "Gagal mengambil jurnal."
+    );
+
+  }
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
+
+}
+
+
+/* =====================================================
+   AMBIL FEEDBACK PER JURNAL
+===================================================== */
+
+async function ambilFeedbackJurnal(jurnalId){
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/feedback_jurnal" +
+      "?jurnal_id=eq." +
+      encodeURIComponent(jurnalId) +
+      "&select=*",
+
+      {
+        headers:headersSupabase()
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data = [];
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+
+  if(!response.ok)
+    return [];
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
+
+}
+
+
+/* =====================================================
+   TAMPILKAN JURNAL
+===================================================== */
+
+async function tampilkanJurnal(){
+
+  const tanggal =
+    document.getElementById(
+      "tanggalRekap"
+    ).value;
+
+
+  const tombol =
+    document.getElementById(
+      "btnTampilkan"
+    );
+
+
+  const status =
+    document.getElementById(
+      "statusJurnal"
+    );
+
+
+  const daftar =
+    document.getElementById(
+      "daftarJurnal"
+    );
+
+
+  if(!tanggal){
+
+    status.className="error";
+    status.textContent=
+      "Pilih tanggal terlebih dahulu.";
+
+    return;
+
+  }
+
+
+  tombol.disabled=true;
+
+  tombol.textContent=
+    "⏳ Memuat...";
+
+
+  status.className="status";
+
+  status.textContent=
+    "Memuat jurnal tanggal " +
+    formatTanggal(tanggal) +
+    "...";
+
+
+  daftar.innerHTML=
+    '<div class="loading">Memuat jurnal...</div>';
+
+
+  try{
+
+    jurnalHariIni =
+      await ambilJurnalTanggal(
+        tanggal
+      );
+
+
+    const mapJurnal={};
+
+
+    jurnalHariIni.forEach(
+      function(j){
+
+        mapJurnal[
+          String(j.siswa_id)
+        ] = j;
+
+      }
+    );
+
+
+    let jumlahSudah=0;
+
+
+    let html="";
+
+
+    if(!daftarSiswa.length){
+
+      html=
+        '<div class="info">' +
+        'Belum ada siswa yang terhubung dengan guru wali ini.' +
+        '</div>';
+
+    }else{
+
+      daftarSiswa.forEach(
+        function(siswa){
+
+          const jurnal =
+            mapJurnal[
+              String(siswa.id)
+            ];
+
+
+          if(!jurnal){
+
+            html += buatBelumAdaJurnal(
+              siswa,
+              tanggal
+            );
+
+            return;
+
+          }
+
+
+          jumlahSudah++;
+
+
+          html +=
+            buatJurnalCard(
+              siswa,
+              jurnal
+            );
+
+        }
+      );
+
+    }
+
+
+    daftar.innerHTML=html;
+
+
+    const jumlahSiswa =
+      daftarSiswa.length;
+
+
+    const belum =
+      jurnalHariIni.length;
+
+
+    status.className="ok";
+
+    status.textContent=
+      "Tanggal " +
+      formatTanggal(tanggal) +
+      ": " +
+      jurnalHariIni.length +
+      " jurnal masuk dari " +
+      jumlahSiswa +
+      " siswa.";
+
+
+    document.getElementById(
+      "belumFeedback"
+    ).textContent =
+      jumlahSiswa - await hitungSudahFeedback(
+        jurnalHariIni
+      );
+
+
+    document.getElementById(
+      "sudahFeedback"
+    ).textContent =
+      await hitungSudahFeedback(
+        jurnalHariIni
+      );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    status.className="error";
+
+    status.textContent=
+      error.message;
+
+    daftar.innerHTML="";
+
+  }finally{
+
+    tombol.disabled=false;
+
+    tombol.textContent=
+      "🔎 Tampilkan Jurnal";
+
+  }
+
+}
+
+
+/* =====================================================
+   JURNAL BELUM DIISI
+===================================================== */
+
+function buatBelumAdaJurnal(
+  siswa,
+  tanggal
+){
+
+  return `
+
+    <div class="jurnal-card">
+
+      <div class="identitas">
+
+        <b>${aman(siswa.nama)}</b><br>
+
+        NISN: ${aman(siswa.nisn)}<br>
+
+        Tanggal:
+        ${aman(formatTanggal(tanggal))}
+
+      </div>
+
+      <div class="info">
+
+        Siswa belum mengisi jurnal
+        pada tanggal tersebut.
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   JURNAL CARD
+===================================================== */
+
+function buatJurnalCard(
+  siswa,
+  jurnal
+){
+
+  return `
+
+    <div
+      class="jurnal-card"
+      data-jurnal-id="${aman(jurnal.id)}">
+
+      <div class="identitas">
+
+        <b>${aman(siswa.nama)}</b><br>
+
+        NISN: ${aman(siswa.nisn)}<br>
+
+        Tanggal:
+        ${aman(formatTanggal(jurnal.tanggal))}
+
+      </div>
+
+
+      ${bagian1(jurnal)}
+
+      ${bagian2(jurnal)}
+
+      ${bagian3(jurnal)}
+
+      ${bagian4(jurnal)}
+
+      ${bagian5(jurnal)}
+
+      ${bagian6(jurnal)}
+
+      ${bagian7(jurnal)}
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   BAGIAN 1
+===================================================== */
+
+function bagian1(jurnal){
+
+  return nomorTemplate(
+    jurnal,
+    "1",
+    "🌅 Bangun Pagi",
+    `
+      <b>Jam bangun:</b>
+      ${aman(formatJam(jurnal.jam_bangun))}
+    `,
+    "bangun_pagi"
+  );
+
+}
+
+
+/* =====================================================
+   BAGIAN 2
+===================================================== */
+
+function bagian2(jurnal){
+
+  let isi="";
+
+
+  if(
+    String(jurnal.puasa || "")
+      .toLowerCase() === "ya"
+  ){
+
+    isi=`
+      <b>Puasa:</b> Ya<br>
+      <b>Menu Sahur:</b>
+      ${aman(nilai(jurnal.menu_sahur))}<br>
+      <b>Menu Berbuka:</b>
+      ${aman(nilai(jurnal.menu_berbuka))}
+    `;
+
+  }else{
+
+    isi=`
+      <b>Puasa:</b>
+      ${aman(nilai(jurnal.puasa))}<br>
+      <b>Menu Sarapan:</b>
+      ${aman(nilai(jurnal.menu_sarapan))}<br>
+      <b>Menu Makan Siang:</b>
+      ${aman(nilai(jurnal.menu_siang))}<br>
+      <b>Menu Makan Malam:</b>
+      ${aman(nilai(jurnal.menu_malam))}
+    `;
+
+  }
+
+
+  return nomorTemplate(
+    jurnal,
+    "2",
+    "🍎 Makan Sehat dan Bergizi",
+    isi,
+    "makan_sehat"
+  );
+
+}
+
+
+/* =====================================================
+   BAGIAN 3
+===================================================== */
+
+function bagian3(jurnal){
+
+  let isi="";
+
+
+  if(
+    String(jurnal.belajar_malam || "")
+      .toLowerCase() === "ya"
+  ){
+
+    isi=`
+      <b>Belajar malam:</b> Ya<br>
+      <b>Materi:</b>
+      ${aman(nilai(jurnal.materi_belajar))}<br>
+      <b>Durasi:</b>
+      ${aman(jurnal.durasi_belajar)}
+      menit
+    `;
+
+  }else{
+
+    isi=`
+      <b>Belajar malam:</b>
+      ${aman(nilai(jurnal.belajar_malam))}<br>
+      <b>Alasan:</b>
+      ${aman(nilai(jurnal.alasan_belajar))}
+    `;
+
+  }
+
+
+  return nomorTemplate(
+    jurnal,
+    "3",
+    "📚 Gemar Belajar",
+    isi,
+    "belajar_malam"
+  );
+
+}
+
+
+/* =====================================================
+   BAGIAN 4
+===================================================== */
+
+function bagian4(jurnal){
+
+  let isi="";
+
+
+  if(
+    String(jurnal.olahraga || "")
+      .toLowerCase() === "ya"
+  ){
+
+    isi=`
+      <b>Olahraga:</b> Ya<br>
+      <b>Jenis:</b>
+      ${aman(nilai(jurnal.jenis_olahraga))}<br>
+      <b>Durasi:</b>
+      ${aman(jurnal.durasi_olahraga)}
+      menit
+    `;
+
+  }else{
+
+    isi=`
+      <b>Olahraga:</b>
+      ${aman(nilai(jurnal.olahraga))}<br>
+      <b>Alasan:</b>
+      ${aman(nilai(jurnal.alasan_olahraga))}
+    `;
+
+  }
+
+
+  return nomorTemplate(
+    jurnal,
+    "4",
+    "🏃 Berolahraga",
+    isi,
+    "olahraga"
+  );
+
+}
+
+
+/* =====================================================
+   BAGIAN 5
+===================================================== */
+
+function bagian5(jurnal){
+
+  let isi="";
+
+
+  if(
+    String(jurnal.bermasyarakat || "")
+      .toLowerCase() === "ya"
+  ){
+
+    isi=`
+      <b>Bermasyarakat:</b> Ya<br>
+      <b>Jenis kegiatan:</b>
+      ${aman(nilai(jurnal.jenis_bermasyarakat))}
+    `;
+
+  }else{
+
+    isi=`
+      <b>Bermasyarakat:</b>
+      ${aman(nilai(jurnal.bermasyarakat))}<br>
+      <b>Alasan:</b>
+      ${aman(nilai(jurnal.alasan_bermasyarakat))}
+    `;
+
+  }
+
+
+  return nomorTemplate(
+    jurnal,
+    "5",
+    "🤝 Bermasyarakat",
+    isi,
+    "bermasyarakat"
+  );
+
+}
+
+
+/* =====================================================
+   BAGIAN 6
+===================================================== */
+
+function bagian6(jurnal){
+
+  let isi="";
+
+
+  if(
+    String(jurnal.ibadah || "")
+      .toLowerCase() === "ya"
+  ){
+
+    isi=`
+      <b>Beribadah:</b> Ya<br>
+      <b>Jenis ibadah:</b>
+      ${aman(nilai(jurnal.jenis_ibadah))}
+    `;
+
+  }else{
+
+    isi=`
+      <b>Beribadah:</b>
+      ${aman(nilai(jurnal.ibadah))}<br>
+      <b>Alasan:</b>
+      ${aman(nilai(jurnal.alasan_ibadah))}
+    `;
+
+  }
+
+
+  return nomorTemplate(
+    jurnal,
+    "6",
+    "🙏 Beribadah",
+    isi,
+    "ibadah"
+  );
+
+}
+
+
+/* =====================================================
+   BAGIAN 7
+===================================================== */
+
+function bagian7(jurnal){
+
+  return nomorTemplate(
+    jurnal,
+    "7",
+    "🌙 Tidur Cepat",
+    `
+      <b>Jam tidur:</b>
+      ${aman(formatJam(jurnal.jam_tidur))}
+    `,
+    "tidur_cepat"
+  );
+
+}
+
+
+/* =====================================================
+   TEMPLATE NOMOR + FEEDBACK
+===================================================== */
+
+function nomorTemplate(
+  jurnal,
+  nomor,
+  judul,
+  isi,
+  bagian
+){
+
+  return `
+
+    <div class="nomor">
+
+      <div class="nomor-header">
+
+        <div class="nomor-isi">
+
+          <div class="nomor-judul">
+            ${nomor}. ${judul}
+          </div>
+
+          <div class="data-siswa">
+            ${isi}
+          </div>
+
+
+          <div
+            class="feedback-box"
+            data-feedback-box="${aman(bagian)}">
+
+            <div class="small">
+              Feedback Guru
+            </div>
+
+            <div
+              class="respons"
+              data-jurnal="${aman(jurnal.id)}"
+              data-bagian="${aman(bagian)}">
+
+              <button
+                type="button"
+                data-respons="Suka"
+                onclick="pilihRespons(this)">
+                ❤️ Suka
+              </button>
+
+              <button
+                type="button"
+                data-respons="Biasa"
+                onclick="pilihRespons(this)">
+                🙂 Biasa
+              </button>
+
+              <button
+                type="button"
+                data-respons="Kecewa"
+                onclick="pilihRespons(this)">
+                😔 Kecewa
+              </button>
+
+            </div>
+
+
+            <textarea
+              class="komentar"
+              data-jurnal="${aman(jurnal.id)}"
+              data-bagian="${aman(bagian)}"
+              placeholder="Komentar guru untuk bagian ini..."></textarea>
+
+```
+        <button
+          type="button"
+          class="simpan-feedback"
+          onclick="simpanFeedback(this)">
+          ✅ Simpan Feedback
+        </button>
+
+
+        <div
+          class="feedback-sudah"
+          data-status-feedback="${aman(bagian)}">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+`;
+
+}
+
+/* =====================================================
+PILIH RESPONS
+===================================================== */
+
+function pilihRespons(tombol){
+
+const parent =
+tombol.parentElement;
+
+parent
+.querySelectorAll("button")
+.forEach(
+function(btn){
+
+```
+    btn.classList.remove(
+      "active"
+    );
+
+  }
+);
+```
+
+tombol.classList.add(
+"active"
+);
+
+}
+
+/* =====================================================
+SIMPAN FEEDBACK
+===================================================== */
+
+async function simpanFeedback(tombol){
+
+const feedbackBox =
+tombol.closest(
+".feedback-box"
+);
+
+const responsBox =
+feedbackBox.querySelector(
+".respons"
+);
+
+const komentarBox =
+feedbackBox.querySelector(
+".komentar"
+);
+
+const jurnalId =
+responsBox.dataset.jurnal;
+
+const bagian =
+responsBox.dataset.bagian;
+
+const tombolRespons =
+responsBox.querySelector(
+"button.active"
+);
+
+if(!tombolRespons){
+
+```
+alert(
+  "Pilih Suka, Biasa, atau Kecewa terlebih dahulu."
+);
+
+return;
+```
+
+}
+
+const respons =
+tombolRespons.dataset.respons;
+
+const komentar =
+komentarBox.value.trim();
+
+tombol.disabled=true;
+
+tombol.textContent=
+"⏳ Menyimpan...";
+
+try{
+
+```
+const guruId =
+  guru.id;
+
+
+/*
+  Cek apakah feedback untuk
+  bagian dan jurnal ini
+  sudah ada.
+*/
+
+const cekResponse =
+  await fetch(
+
+    SUPABASE_URL +
+    "/rest/v1/feedback_jurnal" +
+    "?jurnal_id=eq." +
+    encodeURIComponent(jurnalId) +
+    "&bagian=eq." +
+    encodeURIComponent(bagian) +
+    "&select=id",
+
+    {
+      headers:headersSupabase()
+    }
+
+  );
+
+
+const cekText =
+  await cekResponse.text();
+
+
+let cekData=[];
+
+
+try{
+
+  cekData =
+    cekText
+    ? JSON.parse(cekText)
+    : [];
+
+}catch(error){
+
+  cekData=[];
+
+}
+
+
+if(!cekResponse.ok){
+
+  throw new Error(
+    "Gagal memeriksa feedback."
+  );
+
+}
+
+
+const dataFeedback={
+
+  jurnal_id:
+    Number(jurnalId),
+
+  siswa_id:
+    Number(
+      feedbackBox
+        .closest(
+          ".jurnal-card"
+        )
+        .querySelector(
+          ".identitas"
+        ) ? 0 : 0
+    ),
+
+  guru_id:
+    Number(guruId),
+
+  respons:
+    respons,
+
+  komentar:
+    komentar,
+
+  bagian:
+    bagian
+
+};
+
+
+/*
+  Siswa ID diambil langsung
+  dari jurnal melalui endpoint
+  agar tidak bergantung pada tampilan.
+*/
+
+const jurnalResponse =
+  await fetch(
+
+    SUPABASE_URL +
+    "/rest/v1/jurnal_7_kaih" +
+    "?id=eq." +
+    encodeURIComponent(jurnalId) +
+    "&select=siswa_id",
+
+    {
+      headers:headersSupabase()
+    }
+
+  );
+
+
+const jurnalData =
+  await jurnalResponse.json();
+
+
+if(
+  !jurnalResponse.ok ||
+  !jurnalData.length
+){
+
+  throw new Error(
+    "Siswa jurnal tidak ditemukan."
+  );
+
+}
+
+
+dataFeedback.siswa_id =
+  Number(
+    jurnalData[0].siswa_id
+  );
+
+
+let response;
+
+
+if(cekData.length){
+
+  response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/feedback_jurnal?id=eq." +
+      encodeURIComponent(
+        cekData[0].id
+      ),
+
+      {
+        method:"PATCH",
+
+        headers:{
+          ...headersSupabase(),
+          "Prefer":
+            "return=minimal"
+        },
+
+        body:
+          JSON.stringify({
+            respons:respons,
+            komentar:komentar,
+            guru_id:Number(guruId),
+            bagian:bagian
+          })
+
+      }
+
+    );
+
+}else{
+
+  response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/feedback_jurnal",
+
+      {
+        method:"POST",
+
+        headers:{
+          ...headersSupabase(),
+          "Prefer":
+            "return=minimal"
+        },
+
+        body:
+          JSON.stringify(
+            dataFeedback
+          )
+
+      }
+
+    );
+
+}
+
+
+if(!response.ok){
+
+  const text =
+    await response.text();
+
+  throw new Error(
+    text ||
+    "Gagal menyimpan feedback."
+  );
+
+}
+
+
+const status =
+  feedbackBox.querySelector(
+    ".feedback-sudah"
+  );
+
+
+status.textContent=
+  "✓ Feedback tersimpan: " +
+  respons;
+
+
+tombol.textContent=
+  "✅ Tersimpan";
+```
+
+}catch(error){
+
+```
+console.error(
+  "FEEDBACK ERROR:",
+  error
+);
+
+
+alert(
+  "Gagal menyimpan feedback: " +
+  error.message
+);
+
+
+tombol.disabled=false;
+
+tombol.textContent=
+  "✅ Simpan Feedback";
+
+return;
+```
+
+}
+
+tombol.disabled=false;
+
+}
+
+/* =====================================================
+HITUNG FEEDBACK
+===================================================== */
+
+async function hitungSudahFeedback(
+daftarJurnal
+){
+
+if(!daftarJurnal.length)
+return 0;
+
+let jumlah=0;
+
+for(
+const jurnal of daftarJurnal
+){
+
+```
+const feedback =
+  await ambilFeedbackJurnal(
+    jurnal.id
+  );
+
+
+/*
+  Satu jurnal dianggap
+  sudah feedback jika
+  semua 7 bagian sudah ada.
+*/
+
+const bagianSudah =
+  new Set(
+    feedback
+      .map(
+        function(f){
+          return f.bagian;
+        }
+      )
+      .filter(Boolean)
+  );
+
+
+if(
+  bagianSudah.has("bangun_pagi") &&
+  bagianSudah.has("makan_sehat") &&
+  bagianSudah.has("belajar_malam") &&
+  bagianSudah.has("olahraga") &&
+  bagianSudah.has("bermasyarakat") &&
+  bagianSudah.has("ibadah") &&
+  bagianSudah.has("tidur_cepat")
+){
+
+  jumlah++;
+
+}
+```
+
+}
+
+return jumlah;
+
+}
+
+/* =====================================================
+RINGKASAN
+===================================================== */
+
+async function hitungRingkasan(tanggal){
+
+try{
+
+```
+const jurnal =
+  await ambilJurnalTanggal(
+    tanggal
+  );
+
+
+const sudah =
+  await hitungSudahFeedback(
+    jurnal
+  );
+
+
+document.getElementById(
+  "jumlahSiswa"
+).textContent =
+  daftarSiswa.length;
+
+
+document.getElementById(
+  "belumFeedback"
+).textContent =
+  Math.max(
+    0,
+    daftarSiswa.length -
+    sudah
+  );
+
+
+document.getElementById(
+  "sudahFeedback"
+).textContent =
+  sudah;
+```
+
+}catch(error){
+
+```
+console.error(error);
+```
+
+}
+
+}
+
+/* =====================================================
+TANGGAL LOKAL
+===================================================== */
+
+function tanggalLokal(date){
+
+return (
+date.getFullYear() +
+"-" +
+String(
+date.getMonth()+1
+).padStart(2,"0") +
+"-" +
+String(
+date.getDate()
+).padStart(2,"0")
+);
+
+}
+
+/* =====================================================
+DOWNLOAD REKAP
+===================================================== */
+
+async function downloadRekap(){
+
+const mulai =
+document.getElementById(
+"tanggalRekap"
+).value;
+
+if(!mulai){
+
+```
+alert(
+  "Pilih tanggal terlebih dahulu."
+);
+
+return;
+```
+
+}
+
+try{
+
+```
+const data =
+  await ambilJurnalTanggal(
+    mulai
+  );
+
+
+const siswaMap={};
+
+
+daftarSiswa.forEach(
+  function(s){
+
+    siswaMap[
+      String(s.id)
+    ] = s;
+
+  }
+);
+
+
+const rows=[];
+
+
+rows.push([
+  "REKAP JURNAL 7 KAIH"
+]);
+
+
+rows.push([
+  "Guru Wali",
+  guru.nama ||
+  akun.nama ||
+  ""
+]);
+
+
+rows.push([
+  "Tanggal",
+  formatTanggal(mulai)
+]);
+
+
+rows.push([]);
+
+
+rows.push([
+  "No",
+  "Nama Siswa",
+  "NISN",
+  "Tanggal",
+  "Jam Bangun",
+  "Puasa",
+  "Menu Sahur",
+  "Menu Berbuka",
+  "Menu Sarapan",
+  "Menu Siang",
+  "Menu Malam",
+  "Belajar Malam",
+  "Materi Belajar",
+  "Durasi Belajar",
+  "Alasan Belajar",
+  "Olahraga",
+  "Jenis Olahraga",
+  "Durasi Olahraga",
+  "Alasan Olahraga",
+  "Bermasyarakat",
+  "Jenis Bermasyarakat",
+  "Alasan Bermasyarakat",
+  "Ibadah",
+  "Jenis Ibadah",
+  "Alasan Ibadah",
+  "Jam Tidur"
+]);
+
+
+data.forEach(
+  function(jurnal,index){
+
+    const siswa =
+      siswaMap[
+        String(jurnal.siswa_id)
+      ] || {};
+
+
+    rows.push([
+
+      index+1,
+
+      siswa.nama || "",
+
+      siswa.nisn || "",
+
+      jurnal.tanggal || "",
+
+      jurnal.jam_bangun || "",
+
+      jurnal.puasa || "",
+
+      jurnal.menu_sahur || "",
+
+      jurnal.menu_berbuka || "",
+
+      jurnal.menu_sarapan || "",
+
+      jurnal.menu_siang || "",
+
+      jurnal.menu_malam || "",
+
+      jurnal.belajar_malam || "",
+
+      jurnal.materi_belajar || "",
+
+      jurnal.durasi_belajar || "",
+
+      jurnal.alasan_belajar || "",
+
+      jurnal.olahraga || "",
+
+      jurnal.jenis_olahraga || "",
+
+      jurnal.durasi_olahraga || "",
+
+      jurnal.alasan_olahraga || "",
+
+      jurnal.bermasyarakat || "",
+
+      jurnal.jenis_bermasyarakat || "",
+
+      jurnal.alasan_bermasyarakat || "",
+
+      jurnal.ibadah || "",
+
+      jurnal.jenis_ibadah || "",
+
+      jurnal.alasan_ibadah || "",
+
+      jurnal.jam_tidur || ""
+
+    ]);
+
+  }
+);
+
+
+if(data.length===0){
+
+  rows.push([
+    "",
+    "Tidak ada jurnal pada tanggal tersebut."
+  ]);
+
+}
+
+
+const csv =
+  rows
+    .map(
+      function(row){
+
+        return row
+          .map(
+            function(value){
+
+              return '"' +
+                String(
+                  value ?? ""
+                )
+                .replace(
+                  /"/g,
+                  '""'
+                ) +
+                '"';
+
+            }
+          )
+          .join(",");
+
+      }
+    )
+    .join("\r\n");
+
+
+const blob =
+  new Blob(
+    [
+      "\ufeff",
+      csv
+    ],
+    {
+      type:
+        "text/csv;charset=utf-8;"
+    }
+  );
+
+
+const url =
+  URL.createObjectURL(
+    blob
+  );
+
+
+const link =
+  document.createElement(
+    "a"
+  );
+
+
+link.href=url;
+
+link.download =
+  "Rekap_Jurnal_Guru_" +
+  mulai +
+  ".csv";
+
+
+document.body.appendChild(
+  link
+);
+
+link.click();
+
+link.remove();
+
+URL.revokeObjectURL(
+  url
+);
+
+
+alert(
+  "Rekap jurnal berhasil didownload."
+);
+```
+
+}catch(error){
+
+```
+console.error(error);
+
+alert(
+  "Gagal download rekap: " +
+  error.message
+);
+```
+
+}
+
+}
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+function keluar(){
+
+sessionStorage.removeItem(
+"akun_guru"
+);
+
+sessionStorage.removeItem(
+"akun_login"
+);
+
+window.location.replace(
+"index.html"
+);
+
+}
+
+/* =====================================================
+MULAI
+===================================================== */
+
+mulai();
+
+</script>
+
+</body>
+</html>
+```
