@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login Admin - Jurnal 7 KAIH</title>
+<title>Admin - Jurnal 7 KAIH</title>
 
 <style>
 *{
@@ -21,7 +21,7 @@ body{
 
 /* ================= LOGIN ================= */
 
-#loginArea{
+.login-area{
   min-height:100vh;
   display:flex;
   align-items:center;
@@ -32,7 +32,7 @@ body{
 
 .login-card{
   width:100%;
-  max-width:430px;
+  max-width:420px;
   background:white;
   padding:30px;
   border-radius:20px;
@@ -49,12 +49,13 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:27px;
+  font-size:28px;
   font-weight:bold;
 }
 
 .login-card h1{
   text-align:center;
+  font-size:22px;
   color:#7c3aed;
   margin:18px 0 5px;
 }
@@ -62,9 +63,9 @@ body{
 .school{
   text-align:center;
   color:#64748b;
+  margin-bottom:25px;
   font-size:14px;
   line-height:1.5;
-  margin-bottom:25px;
 }
 
 label{
@@ -180,14 +181,57 @@ input{
   color:#64748b;
 }
 
-.tanggal{
-  margin-top:10px;
-  display:inline-block;
+/* ================= FILTER TANGGAL ================= */
+
+.filter-box{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+.filter-box h2{
+  margin:0 0 15px;
+  color:#7c3aed;
+  font-size:20px;
+}
+
+.filter-row{
+  display:flex;
+  gap:12px;
+  align-items:end;
+}
+
+.filter-item{
+  flex:1;
+}
+
+.filter-item label{
+  margin:0 0 7px;
+}
+
+.filter-button{
+  padding:13px 20px;
+  border:0;
+  border-radius:10px;
+  background:#7c3aed;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.filter-button:hover{
+  background:#6d28d9;
+}
+
+.tanggal-info{
+  margin-top:12px;
+  padding:10px 12px;
   background:#f5f3ff;
   color:#6d28d9;
-  padding:8px 12px;
-  border-radius:8px;
-  font-weight:bold;
+  border-radius:9px;
+  font-size:14px;
 }
 
 /* ================= STATISTIK ================= */
@@ -246,6 +290,7 @@ th,td{
   padding:11px;
   border-bottom:1px solid #e2e8f0;
   text-align:left;
+  vertical-align:top;
 }
 
 th{
@@ -253,17 +298,16 @@ th{
   color:#6d28d9;
 }
 
+.loading{
+  text-align:center;
+  padding:20px;
+  color:#64748b;
+}
+
 .info{
   padding:14px;
   background:#eff6ff;
   color:#075985;
-  border-radius:10px;
-}
-
-.error-box{
-  padding:14px;
-  background:#fee2e2;
-  color:#991b1b;
   border-radius:10px;
 }
 
@@ -282,6 +326,15 @@ th{
     grid-template-columns:repeat(2,1fr);
   }
 
+  .filter-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .filter-button{
+    width:100%;
+  }
+
 }
 
 @media(max-width:550px){
@@ -294,12 +347,16 @@ th{
     font-size:18px;
   }
 
+  .container{
+    padding:15px;
+  }
+
   .statistik{
     grid-template-columns:1fr;
   }
 
-  .container{
-    padding:15px;
+  .panel{
+    padding:18px;
   }
 
 }
@@ -312,7 +369,7 @@ th{
      LOGIN
 ===================================================== -->
 
-<div id="loginArea">
+<div id="loginArea" class="login-area">
 
   <div class="login-card">
 
@@ -355,7 +412,8 @@ th{
     <button
       id="btnLogin"
       class="login-button"
-      onclick="loginAdmin()">
+      onclick="loginAdmin()"
+    >
       LOGIN
     </button>
 
@@ -375,6 +433,7 @@ th{
   <header class="header">
 
     <div>
+
       <h1>
         📊 Dashboard Admin / Kepala Sekolah
       </h1>
@@ -382,6 +441,7 @@ th{
       <p>
         Monitoring Jurnal 7 Kebiasaan Anak Indonesia Hebat
       </p>
+
     </div>
 
     <button
@@ -402,20 +462,57 @@ th{
       </h2>
 
       <p>
-        Rekap aktivitas guru dan siswa
-        serta feedback guru.
+        Rekap aktivitas guru, siswa, dan feedback guru.
       </p>
 
+    </section>
+
+
+    <!-- =================================================
+         PILIH TANGGAL
+    ================================================== -->
+
+    <section class="filter-box">
+
+      <h2>
+        📅 Pilih Tanggal Rekap
+      </h2>
+
+      <div class="filter-row">
+
+        <div class="filter-item">
+
+          <label for="tanggalRekap">
+            Tanggal
+          </label>
+
+          <input
+            type="date"
+            id="tanggalRekap"
+          >
+
+        </div>
+
+        <button
+          class="filter-button"
+          onclick="tampilkanRekap()">
+          🔍 Tampilkan Rekap
+        </button>
+
+      </div>
+
       <div
-        class="tanggal"
-        id="tanggalHariIni">
-        Memuat tanggal...
+        id="tanggalInfo"
+        class="tanggal-info">
+        Silakan pilih tanggal.
       </div>
 
     </section>
 
 
-    <!-- ================= STATISTIK ================= -->
+    <!-- =================================================
+         STATISTIK
+    ================================================== -->
 
     <section class="statistik">
 
@@ -428,7 +525,7 @@ th{
         </div>
 
         <div class="label">
-          Guru Login Hari Ini
+          Guru Login
         </div>
 
       </div>
@@ -443,7 +540,7 @@ th{
         </div>
 
         <div class="label">
-          Siswa Login Hari Ini
+          Siswa Login
         </div>
 
       </div>
@@ -481,49 +578,58 @@ th{
     </section>
 
 
-    <!-- ================= GURU ================= -->
+    <!-- =================================================
+         GURU LOGIN
+    ================================================== -->
 
     <section class="panel">
 
       <h2>
-        👨‍🏫 Guru Login Hari Ini
+        👨‍🏫 Guru Login
       </h2>
 
       <div
-        id="tabelGuruLogin">
-        Memuat data...
+        id="tabelGuruLogin"
+        class="loading">
+        Pilih tanggal terlebih dahulu.
       </div>
 
     </section>
 
 
-    <!-- ================= SISWA ================= -->
+    <!-- =================================================
+         SISWA LOGIN
+    ================================================== -->
 
     <section class="panel">
 
       <h2>
-        👨‍🎓 Siswa Login Hari Ini
+        👨‍🎓 Siswa Login
       </h2>
 
       <div
-        id="tabelSiswaLogin">
-        Memuat data...
+        id="tabelSiswaLogin"
+        class="loading">
+        Pilih tanggal terlebih dahulu.
       </div>
 
     </section>
 
 
-    <!-- ================= FEEDBACK ================= -->
+    <!-- =================================================
+         FEEDBACK
+    ================================================== -->
 
     <section class="panel">
 
       <h2>
-        📝 Guru Memberikan Feedback Minggu Ini
+        📝 Feedback Guru Minggu Ini
       </h2>
 
       <div
-        id="tabelFeedback">
-        Memuat data...
+        id="tabelFeedback"
+        class="loading">
+        Pilih tanggal terlebih dahulu.
       </div>
 
     </section>
@@ -693,10 +799,11 @@ async function loginAdmin(){
 
       role:"admin",
 
+      tipe:"admin",
+
       referensi_id:akun.referensi_id,
 
-      nama:akun.nama ||
-        "Admin / Kepala Sekolah"
+      nama:akun.nama || "Admin / Kepala Sekolah"
 
     };
 
@@ -707,24 +814,17 @@ async function loginAdmin(){
     );
 
 
-    /* CATAT LOGIN ADMIN */
-
-    await catatLogin(
-      akun.username,
-      "admin",
-      akun.referensi_id
-    );
-
-
     pesan.className="sukses";
 
     pesan.textContent=
-      "Login berhasil.";
+      "Login berhasil. Membuka dashboard...";
 
 
-    tampilDashboard(
-      sessionAdmin
-    );
+    setTimeout(function(){
+
+      tampilDashboard(sessionAdmin);
+
+    },500);
 
 
   }catch(error){
@@ -746,59 +846,7 @@ async function loginAdmin(){
 
 
 /* =====================================================
-   CATAT LOGIN
-===================================================== */
-
-async function catatLogin(
-  username,
-  role,
-  referensi_id
-){
-
-  try{
-
-    await fetch(
-      SUPABASE_URL +
-      "/rest/v1/log_login",
-      {
-        method:"POST",
-
-        headers:{
-          "Content-Type":"application/json",
-          "apikey":SUPABASE_KEY,
-          "Authorization":
-            "Bearer " + SUPABASE_KEY,
-          "Prefer":
-            "return=minimal"
-        },
-
-        body:JSON.stringify({
-
-          username:username,
-
-          role:role,
-
-          referensi_id:
-            referensi_id ?? null
-
-        })
-      }
-    );
-
-  }catch(error){
-
-    console.error(
-      "Gagal mencatat login:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   DASHBOARD
+   TAMPIL DASHBOARD
 ===================================================== */
 
 function tampilDashboard(akun){
@@ -814,46 +862,32 @@ function tampilDashboard(akun){
 
   document.getElementById(
     "namaAdmin"
-  ).textContent =
+  ).textContent=
     "Selamat datang, " +
-    (akun.nama ||
-      "Admin / Kepala Sekolah");
+    (akun.nama || "Admin");
 
 
-  tampilkanTanggal();
-
-  loadRekap();
-
-}
-
-
-/* =====================================================
-   TANGGAL
-===================================================== */
-
-function tampilkanTanggal(){
-
-  const sekarang =
-    new Date();
-
-  document.getElementById(
-    "tanggalHariIni"
-  ).textContent =
-    sekarang.toLocaleDateString(
-      "id-ID",
-      {
-        weekday:"long",
-        day:"numeric",
-        month:"long",
-        year:"numeric"
-      }
+  const tanggalInput =
+    document.getElementById(
+      "tanggalRekap"
     );
 
+
+  if(!tanggalInput.value){
+
+    tanggalInput.value =
+      tanggalHariIni();
+
+  }
+
+
+  tampilkanRekap();
+
 }
 
 
 /* =====================================================
-   AMBIL DATA
+   AMBIL DATA SUPABASE
 ===================================================== */
 
 async function ambilData(tabel){
@@ -880,7 +914,7 @@ async function ambilData(tabel){
       await response.text();
 
     throw new Error(
-      "Gagal mengambil data " +
+      "Gagal mengambil tabel " +
       tabel +
       ": " +
       text
@@ -895,30 +929,238 @@ async function ambilData(tabel){
 
 
 /* =====================================================
-   REKAP
+   TANGGAL HARI INI
 ===================================================== */
 
-async function loadRekap(){
+function tanggalHariIni(){
 
-  loadGuruLogin();
+  const sekarang =
+    new Date();
 
-  loadSiswaLogin();
+  const tahun =
+    sekarang.getFullYear();
 
-  loadFeedback();
+  const bulan =
+    String(
+      sekarang.getMonth()+1
+    ).padStart(2,"0");
+
+  const tanggal =
+    String(
+      sekarang.getDate()
+    ).padStart(2,"0");
+
+  return (
+    tahun +
+    "-" +
+    bulan +
+    "-" +
+    tanggal
+  );
 
 }
 
 
 /* =====================================================
-   GURU LOGIN HARI INI
+   FORMAT TANGGAL
 ===================================================== */
 
-async function loadGuruLogin(){
+function formatTanggal(value){
+
+  if(!value)
+    return "-";
+
+
+  const tanggal =
+    new Date(value);
+
+
+  if(isNaN(tanggal.getTime()))
+    return value;
+
+
+  return tanggal.toLocaleString(
+    "id-ID",
+    {
+      dateStyle:"short",
+      timeStyle:"short"
+    }
+  );
+
+}
+
+
+/* =====================================================
+   FORMAT TANGGAL INDONESIA
+===================================================== */
+
+function formatTanggalIndonesia(value){
+
+  if(!value)
+    return "-";
+
+
+  const bagian =
+    String(value).split("-");
+
+
+  if(bagian.length!==3)
+    return value;
+
+
+  return (
+    bagian[2] +
+    "/" +
+    bagian[1] +
+    "/" +
+    bagian[0]
+  );
+
+}
+
+
+/* =====================================================
+   MENDAPATKAN BATAS MINGGU
+   SENIN - MINGGU
+===================================================== */
+
+function batasMinggu(tanggalString){
+
+  const tanggal =
+    new Date(
+      tanggalString +
+      "T00:00:00"
+    );
+
+
+  const hari =
+    tanggal.getDay();
+
+
+  const selisihSenin =
+    hari===0 ? 6 : hari-1;
+
+
+  const awal =
+    new Date(tanggal);
+
+
+  awal.setDate(
+    tanggal.getDate() -
+    selisihSenin
+  );
+
+  awal.setHours(
+    0,0,0,0
+  );
+
+
+  const akhir =
+    new Date(awal);
+
+
+  akhir.setDate(
+    awal.getDate()+7
+  );
+
+
+  return {
+    awal:awal,
+    akhir:akhir
+  };
+
+}
+
+
+/* =====================================================
+   TAMPILKAN REKAP
+===================================================== */
+
+async function tampilkanRekap(){
+
+  const tanggal =
+    document.getElementById(
+      "tanggalRekap"
+    ).value;
+
+
+  if(!tanggal){
+
+    alert(
+      "Silakan pilih tanggal terlebih dahulu."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "tanggalInfo"
+  ).textContent =
+    "Menampilkan rekap untuk tanggal " +
+    formatTanggalIndonesia(tanggal);
+
+
+  document.getElementById(
+    "guruLogin"
+  ).textContent="-";
+
+
+  document.getElementById(
+    "siswaLogin"
+  ).textContent="-";
+
+
+  document.getElementById(
+    "guruFeedback"
+  ).textContent="-";
+
+
+  document.getElementById(
+    "totalFeedback"
+  ).textContent="-";
+
+
+  document.getElementById(
+    "tabelGuruLogin"
+  ).innerHTML=
+    '<div class="loading">Memuat data...</div>';
+
+
+  document.getElementById(
+    "tabelSiswaLogin"
+  ).innerHTML=
+    '<div class="loading">Memuat data...</div>';
+
+
+  document.getElementById(
+    "tabelFeedback"
+  ).innerHTML=
+    '<div class="loading">Memuat data...</div>';
+
+
+  await Promise.all([
+    loadGuruLogin(tanggal),
+    loadSiswaLogin(tanggal),
+    loadFeedback(tanggal)
+  ]);
+
+}
+
+
+/* =====================================================
+   GURU LOGIN
+   MENGGUNAKAN waktu_login
+===================================================== */
+
+async function loadGuruLogin(tanggal){
 
   const tempat =
     document.getElementById(
       "tabelGuruLogin"
     );
+
 
   try{
 
@@ -928,21 +1170,36 @@ async function loadGuruLogin(){
       );
 
 
-    const hariIni =
-      tanggalIndonesiaHariIni();
-
-
     const guru =
       data.filter(function(item){
 
-        return String(item.role)
+        if(
+          String(item.role)
+          .trim()
           .toLowerCase()
-          === "guru"
-          &&
-          tanggalDariDatabase(
-            item.created_at
-          )
-          === hariIni;
+          !== "guru"
+        ){
+
+          return false;
+
+        }
+
+
+        if(!item.waktu_login)
+          return false;
+
+
+        const waktu =
+          new Date(
+            item.waktu_login
+          );
+
+
+        if(isNaN(waktu.getTime()))
+          return false;
+
+
+        return tanggalLokal(waktu)===tanggal;
 
       });
 
@@ -957,8 +1214,9 @@ async function loadGuruLogin(){
 
       tempat.innerHTML=
         '<div class="info">' +
-        'Belum ada guru yang login hari ini.' +
-        '</div>';
+        'Tidak ada guru yang login pada tanggal ' +
+        formatTanggalIndonesia(tanggal) +
+        '.</div>';
 
       return;
 
@@ -970,34 +1228,27 @@ async function loadGuruLogin(){
       '<table>' +
       '<tr>' +
       '<th>No</th>' +
-      '<th>Username</th>' +
-      '<th>Tanggal</th>' +
-      '<th>Jam Login</th>' +
+      '<th>Username / NIP</th>' +
+      '<th>Waktu Login</th>' +
       '</tr>';
 
 
-    guru.forEach(
-      function(item,index){
+    guru.forEach(function(item,index){
 
-        html+=
-          "<tr>" +
-          "<td>"+(index+1)+"</td>" +
-          "<td>"+escapeHTML(
-            item.username
-          )+"</td>" +
-          "<td>"+formatTanggal(
-            item.created_at
-          )+"</td>" +
-          "<td>"+formatJam(
-            item.created_at
-          )+"</td>" +
-          "</tr>";
+      html+=
+        "<tr>" +
+        "<td>"+(index+1)+"</td>" +
+        "<td>"+escapeHTML(item.username)+"</td>" +
+        "<td>"+formatTanggal(item.waktu_login)+"</td>" +
+        "</tr>";
 
-      }
-    );
+    });
 
 
-    html+="</table></div>";
+    html+=
+      "</table>" +
+      "</div>";
+
 
     tempat.innerHTML=html;
 
@@ -1007,15 +1258,10 @@ async function loadGuruLogin(){
     console.error(error);
 
     tempat.innerHTML=
-      '<div class="error-box">' +
-      'Data login guru belum tersedia.' +
-      '<br><small>' +
+      '<div class="info">' +
+      'Gagal membaca data login guru.<br>' +
       escapeHTML(error.message) +
-      '</small></div>';
-
-    document.getElementById(
-      "guruLogin"
-    ).textContent="-";
+      '</div>';
 
   }
 
@@ -1023,15 +1269,17 @@ async function loadGuruLogin(){
 
 
 /* =====================================================
-   SISWA LOGIN HARI INI
+   SISWA LOGIN
+   MENGGUNAKAN waktu_login
 ===================================================== */
 
-async function loadSiswaLogin(){
+async function loadSiswaLogin(tanggal){
 
   const tempat =
     document.getElementById(
       "tabelSiswaLogin"
     );
+
 
   try{
 
@@ -1041,21 +1289,36 @@ async function loadSiswaLogin(){
       );
 
 
-    const hariIni =
-      tanggalIndonesiaHariIni();
-
-
     const siswa =
       data.filter(function(item){
 
-        return String(item.role)
+        if(
+          String(item.role)
+          .trim()
           .toLowerCase()
-          === "siswa"
-          &&
-          tanggalDariDatabase(
-            item.created_at
-          )
-          === hariIni;
+          !== "siswa"
+        ){
+
+          return false;
+
+        }
+
+
+        if(!item.waktu_login)
+          return false;
+
+
+        const waktu =
+          new Date(
+            item.waktu_login
+          );
+
+
+        if(isNaN(waktu.getTime()))
+          return false;
+
+
+        return tanggalLokal(waktu)===tanggal;
 
       });
 
@@ -1070,8 +1333,9 @@ async function loadSiswaLogin(){
 
       tempat.innerHTML=
         '<div class="info">' +
-        'Belum ada siswa yang login hari ini.' +
-        '</div>';
+        'Tidak ada siswa yang login pada tanggal ' +
+        formatTanggalIndonesia(tanggal) +
+        '.</div>';
 
       return;
 
@@ -1084,33 +1348,26 @@ async function loadSiswaLogin(){
       '<tr>' +
       '<th>No</th>' +
       '<th>Username / NISN</th>' +
-      '<th>Tanggal</th>' +
-      '<th>Jam Login</th>' +
+      '<th>Waktu Login</th>' +
       '</tr>';
 
 
-    siswa.forEach(
-      function(item,index){
+    siswa.forEach(function(item,index){
 
-        html+=
-          "<tr>" +
-          "<td>"+(index+1)+"</td>" +
-          "<td>"+escapeHTML(
-            item.username
-          )+"</td>" +
-          "<td>"+formatTanggal(
-            item.created_at
-          )+"</td>" +
-          "<td>"+formatJam(
-            item.created_at
-          )+"</td>" +
-          "</tr>";
+      html+=
+        "<tr>" +
+        "<td>"+(index+1)+"</td>" +
+        "<td>"+escapeHTML(item.username)+"</td>" +
+        "<td>"+formatTanggal(item.waktu_login)+"</td>" +
+        "</tr>";
 
-      }
-    );
+    });
 
 
-    html+="</table></div>";
+    html+=
+      "</table>" +
+      "</div>";
+
 
     tempat.innerHTML=html;
 
@@ -1120,15 +1377,10 @@ async function loadSiswaLogin(){
     console.error(error);
 
     tempat.innerHTML=
-      '<div class="error-box">' +
-      'Data login siswa belum tersedia.' +
-      '<br><small>' +
+      '<div class="info">' +
+      'Gagal membaca data login siswa.<br>' +
       escapeHTML(error.message) +
-      '</small></div>';
-
-    document.getElementById(
-      "siswaLogin"
-    ).textContent="-";
+      '</div>';
 
   }
 
@@ -1136,15 +1388,17 @@ async function loadSiswaLogin(){
 
 
 /* =====================================================
-   FEEDBACK MINGGU INI
+   FEEDBACK MINGGU TERPILIH
+   MENGGUNAKAN feedback_jurnal
 ===================================================== */
 
-async function loadFeedback(){
+async function loadFeedback(tanggal){
 
   const tempat =
     document.getElementById(
       "tabelFeedback"
     );
+
 
   try{
 
@@ -1154,41 +1408,31 @@ async function loadFeedback(){
       );
 
 
-    const sekarang =
-      new Date();
-
-
-    const hari =
-      sekarang.getDay();
-
-
-    const selisih =
-      hari===0
-        ? 6
-        : hari-1;
-
-
-    const awalMinggu =
-      new Date(sekarang);
-
-
-    awalMinggu.setDate(
-      sekarang.getDate() -
-      selisih
-    );
-
-
-    awalMinggu.setHours(
-      0,0,0,0
-    );
+    const minggu =
+      batasMinggu(tanggal);
 
 
     const feedbackMinggu =
       data.filter(function(item){
 
-        return new Date(
-          item.created_at
-        ) >= awalMinggu;
+        if(!item.created_at)
+          return false;
+
+
+        const waktu =
+          new Date(
+            item.created_at
+          );
+
+
+        if(isNaN(waktu.getTime()))
+          return false;
+
+
+        return (
+          waktu >= minggu.awal &&
+          waktu < minggu.akhir
+        );
 
       });
 
@@ -1200,7 +1444,10 @@ async function loadFeedback(){
     feedbackMinggu.forEach(
       function(item){
 
-        if(item.guru_id !== null){
+        if(
+          item.guru_id !== null &&
+          item.guru_id !== undefined
+        ){
 
           guruUnik.add(
             String(item.guru_id)
@@ -1224,14 +1471,29 @@ async function loadFeedback(){
       feedbackMinggu.length;
 
 
-    if(
-      feedbackMinggu.length===0
-    ){
+    const tanggalAwal =
+      tanggalDariDate(
+        minggu.awal
+      );
+
+
+    const tanggalAkhir =
+      tanggalDariDate(
+        new Date(
+          minggu.akhir.getTime()-1
+        )
+      );
+
+
+    if(feedbackMinggu.length===0){
 
       tempat.innerHTML=
         '<div class="info">' +
-        'Belum ada feedback guru minggu ini.' +
-        '</div>';
+        'Belum ada feedback guru pada minggu ' +
+        formatTanggalIndonesia(tanggalAwal) +
+        ' sampai ' +
+        formatTanggalIndonesia(tanggalAkhir) +
+        '.</div>';
 
       return;
 
@@ -1239,6 +1501,15 @@ async function loadFeedback(){
 
 
     let html=
+      '<div class="info">' +
+      'Periode minggu: ' +
+      formatTanggalIndonesia(tanggalAwal) +
+      ' s.d. ' +
+      formatTanggalIndonesia(tanggalAkhir) +
+      '</div>';
+
+
+    html+=
       '<div class="tabel-wrap">' +
       '<table>' +
       '<tr>' +
@@ -1257,24 +1528,21 @@ async function loadFeedback(){
         html+=
           "<tr>" +
           "<td>"+(index+1)+"</td>" +
-          "<td>"+(item.guru_id ?? "")+"</td>" +
-          "<td>"+(item.siswa_id ?? "")+"</td>" +
-          "<td>"+escapeHTML(
-            item.respons
-          )+"</td>" +
-          "<td>"+escapeHTML(
-            item.komentar
-          )+"</td>" +
-          "<td>"+formatTanggal(
-            item.created_at
-          )+"</td>" +
+          "<td>"+escapeHTML(item.guru_id)+"</td>" +
+          "<td>"+escapeHTML(item.siswa_id)+"</td>" +
+          "<td>"+escapeHTML(item.respons)+"</td>" +
+          "<td>"+escapeHTML(item.komentar)+"</td>" +
+          "<td>"+formatTanggal(item.created_at)+"</td>" +
           "</tr>";
 
       }
     );
 
 
-    html+="</table></div>";
+    html+=
+      "</table>" +
+      "</div>";
+
 
     tempat.innerHTML=html;
 
@@ -1282,13 +1550,6 @@ async function loadFeedback(){
   }catch(error){
 
     console.error(error);
-
-    tempat.innerHTML=
-      '<div class="error-box">' +
-      'Data feedback belum tersedia.' +
-      '<br><small>' +
-      escapeHTML(error.message) +
-      '</small></div>';
 
     document.getElementById(
       "guruFeedback"
@@ -1298,102 +1559,74 @@ async function loadFeedback(){
       "totalFeedback"
     ).textContent="-";
 
+
+    tempat.innerHTML=
+      '<div class="info">' +
+      'Gagal membaca tabel feedback_jurnal.<br>' +
+      escapeHTML(error.message) +
+      '</div>';
+
   }
 
 }
 
 
 /* =====================================================
-   TANGGAL DATABASE
+   TANGGAL LOKAL
 ===================================================== */
 
-function tanggalDariDatabase(value){
+function tanggalLokal(date){
 
-  if(!value)
-    return "";
+  const tahun =
+    date.getFullYear();
 
-  const d =
-    new Date(value);
+  const bulan =
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
 
-  return d.toLocaleDateString(
-    "en-CA"
-  );
+  const tanggal =
+    String(
+      date.getDate()
+    ).padStart(2,"0");
 
-}
-
-
-function tanggalIndonesiaHariIni(){
-
-  const d =
-    new Date();
-
-  return d.toLocaleDateString(
-    "en-CA"
+  return (
+    tahun +
+    "-" +
+    bulan +
+    "-" +
+    tanggal
   );
 
 }
 
 
 /* =====================================================
-   FORMAT TANGGAL
+   DATE KE YYYY-MM-DD
 ===================================================== */
 
-function formatTanggal(value){
+function tanggalDariDate(date){
 
-  if(!value)
-    return "-";
-
-  const d =
-    new Date(value);
-
-  return d.toLocaleDateString(
-    "id-ID",
-    {
-      day:"2-digit",
-      month:"2-digit",
-      year:"numeric"
-    }
-  );
+  return tanggalLokal(date);
 
 }
 
 
 /* =====================================================
-   FORMAT JAM
-===================================================== */
-
-function formatJam(value){
-
-  if(!value)
-    return "-";
-
-  const d =
-    new Date(value);
-
-  return d.toLocaleTimeString(
-    "id-ID",
-    {
-      hour:"2-digit",
-      minute:"2-digit",
-      second:"2-digit"
-    }
-  );
-
-}
-
-
-/* =====================================================
-   KEAMANAN TAMPILAN
+   AMANKAN HTML
 ===================================================== */
 
 function escapeHTML(value){
 
-  if(value === null ||
-     value === undefined){
+  if(
+    value === null ||
+    value === undefined
+  ){
 
     return "";
 
   }
+
 
   return String(value)
     .replace(/&/g,"&amp;")
@@ -1415,27 +1648,37 @@ function logout(){
     "akun_admin"
   );
 
+
   document.getElementById(
     "dashboard"
   ).style.display="none";
+
 
   document.getElementById(
     "loginArea"
   ).style.display="flex";
 
+
   document.getElementById(
     "username"
   ).value="";
+
 
   document.getElementById(
     "password"
   ).value="";
 
+
+  document.getElementById(
+    "pesan"
+  ).className="";
+
+
 }
 
 
 /* =====================================================
-   ENTER
+   ENTER UNTUK LOGIN
 ===================================================== */
 
 document
@@ -1452,6 +1695,16 @@ document
 
   }
 );
+
+
+/* =====================================================
+   SET TANGGAL DEFAULT
+===================================================== */
+
+document
+.getElementById("tanggalRekap")
+.value =
+tanggalHariIni();
 
 
 /* =====================================================
@@ -1478,7 +1731,7 @@ document
 
     if(
       akun &&
-      akun.role === "admin"
+      akun.role==="admin"
     ){
 
       tampilDashboard(akun);
