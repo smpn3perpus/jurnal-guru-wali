@@ -1,0 +1,1689 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Siswa & Pengumuman</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#1e293b;
+}
+
+.header{
+  background:#7c3aed;
+  color:#fff;
+  padding:20px;
+}
+
+.header h1{
+  margin:0;
+  font-size:23px;
+}
+
+.header p{
+  margin:6px 0 0;
+  font-size:13px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px 15px 40px;
+}
+
+.panel{
+  background:#fff;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.identitas{
+  background:#f5f3ff;
+  color:#5b21b6;
+  border-radius:10px;
+  padding:14px;
+  line-height:1.6;
+}
+
+h2{
+  margin:0 0 15px;
+  color:#6d28d9;
+}
+
+h3{
+  color:#475569;
+}
+
+button{
+  border:0;
+  padding:12px 15px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+.btn-purple{
+  background:#7c3aed;
+  color:#fff;
+}
+
+.btn-purple:hover{
+  background:#6d28d9;
+}
+
+.btn-green{
+  background:#16a34a;
+  color:#fff;
+}
+
+.btn-green:hover{
+  background:#15803d;
+}
+
+.btn-blue{
+  background:#0284c7;
+  color:#fff;
+}
+
+.btn-blue:hover{
+  background:#0369a1;
+}
+
+.btn-gray{
+  background:#64748b;
+  color:#fff;
+}
+
+.btn-gray:hover{
+  background:#475569;
+}
+
+.nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:15px;
+}
+
+.nav button{
+  flex:1;
+  min-width:180px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =====================================================
+   LOGIN SISWA
+===================================================== */
+
+.login-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.login-table th,
+.login-table td{
+  padding:11px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left;
+  vertical-align:top;
+}
+
+.login-table th{
+  background:#eff6ff;
+  color:#0369a1;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:20px;
+  background:#dcfce7;
+  color:#166534;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+.loading{
+  padding:20px;
+  text-align:center;
+  color:#64748b;
+}
+
+.empty{
+  padding:18px;
+  background:#f8fafc;
+  border-radius:10px;
+  text-align:center;
+  color:#64748b;
+}
+
+.error{
+  padding:14px;
+  background:#fee2e2;
+  color:#991b1b;
+  border-radius:10px;
+  line-height:1.5;
+}
+
+/* =====================================================
+   PENGUMUMAN
+===================================================== */
+
+.form-group{
+  margin-bottom:14px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:bold;
+}
+
+input,
+textarea{
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  padding:12px;
+  font-size:15px;
+  font-family:inherit;
+}
+
+textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+input:focus,
+textarea:focus{
+  outline:none;
+  border-color:#7c3aed;
+  box-shadow:0 0 0 3px rgba(124,58,237,.10);
+}
+
+.pengumuman{
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:16px;
+  margin-top:12px;
+  background:#fff;
+}
+
+.pengumuman-judul{
+  font-size:18px;
+  font-weight:bold;
+  color:#6d28d9;
+}
+
+.pengumuman-waktu{
+  margin-top:6px;
+  font-size:12px;
+  color:#64748b;
+}
+
+.pengumuman-guru{
+  margin-top:7px;
+  font-size:13px;
+  color:#475569;
+}
+
+.pengumuman-isi{
+  margin-top:12px;
+  white-space:pre-wrap;
+  line-height:1.6;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+  text-align:center;
+  color:#64748b;
+  font-size:12px;
+  padding:20px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:600px){
+
+  .container{
+    padding:15px 10px 30px;
+  }
+
+  .panel{
+    padding:16px;
+  }
+
+  .nav{
+    flex-direction:column;
+  }
+
+  .nav button{
+    width:100%;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <h1>
+    📢 Pengumuman & Login Siswa
+  </h1>
+
+  <p>
+    Jurnal 7 Kebiasaan Anak Indonesia Hebat
+    • SMP Negeri 3 Sibolga
+  </p>
+
+</header>
+
+
+<main class="container">
+
+  <!-- =================================================
+       IDENTITAS
+  ================================================== -->
+
+  <section class="panel">
+
+    <div
+      id="identitas"
+      class="identitas">
+      Memeriksa sesi login...
+    </div>
+
+
+    <div class="nav">
+
+      <button
+        class="btn-gray"
+        onclick="kembali()">
+        ← Kembali
+      </button>
+
+      <button
+        id="btnRefresh"
+        class="btn-blue"
+        onclick="refreshSemua()">
+        🔄 Refresh
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       MENU GURU
+  ================================================== -->
+
+  <section
+    id="menuGuru"
+    class="panel hidden">
+
+    <h2>
+      👨‍🏫 Menu Guru
+    </h2>
+
+    <div class="nav">
+
+      <button
+        class="btn-blue"
+        onclick="bukaLoginSiswa()">
+        👨‍🎓 Login Siswa Terakhir
+      </button>
+
+      <button
+        class="btn-purple"
+        onclick="bukaPengumumanGuru()">
+        📢 Pengumuman Guru Wali
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       LOGIN SISWA TERAKHIR
+  ================================================== -->
+
+  <section
+    id="panelLoginSiswa"
+    class="panel hidden">
+
+    <h2>
+      👨‍🎓 Login Siswa Terakhir
+    </h2>
+
+    <div
+      id="jumlahLogin"
+      style="margin-bottom:12px;font-weight:bold;">
+      -
+    </div>
+
+    <div id="daftarLogin">
+      <div class="loading">
+        Memuat login siswa...
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       PENGUMUMAN GURU
+  ================================================== -->
+
+  <section
+    id="panelPengumumanGuru"
+    class="panel hidden">
+
+    <h2>
+      📢 Pengumuman Guru Wali
+    </h2>
+
+
+    <!-- FORM -->
+
+    <div>
+
+      <div class="form-group">
+
+        <label for="judul">
+          Judul Pengumuman
+        </label>
+
+        <input
+          id="judul"
+          type="text"
+          placeholder="Contoh: Pengisian jurnal hari ini"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="isi">
+          Isi Pengumuman
+        </label>
+
+        <textarea
+          id="isi"
+          placeholder="Tulis pengumuman untuk siswa..."
+        ></textarea>
+
+      </div>
+
+
+      <button
+        id="btnSimpan"
+        class="btn-green"
+        onclick="simpanPengumuman()">
+        💾 Simpan Pengumuman
+      </button>
+
+    </div>
+
+
+    <h3>
+      📋 Pengumuman Saya
+    </h3>
+
+    <div id="daftarPengumumanGuru">
+
+      <div class="loading">
+        Memuat pengumuman...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================================
+       PENGUMUMAN SISWA
+  ================================================== -->
+
+  <section
+    id="panelPengumumanSiswa"
+    class="panel hidden">
+
+    <h2>
+      📢 Pengumuman dari Guru Wali
+    </h2>
+
+    <div id="daftarPengumumanSiswa">
+
+      <div class="loading">
+        Memuat pengumuman...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    Created by Mr. Rahmat Batubara, S.T.P
+  </div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+function headers(){
+
+  return {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Accept":
+      "application/json"
+
+  };
+
+}
+
+
+/* =====================================================
+   SESSION
+===================================================== */
+
+let akun = null;
+let tipeAkun = null;
+
+
+/* =====================================================
+   UTILITAS
+===================================================== */
+
+function aman(value){
+
+  return String(
+    value ?? "-"
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+function formatWaktu(value){
+
+  if(!value)
+    return "-";
+
+  try{
+
+    return new Date(value)
+      .toLocaleString(
+        "id-ID",
+        {
+          dateStyle:"medium",
+          timeStyle:"short"
+        }
+      );
+
+  }catch(error){
+
+    return value;
+
+  }
+
+}
+
+
+/* =====================================================
+   BACA SESSION
+===================================================== */
+
+function bacaSession(){
+
+  const savedGuru =
+    sessionStorage.getItem(
+      "akun_guru"
+    );
+
+
+  const savedSiswa =
+    sessionStorage.getItem(
+      "akun_siswa"
+    );
+
+
+  /*
+    Guru diprioritaskan jika kedua session
+    tidak sengaja masih tersimpan.
+  */
+
+  if(savedGuru){
+
+    try{
+
+      const data =
+        JSON.parse(savedGuru);
+
+      if(
+        data &&
+        data.role === "guru" &&
+        data.referensi_id
+      ){
+
+        akun = data;
+        tipeAkun = "guru";
+        return true;
+
+      }
+
+    }catch(error){}
+
+  }
+
+
+  if(savedSiswa){
+
+    try{
+
+      const data =
+        JSON.parse(savedSiswa);
+
+      if(
+        data &&
+        data.role === "siswa" &&
+        data.referensi_id
+      ){
+
+        akun = data;
+        tipeAkun = "siswa";
+        return true;
+
+      }
+
+    }catch(error){}
+
+  }
+
+
+  return false;
+
+}
+
+
+/* =====================================================
+   TAMPIL IDENTITAS
+===================================================== */
+
+function tampilIdentitas(){
+
+  const box =
+    document.getElementById(
+      "identitas"
+    );
+
+
+  if(tipeAkun === "guru"){
+
+    box.innerHTML =
+
+      "👨‍🏫 <b>Guru</b><br>" +
+
+      "Nama: " +
+      aman(akun.nama) +
+
+      "<br>" +
+
+      "NIP / Username: " +
+      aman(akun.username);
+
+    return;
+
+  }
+
+
+  if(tipeAkun === "siswa"){
+
+    box.innerHTML =
+
+      "👨‍🎓 <b>Siswa</b><br>" +
+
+      "Nama: " +
+      aman(akun.nama) +
+
+      "<br>" +
+
+      "NISN: " +
+      aman(akun.username);
+
+  }
+
+}
+
+
+/* =====================================================
+   INISIALISASI
+===================================================== */
+
+async function mulai(){
+
+  if(!bacaSession()){
+
+    document.getElementById(
+      "identitas"
+    ).className =
+      "error";
+
+    document.getElementById(
+      "identitas"
+    ).textContent =
+      "Sesi login tidak ditemukan. Silakan login terlebih dahulu.";
+
+    return;
+
+  }
+
+
+  tampilIdentitas();
+
+
+  if(tipeAkun === "guru"){
+
+    document.getElementById(
+      "menuGuru"
+    ).classList.remove(
+      "hidden"
+    );
+
+
+    await bukaPengumumanGuru();
+
+  }
+
+
+  if(tipeAkun === "siswa"){
+
+    await bukaPengumumanSiswa();
+
+  }
+
+}
+
+
+/* =====================================================
+   GURU:
+   LOGIN SISWA TERAKHIR
+===================================================== */
+
+async function bukaLoginSiswa(){
+
+  tutupSemuaPanel();
+
+
+  document.getElementById(
+    "panelLoginSiswa"
+  ).classList.remove(
+    "hidden"
+  );
+
+
+  await muatLoginSiswa();
+
+}
+
+
+async function muatLoginSiswa(){
+
+  const tempat =
+    document.getElementById(
+      "daftarLogin"
+    );
+
+
+  const jumlah =
+    document.getElementById(
+      "jumlahLogin"
+    );
+
+
+  tempat.innerHTML =
+    `
+    <div class="loading">
+      Mengambil data login siswa...
+    </div>
+    `;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/ambil_login_siswa_guru",
+
+        {
+
+          method:"POST",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              p_guru_id:
+                Number(
+                  akun.referensi_id
+                )
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data=[];
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : [];
+
+    }catch(error){
+
+      throw new Error(
+        "Data login siswa tidak valid."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.details ||
+        data.hint ||
+        text ||
+        "Gagal mengambil login siswa."
+      );
+
+    }
+
+
+    jumlah.textContent =
+      "📊 " +
+      data.length +
+      " login siswa terakhir";
+
+
+    if(!data.length){
+
+      tempat.innerHTML =
+        `
+        <div class="empty">
+          Belum ada siswa wali yang login.
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    let html = `
+
+      <div class="table-wrap">
+
+        <table class="login-table">
+
+          <thead>
+
+            <tr>
+              <th>No</th>
+              <th>Nama Siswa</th>
+              <th>NISN</th>
+              <th>Kelas</th>
+              <th>Waktu Login</th>
+              <th>Status</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+    `;
+
+
+    data.forEach(
+      function(item,index){
+
+        html += `
+
+          <tr>
+
+            <td>
+              ${index + 1}
+            </td>
+
+            <td>
+              <b>
+                ${aman(item.nama)}
+              </b>
+            </td>
+
+            <td>
+              ${aman(item.nisn)}
+            </td>
+
+            <td>
+              ${aman(item.kelas)}
+            </td>
+
+            <td>
+              ${aman(
+                formatWaktu(
+                  item.waktu_login
+                )
+              )}
+            </td>
+
+            <td>
+              <span class="badge">
+                ✅ LOGIN
+              </span>
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    );
+
+
+    html += `
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    `;
+
+
+    tempat.innerHTML =
+      html;
+
+
+  }catch(error){
+
+    console.error(
+      "LOGIN SISWA:",
+      error
+    );
+
+
+    jumlah.textContent =
+      "";
+
+
+    tempat.innerHTML =
+      `
+      <div class="error">
+        <b>Gagal mengambil data login siswa.</b>
+        <br><br>
+        ${aman(error.message)}
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =====================================================
+   GURU:
+   PENGUMUMAN
+===================================================== */
+
+async function bukaPengumumanGuru(){
+
+  if(tipeAkun !== "guru")
+    return;
+
+
+  tutupSemuaPanel();
+
+
+  document.getElementById(
+    "panelPengumumanGuru"
+  ).classList.remove(
+    "hidden"
+  );
+
+
+  await muatPengumumanGuru();
+
+}
+
+
+async function muatPengumumanGuru(){
+
+  const tempat =
+    document.getElementById(
+      "daftarPengumumanGuru"
+    );
+
+
+  tempat.innerHTML =
+    `
+    <div class="loading">
+      Memuat pengumuman...
+    </div>
+    `;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/ambil_pengumuman_guru",
+
+        {
+
+          method:"POST",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              p_guru_id:
+                Number(
+                  akun.referensi_id
+                )
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data=[];
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : [];
+
+    }catch(error){
+
+      throw new Error(
+        "Data pengumuman tidak valid."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.details ||
+        data.hint ||
+        text ||
+        "Gagal mengambil pengumuman."
+      );
+
+    }
+
+
+    if(!data.length){
+
+      tempat.innerHTML =
+        `
+        <div class="empty">
+          Belum ada pengumuman.
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    let html="";
+
+
+    data.forEach(
+      function(item){
+
+        html += `
+
+          <div class="pengumuman">
+
+            <div class="pengumuman-judul">
+              📢 ${aman(item.judul)}
+            </div>
+
+            <div class="pengumuman-waktu">
+              ${aman(
+                formatWaktu(
+                  item.dibuat_at
+                )
+              )}
+            </div>
+
+            <div class="pengumuman-isi">
+              ${aman(item.isi)}
+            </div>
+
+            <div style="margin-top:10px;">
+              ${
+                item.aktif
+                ? '<span class="badge">AKTIF</span>'
+                : '<span class="badge">NONAKTIF</span>'
+              }
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    tempat.innerHTML =
+      html;
+
+
+  }catch(error){
+
+    console.error(
+      "PENGUMUMAN GURU:",
+      error
+    );
+
+
+    tempat.innerHTML =
+      `
+      <div class="error">
+        ${aman(error.message)}
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =====================================================
+   SIMPAN PENGUMUMAN GURU
+===================================================== */
+
+async function simpanPengumuman(){
+
+  if(
+    tipeAkun !== "guru"
+  ){
+
+    alert(
+      "Hanya Guru yang dapat membuat pengumuman."
+    );
+
+    return;
+
+  }
+
+
+  const judul =
+    document.getElementById(
+      "judul"
+    ).value.trim();
+
+
+  const isi =
+    document.getElementById(
+      "isi"
+    ).value.trim();
+
+
+  const tombol =
+    document.getElementById(
+      "btnSimpan"
+    );
+
+
+  if(!judul){
+
+    alert(
+      "Judul pengumuman wajib diisi."
+    );
+
+    return;
+
+  }
+
+
+  if(!isi){
+
+    alert(
+      "Isi pengumuman wajib diisi."
+    );
+
+    return;
+
+  }
+
+
+  tombol.disabled =
+    true;
+
+  tombol.textContent =
+    "⏳ Menyimpan...";
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/tambah_pengumuman_guru",
+
+        {
+
+          method:"POST",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              p_guru_id:
+                Number(
+                  akun.referensi_id
+                ),
+
+              p_judul:
+                judul,
+
+              p_isi:
+                isi
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data={};
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : {};
+
+    }catch(error){}
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.details ||
+        data.hint ||
+        text ||
+        "Gagal menyimpan pengumuman."
+      );
+
+    }
+
+
+    alert(
+      "✅ Pengumuman berhasil disimpan."
+    );
+
+
+    document.getElementById(
+      "judul"
+    ).value =
+      "";
+
+
+    document.getElementById(
+      "isi"
+    ).value =
+      "";
+
+
+    await muatPengumumanGuru();
+
+
+  }catch(error){
+
+    console.error(
+      "SIMPAN PENGUMUMAN:",
+      error
+    );
+
+
+    alert(
+      "Gagal menyimpan pengumuman:\n\n" +
+      error.message
+    );
+
+  }finally{
+
+    tombol.disabled =
+      false;
+
+    tombol.textContent =
+      "💾 Simpan Pengumuman";
+
+  }
+
+}
+
+
+/* =====================================================
+   SISWA:
+   PENGUMUMAN GURU WALI
+===================================================== */
+
+async function bukaPengumumanSiswa(){
+
+  if(tipeAkun !== "siswa")
+    return;
+
+
+  tutupSemuaPanel();
+
+
+  document.getElementById(
+    "panelPengumumanSiswa"
+  ).classList.remove(
+    "hidden"
+  );
+
+
+  await muatPengumumanSiswa();
+
+}
+
+
+async function muatPengumumanSiswa(){
+
+  const tempat =
+    document.getElementById(
+      "daftarPengumumanSiswa"
+    );
+
+
+  tempat.innerHTML =
+    `
+    <div class="loading">
+      Memuat pengumuman dari Guru Wali...
+    </div>
+    `;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/ambil_pengumuman_siswa",
+
+        {
+
+          method:"POST",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              p_siswa_id:
+                Number(
+                  akun.referensi_id
+                )
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    let data=[];
+
+
+    try{
+
+      data =
+        text
+        ? JSON.parse(text)
+        : [];
+
+    }catch(error){
+
+      throw new Error(
+        "Data pengumuman tidak valid."
+      );
+
+    }
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.details ||
+        data.hint ||
+        text ||
+        "Gagal mengambil pengumuman."
+      );
+
+    }
+
+
+    if(!data.length){
+
+      tempat.innerHTML =
+        `
+        <div class="empty">
+          Belum ada pengumuman dari Guru Wali.
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    let html="";
+
+
+    data.forEach(
+      function(item){
+
+        html += `
+
+          <div class="pengumuman">
+
+            <div class="pengumuman-judul">
+              📢 ${aman(item.judul)}
+            </div>
+
+            <div class="pengumuman-guru">
+              👨‍🏫 Guru Wali:
+              <b>
+                ${aman(item.nama_guru)}
+              </b>
+            </div>
+
+            <div class="pengumuman-waktu">
+              ${aman(
+                formatWaktu(
+                  item.dibuat_at
+                )
+              )}
+            </div>
+
+            <div class="pengumuman-isi">
+              ${aman(item.isi)}
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    tempat.innerHTML =
+      html;
+
+
+  }catch(error){
+
+    console.error(
+      "PENGUMUMAN SISWA:",
+      error
+    );
+
+
+    tempat.innerHTML =
+      `
+      <div class="error">
+        ${aman(error.message)}
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =====================================================
+   TUTUP SEMUA PANEL
+===================================================== */
+
+function tutupSemuaPanel(){
+
+  document.getElementById(
+    "panelLoginSiswa"
+  ).classList.add(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "panelPengumumanGuru"
+  ).classList.add(
+    "hidden"
+  );
+
+
+  document.getElementById(
+    "panelPengumumanSiswa"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* =====================================================
+   REFRESH
+===================================================== */
+
+async function refreshSemua(){
+
+  if(tipeAkun === "guru"){
+
+    const loginPanel =
+      document.getElementById(
+        "panelLoginSiswa"
+      );
+
+
+    const pengumumanPanel =
+      document.getElementById(
+        "panelPengumumanGuru"
+      );
+
+
+    if(
+      !loginPanel.classList.contains("hidden")
+    ){
+
+      await muatLoginSiswa();
+      return;
+
+    }
+
+
+    if(
+      !pengumumanPanel.classList.contains("hidden")
+    ){
+
+      await muatPengumumanGuru();
+      return;
+
+    }
+
+
+    await muatLoginSiswa();
+    return;
+
+  }
+
+
+  if(tipeAkun === "siswa"){
+
+    await muatPengumumanSiswa();
+
+  }
+
+}
+
+
+/* =====================================================
+   KEMBALI
+===================================================== */
+
+function kembali(){
+
+  if(tipeAkun === "guru"){
+
+    window.location.href =
+      "guru.html";
+
+    return;
+
+  }
+
+
+  if(tipeAkun === "siswa"){
+
+    window.location.href =
+      "siswa.html";
+
+    return;
+
+  }
+
+
+  window.history.back();
+
+}
+
+
+/* =====================================================
+   MULAI
+===================================================== */
+
+mulai();
+
+</script>
+
+</body>
+</html>
+```
