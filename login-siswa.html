@@ -1,4 +1,4 @@
-```html
+```html id="1w8r4a"
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -14,19 +14,20 @@
 
 body{
   margin:0;
-  min-height:100vh;
   font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#dcfce7,#f8fafc);
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
+  background:linear-gradient(135deg,#dcfce7,#f8fafc);
+  color:#1e293b;
 }
 
-.login-card{
+.card{
   width:100%;
   max-width:420px;
-  background:white;
+  background:#fff;
   padding:30px;
   border-radius:20px;
   box-shadow:0 12px 35px rgba(0,0,0,.12);
@@ -35,10 +36,10 @@ body{
 .logo{
   width:80px;
   height:80px;
-  margin:auto;
+  margin:0 auto;
   border-radius:20px;
   background:#16a34a;
-  color:white;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -48,9 +49,9 @@ body{
 
 h1{
   text-align:center;
-  font-size:22px;
   color:#15803d;
-  margin:18px 0 5px;
+  margin:18px 0 6px;
+  font-size:23px;
 }
 
 .school{
@@ -58,13 +59,13 @@ h1{
   color:#64748b;
   font-size:14px;
   line-height:1.5;
-  margin-bottom:25px;
+  margin-bottom:24px;
 }
 
 label{
   display:block;
   font-weight:bold;
-  margin:15px 0 7px;
+  margin:14px 0 7px;
 }
 
 input{
@@ -73,10 +74,10 @@ input{
   border:1px solid #cbd5e1;
   border-radius:10px;
   font-size:16px;
-  outline:none;
 }
 
 input:focus{
+  outline:none;
   border-color:#16a34a;
   box-shadow:0 0 0 3px rgba(22,163,74,.10);
 }
@@ -88,7 +89,7 @@ button{
   border:0;
   border-radius:10px;
   background:#16a34a;
-  color:white;
+  color:#fff;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
@@ -124,29 +125,10 @@ button:disabled{
   color:#166534;
 }
 
-.info{
-  margin-top:18px;
-  padding:12px;
-  border-radius:9px;
-  background:#f0fdf4;
-  color:#166534;
-  font-size:13px;
-  line-height:1.6;
-}
-
-.kembali{
-  display:block;
+.footer{
   text-align:center;
-  margin-top:18px;
-  color:#15803d;
-  text-decoration:none;
-  font-size:14px;
-}
-
-footer{
-  text-align:center;
-  margin-top:25px;
-  color:#777;
+  margin-top:20px;
+  color:#64748b;
   font-size:12px;
 }
 </style>
@@ -154,10 +136,10 @@ footer{
 
 <body>
 
-<div class="login-card">
+<div class="card">
 
   <div class="logo">
-    👨‍🎓
+    🎓
   </div>
 
   <h1>
@@ -170,8 +152,9 @@ footer{
     SMP NEGERI 3 SIBOLGA
   </div>
 
+
   <label for="username">
-    NISN
+    Username / NISN
   </label>
 
   <input
@@ -179,8 +162,8 @@ footer{
     id="username"
     placeholder="Masukkan NISN"
     autocomplete="username"
-    inputmode="numeric"
   >
+
 
   <label for="password">
     Password
@@ -193,32 +176,29 @@ footer{
     autocomplete="current-password"
   >
 
+
   <button
     id="btnLogin"
     onclick="loginSiswa()">
     LOGIN
   </button>
 
+
   <div id="pesan"></div>
 
-  <div class="info">
-    Username menggunakan <b>NISN</b>.
-    <br>
-    Password awal juga menggunakan <b>NISN</b>.
-  </div>
 
-  <a href="index.html" class="kembali">
-    ← Kembali ke halaman utama
-  </a>
-
-  <footer>
+  <div class="footer">
     Created by Mr. Rahmat Batubara, S.T.P
-  </footer>
+  </div>
 
 </div>
 
 
 <script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
   "https://nnnvgbajiqlqrsaygxme.supabase.co";
@@ -227,22 +207,55 @@ const SUPABASE_KEY =
   "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
+function headers(){
+
+  return {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Accept":
+      "application/json"
+
+  };
+
+}
+
+
+/* =====================================================
+   LOGIN SISWA
+===================================================== */
+
 async function loginSiswa(){
 
   const username =
-    document.getElementById("username")
-      .value
-      .trim();
+    document.getElementById(
+      "username"
+    ).value.trim();
+
 
   const password =
-    document.getElementById("password")
-      .value;
+    document.getElementById(
+      "password"
+    ).value;
+
 
   const tombol =
-    document.getElementById("btnLogin");
+    document.getElementById(
+      "btnLogin"
+    );
+
 
   const pesan =
-    document.getElementById("pesan");
+    document.getElementById(
+      "pesan"
+    );
 
 
   pesan.className="";
@@ -252,7 +265,10 @@ async function loginSiswa(){
   if(!username){
 
     pesan.className="error";
-    pesan.textContent="NISN wajib diisi.";
+
+    pesan.textContent=
+      "NISN wajib diisi.";
+
     return;
 
   }
@@ -261,37 +277,53 @@ async function loginSiswa(){
   if(!password){
 
     pesan.className="error";
-    pesan.textContent="Password wajib diisi.";
+
+    pesan.textContent=
+      "Password wajib diisi.";
+
     return;
 
   }
 
 
   tombol.disabled=true;
-  tombol.textContent="MEMERIKSA...";
+
+  tombol.textContent=
+    "MEMERIKSA...";
 
 
   try{
 
+    /* =========================================
+       CEK LOGIN
+    ========================================= */
+
     const response =
       await fetch(
+
         SUPABASE_URL +
         "/rest/v1/rpc/cek_login",
+
         {
+
           method:"POST",
 
-          headers:{
-            "Content-Type":"application/json",
-            "apikey":SUPABASE_KEY,
-            "Authorization":
-              "Bearer " + SUPABASE_KEY
-          },
+          headers:
+            headers(),
 
-          body:JSON.stringify({
-            p_username:username,
-            p_password:password
-          })
+          body:
+            JSON.stringify({
+
+              p_username:
+                username,
+
+              p_password:
+                password
+
+            })
+
         }
+
       );
 
 
@@ -301,10 +333,13 @@ async function loginSiswa(){
 
     let data=[];
 
+
     try{
 
       data =
-        text ? JSON.parse(text) : [];
+        text
+        ? JSON.parse(text)
+        : [];
 
     }catch(error){
 
@@ -319,8 +354,9 @@ async function loginSiswa(){
 
       throw new Error(
         data.message ||
-        data.hint ||
         data.details ||
+        data.hint ||
+        text ||
         "Login gagal."
       );
 
@@ -329,7 +365,7 @@ async function loginSiswa(){
 
     if(
       !Array.isArray(data) ||
-      data.length===0
+      !data.length
     ){
 
       throw new Error(
@@ -339,13 +375,13 @@ async function loginSiswa(){
     }
 
 
-    const akun =
+    const hasil =
       data[0];
 
 
     const role =
       String(
-        akun.role || ""
+        hasil.role || ""
       )
       .trim()
       .toLowerCase();
@@ -354,31 +390,25 @@ async function loginSiswa(){
     if(role !== "siswa"){
 
       throw new Error(
-        "Akun ini bukan akun siswa."
+        "Akun ini bukan akun Siswa."
       );
 
     }
 
 
-    if(
-      !akun.id ||
-      !akun.referensi_id
-    ){
+    /* =========================================
+       SESSION SISWA
+    ========================================= */
 
-      throw new Error(
-        "ID siswa tidak ditemukan."
-      );
-
-    }
-
-
-    const sessionSiswa = {
+    const akunSiswa={
 
       id:
-        Number(akun.id),
+        Number(
+          hasil.id
+        ),
 
       username:
-        akun.username,
+        hasil.username,
 
       role:
         "siswa",
@@ -387,10 +417,12 @@ async function loginSiswa(){
         "siswa",
 
       referensi_id:
-        Number(akun.referensi_id),
+        Number(
+          hasil.referensi_id
+        ),
 
       nama:
-        akun.nama ||
+        hasil.nama ||
         "Siswa"
 
     };
@@ -398,55 +430,62 @@ async function loginSiswa(){
 
     sessionStorage.setItem(
       "akun_siswa",
-      JSON.stringify(sessionSiswa)
+      JSON.stringify(
+        akunSiswa
+      )
     );
 
 
-    sessionStorage.removeItem(
-      "akun_login"
-    );
+    /* =========================================
+       CATAT LOGIN SISWA
+    ========================================= */
+
+    const logResponse =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/rpc/catat_login",
+
+        {
+
+          method:"POST",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              p_username:
+                akunSiswa.username,
+
+              p_role:
+                "siswa",
+
+              p_referensi_id:
+                akunSiswa.referensi_id
+
+            })
+
+        }
+
+      );
+
+
+    const logText =
+      await logResponse.text();
 
 
     /*
-      Catat login siswa.
+      Login tetap boleh berjalan kalau
+      pencatatan login gagal.
     */
 
-    try{
-
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/log_login",
-        {
-          method:"POST",
-
-          headers:{
-            "Content-Type":"application/json",
-            "apikey":SUPABASE_KEY,
-            "Authorization":
-              "Bearer " + SUPABASE_KEY,
-            "Prefer":"return=minimal"
-          },
-
-          body:JSON.stringify({
-
-            username:
-              akun.username,
-
-            role:
-              "siswa",
-
-            referensi_id:
-              Number(akun.referensi_id)
-
-          })
-        }
-      );
-
-    }catch(error){
+    if(!logResponse.ok){
 
       console.error(
-        "Gagal mencatat login siswa:",
-        error
+        "CATAT LOGIN SISWA GAGAL:",
+        logText
       );
 
     }
@@ -458,19 +497,22 @@ async function loginSiswa(){
       "Login berhasil. Membuka jurnal siswa...";
 
 
-    setTimeout(function(){
+    setTimeout(
+      function(){
 
-      window.location.replace(
-        "siswa.html"
-      );
+        window.location.replace(
+          "siswa.html"
+        );
 
-    },500);
+      },
+      500
+    );
 
 
   }catch(error){
 
     console.error(
-      "LOGIN SISWA ERROR:",
+      "LOGIN SISWA:",
       error
     );
 
@@ -479,24 +521,34 @@ async function loginSiswa(){
 
     pesan.textContent =
       error.message ||
-      "Terjadi kesalahan saat login.";
+      "Login gagal.";
 
 
     tombol.disabled=false;
-    tombol.textContent="LOGIN";
+
+    tombol.textContent =
+      "LOGIN";
 
   }
 
 }
 
 
+/* =====================================================
+   ENTER UNTUK LOGIN
+===================================================== */
+
 document
-  .getElementById("password")
+  .getElementById(
+    "password"
+  )
   .addEventListener(
     "keydown",
     function(event){
 
-      if(event.key==="Enter"){
+      if(
+        event.key === "Enter"
+      ){
 
         loginSiswa();
 
@@ -504,6 +556,51 @@ document
 
     }
   );
+
+
+/* =====================================================
+   SESSION YANG SUDAH ADA
+===================================================== */
+
+(function(){
+
+  const saved =
+    sessionStorage.getItem(
+      "akun_siswa"
+    );
+
+
+  if(!saved)
+    return;
+
+
+  try{
+
+    const akun =
+      JSON.parse(saved);
+
+
+    if(
+      akun &&
+      akun.role === "siswa" &&
+      akun.referensi_id
+    ){
+
+      window.location.replace(
+        "siswa.html"
+      );
+
+    }
+
+  }catch(error){
+
+    sessionStorage.removeItem(
+      "akun_siswa"
+    );
+
+  }
+
+})();
 
 </script>
 
