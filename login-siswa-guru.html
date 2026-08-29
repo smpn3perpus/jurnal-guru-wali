@@ -1,0 +1,773 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login Siswa Terakhir - Guru</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#1e293b;
+}
+
+.header{
+  background:#0284c7;
+  color:#fff;
+  padding:18px 20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+.header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.header p{
+  margin:6px 0 0;
+  font-size:13px;
+  opacity:.95;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px 15px 35px;
+}
+
+.panel{
+  background:#fff;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.guru-info{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.guru-nama{
+  font-size:20px;
+  font-weight:bold;
+  color:#0369a1;
+}
+
+.guru-nip{
+  margin-top:5px;
+  color:#64748b;
+  font-size:14px;
+}
+
+.tombol{
+  border:0;
+  padding:11px 15px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.refresh{
+  background:#0284c7;
+  color:white;
+}
+
+.refresh:hover{
+  background:#0369a1;
+}
+
+.kembali{
+  background:#e2e8f0;
+  color:#334155;
+  margin-left:7px;
+}
+
+.kembali:hover{
+  background:#cbd5e1;
+}
+
+.info{
+  background:#eff6ff;
+  color:#1d4ed8;
+  padding:12px;
+  border-radius:9px;
+  margin-bottom:15px;
+  line-height:1.5;
+}
+
+.count{
+  font-size:15px;
+  font-weight:bold;
+  color:#334155;
+  margin-bottom:12px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:11px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left;
+  vertical-align:top;
+}
+
+th{
+  background:#f0f9ff;
+  color:#0369a1;
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:20px;
+  background:#dcfce7;
+  color:#166534;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.empty{
+  padding:16px;
+  background:#f8fafc;
+  border-radius:9px;
+  color:#64748b;
+  text-align:center;
+}
+
+.loading{
+  padding:20px;
+  text-align:center;
+  color:#64748b;
+}
+
+.error{
+  padding:14px;
+  background:#fee2e2;
+  color:#991b1b;
+  border-radius:9px;
+  line-height:1.5;
+}
+
+.footer{
+  text-align:center;
+  padding:25px;
+  color:#64748b;
+  font-size:12px;
+}
+
+@media(max-width:600px){
+
+  .guru-info{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .kembali{
+    margin-left:0;
+    margin-top:7px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <h1>
+    👨‍🎓 Login Siswa Terakhir
+  </h1>
+
+  <p>
+    Jurnal 7 Kebiasaan Anak Indonesia Hebat
+    • SMP Negeri 3 Sibolga
+  </p>
+
+</header>
+
+
+<main class="container">
+
+  <!-- INFORMASI GURU -->
+
+  <section class="panel">
+
+    <div class="guru-info">
+
+      <div>
+
+        <div
+          id="guruNama"
+          class="guru-nama">
+          Memuat...
+        </div>
+
+        <div
+          id="guruNip"
+          class="guru-nip">
+          -
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <button
+          class="tombol refresh"
+          id="btnRefresh"
+          onclick="muatLoginSiswa()">
+          🔄 Refresh
+        </button>
+
+        <button
+          class="tombol kembali"
+          onclick="kembaliGuru()">
+          ← Kembali ke Guru
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- INFORMASI -->
+
+  <section class="panel">
+
+    <div class="info">
+
+      Halaman ini hanya menampilkan siswa yang
+      terhubung sebagai siswa wali dari Guru yang
+      sedang login.
+
+      <br>
+
+      Data diambil dari tabel <b>log_login</b>.
+
+    </div>
+
+
+    <div
+      id="jumlah"
+      class="count">
+      Memuat jumlah login...
+    </div>
+
+
+    <div
+      id="hasil"
+      class="loading">
+      Memuat data login siswa...
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    Created by Mr. Rahmat Batubara, S.T.P
+  </div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+
+function headers(){
+
+  return {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Accept":
+      "application/json"
+
+  };
+
+}
+
+
+/* =====================================================
+   SESSION GURU
+===================================================== */
+
+let akunGuru = null;
+
+
+const saved =
+  sessionStorage.getItem(
+    "akun_guru"
+  );
+
+
+if(!saved){
+
+  window.location.replace(
+    "login-guru.html"
+  );
+
+}else{
+
+  try{
+
+    akunGuru =
+      JSON.parse(saved);
+
+  }catch(error){
+
+    sessionStorage.removeItem(
+      "akun_guru"
+    );
+
+    window.location.replace(
+      "login-guru.html"
+    );
+
+  }
+
+}
+
+
+if(
+  !akunGuru ||
+  akunGuru.role !== "guru" ||
+  !akunGuru.referensi_id
+){
+
+  sessionStorage.removeItem(
+    "akun_guru"
+  );
+
+  window.location.replace(
+    "login-guru.html"
+  );
+
+}
+
+
+/* =====================================================
+   AMAN HTML
+===================================================== */
+
+function aman(value){
+
+  return String(
+    value ?? "-"
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   FORMAT WAKTU
+===================================================== */
+
+function formatWaktu(value){
+
+  if(!value)
+    return "-";
+
+  try{
+
+    return new Date(value)
+      .toLocaleString(
+        "id-ID",
+        {
+          dateStyle:"medium",
+          timeStyle:"short"
+        }
+      );
+
+  }catch(error){
+
+    return value;
+
+  }
+
+}
+
+
+/* =====================================================
+   INFORMASI GURU
+===================================================== */
+
+document.getElementById(
+  "guruNama"
+).textContent =
+  akunGuru.nama ||
+  "Guru";
+
+
+document.getElementById(
+  "guruNip"
+).textContent =
+  "NIP / Username: " +
+  (
+    akunGuru.username ||
+    "-"
+  );
+
+
+/* =====================================================
+   AMBIL LOGIN SISWA
+===================================================== */
+
+async function ambilLoginSiswa(){
+
+  const guruId =
+    Number(
+      akunGuru.referensi_id
+    );
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/rpc/ambil_login_siswa_guru",
+
+      {
+
+        method:"POST",
+
+        headers:
+          headers(),
+
+        body:
+          JSON.stringify({
+
+            p_guru_id:
+              guruId
+
+          })
+
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data=[];
+
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data login siswa tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.details ||
+      data.hint ||
+      text ||
+      "Gagal mengambil login siswa."
+    );
+
+  }
+
+
+  return Array.isArray(data)
+    ? data
+    : [];
+
+}
+
+
+/* =====================================================
+   TAMPILKAN
+===================================================== */
+
+function tampilkanData(
+  data
+){
+
+  const hasil =
+    document.getElementById(
+      "hasil"
+    );
+
+
+  const jumlah =
+    document.getElementById(
+      "jumlah"
+    );
+
+
+  jumlah.textContent =
+    "📊 Menampilkan " +
+    data.length +
+    " login siswa terakhir.";
+
+
+  if(!data.length){
+
+    hasil.innerHTML = `
+      <div class="empty">
+        Belum ada siswa wali yang login.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  let html = `
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>No</th>
+
+            <th>Nama Siswa</th>
+
+            <th>NISN</th>
+
+            <th>Kelas</th>
+
+            <th>Waktu Login</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+  `;
+
+
+  data.forEach(
+    function(item,index){
+
+      html += `
+
+        <tr>
+
+          <td>
+            ${index + 1}
+          </td>
+
+          <td>
+            <b>
+              ${aman(item.nama)}
+            </b>
+          </td>
+
+          <td>
+            ${aman(item.nisn)}
+          </td>
+
+          <td>
+            ${aman(item.kelas)}
+          </td>
+
+          <td>
+            ${aman(
+              formatWaktu(
+                item.waktu_login
+              )
+            )}
+          </td>
+
+          <td>
+            <span class="badge">
+              ✅ LOGIN
+            </span>
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html += `
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+
+  hasil.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+   MUAT DATA
+===================================================== */
+
+async function muatLoginSiswa(){
+
+  const tombol =
+    document.getElementById(
+      "btnRefresh"
+    );
+
+
+  const hasil =
+    document.getElementById(
+      "hasil"
+    );
+
+
+  tombol.disabled=true;
+
+  tombol.textContent=
+    "⏳ Memuat...";
+
+
+  hasil.innerHTML =
+    `
+    <div class="loading">
+      Mengambil data login siswa...
+    </div>
+    `;
+
+
+  try{
+
+    const data =
+      await ambilLoginSiswa();
+
+
+    tampilkanData(
+      data
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "LOGIN SISWA GURU:",
+      error
+    );
+
+
+    hasil.innerHTML =
+      `
+      <div class="error">
+        <b>Gagal mengambil data.</b>
+        <br><br>
+        ${aman(error.message)}
+      </div>
+      `;
+
+
+    document.getElementById(
+      "jumlah"
+    ).textContent =
+      "";
+
+  }finally{
+
+    tombol.disabled=false;
+
+    tombol.textContent=
+      "🔄 Refresh";
+
+  }
+
+}
+
+
+/* =====================================================
+   KEMBALI
+===================================================== */
+
+function kembaliGuru(){
+
+  window.location.replace(
+    "guru.html"
+  );
+
+}
+
+
+/* =====================================================
+   MULAI
+===================================================== */
+
+muatLoginSiswa();
+
+</script>
+
+</body>
+</html>
+```
