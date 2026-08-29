@@ -27,7 +27,7 @@ body{
 .card{
   width:100%;
   max-width:420px;
-  background:#fff;
+  background:white;
   padding:30px;
   border-radius:20px;
   box-shadow:0 12px 35px rgba(0,0,0,.12);
@@ -36,10 +36,10 @@ body{
 .logo{
   width:80px;
   height:80px;
-  margin:0 auto;
+  margin:auto;
   border-radius:20px;
   background:#7c3aed;
-  color:#fff;
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -51,7 +51,6 @@ h1{
   text-align:center;
   color:#7c3aed;
   margin:18px 0 6px;
-  font-size:23px;
 }
 
 .school{
@@ -89,7 +88,7 @@ button{
   border:0;
   border-radius:10px;
   background:#7c3aed;
-  color:#fff;
+  color:white;
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
@@ -127,7 +126,7 @@ button:disabled{
 
 .footer{
   text-align:center;
-  margin-top:22px;
+  margin-top:20px;
   color:#64748b;
   font-size:12px;
 }
@@ -152,6 +151,7 @@ button:disabled{
     SMP NEGERI 3 SIBOLGA
   </div>
 
+
   <label for="username">
     Username / NIP
   </label>
@@ -162,6 +162,7 @@ button:disabled{
     placeholder="Masukkan username"
     autocomplete="username"
   >
+
 
   <label for="password">
     Password
@@ -174,13 +175,16 @@ button:disabled{
     autocomplete="current-password"
   >
 
+
   <button
     id="btnLogin"
     onclick="loginAdmin()">
     LOGIN
   </button>
 
+
   <div id="pesan"></div>
+
 
   <div class="footer">
     Created by Mr. Rahmat Batubara, S.T.P
@@ -198,26 +202,55 @@ const SUPABASE_KEY =
   "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
 
 
+function headers(){
+
+  return {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Accept":
+      "application/json"
+
+  };
+
+}
+
+
+/* =====================================================
+   LOGIN ADMIN
+===================================================== */
+
 async function loginAdmin(){
 
   const username =
-    document
-      .getElementById("username")
-      .value
-      .trim();
+    document.getElementById(
+      "username"
+    ).value.trim();
+
 
   const password =
-    document
-      .getElementById("password")
-      .value;
+    document.getElementById(
+      "password"
+    ).value;
+
 
   const tombol =
-    document
-      .getElementById("btnLogin");
+    document.getElementById(
+      "btnLogin"
+    );
+
 
   const pesan =
-    document
-      .getElementById("pesan");
+    document.getElementById(
+      "pesan"
+    );
 
 
   pesan.className="";
@@ -266,19 +299,8 @@ async function loginAdmin(){
 
           method:"POST",
 
-          headers:{
-
-            "Content-Type":
-              "application/json",
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY
-
-          },
+          headers:
+            headers(),
 
           body:
             JSON.stringify({
@@ -323,8 +345,8 @@ async function loginAdmin(){
 
       throw new Error(
         data.message ||
-        data.hint ||
         data.details ||
+        data.hint ||
         text ||
         "Login gagal."
       );
@@ -334,7 +356,7 @@ async function loginAdmin(){
 
     if(
       !Array.isArray(data) ||
-      data.length===0
+      !data.length
     ){
 
       throw new Error(
@@ -344,13 +366,13 @@ async function loginAdmin(){
     }
 
 
-    const akun =
+    const hasil =
       data[0];
 
 
     const role =
       String(
-        akun.role || ""
+        hasil.role || ""
       )
       .trim()
       .toLowerCase();
@@ -365,25 +387,24 @@ async function loginAdmin(){
     }
 
 
-    const sessionAdmin = {
+    const akunAdmin = {
 
       id:
-        Number(akun.id),
+        Number(hasil.id),
 
       username:
-        akun.username,
+        hasil.username,
 
       role:
         "admin",
 
-      tipe:
-        "admin",
-
       referensi_id:
-        Number(akun.referensi_id),
+        Number(
+          hasil.referensi_id
+        ),
 
       nama:
-        akun.nama ||
+        hasil.nama ||
         "Admin / Kepala Sekolah"
 
     };
@@ -392,53 +413,40 @@ async function loginAdmin(){
     sessionStorage.setItem(
       "akun_admin",
       JSON.stringify(
-        sessionAdmin
+        akunAdmin
       )
     );
 
 
-    /*
-      Catat login Admin.
-    */
+    /* ==========================================
+       CATAT LOGIN ADMIN
+    ========================================== */
 
     try{
 
       await fetch(
 
         SUPABASE_URL +
-        "/rest/v1/log_login",
+        "/rest/v1/rpc/catat_login",
 
         {
 
           method:"POST",
 
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-
-          },
+          headers:
+            headers(),
 
           body:
             JSON.stringify({
 
-              username:
-                sessionAdmin.username,
+              p_username:
+                akunAdmin.username,
 
-              role:
+              p_role:
                 "admin",
 
-              referensi_id:
-                sessionAdmin.referensi_id
+              p_referensi_id:
+                akunAdmin.referensi_id
 
             })
 
@@ -448,8 +456,13 @@ async function loginAdmin(){
 
     }catch(error){
 
+      /*
+        Login tetap berhasil walaupun
+        pencatatan login gagal.
+      */
+
       console.error(
-        "Gagal mencatat login admin:",
+        "CATAT LOGIN ADMIN:",
         error
       );
 
@@ -470,7 +483,7 @@ async function loginAdmin(){
         );
 
       },
-      400
+      500
     );
 
 
@@ -486,7 +499,7 @@ async function loginAdmin(){
 
     pesan.textContent=
       error.message ||
-      "Terjadi kesalahan saat login.";
+      "Login gagal.";
 
 
     tombol.disabled=false;
@@ -499,10 +512,14 @@ async function loginAdmin(){
 }
 
 
-/* ENTER UNTUK LOGIN */
+/* =====================================================
+   ENTER UNTUK LOGIN
+===================================================== */
 
 document
-  .getElementById("password")
+  .getElementById(
+    "password"
+  )
   .addEventListener(
     "keydown",
     function(event){
@@ -519,7 +536,9 @@ document
   );
 
 
-/* JIKA SUDAH LOGIN */
+/* =====================================================
+   CEK SESSION
+===================================================== */
 
 (function(){
 
@@ -536,7 +555,9 @@ document
   try{
 
     const akun =
-      JSON.parse(saved);
+      JSON.parse(
+        saved
+      );
 
 
     if(
