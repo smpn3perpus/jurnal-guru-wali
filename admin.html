@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin - Jurnal 7 KAIH</title>
+<title>Dashboard Admin - Jurnal 7 KAIH</title>
 
 <style>
 *{
@@ -21,7 +21,7 @@ body{
 
 .header{
   background:#7c3aed;
-  color:white;
+  color:#fff;
   padding:18px 22px;
   display:flex;
   justify-content:space-between;
@@ -38,14 +38,13 @@ body{
 .header p{
   margin:5px 0 0;
   font-size:13px;
-  opacity:.95;
 }
 
 .logout{
   border:0;
-  background:white;
+  background:#fff;
   color:#7c3aed;
-  padding:10px 15px;
+  padding:10px 16px;
   border-radius:9px;
   font-weight:bold;
   cursor:pointer;
@@ -58,7 +57,7 @@ body{
 }
 
 .panel{
-  background:white;
+  background:#fff;
   border-radius:15px;
   padding:20px;
   margin-bottom:18px;
@@ -100,43 +99,36 @@ input{
   font-size:14px;
 }
 
-.button{
+.primary{
   border:0;
+  background:#7c3aed;
+  color:#fff;
   padding:12px 16px;
   border-radius:9px;
   font-weight:bold;
   cursor:pointer;
 }
 
-.primary{
-  background:#7c3aed;
-  color:white;
-}
-
 .primary:hover{
   background:#6d28d9;
 }
 
-.logout:hover{
-  background:#f5f3ff;
-}
-
-.button:disabled{
+.primary:disabled{
   opacity:.6;
   cursor:wait;
 }
 
-/* STATISTIK */
+/* RINGKASAN */
 
 .cards{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:15px;
   margin-bottom:18px;
 }
 
 .card{
-  background:white;
+  background:#fff;
   border-radius:15px;
   padding:20px;
   text-align:center;
@@ -150,22 +142,25 @@ input{
 }
 
 .card-number{
+  margin-top:8px;
   color:#7c3aed;
   font-size:32px;
   font-weight:bold;
-  margin-top:8px;
 }
+
+/* PERIODE */
 
 .week{
   padding:12px;
   background:#f5f3ff;
-  border-radius:9px;
   color:#5b21b6;
+  border-radius:9px;
 }
 
 /* TABEL */
 
 .table-wrap{
+  width:100%;
   overflow-x:auto;
 }
 
@@ -189,9 +184,9 @@ th{
 
 .empty{
   padding:14px;
-  border-radius:9px;
   background:#f8fafc;
   color:#64748b;
+  border-radius:9px;
 }
 
 .badge{
@@ -209,11 +204,11 @@ th{
 
 .error{
   display:none;
-  padding:12px;
   margin-top:12px;
-  border-radius:9px;
+  padding:12px;
   background:#fee2e2;
   color:#991b1b;
+  border-radius:9px;
   line-height:1.5;
 }
 
@@ -230,10 +225,10 @@ th{
   font-size:12px;
 }
 
-@media(max-width:900px){
+@media(max-width:800px){
 
   .cards{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr;
   }
 
 }
@@ -245,16 +240,12 @@ th{
     align-items:flex-start;
   }
 
-  .cards{
-    grid-template-columns:1fr;
-  }
-
   .tanggal-box{
     flex-direction:column;
     align-items:stretch;
   }
 
-  .button{
+  .primary{
     width:100%;
   }
 
@@ -267,16 +258,20 @@ th{
 <header class="header">
 
   <div>
-    <h1>📊 Dashboard Admin / Kepala Sekolah</h1>
+
+    <h1>
+      📊 Dashboard Admin / Kepala Sekolah
+    </h1>
 
     <p>
       Monitoring Jurnal 7 Kebiasaan Anak Indonesia Hebat
       • SMP Negeri 3 Sibolga
     </p>
+
   </div>
 
   <button
-    class="button logout"
+    class="logout"
     onclick="logout()">
     Keluar
   </button>
@@ -286,7 +281,7 @@ th{
 
 <main class="container">
 
-  <!-- SELAMAT DATANG -->
+  <!-- WELCOME -->
 
   <section class="panel welcome">
 
@@ -295,15 +290,18 @@ th{
     </h2>
 
     <p>
-      Rekap login Guru, login Siswa, dan feedback Guru.
+      Pilih tanggal untuk melihat catatan login Guru
+      dan Siswa. Rekap feedback dihitung untuk minggu
+      berjalan.
     </p>
+
 
     <div class="tanggal-box">
 
       <div class="tanggal-wrap">
 
         <label for="tanggal">
-          📅 Pilih Tanggal
+          📅 Pilih Tanggal Login
         </label>
 
         <input
@@ -313,14 +311,16 @@ th{
 
       </div>
 
+
       <button
-        class="button primary"
         id="btnTampilkan"
+        class="primary"
         onclick="loadDashboard()">
         🔎 Tampilkan
       </button>
 
     </div>
+
 
     <div
       id="pesanError"
@@ -330,7 +330,7 @@ th{
   </section>
 
 
-  <!-- STATISTIK -->
+  <!-- RINGKASAN -->
 
   <section class="cards">
 
@@ -341,8 +341,8 @@ th{
       </div>
 
       <div
-        class="card-number"
-        id="guruLoginCount">
+        id="guruLoginCount"
+        class="card-number">
         0
       </div>
 
@@ -356,8 +356,8 @@ th{
       </div>
 
       <div
-        class="card-number"
-        id="siswaLoginCount">
+        id="siswaLoginCount"
+        class="card-number">
         0
       </div>
 
@@ -371,23 +371,8 @@ th{
       </div>
 
       <div
-        class="card-number"
-        id="guruFeedbackCount">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        ✅ Total Feedback Minggu Ini
-      </div>
-
-      <div
-        class="card-number"
-        id="totalFeedback">
+        id="guruFeedbackCount"
+        class="card-number">
         0
       </div>
 
@@ -418,7 +403,7 @@ th{
   <section class="panel">
 
     <h2>
-      👨‍🏫 Rekap Guru Login
+      👨‍🏫 Guru yang Login
     </h2>
 
     <div
@@ -435,7 +420,7 @@ th{
   <section class="panel">
 
     <h2>
-      👨‍🎓 Rekap Siswa Login
+      👨‍🎓 Siswa yang Login
     </h2>
 
     <div
@@ -452,7 +437,7 @@ th{
   <section class="panel">
 
     <h2>
-      📝 Rekap Guru yang Memberikan Feedback
+      📝 Guru yang Memberikan Feedback Minggu Ini
     </h2>
 
     <div
@@ -487,17 +472,20 @@ const SUPABASE_KEY =
 function headers(){
 
   return {
+
     "apikey":
       SUPABASE_KEY,
 
     "Authorization":
-      "Bearer " + SUPABASE_KEY,
+      "Bearer " +
+      SUPABASE_KEY,
 
     "Content-Type":
       "application/json",
 
     "Accept":
       "application/json"
+
   };
 
 }
@@ -507,32 +495,47 @@ function headers(){
    SESSION ADMIN
 ===================================================== */
 
-const session =
+let akunAdmin = null;
+
+const saved =
   sessionStorage.getItem(
     "akun_admin"
   );
 
 
-if(!session){
+if(!saved){
 
   window.location.replace(
     "login-admin.html"
   );
 
+}else{
+
+  try{
+
+    akunAdmin =
+      JSON.parse(saved);
+
+  }catch(error){
+
+    sessionStorage.removeItem(
+      "akun_admin"
+    );
+
+    window.location.replace(
+      "login-admin.html"
+    );
+
+  }
+
 }
 
 
-let akunAdmin=null;
-
-
-try{
-
-  akunAdmin =
-    JSON.parse(
-      session
-    );
-
-}catch(error){
+if(
+  !akunAdmin ||
+  akunAdmin.role !== "admin" ||
+  !akunAdmin.referensi_id
+){
 
   sessionStorage.removeItem(
     "akun_admin"
@@ -577,7 +580,7 @@ function formatTanggal(value){
   const p =
     String(value).split("-");
 
-  if(p.length!==3)
+  if(p.length !== 3)
     return value;
 
   return (
@@ -591,7 +594,7 @@ function formatTanggal(value){
 }
 
 
-function formatTanggalWaktu(value){
+function formatWaktu(value){
 
   if(!value)
     return "-";
@@ -617,10 +620,10 @@ function formatTanggalWaktu(value){
 
 
 /* =====================================================
-   LOAD DASHBOARD
+   AMBIL DASHBOARD RPC
 ===================================================== */
 
-async function loadDashboard(){
+async function ambilDashboard(){
 
   const tanggal =
     document.getElementById(
@@ -628,16 +631,129 @@ async function loadDashboard(){
     ).value;
 
 
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/rpc/ambil_dashboard_admin",
+
+      {
+
+        method:"POST",
+
+        headers:
+          headers(),
+
+        body:
+          JSON.stringify({
+
+            p_admin_id:
+              Number(
+                akunAdmin.referensi_id
+              ),
+
+            p_tanggal:
+              tanggal
+
+          })
+
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : {};
+
+  }catch(error){
+
+    throw new Error(
+      "Respons Dashboard Admin tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.details ||
+      data.hint ||
+      text ||
+      "Gagal mengambil Dashboard Admin."
+    );
+
+  }
+
+
+  /*
+    Supabase dapat mengembalikan:
+    [
+      {
+        ambil_dashboard_admin: {...}
+      }
+    ]
+  */
+
+  if(Array.isArray(data)){
+
+    return (
+      data[0]?.ambil_dashboard_admin ||
+      {}
+    );
+
+  }
+
+
+  if(
+    data &&
+    data.ambil_dashboard_admin
+  ){
+
+    return data.ambil_dashboard_admin;
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
+
+async function loadDashboard(){
+
   const tombol =
     document.getElementById(
       "btnTampilkan"
     );
 
 
+  const tanggal =
+    document.getElementById(
+      "tanggal"
+    ).value;
+
+
   if(!tanggal){
 
     tampilError(
-      "Pilih tanggal terlebih dahulu."
+      "Silakan pilih tanggal terlebih dahulu."
     );
 
     return;
@@ -656,136 +772,21 @@ async function loadDashboard(){
 
   try{
 
-    const response =
-      await fetch(
-
-        SUPABASE_URL +
-        "/rest/v1/rpc/ambil_dashboard_admin",
-
-        {
-          method:"POST",
-
-          headers:
-            headers(),
-
-          body:
-            JSON.stringify({
-
-              p_admin_id:
-                Number(
-                  akunAdmin.referensi_id
-                ),
-
-              p_tanggal:
-                tanggal
-
-            })
-
-        }
-
-      );
-
-
-    const text =
-      await response.text();
-
-
-    let data={};
-
-
-    try{
-
-      data =
-        text
-        ? JSON.parse(text)
-        : {};
-
-    }catch(error){
-
-      throw new Error(
-        "Respons server tidak valid."
-      );
-
-    }
-
-
-    if(!response.ok){
-
-      throw new Error(
-        data.message ||
-        data.details ||
-        data.hint ||
-        text ||
-        "Gagal mengambil data Admin."
-      );
-
-    }
-
-
-    /*
-      RPC mengembalikan satu objek JSONB.
-    */
-
-    let dashboard =
-      data;
-
-
-    /*
-      Jika response berbentuk:
-      [
-        {
-          "ambil_dashboard_admin": {...}
-        }
-      ]
-    */
-
-    if(
-      Array.isArray(data)
-    ){
-
-      dashboard =
-        data[0]?.ambil_dashboard_admin ||
-        {};
-
-    }
-
-
-    /*
-      Jika response langsung:
-      {
-        "ambil_dashboard_admin": {...}
-      }
-    */
-
-    if(
-      dashboard.ambil_dashboard_admin
-    ){
-
-      dashboard =
-        dashboard.ambil_dashboard_admin;
-
-    }
-
-
-    if(!dashboard.admin_nama){
-
-      dashboard.admin_nama =
-        "Admin / Kepala Sekolah";
-
-    }
+    const data =
+      await ambilDashboard();
 
 
     tampilDashboard(
-      dashboard
+      data
     );
-
 
   }catch(error){
 
     console.error(
-      "ADMIN ERROR:",
+      "ADMIN DASHBOARD:",
       error
     );
+
 
     tampilError(
       error.message
@@ -804,11 +805,11 @@ async function loadDashboard(){
 
 
 /* =====================================================
-   TAMPIL DASHBOARD
+   TAMPIL DATA
 ===================================================== */
 
 function tampilDashboard(
-  d
+  data
 ){
 
   document.getElementById(
@@ -816,7 +817,8 @@ function tampilDashboard(
   ).textContent =
     "Selamat datang, " +
     (
-      d.admin_nama ||
+      data.admin_nama ||
+      akunAdmin.nama ||
       "Admin / Kepala Sekolah"
     );
 
@@ -825,7 +827,8 @@ function tampilDashboard(
     "guruLoginCount"
   ).textContent =
     Number(
-      d.guru_login_count || 0
+      data.guru_login_count ||
+      0
     );
 
 
@@ -833,7 +836,8 @@ function tampilDashboard(
     "siswaLoginCount"
   ).textContent =
     Number(
-      d.siswa_login_count || 0
+      data.siswa_login_count ||
+      0
     );
 
 
@@ -841,15 +845,8 @@ function tampilDashboard(
     "guruFeedbackCount"
   ).textContent =
     Number(
-      d.guru_feedback_count || 0
-    );
-
-
-  document.getElementById(
-    "totalFeedback"
-  ).textContent =
-    Number(
-      d.total_feedback || 0
+      data.guru_feedback_count ||
+      0
     );
 
 
@@ -857,33 +854,36 @@ function tampilDashboard(
     "periodeMinggu"
   ).textContent =
     formatTanggal(
-      d.awal_minggu
+      data.awal_minggu
     ) +
     " s.d. " +
     formatTanggal(
-      d.akhir_minggu
+      data.akhir_minggu
     );
 
 
   tampilGuruLogin(
-    d.guru_login || []
+    data.guru_login ||
+    []
   );
 
 
   tampilSiswaLogin(
-    d.siswa_login || []
+    data.siswa_login ||
+    []
   );
 
 
   tampilGuruFeedback(
-    d.guru_feedback || []
+    data.guru_feedback ||
+    []
   );
 
 }
 
 
 /* =====================================================
-   GURU LOGIN
+   TABEL GURU LOGIN
 ===================================================== */
 
 function tampilGuruLogin(
@@ -900,16 +900,10 @@ function tampilGuruLogin(
 
     tempat.innerHTML =
       `
-        <div class="empty">
-          Belum ada guru yang login pada
-          tanggal ${aman(
-            formatTanggal(
-              document.getElementById(
-                "tanggal"
-              ).value
-            )
-          )}.
-        </div>
+      <div class="empty">
+        Belum ada Guru yang login pada
+        tanggal yang dipilih.
+      </div>
       `;
 
     return;
@@ -917,7 +911,7 @@ function tampilGuruLogin(
   }
 
 
-  let html=`
+  let html = `
 
     <div class="table-wrap">
 
@@ -941,12 +935,12 @@ function tampilGuruLogin(
   data.forEach(
     function(item,index){
 
-      html+=`
+      html += `
 
         <tr>
 
           <td>
-            ${index+1}
+            ${index + 1}
           </td>
 
           <td>
@@ -961,7 +955,7 @@ function tampilGuruLogin(
 
           <td>
             ${aman(
-              formatTanggalWaktu(
+              formatWaktu(
                 item.waktu_login
               )
             )}
@@ -975,24 +969,25 @@ function tampilGuruLogin(
   );
 
 
-  html+=`
+  html += `
 
         </tbody>
 
       </table>
 
     </div>
+
   `;
 
 
-  tempat.innerHTML=
+  tempat.innerHTML =
     html;
 
 }
 
 
 /* =====================================================
-   SISWA LOGIN
+   TABEL SISWA LOGIN
 ===================================================== */
 
 function tampilSiswaLogin(
@@ -1009,16 +1004,10 @@ function tampilSiswaLogin(
 
     tempat.innerHTML =
       `
-        <div class="empty">
-          Belum ada siswa yang login pada
-          tanggal ${aman(
-            formatTanggal(
-              document.getElementById(
-                "tanggal"
-              ).value
-            )
-          )}.
-        </div>
+      <div class="empty">
+        Belum ada Siswa yang login pada
+        tanggal yang dipilih.
+      </div>
       `;
 
     return;
@@ -1026,7 +1015,7 @@ function tampilSiswaLogin(
   }
 
 
-  let html=`
+  let html = `
 
     <div class="table-wrap">
 
@@ -1050,12 +1039,12 @@ function tampilSiswaLogin(
   data.forEach(
     function(item,index){
 
-      html+=`
+      html += `
 
         <tr>
 
           <td>
-            ${index+1}
+            ${index + 1}
           </td>
 
           <td>
@@ -1070,7 +1059,7 @@ function tampilSiswaLogin(
 
           <td>
             ${aman(
-              formatTanggalWaktu(
+              formatWaktu(
                 item.waktu_login
               )
             )}
@@ -1084,24 +1073,25 @@ function tampilSiswaLogin(
   );
 
 
-  html+=`
+  html += `
 
         </tbody>
 
       </table>
 
     </div>
+
   `;
 
 
-  tempat.innerHTML=
+  tempat.innerHTML =
     html;
 
 }
 
 
 /* =====================================================
-   GURU FEEDBACK
+   TABEL FEEDBACK GURU
 ===================================================== */
 
 function tampilGuruFeedback(
@@ -1118,10 +1108,10 @@ function tampilGuruFeedback(
 
     tempat.innerHTML =
       `
-        <div class="empty">
-          Belum ada guru yang memberikan
-          feedback pada minggu ini.
-        </div>
+      <div class="empty">
+        Belum ada Guru yang memberikan
+        feedback pada minggu tersebut.
+      </div>
       `;
 
     return;
@@ -1129,7 +1119,7 @@ function tampilGuruFeedback(
   }
 
 
-  let html=`
+  let html = `
 
     <div class="table-wrap">
 
@@ -1154,12 +1144,12 @@ function tampilGuruFeedback(
   data.forEach(
     function(item,index){
 
-      html+=`
+      html += `
 
         <tr>
 
           <td>
-            ${index+1}
+            ${index + 1}
           </td>
 
           <td>
@@ -1170,13 +1160,14 @@ function tampilGuruFeedback(
 
           <td>
             ${Number(
-              item.jumlah_feedback || 0
+              item.jumlah_feedback ||
+              0
             )}
           </td>
 
           <td>
             ${aman(
-              formatTanggalWaktu(
+              formatWaktu(
                 item.feedback_terakhir
               )
             )}
@@ -1198,17 +1189,18 @@ function tampilGuruFeedback(
   );
 
 
-  html+=`
+  html += `
 
         </tbody>
 
       </table>
 
     </div>
+
   `;
 
 
-  tempat.innerHTML=
+  tempat.innerHTML =
     html;
 
 }
@@ -1228,11 +1220,11 @@ function tampilError(
     );
 
 
-  box.style.display=
+  box.style.display =
     "block";
 
 
-  box.textContent=
+  box.textContent =
     pesan ||
     "Terjadi kesalahan.";
 
@@ -1247,18 +1239,18 @@ function sembunyikanError(){
     );
 
 
-  box.style.display=
+  box.style.display =
     "none";
 
 
-  box.textContent=
+  box.textContent =
     "";
 
 }
 
 
 /* =====================================================
-   AMAN
+   AMAN HTML
 ===================================================== */
 
 function aman(value){
