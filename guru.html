@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -108,7 +107,8 @@ label{
 }
 
 input,
-textarea{
+textarea,
+select{
   width:100%;
   padding:11px;
   border:1px solid #cbd5e1;
@@ -134,6 +134,36 @@ textarea{
 .primary:disabled{
   opacity:.6;
   cursor:wait;
+}
+
+.green{
+  background:#16a34a;
+}
+
+.green:hover{
+  background:#15803d;
+}
+
+.red{
+  background:#dc2626;
+}
+
+.red:hover{
+  background:#b91c1c;
+}
+
+.secondary{
+  border:1px solid #cbd5e1;
+  background:white;
+  color:#334155;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.secondary:hover{
+  background:#f8fafc;
 }
 
 /* RINGKASAN */
@@ -357,17 +387,191 @@ textarea{
   color:#64748b;
 }
 
+/* DOWNLOAD */
+
 .download-box{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:end;
   gap:15px;
+  flex-wrap:wrap;
+}
+
+.download-date{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  width:100%;
+}
+
+.download-buttons{
+  display:flex;
+  gap:10px;
   flex-wrap:wrap;
 }
 
 .small{
   color:#64748b;
   font-size:12px;
+}
+
+/* KELOLA SISWA */
+
+.kelola-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.kelola-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.siswa-kelola{
+  margin-top:15px;
+  overflow-x:auto;
+}
+
+.tabel-siswa{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+.tabel-siswa th,
+.tabel-siswa td{
+  padding:11px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:left;
+  font-size:13px;
+}
+
+.tabel-siswa th{
+  background:#f8fafc;
+  color:#475569;
+}
+
+.btn-hapus{
+  border:0;
+  background:#dc2626;
+  color:white;
+  padding:7px 10px;
+  border-radius:7px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-hapus:hover{
+  background:#b91c1c;
+}
+
+/* REKAP */
+
+.rekap-preview{
+  display:none;
+  margin-top:15px;
+  overflow:auto;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+}
+
+.rekap-preview table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:800px;
+}
+
+.rekap-preview th,
+.rekap-preview td{
+  padding:9px;
+  border-bottom:1px solid #e2e8f0;
+  font-size:12px;
+  text-align:left;
+}
+
+.rekap-preview th{
+  background:#f8fafc;
+  position:sticky;
+  top:0;
+}
+
+.rekap-count{
+  margin-top:12px;
+  padding:12px;
+  background:#f8fafc;
+  border-radius:8px;
+  color:#475569;
+  font-size:13px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.55);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:520px;
+  background:white;
+  border-radius:15px;
+  padding:22px;
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+.modal-box h2{
+  margin-top:0;
+  color:#0369a1;
+}
+
+.modal-info{
+  padding:11px;
+  background:#f8fafc;
+  border-radius:8px;
+  color:#475569;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:18px;
+}
+
+.success-message{
+  display:none;
+  margin-top:12px;
+  padding:11px;
+  border-radius:8px;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error-message{
+  display:none;
+  margin-top:12px;
+  padding:11px;
+  border-radius:8px;
+  background:#fee2e2;
+  color:#991b1b;
 }
 
 .footer{
@@ -380,6 +584,10 @@ textarea{
 @media(max-width:800px){
 
   .cards{
+    grid-template-columns:1fr;
+  }
+
+  .download-date{
     grid-template-columns:1fr;
   }
 
@@ -404,6 +612,14 @@ textarea{
   .siswa-head{
     flex-direction:column;
     align-items:flex-start;
+  }
+
+  .kelola-buttons{
+    width:100%;
+  }
+
+  .kelola-buttons button{
+    flex:1;
   }
 
 }
@@ -529,6 +745,62 @@ textarea{
   </section>
 
 
+  <!-- KELOLA SISWA -->
+
+  <section class="panel">
+
+    <div class="kelola-header">
+
+      <div>
+
+        <h2 style="margin-bottom:5px;">
+          👨‍🎓 Kelola Siswa Wali
+        </h2>
+
+        <div class="small">
+          Tambahkan siswa yang belum masuk atau keluarkan siswa yang tidak sesuai.
+        </div>
+
+      </div>
+
+      <div class="kelola-buttons">
+
+        <button
+          class="primary green"
+          onclick="bukaTambahMurid()">
+          ➕ Tambah Murid
+        </button>
+
+        <button
+          class="secondary"
+          onclick="muatTabelSiswa()">
+          🔄 Segarkan
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      id="statusKelolaSiswa"
+      class="status"
+      style="margin-top:15px;">
+      Memuat daftar siswa...
+    </div>
+
+    <div
+      id="tabelSiswa"
+      class="siswa-kelola">
+
+      <div class="loading">
+        Memuat siswa...
+      </div>
+
+    </div>
+
+  </section>
+
+
   <!-- VERIFIKASI -->
 
   <section class="panel">
@@ -554,40 +826,157 @@ textarea{
   </section>
 
 
-  <!-- DOWNLOAD -->
+  <!-- REKAP RENTANG -->
 
   <section class="panel">
 
     <div class="download-box">
 
-      <div>
+      <div style="width:100%;">
 
         <h2 style="margin-bottom:5px;">
-          📥 Download Rekap Jurnal
+          📊 Rekap Jurnal Berdasarkan Rentang Tanggal
         </h2>
 
         <div class="small">
-          Rekap jurnal siswa wali Anda.
+          Pilih tanggal mulai dan tanggal sampai untuk melihat serta mengunduh rekap jurnal siswa wali Anda.
         </div>
 
       </div>
 
-      <button
-        class="primary"
-        onclick="downloadRekap()">
-        📥 Download CSV
-      </button>
+      <div class="download-date">
 
+        <div>
+
+          <label for="tanggalMulai">
+            📅 Tanggal Mulai
+          </label>
+
+          <input
+            type="date"
+            id="tanggalMulai">
+
+        </div>
+
+        <div>
+
+          <label for="tanggalSampai">
+            📅 Tanggal Sampai
+          </label>
+
+          <input
+            type="date"
+            id="tanggalSampai">
+
+        </div>
+
+      </div>
+
+      <div class="download-buttons">
+
+        <button
+          class="primary"
+          id="btnRekap"
+          onclick="tampilkanRekap()">
+          🔎 Tampilkan Rekap
+        </button>
+
+        <button
+          class="primary green"
+          id="btnDownload"
+          onclick="downloadRekap()">
+          📥 Download CSV
+        </button>
+
+      </div>
+
+    </div>
+
+    <div
+      id="statusRekap"
+      class="status"
+      style="margin-top:15px;">
+      Silakan pilih rentang tanggal.
+    </div>
+
+    <div
+      id="rekapPreview"
+      class="rekap-preview">
     </div>
 
   </section>
 
 
   <div class="footer">
-    Created by Mr. Rahmat Batubara, S.T.P
+    Dibuat oleh Mr. Rahmat Batubara, S.T.P
   </div>
 
 </main>
+
+
+<!-- =====================================================
+     MODAL TAMBAH MURID
+===================================================== -->
+
+<div
+  id="modalTambah"
+  class="modal">
+
+  <div class="modal-box">
+
+    <h2>
+      ➕ Tambah Murid
+    </h2>
+
+    <div class="modal-info">
+      Masukkan <b>NISN siswa</b>. Sistem akan mencari siswa yang sudah terdaftar di database, lalu memasukkannya sebagai siswa wali Anda.
+    </div>
+
+    <label for="nisnTambah">
+      NISN Siswa
+    </label>
+
+    <input
+      type="text"
+      id="nisnTambah"
+      placeholder="Masukkan NISN"
+      autocomplete="off">
+
+    <div
+      id="hasilCariMurid"
+      style="margin-top:12px;">
+    </div>
+
+    <div
+      id="pesanTambahBerhasil"
+      class="success-message">
+    </div>
+
+    <div
+      id="pesanTambahError"
+      class="error-message">
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="secondary"
+        onclick="tutupTambahMurid()">
+        Batal
+      </button>
+
+      <button
+        class="primary green"
+        id="btnSimpanMurid"
+        onclick="tambahMurid()">
+        ➕ Tambahkan
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 <script>
@@ -646,6 +1035,8 @@ if(!session){
 let akun = null;
 let guru = null;
 let daftarSiswa = [];
+let cacheKelas = {};
+let cacheRekap = [];
 
 
 /* =====================================================
@@ -701,6 +1092,25 @@ function aman(value){
   .replaceAll(">","&gt;")
   .replaceAll('"',"&quot;")
   .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   ESCAPE CSV
+===================================================== */
+
+function csvValue(value){
+
+  return '"' +
+    String(
+      value ?? ""
+    )
+    .replace(
+      /"/g,
+      '""'
+    ) +
+    '"';
 
 }
 
@@ -863,6 +1273,19 @@ async function namaKelas(
   }
 
 
+  if(
+    cacheKelas[
+      String(kelasId)
+    ]
+  ){
+
+    return cacheKelas[
+      String(kelasId)
+    ];
+
+  }
+
+
   try{
 
     const response =
@@ -901,9 +1324,19 @@ async function namaKelas(
       : [];
 
 
-    return data.length
+    const nama =
+      data.length
       ? data[0].nama
       : "-";
+
+
+    cacheKelas[
+      String(kelasId)
+    ] =
+      nama;
+
+
+    return nama;
 
   }catch(error){
 
@@ -2145,11 +2578,6 @@ async function simpanFeedback(
       "✓ Feedback sudah tersimpan";
 
 
-    /*
-      Hitung ulang ringkasan
-      berdasarkan database terbaru.
-    */
-
     const tanggal =
       document.getElementById(
         "tanggalJurnal"
@@ -2160,10 +2588,6 @@ async function simpanFeedback(
       tanggal
     );
 
-
-    /*
-      Cek ulang kelengkapan 7 bagian.
-    */
 
     const hasil =
       await cekStatusFeedbackJurnal(
@@ -2252,34 +2676,1230 @@ function bukaJurnal(
 
 
 /* =====================================================
-   DOWNLOAD REKAP CSV
+   FORMAT TANGGAL JS
 ===================================================== */
 
-async function downloadRekap(){
+function tambahHari(
+  tanggal
+){
 
-  const tanggal =
+  const d =
+    new Date(
+      tanggal +
+      "T00:00:00"
+    );
+
+
+  d.setDate(
+    d.getDate()+1
+  );
+
+
+  return (
+    d.getFullYear() +
+    "-" +
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0") +
+    "-" +
+    String(
+      d.getDate()
+    ).padStart(2,"0")
+  );
+
+}
+
+
+/* =====================================================
+   VALIDASI RENTANG
+===================================================== */
+
+function ambilRentangTanggal(){
+
+  const mulai =
     document.getElementById(
-      "tanggalJurnal"
+      "tanggalMulai"
+    ).value;
+
+  const sampai =
+    document.getElementById(
+      "tanggalSampai"
     ).value;
 
 
-  if(!tanggal){
+  if(!mulai || !sampai){
 
-    alert(
-      "Pilih tanggal terlebih dahulu."
+    throw new Error(
+      "Tanggal mulai dan tanggal sampai harus diisi."
     );
+
+  }
+
+
+  if(mulai > sampai){
+
+    throw new Error(
+      "Tanggal mulai tidak boleh lebih besar dari tanggal sampai."
+    );
+
+  }
+
+
+  const awal =
+    new Date(
+      mulai +
+      "T00:00:00"
+    );
+
+  const akhir =
+    new Date(
+      sampai +
+      "T00:00:00"
+    );
+
+
+  const selisih =
+    Math.floor(
+      (
+        akhir - awal
+      ) /
+      (
+        1000*60*60*24
+      )
+    ) + 1;
+
+
+  if(selisih > 366){
+
+    throw new Error(
+      "Rentang tanggal maksimal 366 hari."
+    );
+
+  }
+
+
+  return {
+    mulai,
+    sampai,
+    jumlahHari:selisih
+  };
+
+}
+
+
+/* =====================================================
+   AMBIL REKAP RENTANG
+===================================================== */
+
+async function ambilRekapRentang(){
+
+  const rentang =
+    ambilRentangTanggal();
+
+
+  const semua=[];
+
+  let tanggal =
+    rentang.mulai;
+
+
+  for(
+    let i=0;
+    i<rentang.jumlahHari;
+    i++
+  ){
+
+    const data =
+      await ambilJurnalGuru(
+        tanggal
+      );
+
+
+    data.forEach(
+      function(j){
+
+        semua.push(j);
+
+      }
+    );
+
+
+    tanggal =
+      tambahHari(
+        tanggal
+      );
+
+  }
+
+
+  return semua;
+
+}
+
+
+/* =====================================================
+   CARI SISWA
+===================================================== */
+
+async function cariSiswaByNISN(
+  nisn
+){
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/siswa" +
+      "?nisn=eq." +
+      encodeURIComponent(
+        nisn
+      ) +
+      "&select=id,nama,nisn,kelas_id,guru_wali_id",
+
+      {
+        headers:
+          headers()
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data=[];
+
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Data siswa tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      "Gagal mencari siswa: " +
+      text
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =====================================================
+   MODAL TAMBAH MURID
+===================================================== */
+
+function bukaTambahMurid(){
+
+  document.getElementById(
+    "modalTambah"
+  ).classList.add(
+    "open"
+  );
+
+
+  document.getElementById(
+    "nisnTambah"
+  ).value="";
+
+
+  document.getElementById(
+    "hasilCariMurid"
+  ).innerHTML="";
+
+
+  document.getElementById(
+    "pesanTambahBerhasil"
+  ).style.display="none";
+
+
+  document.getElementById(
+    "pesanTambahError"
+  ).style.display="none";
+
+
+  setTimeout(
+    function(){
+
+      document.getElementById(
+        "nisnTambah"
+      ).focus();
+
+    },
+    100
+  );
+
+}
+
+
+function tutupTambahMurid(){
+
+  document.getElementById(
+    "modalTambah"
+  ).classList.remove(
+    "open"
+  );
+
+}
+
+
+/* =====================================================
+   TAMBAH MURID
+===================================================== */
+
+async function tambahMurid(){
+
+  const nisn =
+    document.getElementById(
+      "nisnTambah"
+    ).value.trim();
+
+
+  const hasil =
+    document.getElementById(
+      "hasilCariMurid"
+    );
+
+
+  const pesanOk =
+    document.getElementById(
+      "pesanTambahBerhasil"
+    );
+
+
+  const pesanError =
+    document.getElementById(
+      "pesanTambahError"
+    );
+
+
+  const tombol =
+    document.getElementById(
+      "btnSimpanMurid"
+    );
+
+
+  pesanOk.style.display="none";
+  pesanError.style.display="none";
+
+
+  if(!nisn){
+
+    pesanError.style.display="block";
+
+    pesanError.textContent =
+      "NISN harus diisi.";
 
     return;
 
   }
 
 
+  tombol.disabled=true;
+
+  tombol.textContent =
+    "⏳ Mencari...";
+
+
   try{
 
     const data =
-      await ambilJurnalGuru(
-        tanggal
+      await cariSiswaByNISN(
+        nisn
       );
+
+
+    if(!data.length){
+
+      throw new Error(
+        "Siswa dengan NISN " +
+        nisn +
+        " tidak ditemukan."
+      );
+
+    }
+
+
+    const siswa =
+      data[0];
+
+
+    if(
+      siswa.guru_wali_id !== null &&
+      siswa.guru_wali_id !== undefined &&
+      Number(siswa.guru_wali_id) !== Number(guru.id)
+    ){
+
+      throw new Error(
+        "Siswa tersebut sudah memiliki Guru Wali lain."
+      );
+
+    }
+
+
+    const kelas =
+      await namaKelas(
+        siswa.kelas_id
+      );
+
+
+    hasil.innerHTML = `
+
+      <div style="
+        padding:13px;
+        border:1px solid #bae6fd;
+        background:#f0f9ff;
+        border-radius:9px;
+        line-height:1.7;
+      ">
+
+        <b>Nama:</b>
+        ${aman(siswa.nama)}
+
+        <br>
+
+        <b>NISN:</b>
+        ${aman(siswa.nisn)}
+
+        <br>
+
+        <b>Kelas:</b>
+        ${aman(kelas)}
+
+        <br>
+
+        <b>Status:</b>
+        ${
+          Number(siswa.guru_wali_id) === Number(guru.id)
+          ? "Sudah menjadi siswa wali Anda."
+          : "Siap ditambahkan."
+        }
+
+      </div>
+
+    `;
+
+
+    if(
+      Number(siswa.guru_wali_id) === Number(guru.id)
+    ){
+
+      pesanOk.style.display="block";
+
+      pesanOk.textContent =
+        "Siswa tersebut sudah berada dalam daftar siswa wali Anda.";
+
+      tombol.disabled=false;
+
+      tombol.textContent =
+        "➕ Tambahkan";
+
+      return;
+
+    }
+
+
+    tombol.textContent =
+      "⏳ Menambahkan...";
+
+
+    const updateResponse =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/siswa" +
+        "?id=eq." +
+        encodeURIComponent(
+          siswa.id
+        ),
+
+        {
+
+          method:"PATCH",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              guru_wali_id:
+                Number(
+                  guru.id
+                )
+
+            })
+
+        }
+
+      );
+
+
+    const updateText =
+      await updateResponse.text();
+
+
+    if(!updateResponse.ok){
+
+      throw new Error(
+        updateText ||
+        "Gagal menambahkan siswa."
+      );
+
+    }
+
+
+    pesanOk.style.display="block";
+
+    pesanOk.textContent =
+      "✅ " +
+      siswa.nama +
+      " berhasil ditambahkan sebagai siswa wali Anda.";
+
+
+    tombol.textContent =
+      "✅ Berhasil";
+
+
+    await muatUlangSiswa();
+
+
+    setTimeout(
+      function(){
+
+        tutupTambahMurid();
+
+      },
+      900
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "TAMBAH MURID:",
+      error
+    );
+
+
+    pesanError.style.display="block";
+
+    pesanError.textContent =
+      error.message ||
+      "Gagal menambahkan siswa.";
+
+
+    tombol.textContent =
+      "➕ Tambahkan";
+
+  }finally{
+
+    tombol.disabled=false;
+
+  }
+
+}
+
+
+/* =====================================================
+   HAPUS MURID DARI GURU WALI
+===================================================== */
+
+async function hapusMurid(
+  siswaId,
+  nama
+){
+
+  const yakin =
+    confirm(
+      "Apakah Anda yakin ingin mengeluarkan siswa:\n\n" +
+      nama +
+      "\n\nSiswa tidak akan dihapus dari database. " +
+      "Hanya Guru Wali siswa yang akan dikosongkan."
+    );
+
+
+  if(!yakin)
+    return;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/siswa" +
+        "?id=eq." +
+        encodeURIComponent(
+          siswaId
+        ),
+
+        {
+
+          method:"PATCH",
+
+          headers:
+            headers(),
+
+          body:
+            JSON.stringify({
+
+              guru_wali_id:
+                null
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        text ||
+        "Gagal menghapus siswa dari daftar wali."
+      );
+
+    }
+
+
+    alert(
+      "✅ " +
+      nama +
+      " berhasil dikeluarkan dari daftar siswa wali."
+    );
+
+
+    await muatUlangSiswa();
+
+
+    await tampilkanDaftar();
+
+  }catch(error){
+
+    console.error(
+      "HAPUS MURID:",
+      error
+    );
+
+
+    alert(
+      "Gagal mengeluarkan siswa:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   TABEL SISWA
+===================================================== */
+
+async function muatTabelSiswa(){
+
+  const tabel =
+    document.getElementById(
+      "tabelSiswa"
+    );
+
+
+  const status =
+    document.getElementById(
+      "statusKelolaSiswa"
+    );
+
+
+  tabel.innerHTML =
+    '<div class="loading">Memuat daftar siswa...</div>';
+
+
+  try{
+
+    daftarSiswa =
+      await ambilSiswa();
+
+
+    document.getElementById(
+      "jumlahSiswa"
+    ).textContent =
+      daftarSiswa.length;
+
+
+    if(!daftarSiswa.length){
+
+      tabel.innerHTML = `
+
+        <div class="status">
+          Belum ada siswa yang menjadi wali Anda.
+          Silakan tekan <b>➕ Tambah Murid</b>.
+        </div>
+
+      `;
+
+      status.className =
+        "status";
+
+      status.textContent =
+        "Belum ada siswa wali.";
+
+      return;
+
+    }
+
+
+    let html = `
+
+      <table class="tabel-siswa">
+
+        <thead>
+
+          <tr>
+
+            <th>No</th>
+            <th>Nama Siswa</th>
+            <th>NISN</th>
+            <th>Kelas</th>
+            <th>Aksi</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+    `;
+
+
+    for(
+      let i=0;
+      i<daftarSiswa.length;
+      i++
+    ){
+
+      const siswa =
+        daftarSiswa[i];
+
+
+      const kelas =
+        await namaKelas(
+          siswa.kelas_id
+        );
+
+
+      html += `
+
+        <tr>
+
+          <td>
+            ${i+1}
+          </td>
+
+          <td>
+            <b>${aman(siswa.nama)}</b>
+          </td>
+
+          <td>
+            ${aman(siswa.nisn)}
+          </td>
+
+          <td>
+            ${aman(kelas)}
+          </td>
+
+          <td>
+
+            <button
+              class="btn-hapus"
+              onclick="hapusMurid(
+                ${Number(siswa.id)},
+                '${aman(siswa.nama).replace(/'/g,"\\'")}'
+              )">
+              🗑️ Hapus
+            </button>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+    html += `
+
+        </tbody>
+
+      </table>
+
+    `;
+
+
+    tabel.innerHTML =
+      html;
+
+
+    status.className =
+      "status ok";
+
+
+    status.textContent =
+      "Jumlah siswa wali: " +
+      daftarSiswa.length +
+      " siswa.";
+
+  }catch(error){
+
+    console.error(
+      "TABEL SISWA:",
+      error
+    );
+
+
+    tabel.innerHTML =
+      '<div class="status error">' +
+      aman(error.message) +
+      '</div>';
+
+    status.className =
+      "status error";
+
+    status.textContent =
+      error.message;
+
+  }
+
+}
+
+
+/* =====================================================
+   MUAT ULANG SISWA
+===================================================== */
+
+async function muatUlangSiswa(){
+
+  daftarSiswa =
+    await ambilSiswa();
+
+
+  document.getElementById(
+    "jumlahSiswa"
+  ).textContent =
+    daftarSiswa.length;
+
+
+  await muatTabelSiswa();
+
+}
+
+
+/* =====================================================
+   TAMPILKAN REKAP
+===================================================== */
+
+async function tampilkanRekap(){
+
+  const tombol =
+    document.getElementById(
+      "btnRekap"
+    );
+
+
+  const status =
+    document.getElementById(
+      "statusRekap"
+    );
+
+
+  const preview =
+    document.getElementById(
+      "rekapPreview"
+    );
+
+
+  tombol.disabled=true;
+
+  tombol.textContent =
+    "⏳ Memuat...";
+
+
+  preview.style.display="none";
+
+  preview.innerHTML="";
+
+
+  try{
+
+    const rentang =
+      ambilRentangTanggal();
+
+
+    status.className =
+      "status";
+
+
+    status.textContent =
+      "Sedang mengambil jurnal dari " +
+      formatTanggal(rentang.mulai) +
+      " sampai " +
+      formatTanggal(rentang.sampai) +
+      "...";
+
+
+    const data =
+      await ambilRekapRentang();
+
+
+    const siswaMap={};
+
+
+    daftarSiswa.forEach(
+      function(s){
+
+        siswaMap[
+          String(s.id)
+        ]=s;
+
+      }
+    );
+
+
+    cacheRekap=[];
+
+
+    data.forEach(
+      function(j){
+
+        const siswa =
+          siswaMap[
+            String(j.siswa_id)
+          ];
+
+
+        if(siswa){
+
+          cacheRekap.push({
+
+            jurnal:j,
+
+            siswa:siswa
+
+          });
+
+        }
+
+      }
+    );
+
+
+    cacheRekap.sort(
+      function(a,b){
+
+        const t1 =
+          String(
+            a.jurnal.tanggal
+          );
+
+        const t2 =
+          String(
+            b.jurnal.tanggal
+          );
+
+
+        if(t1 !== t2){
+
+          return t1.localeCompare(
+            t2
+          );
+
+        }
+
+
+        return String(
+          a.siswa.nama
+        ).localeCompare(
+          String(
+            b.siswa.nama
+          )
+        );
+
+      }
+    );
+
+
+    let html = `
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>No</th>
+            <th>Nama Siswa</th>
+            <th>NISN</th>
+            <th>Kelas</th>
+            <th>Tanggal</th>
+            <th>Status Jurnal</th>
+            <th>Jam Bangun</th>
+            <th>Puasa</th>
+            <th>Belajar Malam</th>
+            <th>Olahraga</th>
+            <th>Bermasyarakat</th>
+            <th>Ibadah</th>
+            <th>Jam Tidur</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+    `;
+
+
+    cacheRekap.forEach(
+      function(item,index){
+
+        const j =
+          item.jurnal;
+
+        const s =
+          item.siswa;
+
+
+        html += `
+
+          <tr>
+
+            <td>
+              ${index+1}
+            </td>
+
+            <td>
+              ${aman(s.nama)}
+            </td>
+
+            <td>
+              ${aman(s.nisn)}
+            </td>
+
+            <td>
+              ${aman(
+                cacheKelas[
+                  String(s.kelas_id)
+                ] || "-"
+              )}
+            </td>
+
+            <td>
+              ${aman(
+                formatTanggal(
+                  j.tanggal
+                )
+              )}
+            </td>
+
+            <td>
+              <b style="color:#166534;">
+                ✅ Sudah Mengisi
+              </b>
+            </td>
+
+            <td>
+              ${aman(j.jam_bangun)}
+            </td>
+
+            <td>
+              ${aman(j.puasa)}
+            </td>
+
+            <td>
+              ${aman(j.belajar_malam)}
+            </td>
+
+            <td>
+              ${aman(j.olahraga)}
+            </td>
+
+            <td>
+              ${aman(j.bermasyarakat)}
+            </td>
+
+            <td>
+              ${aman(j.ibadah)}
+            </td>
+
+            <td>
+              ${aman(j.jam_tidur)}
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    );
+
+
+    if(!cacheRekap.length){
+
+      html += `
+
+        <tr>
+
+          <td colspan="13"
+              style="text-align:center;padding:20px;">
+
+            Tidak ada jurnal yang ditemukan pada rentang tanggal tersebut.
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+
+
+    html += `
+
+        </tbody>
+
+      </table>
+
+    `;
+
+
+    preview.innerHTML =
+      html;
+
+
+    preview.style.display =
+      "block";
+
+
+    const jumlah =
+      cacheRekap.length;
+
+
+    status.className =
+      "status ok";
+
+
+    status.innerHTML =
+      "✅ Rekap berhasil ditampilkan. " +
+      "<b>" +
+      jumlah +
+      "</b> jurnal ditemukan dari " +
+      formatTanggal(rentang.mulai) +
+      " sampai " +
+      formatTanggal(rentang.sampai) +
+      ".";
+
+
+  }catch(error){
+
+    console.error(
+      "REKAP:",
+      error
+    );
+
+
+    status.className =
+      "status error";
+
+
+    status.textContent =
+      error.message;
+
+
+  }finally{
+
+    tombol.disabled=false;
+
+    tombol.textContent =
+      "🔎 Tampilkan Rekap";
+
+  }
+
+}
+
+
+/* =====================================================
+   DOWNLOAD REKAP CSV RENTANG
+===================================================== */
+
+async function downloadRekap(){
+
+  const tombol =
+    document.getElementById(
+      "btnDownload"
+    );
+
+
+  try{
+
+    const rentang =
+      ambilRentangTanggal();
+
+
+    tombol.disabled=true;
+
+    tombol.textContent =
+      "⏳ Menyiapkan...";
+
+
+    let data;
+
+
+    /*
+      Jika preview sudah dibuat untuk
+      rentang yang sama, gunakan data tersebut.
+    */
+
+    if(cacheRekap.length){
+
+      data =
+        cacheRekap.map(
+          function(item){
+
+            return item.jurnal;
+
+          }
+        );
+
+    }else{
+
+      data =
+        await ambilRekapRentang();
+
+    }
 
 
     const siswaMap={};
@@ -2311,8 +3931,14 @@ async function downloadRekap(){
 
 
     rows.push([
-      "Tanggal",
-      formatTanggal(tanggal)
+      "Tanggal Mulai",
+      rentang.mulai
+    ]);
+
+
+    rows.push([
+      "Tanggal Sampai",
+      rentang.sampai
     ]);
 
 
@@ -2324,7 +3950,9 @@ async function downloadRekap(){
       "No",
       "Nama Siswa",
       "NISN",
+      "Kelas",
       "Tanggal",
+      "Status Jurnal",
       "Jam Bangun",
       "Puasa",
       "Menu Sahur",
@@ -2351,8 +3979,11 @@ async function downloadRekap(){
     ]);
 
 
+    let nomor=1;
+
+
     data.forEach(
-      function(j,index){
+      function(j){
 
         const s =
           siswaMap[
@@ -2362,13 +3993,19 @@ async function downloadRekap(){
 
         rows.push([
 
-          index+1,
+          nomor++,
 
           s.nama || "",
 
           s.nisn || "",
 
+          cacheKelas[
+            String(s.kelas_id)
+          ] || "",
+
           j.tanggal || "",
+
+          "Sudah Mengisi",
 
           j.jam_bangun || "",
 
@@ -2423,8 +4060,11 @@ async function downloadRekap(){
     if(!data.length){
 
       rows.push([
+
         "",
-        "Tidak ada jurnal pada tanggal tersebut."
+
+        "Tidak ada jurnal pada rentang tanggal tersebut."
+
       ]);
 
     }
@@ -2439,15 +4079,9 @@ async function downloadRekap(){
               .map(
                 function(value){
 
-                  return '"' +
-                    String(
-                      value ?? ""
-                    )
-                    .replace(
-                      /"/g,
-                      '""'
-                    ) +
-                    '"';
+                  return csvValue(
+                    value
+                  );
 
                 }
               )
@@ -2489,7 +4123,9 @@ async function downloadRekap(){
 
     link.download =
       "Rekap_Jurnal_7_KAIH_" +
-      tanggal +
+      rentang.mulai +
+      "_sampai_" +
+      rentang.sampai +
       ".csv";
 
 
@@ -2515,6 +4151,13 @@ async function downloadRekap(){
       "Gagal download rekap:\n\n" +
       error.message
     );
+
+  }finally{
+
+    tombol.disabled=false;
+
+    tombol.textContent =
+      "📥 Download CSV";
 
   }
 
@@ -2564,6 +4207,56 @@ function keluar(){
 
 
 /* =====================================================
+   ENTER PADA NISN TAMBAH
+===================================================== */
+
+document
+  .getElementById(
+    "nisnTambah"
+  )
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(
+        event.key === "Enter"
+      ){
+
+        event.preventDefault();
+
+        tambahMurid();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   KLIK LUAR MODAL
+===================================================== */
+
+document
+  .getElementById(
+    "modalTambah"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        tutupTambahMurid();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
    MULAI
 ===================================================== */
 
@@ -2592,10 +4285,29 @@ async function mulai(){
       daftarSiswa.length;
 
 
+    const hariIni =
+      tanggalHariIni();
+
+
     document.getElementById(
       "tanggalJurnal"
     ).value =
-      tanggalHariIni();
+      hariIni;
+
+
+    document.getElementById(
+      "tanggalMulai"
+    ).value =
+      hariIni;
+
+
+    document.getElementById(
+      "tanggalSampai"
+    ).value =
+      hariIni;
+
+
+    await muatTabelSiswa();
 
 
     await tampilkanDaftar();
@@ -2634,4 +4346,3 @@ mulai();
 
 </body>
 </html>
-```
