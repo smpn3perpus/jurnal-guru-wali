@@ -6,2245 +6,2425 @@
 
 <title>Dashboard Admin - Jurnal 7 KAIH</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#1e293b;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f1f5f9;
+    color:#1e293b;
 }
 
-.header{
-  background:#7c3aed;
-  color:#fff;
-  padding:18px 22px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  box-shadow:0 3px 12px rgba(0,0,0,.15);
+header{
+    background:linear-gradient(135deg,#0f766e,#115e59);
+    color:white;
+    padding:22px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
-.header h1{
-  margin:0;
-  font-size:22px;
+.header-content{
+    max-width:1250px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
 }
 
-.header p{
-  margin:5px 0 0;
-  font-size:13px;
+.header-title h1{
+    font-size:25px;
+    margin-bottom:5px;
 }
 
-.logout{
-  border:0;
-  background:#fff;
-  color:#7c3aed;
-  padding:10px 16px;
-  border-radius:9px;
-  font-weight:bold;
-  cursor:pointer;
+.header-title p{
+    font-size:14px;
+    opacity:.9;
+}
+
+.btn-logout{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-logout:hover{
+    background:#b91c1c;
 }
 
 .container{
-  max-width:1200px;
-  margin:auto;
-  padding:20px 15px 35px;
+    max-width:1250px;
+    margin:25px auto;
+    padding:0 15px;
 }
 
-.panel{
-  background:#fff;
-  border-radius:15px;
-  padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+.welcome{
+    background:white;
+    padding:18px 20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-.panel h2{
-  margin:0 0 15px;
-  color:#6d28d9;
+.welcome h2{
+    font-size:20px;
+    color:#0f766e;
+    margin-bottom:5px;
 }
 
-.welcome p{
-  margin:0;
-  color:#64748b;
+/* FILTER */
+.filter-box{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-.tanggal-box{
-  display:flex;
-  gap:10px;
-  align-items:end;
-  margin-top:18px;
+.filter-title{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+    color:#0f766e;
 }
 
-.tanggal-wrap{
-  flex:1;
+.filter-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:7px;
+.form-group label{
+    display:block;
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:6px;
 }
 
-input{
-  width:100%;
-  padding:12px;
-  border:1px solid #cbd5e1;
-  border-radius:9px;
-  font-size:14px;
+.form-group input{
+    width:100%;
+    padding:11px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    font-size:14px;
 }
 
-.primary{
-  border:0;
-  background:#7c3aed;
-  color:#fff;
-  padding:12px 16px;
-  border-radius:9px;
-  font-weight:bold;
-  cursor:pointer;
+.btn{
+    border:none;
+    border-radius:8px;
+    padding:11px 17px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.primary:hover{
-  background:#6d28d9;
+.btn-primary{
+    background:#0f766e;
+    color:white;
 }
 
-.primary:disabled{
-  opacity:.6;
-  cursor:wait;
+.btn-primary:hover{
+    background:#115e59;
 }
 
-.download{
-  border:0;
-  background:#059669;
-  color:#fff;
-  padding:12px 16px;
-  border-radius:9px;
-  font-weight:bold;
-  cursor:pointer;
+.btn-success{
+    background:#15803d;
+    color:white;
 }
 
-.download:hover{
-  background:#047857;
+.btn-success:hover{
+    background:#166534;
 }
 
-.download:disabled{
-  opacity:.5;
-  cursor:not-allowed;
+.button-row{
+    display:flex;
+    gap:10px;
+    align-items:end;
+    height:100%;
 }
 
-/* RINGKASAN */
-
+/* CARDS */
 .cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:18px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:20px;
 }
 
 .card{
-  background:#fff;
-  border-radius:15px;
-  padding:20px;
-  text-align:center;
-  box-shadow:0 3px 12px rgba(0,0,0,.08);
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    border-left:5px solid #0f766e;
 }
 
 .card-title{
-  color:#64748b;
-  font-size:14px;
-  line-height:1.4;
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:8px;
 }
 
-.card-number{
-  margin-top:8px;
-  color:#7c3aed;
-  font-size:32px;
-  font-weight:bold;
+.card-value{
+    font-size:30px;
+    font-weight:bold;
+    color:#0f766e;
 }
 
-/* REKAP RANGE */
-
-.range-title{
-  color:#047857 !important;
+/* SECTION */
+.section{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-.range-box{
-  display:grid;
-  grid-template-columns:1fr 1fr auto auto;
-  gap:10px;
-  align-items:end;
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+    gap:10px;
 }
 
-.range-info{
-  margin-top:15px;
-  padding:13px;
-  background:#ecfdf5;
-  color:#065f46;
-  border-radius:9px;
-  font-size:14px;
-  line-height:1.6;
+.section-title{
+    font-size:19px;
+    font-weight:bold;
+    color:#0f766e;
 }
 
-.rekap-cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:18px;
-}
-
-.rekap-card{
-  background:#f8fafc;
-  border-radius:12px;
-  padding:18px;
-  text-align:center;
-  border:1px solid #e2e8f0;
-}
-
-.rekap-card-title{
-  color:#64748b;
-  font-size:13px;
-}
-
-.rekap-card-number{
-  margin-top:7px;
-  font-size:28px;
-  font-weight:bold;
-  color:#047857;
-}
-
-/* PERIODE */
-
-.week{
-  padding:12px;
-  background:#f5f3ff;
-  color:#5b21b6;
-  border-radius:9px;
-}
-
-/* TABEL */
-
-.table-wrap{
-  width:100%;
-  overflow-x:auto;
+/* TABLE */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-th,
-td{
-  padding:11px;
-  border-bottom:1px solid #e2e8f0;
-  text-align:left;
-  vertical-align:top;
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
 }
 
 th{
-  background:#f5f3ff;
-  color:#6d28d9;
+    background:#0f766e;
+    color:white;
+    padding:11px 10px;
+    font-size:13px;
+    text-align:left;
+    white-space:nowrap;
 }
 
-.rekap-table th{
-  background:#ecfdf5;
-  color:#047857;
+td{
+    padding:10px;
+    border-bottom:1px solid #e2e8f0;
+    font-size:13px;
 }
 
-.total-row{
-  font-weight:bold;
-  background:#f8fafc;
+tbody tr:hover{
+    background:#f8fafc;
 }
 
-.empty{
-  padding:14px;
-  background:#f8fafc;
-  color:#64748b;
-  border-radius:9px;
+.text-center{
+    text-align:center;
 }
 
+.text-right{
+    text-align:right;
+}
+
+/* BADGE */
 .badge{
-  display:inline-block;
-  padding:6px 9px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
 }
 
-.green{
-  background:#dcfce7;
-  color:#166534;
+.badge-success{
+    background:#dcfce7;
+    color:#166534;
 }
 
-.orange{
-  background:#ffedd5;
-  color:#9a3412;
+.badge-warning{
+    background:#fef3c7;
+    color:#92400e;
 }
 
-.error{
-  display:none;
-  margin-top:12px;
-  padding:12px;
-  background:#fee2e2;
-  color:#991b1b;
-  border-radius:9px;
-  line-height:1.5;
+.badge-danger{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
+.badge-info{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+/* INFO */
+.info-box{
+    background:#ecfeff;
+    border-left:4px solid #0891b2;
+    padding:12px 15px;
+    border-radius:7px;
+    margin-bottom:15px;
+    color:#164e63;
+    font-size:14px;
+}
+
+/* LOADING */
 .loading{
-  padding:20px;
-  text-align:center;
-  color:#64748b;
+    text-align:center;
+    padding:30px;
+    color:#64748b;
 }
 
-.footer{
-  text-align:center;
-  padding:25px;
-  color:#64748b;
-  font-size:12px;
+.spinner{
+    display:inline-block;
+    width:25px;
+    height:25px;
+    border:3px solid #cbd5e1;
+    border-top-color:#0f766e;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin-bottom:8px;
 }
 
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* ERROR */
+.error-box{
+    background:#fee2e2;
+    color:#991b1b;
+    border-left:4px solid #dc2626;
+    padding:13px 15px;
+    border-radius:7px;
+    margin-bottom:15px;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#64748b;
+}
+
+/* RESPONSIVE */
 @media(max-width:900px){
+    .filter-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-  .range-box{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .range-box button{
-    width:100%;
-  }
-
-}
-
-@media(max-width:800px){
-
-  .cards,
-  .rekap-cards{
-    grid-template-columns:1fr;
-  }
-
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
 }
 
 @media(max-width:600px){
+    .header-content{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 
-  .header{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+    .filter-grid{
+        grid-template-columns:1fr;
+    }
 
-  .tanggal-box{
-    flex-direction:column;
-    align-items:stretch;
-  }
+    .cards{
+        grid-template-columns:1fr;
+    }
 
-  .tanggal-box .primary{
-    width:100%;
-  }
+    .button-row{
+        align-items:stretch;
+        flex-direction:column;
+    }
 
-  .range-box{
-    grid-template-columns:1fr;
-  }
+    .button-row .btn{
+        width:100%;
+    }
+}
 
-  .primary,
-  .download{
-    width:100%;
-  }
+/* PRINT */
+@media print{
+    header,
+    .filter-box,
+    .btn-logout,
+    .button-row,
+    #dashboardSection,
+    footer{
+        display:none !important;
+    }
 
+    body{
+        background:white;
+    }
+
+    .container{
+        max-width:none;
+        margin:0;
+        padding:0;
+    }
+
+    .section{
+        box-shadow:none;
+        padding:0;
+    }
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px 15px;
+    color:#64748b;
+    font-size:13px;
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
+<header>
+    <div class="header-content">
+        <div class="header-title">
+            <h1>📊 Dashboard Admin / Kepsek</h1>
+            <p>Jurnal 7 Kebiasaan Anak Indonesia Hebat</p>
+        </div>
 
-  <div>
-
-    <h1>
-      📊 Dashboard Admin / Kepala Sekolah
-    </h1>
-
-    <p>
-      Monitoring Jurnal 7 Kebiasaan Anak Indonesia Hebat
-      • SMP Negeri 3 Sibolga
-    </p>
-
-  </div>
-
-  <button
-    class="logout"
-    onclick="logout()">
-    Keluar
-  </button>
-
+        <button class="btn-logout" onclick="logout()">
+            🚪 Keluar
+        </button>
+    </div>
 </header>
 
+<div class="container">
 
-<main class="container">
+    <!-- WELCOME -->
+    <div class="welcome">
+        <h2 id="namaAdmin">Selamat Datang, Admin</h2>
+        <p>Monitoring aktivitas guru, siswa, dan feedback Jurnal 7 KAIH.</p>
+    </div>
 
-  <!-- WELCOME -->
+    <!-- FILTER DASHBOARD LAMA -->
+    <div class="filter-box" id="dashboardSection">
 
-  <section class="panel welcome">
+        <div class="filter-title">
+            📅 Monitoring Aktivitas
+        </div>
 
-    <h2 id="namaAdmin">
-      Memuat nama admin...
-    </h2>
+        <div class="filter-grid">
 
-    <p>
-      Pilih tanggal untuk melihat catatan login Guru
-      dan Siswa. Rekap feedback dapat dilihat berdasarkan
-      rentang tanggal.
-    </p>
+            <div class="form-group">
+                <label for="tanggalDashboard">
+                    Tanggal
+                </label>
 
+                <input
+                    type="date"
+                    id="tanggalDashboard"
+                >
+            </div>
 
-    <div class="tanggal-box">
+            <div class="form-group">
+                <label>&nbsp;</label>
 
-      <div class="tanggal-wrap">
+                <button
+                    class="btn btn-primary"
+                    onclick="loadDashboard()"
+                >
+                    🔄 Refresh Dashboard
+                </button>
+            </div>
 
-        <label for="tanggal">
-          📅 Pilih Tanggal Login
-        </label>
-
-        <input
-          type="date"
-          id="tanggal"
-        >
-
-      </div>
-
-
-      <button
-        id="btnTampilkan"
-        class="primary"
-        onclick="loadDashboard()">
-        🔎 Tampilkan
-      </button>
+        </div>
 
     </div>
 
+    <!-- CARDS DASHBOARD -->
+    <div class="cards">
 
-    <div
-      id="pesanError"
-      class="error">
-    </div>
+        <div class="card">
+            <div class="card-title">
+                👨‍🏫 Guru Login
+            </div>
 
-  </section>
+            <div
+                class="card-value"
+                id="guruLoginCount"
+            >
+                0
+            </div>
+        </div>
 
+        <div class="card">
+            <div class="card-title">
+                👨‍🎓 Siswa Login
+            </div>
 
-  <!-- RINGKASAN DASHBOARD -->
+            <div
+                class="card-value"
+                id="siswaLoginCount"
+            >
+                0
+            </div>
+        </div>
 
-  <section class="cards">
+        <div class="card">
+            <div class="card-title">
+                💬 Feedback Guru Minggu Ini
+            </div>
 
-    <div class="card">
-
-      <div class="card-title">
-        👨‍🏫 Guru Login
-      </div>
-
-      <div
-        id="guruLoginCount"
-        class="card-number">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        👨‍🎓 Siswa Login
-      </div>
-
-      <div
-        id="siswaLoginCount"
-        class="card-number">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="card-title">
-        📝 Guru Feedback Minggu Ini
-      </div>
-
-      <div
-        id="guruFeedbackCount"
-        class="card-number">
-        0
-      </div>
+            <div
+                class="card-value"
+                id="guruFeedbackCount"
+            >
+                0
+            </div>
+        </div>
 
     </div>
 
-  </section>
+    <!-- GURU LOGIN -->
+    <div class="section">
 
-
-  <!-- =================================================
-       REKAP FEEDBACK TANGGAL KE TANGGAL
-  ================================================== -->
-
-  <section class="panel">
-
-    <h2 class="range-title">
-      📊 Rekap Feedback Guru
-    </h2>
-
-    <p style="color:#64748b;margin-top:-5px;">
-      Pilih tanggal mulai dan tanggal sampai untuk
-      melihat total feedback Guru.
-    </p>
-
-
-    <div class="range-box">
-
-      <div>
-
-        <label for="tanggalMulai">
-          📅 Tanggal Mulai
-        </label>
-
-        <input
-          type="date"
-          id="tanggalMulai"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label for="tanggalSampai">
-          📅 Tanggal Sampai
-        </label>
-
-        <input
-          type="date"
-          id="tanggalSampai"
-        >
-
-      </div>
-
-
-      <button
-        id="btnRekap"
-        class="primary"
-        onclick="loadRekapFeedback()">
-        🔎 Tampilkan Rekap
-      </button>
-
-
-      <button
-        id="btnDownload"
-        class="download"
-        onclick="downloadRekap()"
-        disabled>
-        📥 Download Rekap
-      </button>
-
-    </div>
-
-
-    <div
-      id="infoRekap"
-      class="range-info">
-      Silakan pilih rentang tanggal.
-    </div>
-
-
-    <div class="rekap-cards">
-
-      <div class="rekap-card">
-
-        <div class="rekap-card-title">
-          👨‍🏫 Guru yang Memberikan Feedback
+        <div class="section-header">
+            <div class="section-title">
+                👨‍🏫 Guru Login
+            </div>
         </div>
 
         <div
-          id="totalGuruFeedbackRange"
-          class="rekap-card-number">
-          0
+            id="guruLoginInfo"
+            class="info-box"
+        >
+            Memuat data...
         </div>
 
-      </div>
+        <div class="table-wrapper">
 
+            <table>
 
-      <div class="rekap-card">
+                <thead>
+                    <tr>
+                        <th width="60">No</th>
+                        <th>Nama Guru</th>
+                        <th>NIP / Username</th>
+                        <th>Login Terakhir</th>
+                    </tr>
+                </thead>
 
-        <div class="rekap-card-title">
-          📝 Total Feedback
+                <tbody id="tabelGuruLogin">
+                    <tr>
+                        <td colspan="4" class="loading">
+                            Memuat data...
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- SISWA LOGIN -->
+    <div class="section">
+
+        <div class="section-header">
+            <div class="section-title">
+                👨‍🎓 Siswa Login
+            </div>
         </div>
 
         <div
-          id="totalFeedbackRange"
-          class="rekap-card-number">
-          0
+            id="siswaLoginInfo"
+            class="info-box"
+        >
+            Memuat data...
         </div>
 
-      </div>
+        <div class="table-wrapper">
 
+            <table>
 
-      <div class="rekap-card">
+                <thead>
+                    <tr>
+                        <th width="60">No</th>
+                        <th>Nama Siswa</th>
+                        <th>NISN / Username</th>
+                        <th>Kelas</th>
+                        <th>Login Terakhir</th>
+                    </tr>
+                </thead>
 
-        <div class="rekap-card-title">
-          📈 Rata-rata Feedback / Guru
+                <tbody id="tabelSiswaLogin">
+                    <tr>
+                        <td colspan="5" class="loading">
+                            Memuat data...
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- FEEDBACK MINGGUAN -->
+    <div class="section">
+
+        <div class="section-header">
+            <div class="section-title">
+                💬 Guru Feedback Minggu Ini
+            </div>
         </div>
 
         <div
-          id="rataFeedbackRange"
-          class="rekap-card-number">
-          0
+            id="feedbackMingguanInfo"
+            class="info-box"
+        >
+            Memuat data...
         </div>
 
-      </div>
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th width="60">No</th>
+                        <th>Nama Guru</th>
+                        <th>NIP / Username</th>
+                        <th>Jumlah Feedback</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabelFeedbackMingguan">
+                    <tr>
+                        <td colspan="4" class="loading">
+                            Memuat data...
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
-  </section>
+
+    <!-- ======================================================
+         REKAP FEEDBACK GURU TANGGAL KE TANGGAL
+         ====================================================== -->
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                📊 Rekap Feedback Guru
+            </div>
+
+        </div>
+
+        <div class="info-box">
+            Pilih tanggal mulai dan tanggal sampai untuk melihat
+            total feedback yang diberikan oleh setiap guru.
+        </div>
+
+        <div class="filter-grid">
+
+            <div class="form-group">
+
+                <label for="tanggalMulai">
+                    📅 Tanggal Mulai
+                </label>
+
+                <input
+                    type="date"
+                    id="tanggalMulai"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="tanggalSampai">
+                    📅 Tanggal Sampai
+                </label>
+
+                <input
+                    type="date"
+                    id="tanggalSampai"
+                >
+
+            </div>
+
+            <div class="button-row">
+
+                <button
+                    class="btn btn-primary"
+                    id="btnRekap"
+                    onclick="loadRekapFeedback()"
+                >
+                    🔎 Tampilkan Rekap
+                </button>
+
+                <button
+                    class="btn btn-success"
+                    id="btnDownload"
+                    onclick="downloadRekap()"
+                    disabled
+                >
+                    📥 Download Rekap
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 
-  <!-- TABEL REKAP RANGE -->
+    <!-- CARDS REKAP -->
+    <div class="cards">
 
-  <section class="panel">
+        <div class="card">
 
-    <h2 class="range-title">
-      👨‍🏫 Rincian Feedback Guru
-    </h2>
+            <div class="card-title">
+                👨‍🏫 Guru Memberikan Feedback
+            </div>
+
+            <div
+                class="card-value"
+                id="totalGuruFeedbackRange"
+            >
+                0
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                💬 Total Feedback
+            </div>
+
+            <div
+                class="card-value"
+                id="totalFeedbackRange"
+            >
+                0
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-title">
+                📈 Rata-rata Feedback / Guru
+            </div>
+
+            <div
+                class="card-value"
+                id="rataFeedbackRange"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INFO REKAP -->
 
     <div
-      id="tabelRekapFeedback"
-      class="empty">
-      Belum ada rekap. Silakan pilih rentang tanggal.
+        id="infoRekap"
+        class="info-box"
+    >
+        Silakan pilih tanggal untuk menampilkan rekap.
     </div>
 
-  </section>
 
+    <!-- TABEL REKAP -->
 
-  <!-- PERIODE MINGGUAN -->
+    <div class="section">
 
-  <section class="panel">
+        <div class="section-header">
 
-    <h2>
-      📅 Periode Feedback Minggu Ini
-    </h2>
+            <div class="section-title">
+                📋 Detail Rekap Feedback Guru
+            </div>
 
-    <div
-      id="periodeMinggu"
-      class="week">
-      -
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="tabelRekap">
+
+                <thead>
+
+                    <tr>
+
+                        <th width="55">
+                            No
+                        </th>
+
+                        <th>
+                            Nama Guru
+                        </th>
+
+                        <th>
+                            NIP / Username
+                        </th>
+
+                        <th>
+                            Jumlah Feedback
+                        </th>
+
+                        <th>
+                            Feedback Pertama
+                        </th>
+
+                        <th>
+                            Feedback Terakhir
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelRekapFeedback">
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty"
+                        >
+                            Belum ada data.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     </div>
 
-  </section>
+</div>
 
 
-  <!-- GURU LOGIN -->
-
-  <section class="panel">
-
-    <h2>
-      👨‍🏫 Guru yang Login
-    </h2>
-
-    <div
-      id="tabelGuruLogin"
-      class="loading">
-      Memuat...
-    </div>
-
-  </section>
-
-
-  <!-- SISWA LOGIN -->
-
-  <section class="panel">
-
-    <h2>
-      👨‍🎓 Siswa yang Login
-    </h2>
-
-    <div
-      id="tabelSiswaLogin"
-      class="loading">
-      Memuat...
-    </div>
-
-  </section>
-
-
-  <!-- FEEDBACK MINGGUAN -->
-
-  <section class="panel">
-
-    <h2>
-      📝 Guru yang Memberikan Feedback Minggu Ini
-    </h2>
-
-    <div
-      id="tabelGuruFeedback"
-      class="loading">
-      Memuat...
-    </div>
-
-  </section>
-
-
-  <div class="footer">
+<footer>
     Dibuat oleh Mr. Rahmat Batubara, S.T.P
-  </div>
-
-</main>
+</footer>
 
 
 <script>
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+/* =========================================================
+   KONFIGURASI SUPABASE
+   ========================================================= */
 
 const SUPABASE_URL =
-  "https://nnnvgbajiqlqrsaygxme.supabase.co";
+    "https://nnnvgbajiqlqrsaygxme.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+    "sb_publishable_dHIoPw_gfvud74PH4UCp2w_yGzl9oDy";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-function headers(){
-
-  return {
-
-    "apikey":
-      SUPABASE_KEY,
-
-    "Authorization":
-      "Bearer " +
-      SUPABASE_KEY,
-
-    "Content-Type":
-      "application/json",
-
-    "Accept":
-      "application/json"
-
-  };
-
-}
-
-
-/* =====================================================
-   SESSION ADMIN
-===================================================== */
+/* =========================================================
+   VARIABEL
+   ========================================================= */
 
 let akunAdmin = null;
-
-const saved =
-  sessionStorage.getItem(
-    "akun_admin"
-  );
-
-
-if(!saved){
-
-  window.location.replace(
-    "login-admin.html"
-  );
-
-}else{
-
-  try{
-
-    akunAdmin =
-      JSON.parse(saved);
-
-  }catch(error){
-
-    sessionStorage.removeItem(
-      "akun_admin"
-    );
-
-    window.location.replace(
-      "login-admin.html"
-    );
-
-  }
-
-}
-
-
-if(
-  !akunAdmin ||
-  akunAdmin.role !== "admin" ||
-  !akunAdmin.referensi_id
-){
-
-  sessionStorage.removeItem(
-    "akun_admin"
-  );
-
-  window.location.replace(
-    "login-admin.html"
-  );
-
-}
-
-
-/* =====================================================
-   TANGGAL
-===================================================== */
-
-function tanggalHariIni(){
-
-  const d =
-    new Date();
-
-  return (
-    d.getFullYear() +
-    "-" +
-    String(
-      d.getMonth()+1
-    ).padStart(2,"0") +
-    "-" +
-    String(
-      d.getDate()
-    ).padStart(2,"0")
-  );
-
-}
-
-
-function formatTanggal(value){
-
-  if(!value)
-    return "-";
-
-  const p =
-    String(value).split("-");
-
-  if(p.length !== 3)
-    return value;
-
-  return (
-    p[2] +
-    "/" +
-    p[1] +
-    "/" +
-    p[0]
-  );
-
-}
-
-
-function formatWaktu(value){
-
-  if(!value)
-    return "-";
-
-  try{
-
-    return new Date(value)
-      .toLocaleString(
-        "id-ID",
-        {
-          dateStyle:"short",
-          timeStyle:"short"
-        }
-      );
-
-  }catch(error){
-
-    return value;
-
-  }
-
-}
-
-
-/* =====================================================
-   AMBIL DASHBOARD RPC
-===================================================== */
-
-async function ambilDashboard(){
-
-  const tanggal =
-    document.getElementById(
-      "tanggal"
-    ).value;
-
-
-  const response =
-    await fetch(
-
-      SUPABASE_URL +
-      "/rest/v1/rpc/ambil_dashboard_admin",
-
-      {
-
-        method:"POST",
-
-        headers:
-          headers(),
-
-        body:
-          JSON.stringify({
-
-            p_admin_id:
-              Number(
-                akunAdmin.referensi_id
-              ),
-
-            p_tanggal:
-              tanggal
-
-          })
-
-      }
-
-    );
-
-
-  const text =
-    await response.text();
-
-
-  let data;
-
-
-  try{
-
-    data =
-      text
-      ? JSON.parse(text)
-      : {};
-
-  }catch(error){
-
-    throw new Error(
-      "Respons Dashboard Admin tidak valid."
-    );
-
-  }
-
-
-  if(!response.ok){
-
-    throw new Error(
-      data.message ||
-      data.details ||
-      data.hint ||
-      text ||
-      "Gagal mengambil Dashboard Admin."
-    );
-
-  }
-
-
-  if(Array.isArray(data)){
-
-    return (
-      data[0]?.ambil_dashboard_admin ||
-      {}
-    );
-
-  }
-
-
-  if(
-    data &&
-    data.ambil_dashboard_admin
-  ){
-
-    return data.ambil_dashboard_admin;
-
-  }
-
-
-  return data;
-
-}
-
-
-/* =====================================================
-   LOAD DASHBOARD
-===================================================== */
-
-async function loadDashboard(){
-
-  const tombol =
-    document.getElementById(
-      "btnTampilkan"
-    );
-
-
-  const tanggal =
-    document.getElementById(
-      "tanggal"
-    ).value;
-
-
-  if(!tanggal){
-
-    tampilError(
-      "Silakan pilih tanggal terlebih dahulu."
-    );
-
-    return;
-
-  }
-
-
-  tombol.disabled=true;
-
-  tombol.textContent=
-    "⏳ Memuat...";
-
-
-  sembunyikanError();
-
-
-  try{
-
-    const data =
-      await ambilDashboard();
-
-
-    tampilDashboard(
-      data
-    );
-
-  }catch(error){
-
-    console.error(
-      "ADMIN DASHBOARD:",
-      error
-    );
-
-
-    tampilError(
-      error.message
-    );
-
-  }finally{
-
-    tombol.disabled=false;
-
-    tombol.textContent=
-      "🔎 Tampilkan";
-
-  }
-
-}
-
-
-/* =====================================================
-   TAMPIL DASHBOARD
-===================================================== */
-
-function tampilDashboard(
-  data
-){
-
-  document.getElementById(
-    "namaAdmin"
-  ).textContent =
-    "Selamat datang, " +
-    (
-      data.admin_nama ||
-      akunAdmin.nama ||
-      "Admin / Kepala Sekolah"
-    );
-
-
-  document.getElementById(
-    "guruLoginCount"
-  ).textContent =
-    Number(
-      data.guru_login_count ||
-      0
-    );
-
-
-  document.getElementById(
-    "siswaLoginCount"
-  ).textContent =
-    Number(
-      data.siswa_login_count ||
-      0
-    );
-
-
-  document.getElementById(
-    "guruFeedbackCount"
-  ).textContent =
-    Number(
-      data.guru_feedback_count ||
-      0
-    );
-
-
-  document.getElementById(
-    "periodeMinggu"
-  ).textContent =
-    formatTanggal(
-      data.awal_minggu
-    ) +
-    " s.d. " +
-    formatTanggal(
-      data.akhir_minggu
-    );
-
-
-  tampilGuruLogin(
-    data.guru_login ||
-    []
-  );
-
-
-  tampilSiswaLogin(
-    data.siswa_login ||
-    []
-  );
-
-
-  tampilGuruFeedback(
-    data.guru_feedback ||
-    []
-  );
-
-}
-
-
-/* =====================================================
-   REKAP FEEDBACK RANGE
-===================================================== */
 
 let dataRekapFeedback = [];
 
 
-async function ambilRekapFeedback(){
+/* =========================================================
+   CEK SESSION ADMIN
+   ========================================================= */
 
-  const mulai =
-    document.getElementById(
-      "tanggalMulai"
-    ).value;
+function cekAdmin(){
 
-  const sampai =
-    document.getElementById(
-      "tanggalSampai"
-    ).value;
+    const saved =
+        sessionStorage.getItem("akun_admin");
 
+    if(!saved){
 
-  const response =
-    await fetch(
-
-      SUPABASE_URL +
-      "/rest/v1/rpc/ambil_rekap_feedback_admin",
-
-      {
-
-        method:"POST",
-
-        headers:
-          headers(),
-
-        body:
-          JSON.stringify({
-
-            p_admin_id:
-              Number(
-                akunAdmin.referensi_id
-              ),
-
-            p_tanggal_mulai:
-              mulai,
-
-            p_tanggal_sampai:
-              sampai
-
-          })
-
-      }
-
-    );
-
-
-  const text =
-    await response.text();
-
-
-  let data;
-
-
-  try{
-
-    data =
-      text
-      ? JSON.parse(text)
-      : [];
-
-  }catch(error){
-
-    throw new Error(
-      "Respons rekap feedback tidak valid."
-    );
-
-  }
-
-
-  if(!response.ok){
-
-    throw new Error(
-      data.message ||
-      data.details ||
-      data.hint ||
-      text ||
-      "Gagal mengambil rekap feedback."
-    );
-
-  }
-
-
-  if(Array.isArray(data)){
-
-    return data;
-
-  }
-
-
-  if(
-    data &&
-    Array.isArray(
-      data.ambil_rekap_feedback_admin
-    )
-  ){
-
-    return data.ambil_rekap_feedback_admin;
-
-  }
-
-
-  if(
-    data &&
-    data.ambil_rekap_feedback_admin
-  ){
-
-    return [
-      data.ambil_rekap_feedback_admin
-    ];
-
-  }
-
-
-  return [];
-
-}
-
-
-/* =====================================================
-   LOAD REKAP
-===================================================== */
-
-async function loadRekapFeedback(){
-
-  const mulai =
-    document.getElementById(
-      "tanggalMulai"
-    ).value;
-
-  const sampai =
-    document.getElementById(
-      "tanggalSampai"
-    ).value;
-
-  const tombol =
-    document.getElementById(
-      "btnRekap"
-    );
-
-
-  if(!mulai || !sampai){
-
-    tampilError(
-      "Silakan isi Tanggal Mulai dan Tanggal Sampai."
-    );
-
-    return;
-
-  }
-
-
-  if(mulai > sampai){
-
-    tampilError(
-      "Tanggal Mulai tidak boleh lebih besar daripada Tanggal Sampai."
-    );
-
-    return;
-
-  }
-
-
-  tombol.disabled=true;
-
-  tombol.textContent=
-    "⏳ Memuat...";
-
-  sembunyikanError();
-
-
-  try{
-
-    const data =
-      await ambilRekapFeedback();
-
-
-    dataRekapFeedback =
-      data || [];
-
-
-    tampilRekapFeedback(
-      dataRekapFeedback,
-      mulai,
-      sampai
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "REKAP FEEDBACK:",
-      error
-    );
-
-
-    dataRekapFeedback =
-      [];
-
-
-    tampilError(
-      error.message
-    );
-
-  }finally{
-
-    tombol.disabled=false;
-
-    tombol.textContent=
-      "🔎 Tampilkan Rekap";
-
-  }
-
-}
-
-
-/* =====================================================
-   TAMPIL REKAP
-===================================================== */
-
-function tampilRekapFeedback(
-  data,
-  mulai,
-  sampai
-){
-
-  const tempat =
-    document.getElementById(
-      "tabelRekapFeedback"
-    );
-
-
-  const totalGuru =
-    data.length;
-
-
-  let totalFeedback = 0;
-
-
-  data.forEach(
-    item => {
-
-      totalFeedback +=
-        Number(
-          item.jumlah_feedback ||
-          0
+        alert(
+            "Session admin tidak ditemukan. Silakan login kembali."
         );
 
+        window.location.href =
+            "login.html";
+
+        return false;
     }
-  );
 
+    try{
 
-  const rata =
-    totalGuru
-      ? (
-          totalFeedback /
-          totalGuru
-        ).toFixed(2)
-      : "0";
+        akunAdmin =
+            JSON.parse(saved);
 
+    }catch(error){
 
-  document.getElementById(
-    "totalGuruFeedbackRange"
-  ).textContent =
-    totalGuru;
+        console.error(error);
 
-
-  document.getElementById(
-    "totalFeedbackRange"
-  ).textContent =
-    totalFeedback;
-
-
-  document.getElementById(
-    "rataFeedbackRange"
-  ).textContent =
-    rata;
-
-
-  document.getElementById(
-    "infoRekap"
-  ).innerHTML =
-    "Periode: <b>" +
-    aman(
-      formatTanggal(mulai)
-    ) +
-    "</b> s.d. <b>" +
-    aman(
-      formatTanggal(sampai)
-    ) +
-    "</b><br>" +
-    "Ditemukan <b>" +
-    totalGuru +
-    "</b> Guru yang memberikan feedback " +
-    "dengan total <b>" +
-    totalFeedback +
-    "</b> feedback.";
-
-
-  document.getElementById(
-    "btnDownload"
-  ).disabled =
-    data.length === 0;
-
-
-  if(!data.length){
-
-    tempat.innerHTML =
-      `
-      <div class="empty">
-        Tidak ada Guru yang memberikan feedback
-        pada rentang tanggal tersebut.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  let html = `
-
-    <div class="table-wrap">
-
-      <table class="rekap-table">
-
-        <thead>
-
-          <tr>
-
-            <th>No</th>
-
-            <th>Nama Guru</th>
-
-            <th>NIP / Username</th>
-
-            <th>Jumlah Feedback</th>
-
-            <th>Feedback Pertama</th>
-
-            <th>Feedback Terakhir</th>
-
-            <th>Status</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-  `;
-
-
-  data.forEach(
-    function(item,index){
-
-      html += `
-
-        <tr>
-
-          <td>
-            ${index + 1}
-          </td>
-
-          <td>
-            <b>
-              ${aman(item.nama)}
-            </b>
-          </td>
-
-          <td>
-            ${aman(item.username)}
-          </td>
-
-          <td>
-            <b>
-              ${Number(
-                item.jumlah_feedback ||
-                0
-              )}
-            </b>
-          </td>
-
-          <td>
-            ${aman(
-              formatWaktu(
-                item.feedback_pertama
-              )
-            )}
-          </td>
-
-          <td>
-            ${aman(
-              formatWaktu(
-                item.feedback_terakhir
-              )
-            )}
-          </td>
-
-          <td>
-
-            <span class="badge green">
-              ✅ SUDAH FEEDBACK
-            </span>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-        <tr class="total-row">
-
-          <td colspan="3">
-            TOTAL
-          </td>
-
-          <td>
-            ${totalFeedback}
-          </td>
-
-          <td colspan="3">
-            ${totalGuru} Guru
-          </td>
-
-        </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  tempat.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-   DOWNLOAD REKAP CSV
-===================================================== */
-
-function csvCell(value){
-
-  return (
-    '"' +
-    String(
-      value ?? ""
-    )
-    .replaceAll(
-      '"',
-      '""'
-    ) +
-    '"'
-  );
-
-}
-
-
-function downloadRekap(){
-
-  if(!dataRekapFeedback.length){
-
-    tampilError(
-      "Belum ada data rekap untuk didownload."
-    );
-
-    return;
-
-  }
-
-
-  const mulai =
-    document.getElementById(
-      "tanggalMulai"
-    ).value;
-
-  const sampai =
-    document.getElementById(
-      "tanggalSampai"
-    ).value;
-
-
-  let totalFeedback = 0;
-
-
-  dataRekapFeedback.forEach(
-    item => {
-
-      totalFeedback +=
-        Number(
-          item.jumlah_feedback ||
-          0
+        sessionStorage.removeItem(
+            "akun_admin"
         );
 
+        window.location.href =
+            "login.html";
+
+        return false;
     }
-  );
 
 
-  let rows = [];
+    if(
+        !akunAdmin ||
+        akunAdmin.role !== "admin" ||
+        !akunAdmin.referensi_id
+    ){
 
+        alert(
+            "Akses admin tidak valid."
+        );
 
-  rows.push([
-    "REKAP FEEDBACK GURU"
-  ]);
+        sessionStorage.removeItem(
+            "akun_admin"
+        );
 
+        window.location.href =
+            "login.html";
 
-  rows.push([
-    "SMP Negeri 3 Sibolga"
-  ]);
-
-
-  rows.push([
-    "Periode",
-    formatTanggal(mulai),
-    "s.d.",
-    formatTanggal(sampai)
-  ]);
-
-
-  rows.push([]);
-
-
-  rows.push([
-    "Total Guru Memberikan Feedback",
-    dataRekapFeedback.length
-  ]);
-
-
-  rows.push([
-    "Total Feedback",
-    totalFeedback
-  ]);
-
-
-  rows.push([]);
-
-
-  rows.push([
-    "No",
-    "Nama Guru",
-    "NIP / Username",
-    "Jumlah Feedback",
-    "Feedback Pertama",
-    "Feedback Terakhir",
-    "Status"
-  ]);
-
-
-  dataRekapFeedback.forEach(
-    function(item,index){
-
-      rows.push([
-
-        index + 1,
-
-        item.nama || "",
-
-        item.username || "",
-
-        Number(
-          item.jumlah_feedback ||
-          0
-        ),
-
-        formatWaktu(
-          item.feedback_pertama
-        ),
-
-        formatWaktu(
-          item.feedback_terakhir
-        ),
-
-        "SUDAH FEEDBACK"
-
-      ]);
-
+        return false;
     }
-  );
 
-
-  rows.push([]);
-
-
-  rows.push([
-    "",
-    "",
-    "TOTAL",
-    totalFeedback,
-    "",
-    "",
-    dataRekapFeedback.length +
-    " Guru"
-  ]);
-
-
-  const csv =
-    "\ufeff" +
-    rows
-      .map(
-        row =>
-          row
-            .map(csvCell)
-            .join(",")
-      )
-      .join("\r\n");
-
-
-  const blob =
-    new Blob(
-      [csv],
-      {
-        type:
-          "text/csv;charset=utf-8;"
-      }
-    );
-
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const a =
-    document.createElement(
-      "a"
-    );
-
-
-  a.href =
-    url;
-
-
-  a.download =
-    "Rekap_Feedback_Guru_" +
-    mulai +
-    "_sampai_" +
-    sampai +
-    ".csv";
-
-
-  document.body.appendChild(
-    a
-  );
-
-
-  a.click();
-
-
-  document.body.removeChild(
-    a
-  );
-
-
-  URL.revokeObjectURL(
-    url
-  );
-
+    return true;
 }
 
 
-/* =====================================================
-   TABEL GURU LOGIN
-===================================================== */
-
-function tampilGuruLogin(
-  data
-){
-
-  const tempat =
-    document.getElementById(
-      "tabelGuruLogin"
-    );
-
-
-  if(!data.length){
-
-    tempat.innerHTML =
-      `
-      <div class="empty">
-        Belum ada Guru yang login pada
-        tanggal yang dipilih.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  let html = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>No</th>
-
-            <th>Nama Guru</th>
-
-            <th>NIP / Username</th>
-
-            <th>Waktu Login</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-  `;
-
-
-  data.forEach(
-    function(item,index){
-
-      html += `
-
-        <tr>
-
-          <td>
-            ${index + 1}
-          </td>
-
-          <td>
-            <b>
-              ${aman(item.nama)}
-            </b>
-          </td>
-
-          <td>
-            ${aman(item.username)}
-          </td>
-
-          <td>
-            ${aman(
-              formatWaktu(
-                item.waktu_login
-              )
-            )}
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  tempat.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-   TABEL SISWA LOGIN
-===================================================== */
-
-function tampilSiswaLogin(
-  data
-){
-
-  const tempat =
-    document.getElementById(
-      "tabelSiswaLogin"
-    );
-
-
-  if(!data.length){
-
-    tempat.innerHTML =
-      `
-      <div class="empty">
-        Belum ada Siswa yang login pada
-        tanggal yang dipilih.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  let html = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>No</th>
-
-            <th>Nama Siswa</th>
-
-            <th>NISN</th>
-
-            <th>Waktu Login</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-  `;
-
-
-  data.forEach(
-    function(item,index){
-
-      html += `
-
-        <tr>
-
-          <td>
-            ${index + 1}
-          </td>
-
-          <td>
-            <b>
-              ${aman(item.nama)}
-            </b>
-          </td>
-
-          <td>
-            ${aman(item.username)}
-          </td>
-
-          <td>
-            ${aman(
-              formatWaktu(
-                item.waktu_login
-              )
-            )}
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  tempat.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-   TABEL FEEDBACK MINGGUAN
-===================================================== */
-
-function tampilGuruFeedback(
-  data
-){
-
-  const tempat =
-    document.getElementById(
-      "tabelGuruFeedback"
-    );
-
-
-  if(!data.length){
-
-    tempat.innerHTML =
-      `
-      <div class="empty">
-        Belum ada Guru yang memberikan
-        feedback pada minggu tersebut.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  let html = `
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>No</th>
-
-            <th>Nama Guru</th>
-
-            <th>Jumlah Feedback</th>
-
-            <th>Feedback Terakhir</th>
-
-            <th>Status</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-  `;
-
-
-  data.forEach(
-    function(item,index){
-
-      html += `
-
-        <tr>
-
-          <td>
-            ${index + 1}
-          </td>
-
-          <td>
-            <b>
-              ${aman(item.nama)}
-            </b>
-          </td>
-
-          <td>
-            ${Number(
-              item.jumlah_feedback ||
-              0
-            )}
-          </td>
-
-          <td>
-            ${aman(
-              formatWaktu(
-                item.feedback_terakhir
-              )
-            )}
-          </td>
-
-          <td>
-
-            <span class="badge green">
-              ✅ SUDAH FEEDBACK
-            </span>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }
-  );
-
-
-  html += `
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  `;
-
-
-  tempat.innerHTML =
-    html;
-
-}
-
-
-/* =====================================================
-   ERROR
-===================================================== */
-
-function tampilError(
-  pesan
-){
-
-  const box =
-    document.getElementById(
-      "pesanError"
-    );
-
-
-  box.style.display =
-    "block";
-
-
-  box.textContent =
-    pesan ||
-    "Terjadi kesalahan.";
-
-}
-
-
-function sembunyikanError(){
-
-  const box =
-    document.getElementById(
-      "pesanError"
-    );
-
-
-  box.style.display =
-    "none";
-
-
-  box.textContent =
-    "";
-
-}
-
-
-/* =====================================================
-   AMAN HTML
-===================================================== */
-
-function aman(value){
-
-  return String(
-    value ?? "-"
-  )
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
-
-}
-
-
-/* =====================================================
+/* =========================================================
    LOGOUT
-===================================================== */
+   ========================================================= */
 
 function logout(){
 
-  sessionStorage.removeItem(
-    "akun_admin"
-  );
+    if(
+        confirm(
+            "Apakah Anda yakin ingin keluar?"
+        )
+    ){
 
-  window.location.replace(
-    "login-admin.html"
-  );
+        sessionStorage.removeItem(
+            "akun_admin"
+        );
+
+        window.location.href =
+            "login.html";
+    }
 
 }
 
 
-/* =====================================================
-   MULAI
-===================================================== */
+/* =========================================================
+   FORMAT ANGKA
+   ========================================================= */
 
-const hariIni =
-  tanggalHariIni();
+function formatNumber(value){
 
+    return Number(
+        value || 0
+    ).toLocaleString(
+        "id-ID"
+    );
 
-document.getElementById(
-  "tanggal"
-).value =
-  hariIni;
-
-
-document.getElementById(
-  "tanggalMulai"
-).value =
-  hariIni;
+}
 
 
-document.getElementById(
-  "tanggalSampai"
-).value =
-  hariIni;
+/* =========================================================
+   FORMAT TANGGAL
+   ========================================================= */
+
+function formatTanggal(value){
+
+    if(!value){
+        return "-";
+    }
+
+    const d =
+        new Date(value);
+
+    if(
+        Number.isNaN(
+            d.getTime()
+        )
+    ){
+
+        return value;
+
+    }
+
+    return d.toLocaleString(
+        "id-ID",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
 
 
-loadDashboard();
+/* =========================================================
+   FORMAT TANGGAL DATE INPUT
+   ========================================================= */
+
+function formatTanggalIndonesia(
+    tanggal
+){
+
+    if(!tanggal){
+        return "-";
+    }
+
+    const parts =
+        tanggal.split("-");
+
+    if(parts.length !== 3){
+        return tanggal;
+    }
+
+    return (
+        parts[2] +
+        "/" +
+        parts[1] +
+        "/" +
+        parts[0]
+    );
+
+}
+
+
+/* =========================================================
+   TANGGAL HARI INI
+   ========================================================= */
+
+function tanggalHariIni(){
+
+    const now =
+        new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+
+}
+
+
+/* =========================================================
+   SET TANGGAL DEFAULT
+   ========================================================= */
+
+function setTanggalDefault(){
+
+    const hariIni =
+        tanggalHariIni();
+
+    const mulai =
+        document.getElementById(
+            "tanggalMulai"
+        );
+
+    const sampai =
+        document.getElementById(
+            "tanggalSampai"
+        );
+
+    const dashboard =
+        document.getElementById(
+            "tanggalDashboard"
+        );
+
+
+    if(mulai){
+        mulai.value =
+            hariIni;
+    }
+
+    if(sampai){
+        sampai.value =
+            hariIni;
+    }
+
+    if(dashboard){
+        dashboard.value =
+            hariIni;
+    }
+
+}
+
+
+/* =========================================================
+   DASHBOARD ADMIN
+   ========================================================= */
+
+async function loadDashboard(){
+
+    if(!akunAdmin){
+        return;
+    }
+
+    const tanggal =
+        document.getElementById(
+            "tanggalDashboard"
+        ).value;
+
+    if(!tanggal){
+
+        alert(
+            "Silakan pilih tanggal."
+        );
+
+        return;
+    }
+
+
+    document.getElementById(
+        "guruLoginInfo"
+    ).innerHTML =
+        "⏳ Memuat data...";
+
+    document.getElementById(
+        "siswaLoginInfo"
+    ).innerHTML =
+        "⏳ Memuat data...";
+
+    document.getElementById(
+        "feedbackMingguanInfo"
+    ).innerHTML =
+        "⏳ Memuat data...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/rpc/ambil_dashboard_admin",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY
+                    },
+
+                    body:JSON.stringify({
+
+                        p_admin_id:
+                            Number(
+                                akunAdmin.referensi_id
+                            ),
+
+                        p_tanggal:
+                            tanggal
+
+                    })
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.message ||
+                result.error ||
+                "Gagal mengambil dashboard."
+            );
+
+        }
+
+
+        tampilDashboard(
+            result
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+        document.getElementById(
+            "guruLoginInfo"
+        ).innerHTML =
+            "❌ " +
+            error.message;
+
+        document.getElementById(
+            "siswaLoginInfo"
+        ).innerHTML =
+            "❌ Gagal mengambil data.";
+
+        document.getElementById(
+            "feedbackMingguanInfo"
+        ).innerHTML =
+            "❌ Gagal mengambil data.";
+
+    }
+
+}
+
+
+/* =========================================================
+   TAMPIL DASHBOARD
+   ========================================================= */
+
+function tampilDashboard(data){
+
+    /*
+      RPC bisa mengembalikan object atau array.
+    */
+
+    let row = data;
+
+    if(Array.isArray(data)){
+
+        row =
+            data.length > 0
+                ? data[0]
+                : {};
+
+    }
+
+
+    document.getElementById(
+        "guruLoginCount"
+    ).textContent =
+        formatNumber(
+            row.guru_login_count
+        );
+
+
+    document.getElementById(
+        "siswaLoginCount"
+    ).textContent =
+        formatNumber(
+            row.siswa_login_count
+        );
+
+
+    document.getElementById(
+        "guruFeedbackCount"
+    ).textContent =
+        formatNumber(
+            row.guru_feedback_count
+        );
+
+
+    const nama =
+        row.admin_nama ||
+        akunAdmin.nama ||
+        "Admin";
+
+
+    document.getElementById(
+        "namaAdmin"
+    ).textContent =
+        "Selamat Datang, " +
+        nama;
+
+
+    tampilGuruLogin(
+        row.guru_login
+    );
+
+    tampilSiswaLogin(
+        row.siswa_login
+    );
+
+    tampilFeedbackMingguan(
+        row.guru_feedback
+    );
+
+}
+
+
+/* =========================================================
+   GURU LOGIN
+   ========================================================= */
+
+function tampilGuruLogin(data){
+
+    const tbody =
+        document.getElementById(
+            "tabelGuruLogin"
+        );
+
+    const info =
+        document.getElementById(
+            "guruLoginInfo"
+        );
+
+
+    if(!Array.isArray(data) || data.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" class="empty">
+                    Tidak ada data guru login.
+                </td>
+            </tr>
+        `;
+
+        info.textContent =
+            "Tidak ada guru yang login pada tanggal yang dipilih.";
+
+        return;
+    }
+
+
+    info.textContent =
+        "Ditemukan " +
+        formatNumber(data.length) +
+        " guru yang login.";
+
+
+    tbody.innerHTML =
+        data.map(
+            (guru,index) => `
+
+                <tr>
+
+                    <td class="text-center">
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            guru.nama ||
+                            guru.nama_guru ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            guru.username ||
+                            guru.nip ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatTanggal(
+                            guru.login_terakhir ||
+                            guru.last_login ||
+                            guru.created_at
+                        )}
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   SISWA LOGIN
+   ========================================================= */
+
+function tampilSiswaLogin(data){
+
+    const tbody =
+        document.getElementById(
+            "tabelSiswaLogin"
+        );
+
+    const info =
+        document.getElementById(
+            "siswaLoginInfo"
+        );
+
+
+    if(!Array.isArray(data) || data.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    Tidak ada data siswa login.
+                </td>
+            </tr>
+        `;
+
+        info.textContent =
+            "Tidak ada siswa yang login pada tanggal yang dipilih.";
+
+        return;
+    }
+
+
+    info.textContent =
+        "Ditemukan " +
+        formatNumber(data.length) +
+        " siswa yang login.";
+
+
+    tbody.innerHTML =
+        data.map(
+            (siswa,index) => `
+
+                <tr>
+
+                    <td class="text-center">
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            siswa.nama ||
+                            siswa.nama_siswa ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            siswa.username ||
+                            siswa.nisn ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            siswa.kelas ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatTanggal(
+                            siswa.login_terakhir ||
+                            siswa.last_login ||
+                            siswa.created_at
+                        )}
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   FEEDBACK MINGGUAN
+   ========================================================= */
+
+function tampilFeedbackMingguan(data){
+
+    const tbody =
+        document.getElementById(
+            "tabelFeedbackMingguan"
+        );
+
+    const info =
+        document.getElementById(
+            "feedbackMingguanInfo"
+        );
+
+
+    if(!Array.isArray(data) || data.length === 0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" class="empty">
+                    Tidak ada feedback guru.
+                </td>
+            </tr>
+        `;
+
+        info.textContent =
+            "Belum ada feedback guru pada periode minggu ini.";
+
+        return;
+    }
+
+
+    info.textContent =
+        "Ditemukan " +
+        formatNumber(data.length) +
+        " guru yang memberikan feedback minggu ini.";
+
+
+    tbody.innerHTML =
+        data.map(
+            (guru,index) => `
+
+                <tr>
+
+                    <td class="text-center">
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            guru.nama ||
+                            guru.nama_guru ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            guru.username ||
+                            guru.nip ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td class="text-center">
+
+                        <span class="badge badge-info">
+
+                            ${formatNumber(
+                                guru.jumlah_feedback ||
+                                guru.feedback_count ||
+                                0
+                            )}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================================================
+   REKAP FEEDBACK GURU
+   ========================================================= */
+
+async function ambilRekapFeedback(
+    mulai,
+    sampai
+){
+
+    const url =
+        SUPABASE_URL +
+        "/rest/v1/rpc/ambil_rekap_feedback_admin";
+
+
+    const body = {
+
+        p_admin_id:
+            Number(
+                akunAdmin.referensi_id
+            ),
+
+        p_tanggal_mulai:
+            mulai,
+
+        p_tanggal_sampai:
+            sampai
+
+    };
+
+
+    console.log(
+        "Memanggil RPC rekap:",
+        url
+    );
+
+    console.log(
+        "Parameter:",
+        body
+    );
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "application/json",
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
+
+                    "Accept":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(
+                        body
+                    )
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    let result;
+
+    try{
+
+        result =
+            text
+                ? JSON.parse(text)
+                : [];
+
+    }catch(error){
+
+        throw new Error(
+            "Respons Supabase tidak valid: " +
+            text
+        );
+
+    }
+
+
+    if(!response.ok){
+
+        console.error(
+            "RPC Error:",
+            result
+        );
+
+        throw new Error(
+            result.message ||
+            result.error_description ||
+            result.error ||
+            text ||
+            "Gagal mengambil rekap feedback."
+        );
+
+    }
+
+
+    return Array.isArray(result)
+        ? result
+        : [];
+
+
+}
+
+
+/* =========================================================
+   LOAD REKAP
+   ========================================================= */
+
+async function loadRekapFeedback(){
+
+    if(!akunAdmin){
+
+        alert(
+            "Session admin tidak ditemukan."
+        );
+
+        return;
+    }
+
+
+    const mulai =
+        document.getElementById(
+            "tanggalMulai"
+        ).value;
+
+    const sampai =
+        document.getElementById(
+            "tanggalSampai"
+        ).value;
+
+
+    if(!mulai || !sampai){
+
+        alert(
+            "Tanggal mulai dan tanggal sampai wajib diisi."
+        );
+
+        return;
+    }
+
+
+    if(mulai > sampai){
+
+        alert(
+            "Tanggal mulai tidak boleh lebih besar dari tanggal sampai."
+        );
+
+        return;
+    }
+
+
+    const btn =
+        document.getElementById(
+            "btnRekap"
+        );
+
+    const btnDownload =
+        document.getElementById(
+            "btnDownload"
+        );
+
+
+    btn.disabled = true;
+
+    btn.textContent =
+        "⏳ Memuat...";
+
+    btnDownload.disabled = true;
+
+
+    const tbody =
+        document.getElementById(
+            "tabelRekapFeedback"
+        );
+
+
+    tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="7"
+                class="loading"
+            >
+
+                <div class="spinner"></div>
+
+                <br>
+
+                Mengambil data feedback...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    const info =
+        document.getElementById(
+            "infoRekap"
+        );
+
+
+    info.className =
+        "info-box";
+
+    info.innerHTML =
+        "⏳ Sedang mengambil rekap feedback...";
+
+
+    try{
+
+        const data =
+            await ambilRekapFeedback(
+                mulai,
+                sampai
+            );
+
+
+        dataRekapFeedback =
+            data;
+
+
+        tampilRekapFeedback(
+            data,
+            mulai,
+            sampai
+        );
+
+
+        btnDownload.disabled =
+            data.length === 0;
+
+
+    }catch(error){
+
+        console.error(
+            "Rekap feedback error:",
+            error
+        );
+
+
+        dataRekapFeedback =
+            [];
+
+
+        document.getElementById(
+            "totalGuruFeedbackRange"
+        ).textContent =
+            "0";
+
+
+        document.getElementById(
+            "totalFeedbackRange"
+        ).textContent =
+            "0";
+
+
+        document.getElementById(
+            "rataFeedbackRange"
+        ).textContent =
+            "0";
+
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty"
+                >
+
+                    ❌ Gagal mengambil data.
+
+                    <br><br>
+
+                    ${escapeHtml(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        info.className =
+            "error-box";
+
+        info.innerHTML =
+            "❌ Gagal mengambil rekap feedback: " +
+            escapeHtml(
+                error.message
+            );
+
+    }finally{
+
+        btn.disabled = false;
+
+        btn.textContent =
+            "🔎 Tampilkan Rekap";
+
+    }
+
+}
+
+
+/* =========================================================
+   TAMPIL REKAP FEEDBACK
+   ========================================================= */
+
+function tampilRekapFeedback(
+    data,
+    mulai,
+    sampai
+){
+
+    const tbody =
+        document.getElementById(
+            "tabelRekapFeedback"
+        );
+
+
+    const totalGuru =
+        data.length;
+
+
+    const totalFeedback =
+        data.reduce(
+            (
+                total,
+                item
+            ) => {
+
+                return total +
+                    Number(
+                        item.jumlah_feedback ||
+                        0
+                    );
+
+            },
+            0
+        );
+
+
+    const rata =
+        totalGuru > 0
+            ? (
+                totalFeedback /
+                totalGuru
+            ).toFixed(1)
+            : 0;
+
+
+    document.getElementById(
+        "totalGuruFeedbackRange"
+    ).textContent =
+        formatNumber(
+            totalGuru
+        );
+
+
+    document.getElementById(
+        "totalFeedbackRange"
+    ).textContent =
+        formatNumber(
+            totalFeedback
+        );
+
+
+    document.getElementById(
+        "rataFeedbackRange"
+    ).textContent =
+        rata;
+
+
+    const info =
+        document.getElementById(
+            "infoRekap"
+        );
+
+
+    info.className =
+        "info-box";
+
+
+    info.innerHTML =
+
+        "Periode: <strong>" +
+
+        formatTanggalIndonesia(
+            mulai
+        ) +
+
+        "</strong> s.d. <strong>" +
+
+        formatTanggalIndonesia(
+            sampai
+        ) +
+
+        "</strong><br>" +
+
+        "Ditemukan <strong>" +
+
+        formatNumber(
+            totalGuru
+        ) +
+
+        "</strong> Guru yang memberikan feedback " +
+
+        "dengan total <strong>" +
+
+        formatNumber(
+            totalFeedback
+        ) +
+
+        "</strong> feedback.";
+
+
+    if(data.length === 0){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty"
+                >
+
+                    Tidak ditemukan feedback
+                    pada periode tersebut.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+    }
+
+
+    tbody.innerHTML =
+        data.map(
+            (guru,index) => {
+
+                const jumlah =
+                    Number(
+                        guru.jumlah_feedback ||
+                        0
+                    );
+
+
+                let status =
+                    "Aktif";
+
+
+                let badge =
+                    "badge-success";
+
+
+                if(jumlah < 10){
+
+                    status =
+                        "Sedikit";
+
+                    badge =
+                        "badge-warning";
+
+                }
+
+
+                if(jumlah >= 100){
+
+                    status =
+                        "Sangat Aktif";
+
+                    badge =
+                        "badge-success";
+
+                }
+
+
+                return `
+
+                    <tr>
+
+                        <td class="text-center">
+                            ${index + 1}
+                        </td>
+
+                        <td>
+                            <strong>
+                                ${escapeHtml(
+                                    guru.nama ||
+                                    "Guru"
+                                )}
+                            </strong>
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                guru.username ||
+                                "-"
+                            )}
+                        </td>
+
+                        <td class="text-center">
+
+                            <strong>
+                                ${formatNumber(
+                                    jumlah
+                                )}
+                            </strong>
+
+                        </td>
+
+                        <td>
+                            ${formatTanggal(
+                                guru.feedback_pertama
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatTanggal(
+                                guru.feedback_terakhir
+                            )}
+                        </td>
+
+                        <td class="text-center">
+
+                            <span
+                                class="badge ${badge}"
+                            >
+                                ${status}
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   DOWNLOAD CSV
+   ========================================================= */
+
+function downloadRekap(){
+
+    if(
+        !dataRekapFeedback ||
+        dataRekapFeedback.length === 0
+    ){
+
+        alert(
+            "Belum ada data rekap untuk didownload."
+        );
+
+        return;
+    }
+
+
+    const mulai =
+        document.getElementById(
+            "tanggalMulai"
+        ).value;
+
+
+    const sampai =
+        document.getElementById(
+            "tanggalSampai"
+        ).value;
+
+
+    const rows = [];
+
+
+    /*
+       HEADER
+    */
+
+    rows.push([
+        "No",
+        "Nama Guru",
+        "NIP / Username",
+        "Jumlah Feedback",
+        "Feedback Pertama",
+        "Feedback Terakhir"
+    ]);
+
+
+    /*
+       DATA
+    */
+
+    dataRekapFeedback.forEach(
+        (guru,index) => {
+
+            rows.push([
+
+                index + 1,
+
+                guru.nama ||
+                "",
+
+                guru.username ||
+                "",
+
+                Number(
+                    guru.jumlah_feedback ||
+                    0
+                ),
+
+                formatTanggal(
+                    guru.feedback_pertama
+                ),
+
+                formatTanggal(
+                    guru.feedback_terakhir
+                )
+
+            ]);
+
+        }
+    );
+
+
+    /*
+       CSV ESCAPE
+    */
+
+    const csv =
+        rows.map(
+            row => row.map(
+                cell => {
+
+                    const value =
+                        String(
+                            cell ?? ""
+                        );
+
+                    return (
+                        '"' +
+                        value
+                            .replace(
+                                /"/g,
+                                '""'
+                            ) +
+                        '"'
+                    );
+
+                }
+            ).join(",")
+        ).join("\r\n");
+
+
+    /*
+       UTF-8 BOM
+    */
+
+    const blob =
+        new Blob(
+            [
+                "\uFEFF",
+                csv
+            ],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const a =
+        document.createElement(
+            "a"
+        );
+
+
+    a.href =
+        url;
+
+
+    a.download =
+        "Rekap_Feedback_Guru_" +
+        mulai +
+        "_sampai_" +
+        sampai +
+        ".csv";
+
+
+    document.body.appendChild(
+        a
+    );
+
+
+    a.click();
+
+
+    document.body.removeChild(
+        a
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHtml(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   INIT
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        /*
+           Pastikan admin valid
+        */
+
+        if(!cekAdmin()){
+
+            return;
+
+        }
+
+
+        /*
+           Set tanggal default
+        */
+
+        setTanggalDefault();
+
+
+        /*
+           Tampilkan nama admin
+        */
+
+        if(akunAdmin){
+
+            document.getElementById(
+                "namaAdmin"
+            ).textContent =
+                "Selamat Datang, " +
+                (
+                    akunAdmin.nama ||
+                    akunAdmin.nama_admin ||
+                    "Admin"
+                );
+
+        }
+
+
+        /*
+           Dashboard lama
+        */
+
+        await loadDashboard();
+
+
+        /*
+           LANGSUNG LOAD REKAP
+           hari ini
+        */
+
+        await loadRekapFeedback();
+
+    }
+);
 
 </script>
 
