@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -118,6 +117,25 @@ input{
   cursor:wait;
 }
 
+.download{
+  border:0;
+  background:#059669;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.download:hover{
+  background:#047857;
+}
+
+.download:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
 /* RINGKASAN */
 
 .cards{
@@ -146,6 +164,56 @@ input{
   color:#7c3aed;
   font-size:32px;
   font-weight:bold;
+}
+
+/* REKAP RANGE */
+
+.range-title{
+  color:#047857 !important;
+}
+
+.range-box{
+  display:grid;
+  grid-template-columns:1fr 1fr auto auto;
+  gap:10px;
+  align-items:end;
+}
+
+.range-info{
+  margin-top:15px;
+  padding:13px;
+  background:#ecfdf5;
+  color:#065f46;
+  border-radius:9px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.rekap-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:18px;
+}
+
+.rekap-card{
+  background:#f8fafc;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+  border:1px solid #e2e8f0;
+}
+
+.rekap-card-title{
+  color:#64748b;
+  font-size:13px;
+}
+
+.rekap-card-number{
+  margin-top:7px;
+  font-size:28px;
+  font-weight:bold;
+  color:#047857;
 }
 
 /* PERIODE */
@@ -182,6 +250,16 @@ th{
   color:#6d28d9;
 }
 
+.rekap-table th{
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.total-row{
+  font-weight:bold;
+  background:#f8fafc;
+}
+
 .empty{
   padding:14px;
   background:#f8fafc;
@@ -200,6 +278,11 @@ th{
 .green{
   background:#dcfce7;
   color:#166534;
+}
+
+.orange{
+  background:#ffedd5;
+  color:#9a3412;
 }
 
 .error{
@@ -225,9 +308,22 @@ th{
   font-size:12px;
 }
 
+@media(max-width:900px){
+
+  .range-box{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .range-box button{
+    width:100%;
+  }
+
+}
+
 @media(max-width:800px){
 
-  .cards{
+  .cards,
+  .rekap-cards{
     grid-template-columns:1fr;
   }
 
@@ -245,7 +341,16 @@ th{
     align-items:stretch;
   }
 
-  .primary{
+  .tanggal-box .primary{
+    width:100%;
+  }
+
+  .range-box{
+    grid-template-columns:1fr;
+  }
+
+  .primary,
+  .download{
     width:100%;
   }
 
@@ -291,8 +396,8 @@ th{
 
     <p>
       Pilih tanggal untuk melihat catatan login Guru
-      dan Siswa. Rekap feedback dihitung untuk minggu
-      berjalan.
+      dan Siswa. Rekap feedback dapat dilihat berdasarkan
+      rentang tanggal.
     </p>
 
 
@@ -330,7 +435,7 @@ th{
   </section>
 
 
-  <!-- RINGKASAN -->
+  <!-- RINGKASAN DASHBOARD -->
 
   <section class="cards">
 
@@ -381,7 +486,147 @@ th{
   </section>
 
 
-  <!-- PERIODE -->
+  <!-- =================================================
+       REKAP FEEDBACK TANGGAL KE TANGGAL
+  ================================================== -->
+
+  <section class="panel">
+
+    <h2 class="range-title">
+      📊 Rekap Feedback Guru
+    </h2>
+
+    <p style="color:#64748b;margin-top:-5px;">
+      Pilih tanggal mulai dan tanggal sampai untuk
+      melihat total feedback Guru.
+    </p>
+
+
+    <div class="range-box">
+
+      <div>
+
+        <label for="tanggalMulai">
+          📅 Tanggal Mulai
+        </label>
+
+        <input
+          type="date"
+          id="tanggalMulai"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label for="tanggalSampai">
+          📅 Tanggal Sampai
+        </label>
+
+        <input
+          type="date"
+          id="tanggalSampai"
+        >
+
+      </div>
+
+
+      <button
+        id="btnRekap"
+        class="primary"
+        onclick="loadRekapFeedback()">
+        🔎 Tampilkan Rekap
+      </button>
+
+
+      <button
+        id="btnDownload"
+        class="download"
+        onclick="downloadRekap()"
+        disabled>
+        📥 Download Rekap
+      </button>
+
+    </div>
+
+
+    <div
+      id="infoRekap"
+      class="range-info">
+      Silakan pilih rentang tanggal.
+    </div>
+
+
+    <div class="rekap-cards">
+
+      <div class="rekap-card">
+
+        <div class="rekap-card-title">
+          👨‍🏫 Guru yang Memberikan Feedback
+        </div>
+
+        <div
+          id="totalGuruFeedbackRange"
+          class="rekap-card-number">
+          0
+        </div>
+
+      </div>
+
+
+      <div class="rekap-card">
+
+        <div class="rekap-card-title">
+          📝 Total Feedback
+        </div>
+
+        <div
+          id="totalFeedbackRange"
+          class="rekap-card-number">
+          0
+        </div>
+
+      </div>
+
+
+      <div class="rekap-card">
+
+        <div class="rekap-card-title">
+          📈 Rata-rata Feedback / Guru
+        </div>
+
+        <div
+          id="rataFeedbackRange"
+          class="rekap-card-number">
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TABEL REKAP RANGE -->
+
+  <section class="panel">
+
+    <h2 class="range-title">
+      👨‍🏫 Rincian Feedback Guru
+    </h2>
+
+    <div
+      id="tabelRekapFeedback"
+      class="empty">
+      Belum ada rekap. Silakan pilih rentang tanggal.
+    </div>
+
+  </section>
+
+
+  <!-- PERIODE MINGGUAN -->
 
   <section class="panel">
 
@@ -432,7 +677,7 @@ th{
   </section>
 
 
-  <!-- FEEDBACK -->
+  <!-- FEEDBACK MINGGUAN -->
 
   <section class="panel">
 
@@ -450,7 +695,7 @@ th{
 
 
   <div class="footer">
-    Created by Mr. Rahmat Batubara, S.T.P
+    Dibuat oleh Mr. Rahmat Batubara, S.T.P
   </div>
 
 </main>
@@ -698,15 +943,6 @@ async function ambilDashboard(){
   }
 
 
-  /*
-    Supabase dapat mengembalikan:
-    [
-      {
-        ambil_dashboard_admin: {...}
-      }
-    ]
-  */
-
   if(Array.isArray(data)){
 
     return (
@@ -805,7 +1041,7 @@ async function loadDashboard(){
 
 
 /* =====================================================
-   TAMPIL DATA
+   TAMPIL DASHBOARD
 ===================================================== */
 
 function tampilDashboard(
@@ -883,6 +1119,685 @@ function tampilDashboard(
 
 
 /* =====================================================
+   REKAP FEEDBACK RANGE
+===================================================== */
+
+let dataRekapFeedback = [];
+
+
+async function ambilRekapFeedback(){
+
+  const mulai =
+    document.getElementById(
+      "tanggalMulai"
+    ).value;
+
+  const sampai =
+    document.getElementById(
+      "tanggalSampai"
+    ).value;
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/rest/v1/rpc/ambil_rekap_feedback_admin",
+
+      {
+
+        method:"POST",
+
+        headers:
+          headers(),
+
+        body:
+          JSON.stringify({
+
+            p_admin_id:
+              Number(
+                akunAdmin.referensi_id
+              ),
+
+            p_tanggal_mulai:
+              mulai,
+
+            p_tanggal_sampai:
+              sampai
+
+          })
+
+      }
+
+    );
+
+
+  const text =
+    await response.text();
+
+
+  let data;
+
+
+  try{
+
+    data =
+      text
+      ? JSON.parse(text)
+      : [];
+
+  }catch(error){
+
+    throw new Error(
+      "Respons rekap feedback tidak valid."
+    );
+
+  }
+
+
+  if(!response.ok){
+
+    throw new Error(
+      data.message ||
+      data.details ||
+      data.hint ||
+      text ||
+      "Gagal mengambil rekap feedback."
+    );
+
+  }
+
+
+  if(Array.isArray(data)){
+
+    return data;
+
+  }
+
+
+  if(
+    data &&
+    Array.isArray(
+      data.ambil_rekap_feedback_admin
+    )
+  ){
+
+    return data.ambil_rekap_feedback_admin;
+
+  }
+
+
+  if(
+    data &&
+    data.ambil_rekap_feedback_admin
+  ){
+
+    return [
+      data.ambil_rekap_feedback_admin
+    ];
+
+  }
+
+
+  return [];
+
+}
+
+
+/* =====================================================
+   LOAD REKAP
+===================================================== */
+
+async function loadRekapFeedback(){
+
+  const mulai =
+    document.getElementById(
+      "tanggalMulai"
+    ).value;
+
+  const sampai =
+    document.getElementById(
+      "tanggalSampai"
+    ).value;
+
+  const tombol =
+    document.getElementById(
+      "btnRekap"
+    );
+
+
+  if(!mulai || !sampai){
+
+    tampilError(
+      "Silakan isi Tanggal Mulai dan Tanggal Sampai."
+    );
+
+    return;
+
+  }
+
+
+  if(mulai > sampai){
+
+    tampilError(
+      "Tanggal Mulai tidak boleh lebih besar daripada Tanggal Sampai."
+    );
+
+    return;
+
+  }
+
+
+  tombol.disabled=true;
+
+  tombol.textContent=
+    "⏳ Memuat...";
+
+  sembunyikanError();
+
+
+  try{
+
+    const data =
+      await ambilRekapFeedback();
+
+
+    dataRekapFeedback =
+      data || [];
+
+
+    tampilRekapFeedback(
+      dataRekapFeedback,
+      mulai,
+      sampai
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "REKAP FEEDBACK:",
+      error
+    );
+
+
+    dataRekapFeedback =
+      [];
+
+
+    tampilError(
+      error.message
+    );
+
+  }finally{
+
+    tombol.disabled=false;
+
+    tombol.textContent=
+      "🔎 Tampilkan Rekap";
+
+  }
+
+}
+
+
+/* =====================================================
+   TAMPIL REKAP
+===================================================== */
+
+function tampilRekapFeedback(
+  data,
+  mulai,
+  sampai
+){
+
+  const tempat =
+    document.getElementById(
+      "tabelRekapFeedback"
+    );
+
+
+  const totalGuru =
+    data.length;
+
+
+  let totalFeedback = 0;
+
+
+  data.forEach(
+    item => {
+
+      totalFeedback +=
+        Number(
+          item.jumlah_feedback ||
+          0
+        );
+
+    }
+  );
+
+
+  const rata =
+    totalGuru
+      ? (
+          totalFeedback /
+          totalGuru
+        ).toFixed(2)
+      : "0";
+
+
+  document.getElementById(
+    "totalGuruFeedbackRange"
+  ).textContent =
+    totalGuru;
+
+
+  document.getElementById(
+    "totalFeedbackRange"
+  ).textContent =
+    totalFeedback;
+
+
+  document.getElementById(
+    "rataFeedbackRange"
+  ).textContent =
+    rata;
+
+
+  document.getElementById(
+    "infoRekap"
+  ).innerHTML =
+    "Periode: <b>" +
+    aman(
+      formatTanggal(mulai)
+    ) +
+    "</b> s.d. <b>" +
+    aman(
+      formatTanggal(sampai)
+    ) +
+    "</b><br>" +
+    "Ditemukan <b>" +
+    totalGuru +
+    "</b> Guru yang memberikan feedback " +
+    "dengan total <b>" +
+    totalFeedback +
+    "</b> feedback.";
+
+
+  document.getElementById(
+    "btnDownload"
+  ).disabled =
+    data.length === 0;
+
+
+  if(!data.length){
+
+    tempat.innerHTML =
+      `
+      <div class="empty">
+        Tidak ada Guru yang memberikan feedback
+        pada rentang tanggal tersebut.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  let html = `
+
+    <div class="table-wrap">
+
+      <table class="rekap-table">
+
+        <thead>
+
+          <tr>
+
+            <th>No</th>
+
+            <th>Nama Guru</th>
+
+            <th>NIP / Username</th>
+
+            <th>Jumlah Feedback</th>
+
+            <th>Feedback Pertama</th>
+
+            <th>Feedback Terakhir</th>
+
+            <th>Status</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+  `;
+
+
+  data.forEach(
+    function(item,index){
+
+      html += `
+
+        <tr>
+
+          <td>
+            ${index + 1}
+          </td>
+
+          <td>
+            <b>
+              ${aman(item.nama)}
+            </b>
+          </td>
+
+          <td>
+            ${aman(item.username)}
+          </td>
+
+          <td>
+            <b>
+              ${Number(
+                item.jumlah_feedback ||
+                0
+              )}
+            </b>
+          </td>
+
+          <td>
+            ${aman(
+              formatWaktu(
+                item.feedback_pertama
+              )
+            )}
+          </td>
+
+          <td>
+            ${aman(
+              formatWaktu(
+                item.feedback_terakhir
+              )
+            )}
+          </td>
+
+          <td>
+
+            <span class="badge green">
+              ✅ SUDAH FEEDBACK
+            </span>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }
+  );
+
+
+  html += `
+
+        <tr class="total-row">
+
+          <td colspan="3">
+            TOTAL
+          </td>
+
+          <td>
+            ${totalFeedback}
+          </td>
+
+          <td colspan="3">
+            ${totalGuru} Guru
+          </td>
+
+        </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+
+  tempat.innerHTML =
+    html;
+
+}
+
+
+/* =====================================================
+   DOWNLOAD REKAP CSV
+===================================================== */
+
+function csvCell(value){
+
+  return (
+    '"' +
+    String(
+      value ?? ""
+    )
+    .replaceAll(
+      '"',
+      '""'
+    ) +
+    '"'
+  );
+
+}
+
+
+function downloadRekap(){
+
+  if(!dataRekapFeedback.length){
+
+    tampilError(
+      "Belum ada data rekap untuk didownload."
+    );
+
+    return;
+
+  }
+
+
+  const mulai =
+    document.getElementById(
+      "tanggalMulai"
+    ).value;
+
+  const sampai =
+    document.getElementById(
+      "tanggalSampai"
+    ).value;
+
+
+  let totalFeedback = 0;
+
+
+  dataRekapFeedback.forEach(
+    item => {
+
+      totalFeedback +=
+        Number(
+          item.jumlah_feedback ||
+          0
+        );
+
+    }
+  );
+
+
+  let rows = [];
+
+
+  rows.push([
+    "REKAP FEEDBACK GURU"
+  ]);
+
+
+  rows.push([
+    "SMP Negeri 3 Sibolga"
+  ]);
+
+
+  rows.push([
+    "Periode",
+    formatTanggal(mulai),
+    "s.d.",
+    formatTanggal(sampai)
+  ]);
+
+
+  rows.push([]);
+
+
+  rows.push([
+    "Total Guru Memberikan Feedback",
+    dataRekapFeedback.length
+  ]);
+
+
+  rows.push([
+    "Total Feedback",
+    totalFeedback
+  ]);
+
+
+  rows.push([]);
+
+
+  rows.push([
+    "No",
+    "Nama Guru",
+    "NIP / Username",
+    "Jumlah Feedback",
+    "Feedback Pertama",
+    "Feedback Terakhir",
+    "Status"
+  ]);
+
+
+  dataRekapFeedback.forEach(
+    function(item,index){
+
+      rows.push([
+
+        index + 1,
+
+        item.nama || "",
+
+        item.username || "",
+
+        Number(
+          item.jumlah_feedback ||
+          0
+        ),
+
+        formatWaktu(
+          item.feedback_pertama
+        ),
+
+        formatWaktu(
+          item.feedback_terakhir
+        ),
+
+        "SUDAH FEEDBACK"
+
+      ]);
+
+    }
+  );
+
+
+  rows.push([]);
+
+
+  rows.push([
+    "",
+    "",
+    "TOTAL",
+    totalFeedback,
+    "",
+    "",
+    dataRekapFeedback.length +
+    " Guru"
+  ]);
+
+
+  const csv =
+    "\ufeff" +
+    rows
+      .map(
+        row =>
+          row
+            .map(csvCell)
+            .join(",")
+      )
+      .join("\r\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+
+  a.href =
+    url;
+
+
+  a.download =
+    "Rekap_Feedback_Guru_" +
+    mulai +
+    "_sampai_" +
+    sampai +
+    ".csv";
+
+
+  document.body.appendChild(
+    a
+  );
+
+
+  a.click();
+
+
+  document.body.removeChild(
+    a
+  );
+
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+/* =====================================================
    TABEL GURU LOGIN
 ===================================================== */
 
@@ -920,15 +1835,21 @@ function tampilGuruLogin(
         <thead>
 
           <tr>
+
             <th>No</th>
+
             <th>Nama Guru</th>
+
             <th>NIP / Username</th>
+
             <th>Waktu Login</th>
+
           </tr>
 
         </thead>
 
         <tbody>
+
   `;
 
 
@@ -1024,15 +1945,21 @@ function tampilSiswaLogin(
         <thead>
 
           <tr>
+
             <th>No</th>
+
             <th>Nama Siswa</th>
+
             <th>NISN</th>
+
             <th>Waktu Login</th>
+
           </tr>
 
         </thead>
 
         <tbody>
+
   `;
 
 
@@ -1091,7 +2018,7 @@ function tampilSiswaLogin(
 
 
 /* =====================================================
-   TABEL FEEDBACK GURU
+   TABEL FEEDBACK MINGGUAN
 ===================================================== */
 
 function tampilGuruFeedback(
@@ -1128,16 +2055,23 @@ function tampilGuruFeedback(
         <thead>
 
           <tr>
+
             <th>No</th>
+
             <th>Nama Guru</th>
+
             <th>Jumlah Feedback</th>
+
             <th>Feedback Terakhir</th>
+
             <th>Status</th>
+
           </tr>
 
         </thead>
 
         <tbody>
+
   `;
 
 
@@ -1288,10 +2222,26 @@ function logout(){
    MULAI
 ===================================================== */
 
+const hariIni =
+  tanggalHariIni();
+
+
 document.getElementById(
   "tanggal"
 ).value =
-  tanggalHariIni();
+  hariIni;
+
+
+document.getElementById(
+  "tanggalMulai"
+).value =
+  hariIni;
+
+
+document.getElementById(
+  "tanggalSampai"
+).value =
+  hariIni;
 
 
 loadDashboard();
@@ -1300,4 +2250,3 @@ loadDashboard();
 
 </body>
 </html>
-```
