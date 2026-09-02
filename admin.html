@@ -81,7 +81,10 @@ header{
     margin-bottom:5px;
 }
 
-/* FILTER */
+/* =====================================================
+   FILTER
+   ===================================================== */
+
 .filter-box{
     background:white;
     padding:20px;
@@ -110,7 +113,8 @@ header{
     margin-bottom:6px;
 }
 
-.form-group input{
+.form-group input,
+.form-group select{
     width:100%;
     padding:11px;
     border:1px solid #cbd5e1;
@@ -144,6 +148,15 @@ header{
     background:#166534;
 }
 
+.btn-secondary{
+    background:#475569;
+    color:white;
+}
+
+.btn-secondary:hover{
+    background:#334155;
+}
+
 .button-row{
     display:flex;
     gap:10px;
@@ -151,7 +164,10 @@ header{
     height:100%;
 }
 
-/* CARDS */
+/* =====================================================
+   CARDS
+   ===================================================== */
+
 .cards{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -179,7 +195,10 @@ header{
     color:#0f766e;
 }
 
-/* SECTION */
+/* =====================================================
+   SECTION
+   ===================================================== */
+
 .section{
     background:white;
     border-radius:12px;
@@ -202,7 +221,10 @@ header{
     color:#0f766e;
 }
 
-/* TABLE */
+/* =====================================================
+   TABLE
+   ===================================================== */
+
 .table-wrapper{
     width:100%;
     overflow-x:auto;
@@ -241,7 +263,10 @@ tbody tr:hover{
     text-align:right;
 }
 
-/* BADGE */
+/* =====================================================
+   BADGE
+   ===================================================== */
+
 .badge{
     display:inline-block;
     padding:5px 9px;
@@ -270,7 +295,15 @@ tbody tr:hover{
     color:#1e40af;
 }
 
-/* INFO */
+.badge-secondary{
+    background:#e2e8f0;
+    color:#475569;
+}
+
+/* =====================================================
+   INFO
+   ===================================================== */
+
 .info-box{
     background:#ecfeff;
     border-left:4px solid #0891b2;
@@ -281,7 +314,10 @@ tbody tr:hover{
     font-size:14px;
 }
 
-/* LOADING */
+/* =====================================================
+   LOADING
+   ===================================================== */
+
 .loading{
     text-align:center;
     padding:30px;
@@ -305,7 +341,10 @@ tbody tr:hover{
     }
 }
 
-/* ERROR */
+/* =====================================================
+   ERROR
+   ===================================================== */
+
 .error-box{
     background:#fee2e2;
     color:#991b1b;
@@ -315,15 +354,71 @@ tbody tr:hover{
     margin-bottom:15px;
 }
 
-/* EMPTY */
+/* =====================================================
+   EMPTY
+   ===================================================== */
+
 .empty{
     text-align:center;
     padding:30px;
     color:#64748b;
 }
 
-/* RESPONSIVE */
+/* =====================================================
+   GURU STATUS
+   ===================================================== */
+
+.status-dot{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    margin-right:5px;
+}
+
+.dot-active{
+    background:#16a34a;
+}
+
+.dot-inactive{
+    background:#dc2626;
+}
+
+/* =====================================================
+   MENU KEPESEK
+   ===================================================== */
+
+.menu-kepsek{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.menu-card{
+    background:white;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    border-left:5px solid #0f766e;
+}
+
+.menu-card h3{
+    color:#0f766e;
+    margin-bottom:5px;
+}
+
+.menu-card p{
+    color:#64748b;
+    font-size:13px;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
 @media(max-width:900px){
+
     .filter-grid{
         grid-template-columns:1fr 1fr;
     }
@@ -331,9 +426,15 @@ tbody tr:hover{
     .cards{
         grid-template-columns:1fr 1fr;
     }
+
+    .menu-kepsek{
+        grid-template-columns:1fr;
+    }
+
 }
 
 @media(max-width:600px){
+
     .header-content{
         flex-direction:column;
         align-items:flex-start;
@@ -355,10 +456,15 @@ tbody tr:hover{
     .button-row .btn{
         width:100%;
     }
+
 }
 
-/* PRINT */
+/* =====================================================
+   PRINT
+   ===================================================== */
+
 @media print{
+
     header,
     .filter-box,
     .btn-logout,
@@ -382,9 +488,13 @@ tbody tr:hover{
         box-shadow:none;
         padding:0;
     }
+
 }
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
 footer{
     text-align:center;
     padding:25px 15px;
@@ -397,28 +507,97 @@ footer{
 <body>
 
 <header>
+
     <div class="header-content">
+
         <div class="header-title">
-            <h1>📊 Dashboard Admin / Kepsek</h1>
-            <p>Jurnal 7 Kebiasaan Anak Indonesia Hebat</p>
+
+            <h1>
+                📊 Dashboard Admin / Kepsek
+            </h1>
+
+            <p>
+                Jurnal 7 Kebiasaan Anak Indonesia Hebat
+            </p>
+
         </div>
 
-        <button class="btn-logout" onclick="logout()">
+        <button
+            class="btn-logout"
+            onclick="logout()"
+        >
             🚪 Keluar
         </button>
+
     </div>
+
 </header>
+
 
 <div class="container">
 
-    <!-- WELCOME -->
+    <!-- =================================================
+         WELCOME
+         ================================================= -->
+
     <div class="welcome">
-        <h2 id="namaAdmin">Selamat Datang, Admin</h2>
-        <p>Monitoring aktivitas guru, siswa, dan feedback Jurnal 7 KAIH.</p>
+
+        <h2 id="namaAdmin">
+            Selamat Datang, Admin
+        </h2>
+
+        <p>
+            Monitoring aktivitas guru, siswa,
+            kelas, dan feedback Jurnal 7 KAIH.
+        </p>
+
     </div>
 
-    <!-- FILTER DASHBOARD LAMA -->
-    <div class="filter-box" id="dashboardSection">
+
+    <!-- =================================================
+         MENU KEPESEK
+         ================================================= -->
+
+    <div class="menu-kepsek">
+
+        <div class="menu-card">
+
+            <h3>
+                👨‍🏫 Daftar Guru
+            </h3>
+
+            <p>
+                Menampilkan seluruh guru,
+                termasuk guru yang belum pernah login
+                dan guru tidak aktif.
+            </p>
+
+        </div>
+
+        <div class="menu-card">
+
+            <h3>
+                🏫 Daftar Kelas
+            </h3>
+
+            <p>
+                Menampilkan seluruh kelas
+                yang terdaftar dalam sistem.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FILTER DASHBOARD
+         ================================================= -->
+
+    <div
+        class="filter-box"
+        id="dashboardSection"
+    >
 
         <div class="filter-title">
             📅 Monitoring Aktivitas
@@ -427,6 +606,7 @@ footer{
         <div class="filter-grid">
 
             <div class="form-group">
+
                 <label for="tanggalDashboard">
                     Tanggal
                 </label>
@@ -435,9 +615,11 @@ footer{
                     type="date"
                     id="tanggalDashboard"
                 >
+
             </div>
 
             <div class="form-group">
+
                 <label>&nbsp;</label>
 
                 <button
@@ -446,16 +628,22 @@ footer{
                 >
                     🔄 Refresh Dashboard
                 </button>
+
             </div>
 
         </div>
 
     </div>
 
-    <!-- CARDS DASHBOARD -->
+
+    <!-- =================================================
+         CARDS DASHBOARD
+         ================================================= -->
+
     <div class="cards">
 
         <div class="card">
+
             <div class="card-title">
                 👨‍🏫 Guru Login
             </div>
@@ -466,9 +654,12 @@ footer{
             >
                 0
             </div>
+
         </div>
 
+
         <div class="card">
+
             <div class="card-title">
                 👨‍🎓 Siswa Login
             </div>
@@ -479,9 +670,12 @@ footer{
             >
                 0
             </div>
+
         </div>
 
+
         <div class="card">
+
             <div class="card-title">
                 💬 Feedback Guru Minggu Ini
             </div>
@@ -492,17 +686,188 @@ footer{
             >
                 0
             </div>
+
         </div>
 
     </div>
 
-    <!-- GURU LOGIN -->
+
+    <!-- =================================================
+         SEMUA GURU
+         ================================================= -->
+
     <div class="section">
 
         <div class="section-header">
+
+            <div class="section-title">
+                👨‍🏫 Daftar Semua Guru
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="loadSemuaGuru()"
+            >
+                🔄 Refresh Guru
+            </button>
+
+        </div>
+
+        <div
+            id="semuaGuruInfo"
+            class="info-box"
+        >
+            Memuat seluruh data guru...
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th width="55">
+                            No
+                        </th>
+
+                        <th>
+                            Nama Guru
+                        </th>
+
+                        <th>
+                            NIP / Username
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Login Terakhir
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelSemuaGuru">
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="loading"
+                        >
+
+                            <div class="spinner"></div>
+
+                            <br>
+
+                            Memuat semua guru...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SEMUA KELAS
+         ================================================= -->
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                🏫 Daftar Semua Kelas
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="loadSemuaKelas()"
+            >
+                🔄 Refresh Kelas
+            </button>
+
+        </div>
+
+        <div
+            id="semuaKelasInfo"
+            class="info-box"
+        >
+            Memuat seluruh data kelas...
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th width="70">
+                            No
+                        </th>
+
+                        <th>
+                            Nama Kelas
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tabelSemuaKelas">
+
+                    <tr>
+
+                        <td
+                            colspan="2"
+                            class="loading"
+                        >
+
+                            <div class="spinner"></div>
+
+                            <br>
+
+                            Memuat semua kelas...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         GURU LOGIN
+         ================================================= -->
+
+    <div class="section">
+
+        <div class="section-header">
+
             <div class="section-title">
                 👨‍🏫 Guru Login
             </div>
+
         </div>
 
         <div
@@ -517,20 +882,42 @@ footer{
             <table>
 
                 <thead>
+
                     <tr>
-                        <th width="60">No</th>
-                        <th>Nama Guru</th>
-                        <th>NIP / Username</th>
-                        <th>Login Terakhir</th>
+
+                        <th width="60">
+                            No
+                        </th>
+
+                        <th>
+                            Nama Guru
+                        </th>
+
+                        <th>
+                            NIP / Username
+                        </th>
+
+                        <th>
+                            Login Terakhir
+                        </th>
+
                     </tr>
+
                 </thead>
 
                 <tbody id="tabelGuruLogin">
+
                     <tr>
-                        <td colspan="4" class="loading">
+
+                        <td
+                            colspan="4"
+                            class="loading"
+                        >
                             Memuat data...
                         </td>
+
                     </tr>
+
                 </tbody>
 
             </table>
@@ -539,13 +926,19 @@ footer{
 
     </div>
 
-    <!-- SISWA LOGIN -->
+
+    <!-- =================================================
+         SISWA LOGIN
+         ================================================= -->
+
     <div class="section">
 
         <div class="section-header">
+
             <div class="section-title">
                 👨‍🎓 Siswa Login
             </div>
+
         </div>
 
         <div
@@ -560,21 +953,46 @@ footer{
             <table>
 
                 <thead>
+
                     <tr>
-                        <th width="60">No</th>
-                        <th>Nama Siswa</th>
-                        <th>NISN / Username</th>
-                        <th>Kelas</th>
-                        <th>Login Terakhir</th>
+
+                        <th width="60">
+                            No
+                        </th>
+
+                        <th>
+                            Nama Siswa
+                        </th>
+
+                        <th>
+                            NISN / Username
+                        </th>
+
+                        <th>
+                            Kelas
+                        </th>
+
+                        <th>
+                            Login Terakhir
+                        </th>
+
                     </tr>
+
                 </thead>
 
                 <tbody id="tabelSiswaLogin">
+
                     <tr>
-                        <td colspan="5" class="loading">
+
+                        <td
+                            colspan="5"
+                            class="loading"
+                        >
                             Memuat data...
                         </td>
+
                     </tr>
+
                 </tbody>
 
             </table>
@@ -583,13 +1001,19 @@ footer{
 
     </div>
 
-    <!-- FEEDBACK MINGGUAN -->
+
+    <!-- =================================================
+         FEEDBACK MINGGUAN
+         ================================================= -->
+
     <div class="section">
 
         <div class="section-header">
+
             <div class="section-title">
                 💬 Guru Feedback Minggu Ini
             </div>
+
         </div>
 
         <div
@@ -604,20 +1028,42 @@ footer{
             <table>
 
                 <thead>
+
                     <tr>
-                        <th width="60">No</th>
-                        <th>Nama Guru</th>
-                        <th>NIP / Username</th>
-                        <th>Jumlah Feedback</th>
+
+                        <th width="60">
+                            No
+                        </th>
+
+                        <th>
+                            Nama Guru
+                        </th>
+
+                        <th>
+                            NIP / Username
+                        </th>
+
+                        <th>
+                            Jumlah Feedback
+                        </th>
+
                     </tr>
+
                 </thead>
 
                 <tbody id="tabelFeedbackMingguan">
+
                     <tr>
-                        <td colspan="4" class="loading">
+
+                        <td
+                            colspan="4"
+                            class="loading"
+                        >
                             Memuat data...
                         </td>
+
                     </tr>
+
                 </tbody>
 
             </table>
@@ -627,9 +1073,9 @@ footer{
     </div>
 
 
-    <!-- ======================================================
-         REKAP FEEDBACK GURU TANGGAL KE TANGGAL
-         ====================================================== -->
+    <!-- =================================================
+         REKAP FEEDBACK
+         ================================================= -->
 
     <div class="section">
 
@@ -642,8 +1088,11 @@ footer{
         </div>
 
         <div class="info-box">
-            Pilih tanggal mulai dan tanggal sampai untuk melihat
-            total feedback yang diberikan oleh setiap guru.
+
+            Pilih tanggal mulai dan tanggal sampai
+            untuk melihat total feedback yang diberikan
+            oleh setiap guru.
+
         </div>
 
         <div class="filter-grid">
@@ -661,6 +1110,7 @@ footer{
 
             </div>
 
+
             <div class="form-group">
 
                 <label for="tanggalSampai">
@@ -673,6 +1123,7 @@ footer{
                 >
 
             </div>
+
 
             <div class="button-row">
 
@@ -700,7 +1151,10 @@ footer{
     </div>
 
 
-    <!-- CARDS REKAP -->
+    <!-- =================================================
+         CARDS REKAP
+         ================================================= -->
+
     <div class="cards">
 
         <div class="card">
@@ -718,6 +1172,7 @@ footer{
 
         </div>
 
+
         <div class="card">
 
             <div class="card-title">
@@ -732,6 +1187,7 @@ footer{
             </div>
 
         </div>
+
 
         <div class="card">
 
@@ -751,7 +1207,9 @@ footer{
     </div>
 
 
-    <!-- INFO REKAP -->
+    <!-- =================================================
+         INFO REKAP
+         ================================================= -->
 
     <div
         id="infoRekap"
@@ -761,7 +1219,9 @@ footer{
     </div>
 
 
-    <!-- TABEL REKAP -->
+    <!-- =================================================
+         TABEL REKAP
+         ================================================= -->
 
     <div class="section">
 
@@ -822,7 +1282,6 @@ footer{
                             class="empty"
                         >
                             Belum ada data.
-
                         </td>
 
                     </tr>
@@ -1000,6 +1459,7 @@ function formatTanggal(value){
     return d.toLocaleString(
         "id-ID",
         {
+            timeZone:"Asia/Jakarta",
             day:"2-digit",
             month:"2-digit",
             year:"numeric",
@@ -1012,7 +1472,7 @@ function formatTanggal(value){
 
 
 /* =========================================================
-   FORMAT TANGGAL DATE INPUT
+   FORMAT TANGGAL INPUT
    ========================================================= */
 
 function formatTanggalIndonesia(
@@ -1050,31 +1510,31 @@ function tanggalHariIni(){
     const now =
         new Date();
 
-    const year =
-        now.getFullYear();
+    const parts =
+        new Intl.DateTimeFormat(
+            "en-CA",
+            {
+                timeZone:"Asia/Jakarta",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }
+        ).formatToParts(now);
 
-    const month =
-        String(
-            now.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
+    const obj = {};
 
-    const day =
-        String(
-            now.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
+    parts.forEach(
+        p => {
+            obj[p.type] = p.value;
+        }
+    );
 
     return (
-        year +
+        obj.year +
         "-" +
-        month +
+        obj.month +
         "-" +
-        day
+        obj.day
     );
 
 }
@@ -1124,6 +1584,678 @@ function setTanggalDefault(){
 
 
 /* =========================================================
+   LOAD SEMUA GURU
+   ========================================================= */
+
+async function loadSemuaGuru(){
+
+    const tbody =
+        document.getElementById(
+            "tabelSemuaGuru"
+        );
+
+    const info =
+        document.getElementById(
+            "semuaGuruInfo"
+        );
+
+
+    tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="5"
+                class="loading"
+            >
+
+                <div class="spinner"></div>
+
+                <br>
+
+                Memuat seluruh guru...
+
+            </td>
+
+        </tr>
+
+    `;
+
+    info.className =
+        "info-box";
+
+    info.innerHTML =
+        "⏳ Sedang mengambil semua data guru...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/rpc/ambil_semua_guru_admin",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY,
+
+                        "Accept":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            p_admin_id:
+                                Number(
+                                    akunAdmin.referensi_id
+                                )
+
+                        })
+                }
+            );
+
+
+        const text =
+            await response.text();
+
+
+        let result;
+
+        try{
+
+            result =
+                text
+                    ? JSON.parse(text)
+                    : [];
+
+        }catch(error){
+
+            throw new Error(
+                "Respons Supabase tidak valid."
+            );
+
+        }
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.message ||
+                result.error ||
+                result.error_description ||
+                text ||
+                "Gagal mengambil data guru."
+            );
+
+        }
+
+
+        let data = result;
+
+        /*
+          RPC jsonb biasanya langsung object array.
+        */
+
+        if(
+            data &&
+            !Array.isArray(data) &&
+            Array.isArray(data.data)
+        ){
+
+            data =
+                data.data;
+
+        }
+
+
+        if(
+            typeof data === "string"
+        ){
+
+            try{
+                data = JSON.parse(data);
+            }catch(e){}
+
+        }
+
+
+        tampilSemuaGuru(
+            Array.isArray(data)
+                ? data
+                : []
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Load guru error:",
+            error
+        );
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty"
+                >
+
+                    ❌ Gagal mengambil data guru.
+
+                    <br><br>
+
+                    ${escapeHtml(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+
+        `;
+
+        info.className =
+            "error-box";
+
+        info.innerHTML =
+            "❌ " +
+            escapeHtml(
+                error.message
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   TAMPIL SEMUA GURU
+   ========================================================= */
+
+function tampilSemuaGuru(
+    data
+){
+
+    const tbody =
+        document.getElementById(
+            "tabelSemuaGuru"
+        );
+
+    const info =
+        document.getElementById(
+            "semuaGuruInfo"
+        );
+
+
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="empty"
+                >
+
+                    Tidak ada data guru
+                    pada tabel guru_wali.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        info.textContent =
+            "Belum ada data guru.";
+
+        return;
+    }
+
+
+    const aktif =
+        data.filter(
+            guru =>
+                String(
+                    guru.status ||
+                    ""
+                ).toLowerCase()
+                === "aktif"
+        ).length;
+
+
+    const tidakAktif =
+        data.length -
+        aktif;
+
+
+    const belumLogin =
+        data.filter(
+            guru =>
+                !guru.login_terakhir
+        ).length;
+
+
+    info.innerHTML =
+
+        "Total <strong>" +
+        formatNumber(data.length) +
+        "</strong> guru. " +
+
+        "Aktif: <strong>" +
+        formatNumber(aktif) +
+        "</strong>. " +
+
+        "Tidak aktif: <strong>" +
+        formatNumber(tidakAktif) +
+        "</strong>. " +
+
+        "Belum pernah login: <strong>" +
+        formatNumber(belumLogin) +
+        "</strong>.";
+
+
+    tbody.innerHTML =
+        data.map(
+            (guru,index) => {
+
+                const status =
+                    guru.status ||
+                    "Aktif";
+
+
+                const aktifStatus =
+                    String(
+                        status
+                    ).toLowerCase()
+                    === "aktif";
+
+
+                const badgeClass =
+                    aktifStatus
+                        ? "badge-success"
+                        : "badge-danger";
+
+
+                const loginTerakhir =
+                    guru.login_terakhir;
+
+
+                return `
+
+                    <tr>
+
+                        <td class="text-center">
+                            ${index + 1}
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                ${escapeHtml(
+                                    guru.nama ||
+                                    guru.nama_guru ||
+                                    guru.nama_lengkap ||
+                                    "Guru"
+                                )}
+                            </strong>
+
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                guru.username ||
+                                guru.nip ||
+                                guru.nik ||
+                                "-"
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="badge ${badgeClass}"
+                            >
+
+                                <span
+                                    class="status-dot ${
+                                        aktifStatus
+                                            ? "dot-active"
+                                            : "dot-inactive"
+                                    }"
+                                ></span>
+
+                                ${escapeHtml(
+                                    status
+                                )}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            ${
+                                loginTerakhir
+                                    ? formatTanggal(
+                                        loginTerakhir
+                                    )
+                                    : `<span class="badge badge-secondary">
+                                         Belum pernah login
+                                       </span>`
+                            }
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =========================================================
+   LOAD SEMUA KELAS
+   ========================================================= */
+
+async function loadSemuaKelas(){
+
+    const tbody =
+        document.getElementById(
+            "tabelSemuaKelas"
+        );
+
+    const info =
+        document.getElementById(
+            "semuaKelasInfo"
+        );
+
+
+    tbody.innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="2"
+                class="loading"
+            >
+
+                <div class="spinner"></div>
+
+                <br>
+
+                Memuat seluruh kelas...
+
+            </td>
+
+        </tr>
+
+    `;
+
+    info.className =
+        "info-box";
+
+    info.innerHTML =
+        "⏳ Sedang mengambil semua data kelas...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/rpc/ambil_semua_kelas_admin",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY,
+
+                        "Accept":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            p_admin_id:
+                                Number(
+                                    akunAdmin.referensi_id
+                                )
+
+                        })
+                }
+            );
+
+
+        const text =
+            await response.text();
+
+
+        let result;
+
+        try{
+
+            result =
+                text
+                    ? JSON.parse(text)
+                    : [];
+
+        }catch(error){
+
+            throw new Error(
+                "Respons Supabase tidak valid."
+            );
+
+        }
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.message ||
+                result.error ||
+                result.error_description ||
+                text ||
+                "Gagal mengambil data kelas."
+            );
+
+        }
+
+
+        let data = result;
+
+
+        if(
+            typeof data === "string"
+        ){
+
+            try{
+                data = JSON.parse(data);
+            }catch(e){}
+
+        }
+
+
+        if(
+            data &&
+            !Array.isArray(data) &&
+            Array.isArray(data.data)
+        ){
+
+            data =
+                data.data;
+
+        }
+
+
+        tampilSemuaKelas(
+            Array.isArray(data)
+                ? data
+                : []
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Load kelas error:",
+            error
+        );
+
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="2"
+                    class="empty"
+                >
+
+                    ❌ Gagal mengambil data kelas.
+
+                    <br><br>
+
+                    ${escapeHtml(
+                        error.message
+                    )}
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        info.className =
+            "error-box";
+
+        info.innerHTML =
+            "❌ " +
+            escapeHtml(
+                error.message
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   TAMPIL SEMUA KELAS
+   ========================================================= */
+
+function tampilSemuaKelas(
+    data
+){
+
+    const tbody =
+        document.getElementById(
+            "tabelSemuaKelas"
+        );
+
+    const info =
+        document.getElementById(
+            "semuaKelasInfo"
+        );
+
+
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="2"
+                    class="empty"
+                >
+
+                    Tidak ada data kelas.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        info.textContent =
+            "Belum ada kelas yang terdaftar.";
+
+        return;
+    }
+
+
+    info.innerHTML =
+        "Total <strong>" +
+        formatNumber(data.length) +
+        "</strong> kelas terdaftar.";
+
+
+    tbody.innerHTML =
+        data.map(
+            (kelas,index) => `
+
+                <tr>
+
+                    <td class="text-center">
+                        ${index + 1}
+                    </td>
+
+                    <td>
+
+                        <strong>
+                            ${escapeHtml(
+                                kelas.nama_kelas ||
+                                kelas.nama ||
+                                kelas.kelas ||
+                                kelas.kode_kelas ||
+                                "Kelas"
+                            )}
+                        </strong>
+
+                    </td>
+
+                </tr>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================================================
    DASHBOARD ADMIN
    ========================================================= */
 
@@ -1133,10 +2265,12 @@ async function loadDashboard(){
         return;
     }
 
+
     const tanggal =
         document.getElementById(
             "tanggalDashboard"
         ).value;
+
 
     if(!tanggal){
 
@@ -1153,10 +2287,12 @@ async function loadDashboard(){
     ).innerHTML =
         "⏳ Memuat data...";
 
+
     document.getElementById(
         "siswaLoginInfo"
     ).innerHTML =
         "⏳ Memuat data...";
+
 
     document.getElementById(
         "feedbackMingguanInfo"
@@ -1185,17 +2321,18 @@ async function loadDashboard(){
                             SUPABASE_KEY
                     },
 
-                    body:JSON.stringify({
+                    body:
+                        JSON.stringify({
 
-                        p_admin_id:
-                            Number(
-                                akunAdmin.referensi_id
-                            ),
+                            p_admin_id:
+                                Number(
+                                    akunAdmin.referensi_id
+                                ),
 
-                        p_tanggal:
-                            tanggal
+                            p_tanggal:
+                                tanggal
 
-                    })
+                        })
                 }
             );
 
@@ -1227,16 +2364,21 @@ async function loadDashboard(){
             error
         );
 
+
         document.getElementById(
             "guruLoginInfo"
         ).innerHTML =
             "❌ " +
-            error.message;
+            escapeHtml(
+                error.message
+            );
+
 
         document.getElementById(
             "siswaLoginInfo"
         ).innerHTML =
             "❌ Gagal mengambil data.";
+
 
         document.getElementById(
             "feedbackMingguanInfo"
@@ -1252,15 +2394,17 @@ async function loadDashboard(){
    TAMPIL DASHBOARD
    ========================================================= */
 
-function tampilDashboard(data){
+function tampilDashboard(
+    data
+){
 
-    /*
-      RPC bisa mengembalikan object atau array.
-    */
+    let row =
+        data;
 
-    let row = data;
 
-    if(Array.isArray(data)){
+    if(
+        Array.isArray(data)
+    ){
 
         row =
             data.length > 0
@@ -1311,9 +2455,11 @@ function tampilDashboard(data){
         row.guru_login
     );
 
+
     tampilSiswaLogin(
         row.siswa_login
     );
+
 
     tampilFeedbackMingguan(
         row.guru_feedback
@@ -1326,7 +2472,9 @@ function tampilDashboard(data){
    GURU LOGIN
    ========================================================= */
 
-function tampilGuruLogin(data){
+function tampilGuruLogin(
+    data
+){
 
     const tbody =
         document.getElementById(
@@ -1339,15 +2487,28 @@ function tampilGuruLogin(data){
         );
 
 
-    if(!Array.isArray(data) || data.length === 0){
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
 
         tbody.innerHTML = `
+
             <tr>
-                <td colspan="4" class="empty">
+
+                <td
+                    colspan="4"
+                    class="empty"
+                >
+
                     Tidak ada data guru login.
+
                 </td>
+
             </tr>
+
         `;
+
 
         info.textContent =
             "Tidak ada guru yang login pada tanggal yang dipilih.";
@@ -1373,27 +2534,33 @@ function tampilGuruLogin(data){
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             guru.nama ||
                             guru.nama_guru ||
                             "-"
                         )}
+
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             guru.username ||
                             guru.nip ||
                             "-"
                         )}
+
                     </td>
 
                     <td>
+
                         ${formatTanggal(
                             guru.login_terakhir ||
                             guru.last_login ||
                             guru.created_at
                         )}
+
                     </td>
 
                 </tr>
@@ -1408,7 +2575,9 @@ function tampilGuruLogin(data){
    SISWA LOGIN
    ========================================================= */
 
-function tampilSiswaLogin(data){
+function tampilSiswaLogin(
+    data
+){
 
     const tbody =
         document.getElementById(
@@ -1421,15 +2590,28 @@ function tampilSiswaLogin(data){
         );
 
 
-    if(!Array.isArray(data) || data.length === 0){
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
 
         tbody.innerHTML = `
+
             <tr>
-                <td colspan="5" class="empty">
+
+                <td
+                    colspan="5"
+                    class="empty"
+                >
+
                     Tidak ada data siswa login.
+
                 </td>
+
             </tr>
+
         `;
+
 
         info.textContent =
             "Tidak ada siswa yang login pada tanggal yang dipilih.";
@@ -1455,34 +2637,42 @@ function tampilSiswaLogin(data){
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             siswa.nama ||
                             siswa.nama_siswa ||
                             "-"
                         )}
+
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             siswa.username ||
                             siswa.nisn ||
                             "-"
                         )}
+
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             siswa.kelas ||
                             "-"
                         )}
+
                     </td>
 
                     <td>
+
                         ${formatTanggal(
                             siswa.login_terakhir ||
                             siswa.last_login ||
                             siswa.created_at
                         )}
+
                     </td>
 
                 </tr>
@@ -1497,7 +2687,9 @@ function tampilSiswaLogin(data){
    FEEDBACK MINGGUAN
    ========================================================= */
 
-function tampilFeedbackMingguan(data){
+function tampilFeedbackMingguan(
+    data
+){
 
     const tbody =
         document.getElementById(
@@ -1510,15 +2702,28 @@ function tampilFeedbackMingguan(data){
         );
 
 
-    if(!Array.isArray(data) || data.length === 0){
+    if(
+        !Array.isArray(data) ||
+        data.length === 0
+    ){
 
         tbody.innerHTML = `
+
             <tr>
-                <td colspan="4" class="empty">
+
+                <td
+                    colspan="4"
+                    class="empty"
+                >
+
                     Tidak ada feedback guru.
+
                 </td>
+
             </tr>
+
         `;
+
 
         info.textContent =
             "Belum ada feedback guru pada periode minggu ini.";
@@ -1544,24 +2749,30 @@ function tampilFeedbackMingguan(data){
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             guru.nama ||
                             guru.nama_guru ||
                             "-"
                         )}
+
                     </td>
 
                     <td>
+
                         ${escapeHtml(
                             guru.username ||
                             guru.nip ||
                             "-"
                         )}
+
                     </td>
 
                     <td class="text-center">
 
-                        <span class="badge badge-info">
+                        <span
+                            class="badge badge-info"
+                        >
 
                             ${formatNumber(
                                 guru.jumlah_feedback ||
@@ -1582,7 +2793,7 @@ function tampilFeedbackMingguan(data){
 
 
 /* =========================================================
-   REKAP FEEDBACK GURU
+   AMBIL REKAP FEEDBACK
    ========================================================= */
 
 async function ambilRekapFeedback(
@@ -1609,17 +2820,6 @@ async function ambilRekapFeedback(
             sampai
 
     };
-
-
-    console.log(
-        "Memanggil RPC rekap:",
-        url
-    );
-
-    console.log(
-        "Parameter:",
-        body
-    );
 
 
     const response =
@@ -1657,6 +2857,7 @@ async function ambilRekapFeedback(
 
     let result;
 
+
     try{
 
         result =
@@ -1676,11 +2877,6 @@ async function ambilRekapFeedback(
 
     if(!response.ok){
 
-        console.error(
-            "RPC Error:",
-            result
-        );
-
         throw new Error(
             result.message ||
             result.error_description ||
@@ -1695,7 +2891,6 @@ async function ambilRekapFeedback(
     return Array.isArray(result)
         ? result
         : [];
-
 
 }
 
@@ -1720,6 +2915,7 @@ async function loadRekapFeedback(){
         document.getElementById(
             "tanggalMulai"
         ).value;
+
 
     const sampai =
         document.getElementById(
@@ -1752,18 +2948,23 @@ async function loadRekapFeedback(){
             "btnRekap"
         );
 
+
     const btnDownload =
         document.getElementById(
             "btnDownload"
         );
 
 
-    btn.disabled = true;
+    btn.disabled =
+        true;
+
 
     btn.textContent =
         "⏳ Memuat...";
 
-    btnDownload.disabled = true;
+
+    btnDownload.disabled =
+        true;
 
 
     const tbody =
@@ -1802,6 +3003,7 @@ async function loadRekapFeedback(){
 
     info.className =
         "info-box";
+
 
     info.innerHTML =
         "⏳ Sedang mengambil rekap feedback...";
@@ -1888,6 +3090,7 @@ async function loadRekapFeedback(){
         info.className =
             "error-box";
 
+
         info.innerHTML =
             "❌ Gagal mengambil rekap feedback: " +
             escapeHtml(
@@ -1896,7 +3099,9 @@ async function loadRekapFeedback(){
 
     }finally{
 
-        btn.disabled = false;
+        btn.disabled =
+            false;
+
 
         btn.textContent =
             "🔎 Tampilkan Rekap";
@@ -2092,19 +3297,23 @@ function tampilRekapFeedback(
                         </td>
 
                         <td>
+
                             <strong>
                                 ${escapeHtml(
                                     guru.nama ||
                                     "Guru"
                                 )}
                             </strong>
+
                         </td>
 
                         <td>
+
                             ${escapeHtml(
                                 guru.username ||
                                 "-"
                             )}
+
                         </td>
 
                         <td class="text-center">
@@ -2118,15 +3327,19 @@ function tampilRekapFeedback(
                         </td>
 
                         <td>
+
                             ${formatTanggal(
                                 guru.feedback_pertama
                             )}
+
                         </td>
 
                         <td>
+
                             ${formatTanggal(
                                 guru.feedback_terakhir
                             )}
+
                         </td>
 
                         <td class="text-center">
@@ -2134,7 +3347,9 @@ function tampilRekapFeedback(
                             <span
                                 class="badge ${badge}"
                             >
+
                                 ${status}
+
                             </span>
 
                         </td>
@@ -2183,23 +3398,17 @@ function downloadRekap(){
     const rows = [];
 
 
-    /*
-       HEADER
-    */
-
     rows.push([
+
         "No",
         "Nama Guru",
         "NIP / Username",
         "Jumlah Feedback",
         "Feedback Pertama",
         "Feedback Terakhir"
+
     ]);
 
-
-    /*
-       DATA
-    */
 
     dataRekapFeedback.forEach(
         (guru,index) => {
@@ -2233,38 +3442,30 @@ function downloadRekap(){
     );
 
 
-    /*
-       CSV ESCAPE
-    */
-
     const csv =
         rows.map(
-            row => row.map(
-                cell => {
+            row =>
+                row.map(
+                    cell => {
 
-                    const value =
-                        String(
-                            cell ?? ""
-                        );
+                        const value =
+                            String(
+                                cell ?? ""
+                            );
 
-                    return (
-                        '"' +
-                        value
-                            .replace(
+                        return (
+                            '"' +
+                            value.replace(
                                 /"/g,
                                 '""'
                             ) +
-                        '"'
-                    );
+                            '"'
+                        );
 
-                }
-            ).join(",")
+                    }
+                ).join(",")
         ).join("\r\n");
 
-
-    /*
-       UTF-8 BOM
-    */
 
     const blob =
         new Blob(
@@ -2327,7 +3528,9 @@ function downloadRekap(){
    ESCAPE HTML
    ========================================================= */
 
-function escapeHtml(value){
+function escapeHtml(
+    value
+){
 
     if(
         value === null ||
@@ -2340,22 +3543,27 @@ function escapeHtml(value){
 
 
     return String(value)
+
         .replace(
             /&/g,
             "&amp;"
         )
+
         .replace(
             /</g,
             "&lt;"
         )
+
         .replace(
             />/g,
             "&gt;"
         )
+
         .replace(
             /"/g,
             "&quot;"
         )
+
         .replace(
             /'/g,
             "&#039;"
@@ -2372,9 +3580,16 @@ document.addEventListener(
     "DOMContentLoaded",
     async function(){
 
-        /*
+        /* -----------------------------------------------
            Pastikan admin valid
-        */
+           ----------------------------------------------- */
+
+        if(!cekAdmin){
+
+            return;
+
+        }
+
 
         if(!cekAdmin()){
 
@@ -2383,23 +3598,25 @@ document.addEventListener(
         }
 
 
-        /*
-           Set tanggal default
-        */
+        /* -----------------------------------------------
+           Tanggal default
+           ----------------------------------------------- */
 
         setTanggalDefault();
 
 
-        /*
-           Tampilkan nama admin
-        */
+        /* -----------------------------------------------
+           Nama admin
+           ----------------------------------------------- */
 
         if(akunAdmin){
 
             document.getElementById(
                 "namaAdmin"
             ).textContent =
+
                 "Selamat Datang, " +
+
                 (
                     akunAdmin.nama ||
                     akunAdmin.nama_admin ||
@@ -2409,17 +3626,30 @@ document.addEventListener(
         }
 
 
-        /*
-           Dashboard lama
-        */
+        /* -----------------------------------------------
+           LOAD SEMUA GURU
+           ----------------------------------------------- */
+
+        await loadSemuaGuru();
+
+
+        /* -----------------------------------------------
+           LOAD SEMUA KELAS
+           ----------------------------------------------- */
+
+        await loadSemuaKelas();
+
+
+        /* -----------------------------------------------
+           DASHBOARD LAMA
+           ----------------------------------------------- */
 
         await loadDashboard();
 
 
-        /*
-           LANGSUNG LOAD REKAP
-           hari ini
-        */
+        /* -----------------------------------------------
+           REKAP FEEDBACK HARI INI
+           ----------------------------------------------- */
 
         await loadRekapFeedback();
 
