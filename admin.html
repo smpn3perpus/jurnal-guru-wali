@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -390,7 +391,7 @@ tbody tr:hover{
 
 .menu-kepsek{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr;
     gap:15px;
     margin-bottom:20px;
 }
@@ -425,10 +426,6 @@ tbody tr:hover{
 
     .cards{
         grid-template-columns:1fr 1fr;
-    }
-
-    .menu-kepsek{
-        grid-template-columns:1fr;
     }
 
 }
@@ -548,7 +545,7 @@ footer{
 
         <p>
             Monitoring aktivitas guru, siswa,
-            kelas, dan feedback Jurnal 7 KAIH.
+            dan feedback Jurnal 7 KAIH.
         </p>
 
     </div>
@@ -556,6 +553,7 @@ footer{
 
     <!-- =================================================
          MENU KEPESEK
+         HANYA DAFTAR GURU
          ================================================= -->
 
     <div class="menu-kepsek">
@@ -570,19 +568,6 @@ footer{
                 Menampilkan seluruh guru,
                 termasuk guru yang belum pernah login
                 dan guru tidak aktif.
-            </p>
-
-        </div>
-
-        <div class="menu-card">
-
-            <h3>
-                🏫 Daftar Kelas
-            </h3>
-
-            <p>
-                Menampilkan seluruh kelas
-                yang terdaftar dalam sistem.
             </p>
 
         </div>
@@ -781,82 +766,6 @@ footer{
 
 
     <!-- =================================================
-         SEMUA KELAS
-         ================================================= -->
-
-    <div class="section">
-
-        <div class="section-header">
-
-            <div class="section-title">
-                🏫 Daftar Semua Kelas
-            </div>
-
-            <button
-                class="btn btn-primary"
-                onclick="loadSemuaKelas()"
-            >
-                🔄 Refresh Kelas
-            </button>
-
-        </div>
-
-        <div
-            id="semuaKelasInfo"
-            class="info-box"
-        >
-            Memuat seluruh data kelas...
-        </div>
-
-        <div class="table-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th width="70">
-                            No
-                        </th>
-
-                        <th>
-                            Nama Kelas
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="tabelSemuaKelas">
-
-                    <tr>
-
-                        <td
-                            colspan="2"
-                            class="loading"
-                        >
-
-                            <div class="spinner"></div>
-
-                            <br>
-
-                            Memuat semua kelas...
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
          GURU LOGIN
          ================================================= -->
 
@@ -929,6 +838,7 @@ footer{
 
     <!-- =================================================
          SISWA LOGIN
+         KELAS SISWA TETAP DITAMPILKAN
          ================================================= -->
 
     <div class="section">
@@ -1702,9 +1612,6 @@ async function loadSemuaGuru(){
 
         let data = result;
 
-        /*
-          RPC jsonb biasanya langsung object array.
-        */
 
         if(
             data &&
@@ -1968,288 +1875,6 @@ function tampilSemuaGuru(
                 `;
 
             }
-        ).join("");
-
-}
-
-
-/* =========================================================
-   LOAD SEMUA KELAS
-   ========================================================= */
-
-async function loadSemuaKelas(){
-
-    const tbody =
-        document.getElementById(
-            "tabelSemuaKelas"
-        );
-
-    const info =
-        document.getElementById(
-            "semuaKelasInfo"
-        );
-
-
-    tbody.innerHTML = `
-
-        <tr>
-
-            <td
-                colspan="2"
-                class="loading"
-            >
-
-                <div class="spinner"></div>
-
-                <br>
-
-                Memuat seluruh kelas...
-
-            </td>
-
-        </tr>
-
-    `;
-
-    info.className =
-        "info-box";
-
-    info.innerHTML =
-        "⏳ Sedang mengambil semua data kelas...";
-
-
-    try{
-
-        const response =
-            await fetch(
-                SUPABASE_URL +
-                "/rest/v1/rpc/ambil_semua_kelas_admin",
-                {
-                    method:"POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json",
-
-                        "apikey":
-                            SUPABASE_KEY,
-
-                        "Authorization":
-                            "Bearer " +
-                            SUPABASE_KEY,
-
-                        "Accept":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            p_admin_id:
-                                Number(
-                                    akunAdmin.referensi_id
-                                )
-
-                        })
-                }
-            );
-
-
-        const text =
-            await response.text();
-
-
-        let result;
-
-        try{
-
-            result =
-                text
-                    ? JSON.parse(text)
-                    : [];
-
-        }catch(error){
-
-            throw new Error(
-                "Respons Supabase tidak valid."
-            );
-
-        }
-
-
-        if(!response.ok){
-
-            throw new Error(
-                result.message ||
-                result.error ||
-                result.error_description ||
-                text ||
-                "Gagal mengambil data kelas."
-            );
-
-        }
-
-
-        let data = result;
-
-
-        if(
-            typeof data === "string"
-        ){
-
-            try{
-                data = JSON.parse(data);
-            }catch(e){}
-
-        }
-
-
-        if(
-            data &&
-            !Array.isArray(data) &&
-            Array.isArray(data.data)
-        ){
-
-            data =
-                data.data;
-
-        }
-
-
-        tampilSemuaKelas(
-            Array.isArray(data)
-                ? data
-                : []
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Load kelas error:",
-            error
-        );
-
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="2"
-                    class="empty"
-                >
-
-                    ❌ Gagal mengambil data kelas.
-
-                    <br><br>
-
-                    ${escapeHtml(
-                        error.message
-                    )}
-
-                </td>
-
-            </tr>
-
-        `;
-
-
-        info.className =
-            "error-box";
-
-        info.innerHTML =
-            "❌ " +
-            escapeHtml(
-                error.message
-            );
-
-    }
-
-}
-
-
-/* =========================================================
-   TAMPIL SEMUA KELAS
-   ========================================================= */
-
-function tampilSemuaKelas(
-    data
-){
-
-    const tbody =
-        document.getElementById(
-            "tabelSemuaKelas"
-        );
-
-    const info =
-        document.getElementById(
-            "semuaKelasInfo"
-        );
-
-
-    if(
-        !Array.isArray(data) ||
-        data.length === 0
-    ){
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="2"
-                    class="empty"
-                >
-
-                    Tidak ada data kelas.
-
-                </td>
-
-            </tr>
-
-        `;
-
-        info.textContent =
-            "Belum ada kelas yang terdaftar.";
-
-        return;
-    }
-
-
-    info.innerHTML =
-        "Total <strong>" +
-        formatNumber(data.length) +
-        "</strong> kelas terdaftar.";
-
-
-    tbody.innerHTML =
-        data.map(
-            (kelas,index) => `
-
-                <tr>
-
-                    <td class="text-center">
-                        ${index + 1}
-                    </td>
-
-                    <td>
-
-                        <strong>
-                            ${escapeHtml(
-                                kelas.nama_kelas ||
-                                kelas.nama ||
-                                kelas.kelas ||
-                                kelas.kode_kelas ||
-                                "Kelas"
-                            )}
-                        </strong>
-
-                    </td>
-
-                </tr>
-
-            `
         ).join("");
 
 }
@@ -2573,6 +2198,7 @@ function tampilGuruLogin(
 
 /* =========================================================
    SISWA LOGIN
+   KELAS TETAP DITAMPILKAN
    ========================================================= */
 
 function tampilSiswaLogin(
@@ -3584,13 +3210,6 @@ document.addEventListener(
            Pastikan admin valid
            ----------------------------------------------- */
 
-        if(!cekAdmin){
-
-            return;
-
-        }
-
-
         if(!cekAdmin()){
 
             return;
@@ -3634,14 +3253,8 @@ document.addEventListener(
 
 
         /* -----------------------------------------------
-           LOAD SEMUA KELAS
-           ----------------------------------------------- */
-
-        await loadSemuaKelas();
-
-
-        /* -----------------------------------------------
-           DASHBOARD LAMA
+           DASHBOARD
+           Tidak ada lagi loadSemuaKelas()
            ----------------------------------------------- */
 
         await loadDashboard();
@@ -3660,3 +3273,4 @@ document.addEventListener(
 
 </body>
 </html>
+```
